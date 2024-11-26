@@ -1,152 +1,153 @@
 <section class="relative flex flex-row-reverse flex-wrap lg:h-screen lg:items-center">
-  <div class="w-full px-4 py-6 sm:px-6 sm:py-6 lg:w-1/2 lg:px-6 lg:py-6">
-    {% include 'register/components/infoTopRegiter.html' with title='Obtener tu cuenta' text='Crea una cuenta para acceder a todos los servicios y productos' %}
 
-    <form class="mx-auto mb-0 mt-8 max-w-md space-y-4" method="post">
-      <div class="flex flex-col flex-wrap">
-        {% csrf_token %}
-        {% if form.non_field_errors %}
-        <ul class="errors">
-          {% for error in form.non_field_errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-        {% endif %}
-
-        <div class="form-group">
-          <label for="{{ form.cedulaCliente.id_for_label }}">Cédula:</label>
-          {{ form.cedulaCliente }}
-          {% if form.cedulaCliente.errors %}
+    <div class="w-full px-4 py-6 sm:px-6 sm:py-6 lg:w-1/2 lg:px-6 lg:py-6" >
+      {% include 'register/components/infoTopRegiter.html' with title='Obtener tu cuenta' text='Crea una cuenta para acceder a todos los servicios y productos' %}
+  
+      <form class="mx-auto mb-0 mt-8 max-w-md space-y-4" method="post">
+        <div class="flex flex-col flex-wrap">
+          {% csrf_token %}
+          {% if form.non_field_errors %}
           <ul class="errors">
-            {% for error in form.cedulaCliente.errors %}
+            {% for error in form.non_field_errors %}
             <li>{{ error }}</li>
             {% endfor %}
           </ul>
           {% endif %}
-        </div>
-
-        <div class="grid sm:grid-cols-2 gap-3">
+  
           <div class="form-group">
-            <label for="{{ form.nombreCliente.id_for_label }}">Nombre:</label>
-            {{ form.nombreCliente }}
-            {% if form.nombreCliente.errors %}
+            <label for="{{ form.cedulaCliente.id_for_label }}">Cédula:</label>
+            {{ form.cedulaCliente }}
+            {% if form.cedulaCliente.errors %}
             <ul class="errors">
-              {% for error in form.nombreCliente.errors %}
-              <li>{{ error }}</li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-          </div>
-
-          <div class="form-group">
-            <label for="{{ form.apellidoCliente.id_for_label }}">Apellido:</label>
-            {{ form.apellidoCliente }}
-            {% if form.apellidoCliente.errors %}
-            <ul class="errors">
-              {% for error in form.apellidoCliente.errors %}
-              <li>{{ error }}</li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-          </div>
-
-          <div class="form-group">
-            <label for="{{ form.telefonoCliente.id_for_label }}">Teléfono:</label>
-            {{ form.telefonoCliente }}
-            {% if form.telefonoCliente.errors %}
-            <ul class="errors">
-              {% for error in form.telefonoCliente.errors %}
+              {% for error in form.cedulaCliente.errors %}
               <li>{{ error }}</li>
               {% endfor %}
             </ul>
             {% endif %}
           </div>
   
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="form-group">
+              <label for="{{ form.nombreCliente.id_for_label }}">Nombre:</label>
+              {{ form.nombreCliente }}
+              {% if form.nombreCliente.errors %}
+              <ul class="errors">
+                {% for error in form.nombreCliente.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+  
+            <div class="form-group">
+              <label for="{{ form.apellidoCliente.id_for_label }}">Apellido:</label>
+              {{ form.apellidoCliente }}
+              {% if form.apellidoCliente.errors %}
+              <ul class="errors">
+                {% for error in form.apellidoCliente.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+  
+            <div class="form-group">
+              <label for="{{ form.telefonoCliente.id_for_label }}">Teléfono:</label>
+              {{ form.telefonoCliente }}
+              {% if form.telefonoCliente.errors %}
+              <ul class="errors">
+                {% for error in form.telefonoCliente.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+    
+            <div class="form-group">
+              <label for="{{ form.correoCliente.id_for_label }}">Correo Electrónico:</label>
+              {{ form.correoCliente }}
+              {% if form.correoCliente.errors %}
+              <ul class="errors">
+                {% for error in form.correoCliente.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+    
+            <div class="form-group">
+              <label for="{{ form.nacionalidadCliente.id_for_label }}">Nacionalidad:</label>
+              {{ form.nacionalidadCliente }}
+              {% if form.nacionalidadCliente.errors %}
+              <ul class="errors">
+                {% for error in form.nacionalidadCliente.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+    
+            <div class="form-group">
+              <label for="{{ form.genero.id_for_label }}">Género:</label>
+              {{ form.genero }}
+              {% if form.genero.errors %}
+              <ul class="errors">
+                {% for error in form.genero.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+          </div>
+  
+  
+          
+  
+          
+  
           <div class="form-group">
-            <label for="{{ form.correoCliente.id_for_label }}">Correo Electrónico:</label>
-            {{ form.correoCliente }}
-            {% if form.correoCliente.errors %}
+            <label for="{{ form.username.id_for_label }}">Nombre de Usuario:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
             <ul class="errors">
-              {% for error in form.correoCliente.errors %}
+              {% for error in form.username.errors %}
               <li>{{ error }}</li>
               {% endfor %}
             </ul>
             {% endif %}
           </div>
   
-          <div class="form-group">
-            <label for="{{ form.nacionalidadCliente.id_for_label }}">Nacionalidad:</label>
-            {{ form.nacionalidadCliente }}
-            {% if form.nacionalidadCliente.errors %}
-            <ul class="errors">
-              {% for error in form.nacionalidadCliente.errors %}
-              <li>{{ error }}</li>
-              {% endfor %}
-            </ul>
-            {% endif %}
+          <div class="grid sm:grid-cols-2 gap-3">
+            <div class="form-group">
+              <label for="{{ form.password.id_for_label }}">Contraseña:</label>
+              {{ form.password }}
+              {% if form.password.errors %}
+              <ul class="errors">
+                {% for error in form.password.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
+    
+            <div class="form-group">
+              <label for="{{ form.password_confirm.id_for_label }}">Confirmar Contraseña:</label>
+              {{ form.password_confirm }}
+              {% if form.password_confirm.errors %}
+              <ul class="errors">
+                {% for error in form.password_confirm.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+            </div>
           </div>
+        </div>
   
-          <div class="form-group">
-            <label for="{{ form.genero.id_for_label }}">Género:</label>
-            {{ form.genero }}
-            {% if form.genero.errors %}
-            <ul class="errors">
-              {% for error in form.genero.errors %}
-              <li>{{ error }}</li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-          </div>
-        </div>
-
-
-        
-
-        
-
-        <div class="form-group">
-          <label for="{{ form.username.id_for_label }}">Nombre de Usuario:</label>
-          {{ form.username }}
-          {% if form.username.errors %}
-          <ul class="errors">
-            {% for error in form.username.errors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-        </div>
-
-        <div class="grid sm:grid-cols-2 gap-3">
-          <div class="form-group">
-            <label for="{{ form.password.id_for_label }}">Contraseña:</label>
-            {{ form.password }}
-            {% if form.password.errors %}
-            <ul class="errors">
-              {% for error in form.password.errors %}
-              <li>{{ error }}</li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-          </div>
+        {% include 'register/components/infoBoottomregiter.html' with link="login"  text='Tienes cuenta?' nameLink='Iniciar sesión' btnText='Registrarse' %}  
+      </form>
+    </div>
   
-          <div class="form-group">
-            <label for="{{ form.password_confirm.id_for_label }}">Confirmar Contraseña:</label>
-            {{ form.password_confirm }}
-            {% if form.password_confirm.errors %}
-            <ul class="errors">
-              {% for error in form.password_confirm.errors %}
-              <li>{{ error }}</li>
-              {% endfor %}
-            </ul>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-
-      {% include 'register/components/infoBoottomregiter.html' with text='Tienes cuenta?' nameLink='Iniciar sesión' btnText='Registrarse' %}
-    </form>
-  </div>
-
-  {% include 'register/components/imgRegister.html' %}
+    {% include 'register/components/imgRegister.html' %}
 
 </section>

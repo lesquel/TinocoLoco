@@ -1,0 +1,43 @@
+<div id="aaa" class="hidden md:relative md:block">
+
+    {% if user.is_authenticated %}
+        {% include 'pages/components/Header/fotoPerfilHeader.html' %}
+
+        {% include 'pages/components/Header/subMenu.html' %}
+
+    {% else %}
+        <a href="{% url 'login' %}">
+        {% include 'register/components/btnRegister.html' with btnText='Login' %}
+        </a>
+    {% endif %}
+</div>
+
+<div class="block md:hidden">
+    <button id="show-menu" class="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
+        <svg id="show-menu-svg" xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2">
+            <path id="show-menu-svg-path" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+    </button>
+</div>
+
+
+<script>
+    const toggleMenu = (selector) => {
+        const menu = document.querySelector(selector);
+        menu.classList.toggle('hidden');
+    }
+
+    document.addEventListener('click', (e) => {
+        console.log(e.target);
+        if (e.target.matches('#show-sub-menu')) {
+            toggleMenu('#sub-menu');
+            return;
+        }
+
+        if (e.target.matches('#show-menu') || e.target.matches('#show-menu-svg') || e.target.matches('#show-menu-svg-path')) {
+            toggleMenu("#menu-nav");
+            return;
+        }
+    });
+</script>

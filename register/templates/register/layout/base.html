@@ -1,16 +1,58 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> TinocoLoco - {% block title %}{% endblock %}</title>
-    {% tailwind_css %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TinocoLoco - {% block title %}{% endblock %}</title>
+  {% tailwind_css %}
+  <style media="screen">
+    [data-barba="container"] {
+      position: absolute;
+      font-family: monospace;
+      width: 100%; /* Asegura que el contenedor ocupe todo el ancho */
+      height: 100%; /* Asegura que el contenedor ocupe todo el alto */
+    }
+  </style>
 </head>
+
 <body>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+  <main data-barba="wrapper">
+    <div data-barba="container">
+      {% block content %}
+    {% endblock %}
+    </div>
+  </main>
+
+  <!-- Cargar Barba.js (versión UMD) -->
+  <script src="https://unpkg.com/@barba/core"></script>
+
+  <!-- Cargar la biblioteca de animación GSAP (versión minificada) -->
+  <script src="https://unpkg.com/gsap@latest/dist/gsap.min.js"></script>
+
+  <!-- Inicializar Barba.js con la transición de opacidad -->
+  <script type="text/javascript">
+    barba.init({
+      transitions: [{
+        name: 'opacity-transition',
+        leave(data) {
+          // Transición de salida con GSAP
+          return gsap.to(data.current.container, {
+            opacity: 0,
+            duration: 0.5 // Ajusta la duración según tus necesidades
+          });
+        },
+        enter(data) {
+          // Transición de entrada con GSAP
+          return gsap.from(data.next.container, {
+            opacity: 0,
+            duration: 0.5 // Ajusta la duración según tus necesidades
+          });
+        }
+      }],
+    });
+  </script>
 </body>
+
 </html>

@@ -1,5 +1,7 @@
 <section class="relative flex flex-wrap lg:h-screen lg:items-center">
-    <div class="w-full px-4 py-6 sm:px-6 sm:py-6 lg:w-1/2 lg:px-6 lg:py-6">
+
+
+    <div class="w-full px-4 py-6 sm:px-6 sm:py-6 lg:w-1/2 lg:px-6 lg:py-6" >
       
       {% include 'register/components/infoTopRegiter.html' with title='Inicia sesión' text='Inicia sesión para acceder a todas las funcionalidades del sitio' %}
       
@@ -9,7 +11,7 @@
           {{ form.as_p }}
         </div>
   
-        {% include 'register/components/infoBoottomregiter.html' with text='No tienes cuenta?' nameLink='Registrarse' btnText='Iniciar sesión' %}
+        {% include 'register/components/infoBoottomregiter.html' with link="register" text='No tienes cuenta?' nameLink='Registrarse' btnText='Iniciar sesión' %}
       </form>
     </div>
   
