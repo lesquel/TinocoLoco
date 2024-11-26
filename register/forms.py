@@ -1,8 +1,10 @@
 from django.utils import timezone
 from django import forms
 from .models import User
+from django.contrib.auth.models import Group
 
-classStyle = "w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+classStyle = "input"
+classStyleW05 = " input-w-05"
 class UserRegistrationForm(forms.ModelForm):
     # Campos adicionales para la contraseña
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': classStyle}), label="Contraseña")
@@ -11,7 +13,6 @@ class UserRegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'username',
             'cedulaCliente', 
             'nombreCliente', 
             'apellidoCliente', 
@@ -19,16 +20,17 @@ class UserRegistrationForm(forms.ModelForm):
             'telefonoCliente', 
             'correoCliente', 
             'genero', 
+            'username',
         ]
         widgets = {
-            'username': forms.TextInput(attrs={'class': classStyle}),
             'cedulaCliente': forms.TextInput(attrs={'class': classStyle}),
             'nombreCliente': forms.TextInput(attrs={'class': classStyle}),
-            'apellidoCliente': forms.TextInput(attrs={'class': classStyle}),
+            'apellidoCliente': forms.TextInput(attrs={'class': classStyle}),	
             'nacionalidadCliente': forms.TextInput(attrs={'class': classStyle}),
             'telefonoCliente': forms.TextInput(attrs={'class': classStyle}),
             'correoCliente': forms.TextInput(attrs={'class': classStyle}),
             'genero': forms.Select(attrs={'class': classStyle}),
+            'username': forms.TextInput(attrs={'class': classStyle}),
             # No incluimos 'fechaRegistroCliente' en los campos
         }
 
@@ -50,9 +52,11 @@ class UserRegistrationForm(forms.ModelForm):
 
         if commit:
             user.save()
+            group = Group.objects.get(name='Cliente')
+            user.groups.add(group)
+        
         return user
 
-from django import forms
 from django.contrib.auth import authenticate
 
 class UserLoginForm(forms.Form):

@@ -1,0 +1,8 @@
+<div class="flex items-center justify-between">
+    <p class="text-sm text-gray-500">
+      {{ text }}
+      <a class="underline" href="{% url 'register' %}">{{ nameLink }}</a>
+    </p>
+
+    {% include 'register/components/btnRegister.html' with btnText=btnText %}
+  </div>
