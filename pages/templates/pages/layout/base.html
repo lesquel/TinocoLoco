@@ -6,12 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> TinocoLoco - {% block title %}{% endblock %}</title>
     {% tailwind_css %}
+
 </head>
 <body>
+    {% include 'pages/section/Header/header.html' %}
+
     
-    <main>
+    <main class="min-h-screen pb-20">
         {% block content %}
         {% endblock %}
     </main>
+
+    {% include 'pages/section/Footer/footer.html' %}
 </body>
 </html>
