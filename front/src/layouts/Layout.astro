@@ -1,7 +1,7 @@
 ---
-import { ClientRouter } from "astro:transitions";
+	import { ClientRouter } from "astro:transitions";
+	import Header from "../components/layout/Header.astro";
 ---
-
 <!doctype html>
 <html lang="en">
 	<head>
@@ -10,10 +10,19 @@ import { ClientRouter } from "astro:transitions";
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+		<ClientRouter />
 	</head>
 	<body>
-		<ClientRouter>
-			<slot />
-		</ClientRouter>
+		<Header />
+		<slot />
 	</body>
 </html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
