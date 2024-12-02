@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-02 08:05-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\business_configuration\models.py:7 .\business_configuration\models.py:35
+msgid "Nombre del negocio"
+msgstr "Business Name"
+
+#: .\business_configuration\models.py:8 .\business_configuration\models.py:36
+msgid "Direccion del negocio"
+msgstr "Business Address"
+
+#: .\business_configuration\models.py:9 .\business_configuration\models.py:37
+msgid "Número de teléfono del negocio"
+msgstr "Business Phone Number"
+
+#: .\business_configuration\models.py:10 .\business_configuration\models.py:38
+msgid "Correo electrónico del negocio"
+msgstr "Business Email"
+
+#: .\business_configuration\models.py:11 .\business_configuration\models.py:39
+msgid "URL del sitio web del negocio"
+msgstr "Business Website URL"
+
+#: .\business_configuration\models.py:12 .\business_configuration\models.py:40
+msgid "URL de Facebook del negocio"
+msgstr "Business Facebook URL"
+
+#: .\business_configuration\models.py:13 .\business_configuration\models.py:41
+msgid "URL de Instagram del negocio"
+msgstr "Business Instagram URL"
+
+#: .\business_configuration\models.py:14 .\business_configuration\models.py:42
+msgid "URL de X (anteriormente Twitter) del negocio"
+msgstr "Business X URL"
+
+#: .\business_configuration\models.py:16 .\business_configuration\models.py:44
+msgid "Número de cuenta bancaria 1 del negocio"
+msgstr "Business Bank Account Number 1"
+
+#: .\business_configuration\models.py:17 .\business_configuration\models.py:45
+msgid "Nombre del banco 1 del negocio"
+msgstr "Business Bank Name 1"
+
+#: .\business_configuration\models.py:18 .\business_configuration\models.py:46
+msgid "Tipo de cuenta bancaria 1 del negocio"
+msgstr "Business Bank Account Type 1"
+
+#: .\business_configuration\models.py:20 .\business_configuration\models.py:48
+msgid "Número de cuenta bancaria 2 del negocio"
+msgstr "Business Bank Account Number 2"
+
+#: .\business_configuration\models.py:21 .\business_configuration\models.py:49
+msgid "Nombre del banco 2 del negocio"
+msgstr "Business Bank Name 2"
+
+#: .\business_configuration\models.py:22 .\business_configuration\models.py:50
+msgid "Tipo de cuenta bancaria 2 del negocio"
+msgstr "Business Bank Account Type 2"
+
+#: .\business_configuration\models.py:24 .\business_configuration\models.py:52
+msgid "Configuracion del negocio"
+msgstr "Business Configuration"
+
+#: .\business_configuration\models.py:25 .\business_configuration\models.py:53
+msgid "Configuraciones del negocio"
+msgstr "Business Configurations"
+
+#: .\business_configuration\models.py:55 .\business_configuration\views.py:10
+msgid "Solo puede haber una configuración de negocio."
+msgstr "Only one business configuration can exits"
+
+#: .\business_configuration\views.py:9
+msgid "Configuración del negocio no encontrada."
+msgstr "Business configurationn not found"

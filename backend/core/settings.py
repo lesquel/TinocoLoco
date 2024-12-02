@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import environ
+from django.utils.translation import gettext_lazy as _
+
+# Para lograr la traduccion
+import os
 
 
 env = environ.Env(DEBUG=(bool, False))
@@ -44,18 +48,21 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "corsheaders",
+    "business_configuration.apps.BusinessConfigurationConfig",
+    "user.apps.UserConfig"
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
 
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # Add this line
+    # "corsheaders.middleware.CorsMiddleware",  # Se agrega esto para el acople con djnago
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    # "core.middleware.custom_locale_middleware.CustomLocaleMiddleware",  # Se agrega esto para la traduccion de idiomas
+    "django.middleware.locale.LocaleMiddleware",  # Se agrega esto para la traduccion de idiomas
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -63,12 +70,15 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+
 ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            BASE_DIR / "templates"
+        ],  # Add any other template directories if necessary
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -76,10 +86,12 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # "django.template.context_processors.i18n",  # Para traducir
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = "core.wsgi.application"
 
@@ -113,11 +125,26 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Modifico esto para que funcione con mi modelo de usuario
+# AUTH_USER_MODEL = 'your_app_name.CustomUser' #Cambiar 'your_app_name' por el nombre de la app que se haya
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+# LANGUAGE_CODE = env("LANGUAGE_CODE", default="en")
+LANGUAGE_CODE = "en"
+
+
+# En caso de que de errores: instalar lo siguiente desde mingw-64: pacman -S mingw-w64-x86_64-gettext
+# O tambien, agregar la siguiente ruta a variable de entorno: C:\msys64\usr\bin
+
+languages_str = env("LANGUAGES", default='[("en", _("English")), ("es", _("Spanish"))]')
+LANGUAGES = eval(languages_str)
+
+
+LOCALE_PATHS = [env("LOCALE_PATHS", default=os.path.join(BASE_DIR, "locale"))]
+
 
 TIME_ZONE = "UTC"
 
