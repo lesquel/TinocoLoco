@@ -9,6 +9,8 @@ __pycache__/
 # Entornos virtuales
 venv/
 env/
+.venv/
+.env/
 
 # Archivos de configuración de IDE
 .idea/
@@ -41,3 +43,6 @@ Thumbs.db
 
 # Archivos de caché y temporales
 *.cache
+
+# Archivos de logs
+*.log
