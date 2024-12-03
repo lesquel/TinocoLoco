@@ -31,3 +31,7 @@ python manage.py makemessages -all
 
 //Compilar los archivos de traduccion
 python manage.py compilemessages
+
+
+// Force migrate
+python manage.py migrate --run-syncdb 

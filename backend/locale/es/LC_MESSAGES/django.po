@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 08:05-0500\n"
+"POT-Creation-Date: 2024-12-02 21:13-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,71 +19,75 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
 "1 : 2;\n"
 
-#: .\business_configuration\models.py:7 .\business_configuration\models.py:35
+#: .\business_configuration\models.py:8 .\business_configuration\models.py:30
 msgid "Nombre del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:8 .\business_configuration\models.py:36
+#: .\business_configuration\models.py:9 .\business_configuration\models.py:34
 msgid "Direccion del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:9 .\business_configuration\models.py:37
+#: .\business_configuration\models.py:10 .\business_configuration\models.py:35
 msgid "Número de teléfono del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:10 .\business_configuration\models.py:38
+#: .\business_configuration\models.py:11 .\business_configuration\models.py:36
 msgid "Correo electrónico del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:11 .\business_configuration\models.py:39
+#: .\business_configuration\models.py:12 .\business_configuration\models.py:37
 msgid "URL del sitio web del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:12 .\business_configuration\models.py:40
+#: .\business_configuration\models.py:13 .\business_configuration\models.py:38
 msgid "URL de Facebook del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:13 .\business_configuration\models.py:41
+#: .\business_configuration\models.py:14 .\business_configuration\models.py:39
 msgid "URL de Instagram del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:14 .\business_configuration\models.py:42
+#: .\business_configuration\models.py:15 .\business_configuration\models.py:40
 msgid "URL de X (anteriormente Twitter) del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:16 .\business_configuration\models.py:44
+#: .\business_configuration\models.py:17 .\business_configuration\models.py:42
 msgid "Número de cuenta bancaria 1 del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:17 .\business_configuration\models.py:45
+#: .\business_configuration\models.py:18 .\business_configuration\models.py:43
 msgid "Nombre del banco 1 del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:18 .\business_configuration\models.py:46
+#: .\business_configuration\models.py:19 .\business_configuration\models.py:44
 msgid "Tipo de cuenta bancaria 1 del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:20 .\business_configuration\models.py:48
+#: .\business_configuration\models.py:21 .\business_configuration\models.py:46
 msgid "Número de cuenta bancaria 2 del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:21 .\business_configuration\models.py:49
+#: .\business_configuration\models.py:22 .\business_configuration\models.py:47
 msgid "Nombre del banco 2 del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:22 .\business_configuration\models.py:50
+#: .\business_configuration\models.py:23 .\business_configuration\models.py:48
 msgid "Tipo de cuenta bancaria 2 del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:24 .\business_configuration\models.py:52
+#: .\business_configuration\models.py:25 .\business_configuration\models.py:50
 msgid "Configuracion del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:25 .\business_configuration\models.py:53
+#: .\business_configuration\models.py:26 .\business_configuration\models.py:51
 msgid "Configuraciones del negocio"
 msgstr ""
 
-#: .\business_configuration\models.py:55 .\business_configuration\views.py:10
+#: .\business_configuration\models.py:31
+msgid "Logo del negocio"
+msgstr ""
+
+#: .\business_configuration\models.py:53 .\business_configuration\views.py:10
 msgid "Solo puede haber una configuración de negocio."
 msgstr ""
 

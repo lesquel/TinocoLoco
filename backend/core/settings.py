@@ -13,9 +13,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import environ
 from django.utils.translation import gettext_lazy as _
+import cloudinary
+import os
 
 # Para lograr la traduccion
-import os
 
 
 env = environ.Env(DEBUG=(bool, False))
@@ -26,9 +27,6 @@ environ.Env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("SECRET_KEY")
@@ -49,16 +47,41 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "cloudinary",
+    "cloudinary_storage",
     "corsheaders",
     "business_configuration.apps.BusinessConfigurationConfig",
-    "user.apps.UserConfig"
+    "user.apps.UserConfig",
 ]
 
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
 
 
+# CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_NAME")
+# CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY")
+# CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
+# CLOUDINARY_SECURE= os.getenv("CLOUDINARY_SECURE", default=True)
+
+# # Configuration
+# cloudinary.config(
+#     cloud_name=CLOUDINARY_CLOUD_NAME,
+#     api_key=CLOUDINARY_API_KEY,
+#     api_secret=CLOUDINARY_API_SECRET,
+#     secure=CLOUDINARY_SECURE
+# )
+
+cloudinary.config(
+    cloud_name=env("CLOUDINARY_NAME"),
+    api_key=env("CLOUDINARY_API_KEY"),
+    api_secret=env("CLOUDINARY_API_SECRET"),
+    secure=env("CLOUDINARY_SECURE", default=True),
+)
+
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
 MIDDLEWARE = [
-    # "corsheaders.middleware.CorsMiddleware",  # Se agrega esto para el acople con djnago
+    "corsheaders.middleware.CorsMiddleware",  # Se agrega esto para el acople con djnago
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     # "core.middleware.custom_locale_middleware.CustomLocaleMiddleware",  # Se agrega esto para la traduccion de idiomas
@@ -76,9 +99,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            BASE_DIR / "templates"
-        ],  # Add any other template directories if necessary
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -86,7 +107,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                # "django.template.context_processors.i18n",  # Para traducir
             ],
         },
     },
@@ -97,7 +117,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
 
 DATABASES = {
     "default": {
@@ -108,7 +128,6 @@ DATABASES = {
 
 
 # Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -130,10 +149,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
-# LANGUAGE_CODE = env("LANGUAGE_CODE", default="en")
-LANGUAGE_CODE = "en"
+LANGUAGE_CODE = env("LANGUAGE_CODE", default="en")
 
 
 # En caso de que de errores: instalar lo siguiente desde mingw-64: pacman -S mingw-w64-x86_64-gettext
@@ -154,11 +170,9 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
 
 # Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

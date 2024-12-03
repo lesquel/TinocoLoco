@@ -2,6 +2,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+from cloudinary.models import CloudinaryField
 
 # Definir constantes para los nombres de los campos
 BUSINESS_NAME_VERBOSE = _("Nombre del negocio")
@@ -25,9 +26,11 @@ META_VERBOSE_NAME = _("Configuracion del negocio")
 META_VERBOSE_NAME_PLURAL = _("Configuraciones del negocio")
 
 
-
 # Definir constantes para los nombres de los campos
 BUSINESS_NAME_VERBOSE = _("Nombre del negocio")
+BUSINESS_LOGO_VERBOSE = _("Logo del negocio")
+
+
 BUSINESS_ADDRESS_VERBOSE = _("Direccion del negocio")
 BUSINESS_PHONE_NUMBER_VERBOSE = _("Número de teléfono del negocio")
 BUSINESS_EMAIL_VERBOSE = _("Correo electrónico del negocio")
@@ -49,6 +52,7 @@ META_VERBOSE_NAME_PLURAL = _("Configuraciones del negocio")
 
 ONLY_ONE_CONFIGURATION_ERROR = _("Solo puede haber una configuración de negocio.")
 
+
 class BusinessConfiguration(models.Model):
     class Meta:
         verbose_name = META_VERBOSE_NAME
@@ -57,32 +61,44 @@ class BusinessConfiguration(models.Model):
     business_name = models.CharField(
         max_length=50, verbose_name=BUSINESS_NAME_VERBOSE, default="Tinocoloco"
     )
+
+
+    business_logo = CloudinaryField(
+        BUSINESS_LOGO_VERBOSE,
+        null=True,
+        blank=True,
+    )
+
     business_address = models.CharField(
         max_length=255,
+        blank=True,
+        null=True,
         verbose_name=BUSINESS_ADDRESS_VERBOSE,
-        default="Dirección no especificada",
     )
     business_phone_number = models.CharField(
         max_length=15,
+        blank=True,
+        null=True,
         verbose_name=BUSINESS_PHONE_NUMBER_VERBOSE,
-        default="000-000-0000",
     )
     business_email = models.EmailField(
-        verbose_name=BUSINESS_EMAIL_VERBOSE, default="contacto@negocio.com"
+        verbose_name=BUSINESS_EMAIL_VERBOSE, default="tinocoloco265@gmail.com"
     )
     business_website_url = models.URLField(
-        verbose_name=BUSINESS_WEBSITE_URL_VERBOSE, default="https://www.misitioweb.com"
+        blank=True, null=True, verbose_name=BUSINESS_WEBSITE_URL_VERBOSE
     )
     business_facebook_url = models.URLField(
+        blank=True,
+        null=True,
         verbose_name=BUSINESS_FACEBOOK_URL_VERBOSE,
-        default="https://www.facebook.com/miempresa",
     )
     business_instagram_url = models.URLField(
+        blank=True,
+        null=True,
         verbose_name=BUSINESS_INSTAGRAM_URL_VERBOSE,
-        default="https://www.instagram.com/miempresa",
     )
     business_x_url = models.URLField(
-        verbose_name=BUSINESS_X_URL_VERBOSE, default="https://www.x.com/miempresa"
+        blank=True, null=True, verbose_name=BUSINESS_X_URL_VERBOSE
     )
     business_bank_account_number_1 = models.CharField(
         max_length=15,
@@ -101,18 +117,21 @@ class BusinessConfiguration(models.Model):
     )
     business_bank_account_number_2 = models.CharField(
         max_length=15,
+        blank=True,
+        null=True,
         verbose_name=BUSINESS_BANK_ACCOUNT_NUMBER_2_VERBOSE,
-        default="000000000000000",
     )
     business_bank_name_2 = models.CharField(
         max_length=40,
+        blank=True,
+        null=True,
         verbose_name=BUSINESS_BANK_NAME_2_VERBOSE,
-        default="Banco Genérico 2",
     )
     business_bank_account_type_2 = models.CharField(
         max_length=15,
+        blank=True,
+        null=True,
         verbose_name=BUSINESS_BANK_ACCOUNT_TYPE_2_VERBOSE,
-        default="Corriente",
     )
 
     def clean(self):
