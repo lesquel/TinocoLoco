@@ -2,6 +2,11 @@
 import SearchIcon from '../../assets/icons/seacrh.svg';
 import DashboardIcon from '../../assets/icons/dashboard.svg';
 import BurgerIcon from '../../assets/icons/burger.svg';
+
+import UserImg from '../../assets/images/user.jpg';
+
+import IcoImg from '../ui/IcoImg.astro';
+import { imageConfig } from 'astro:assets';
 ---
 <header class="flex justify-between bg-[#00AF9A] p-2">
     <figure>
@@ -9,23 +14,20 @@ import BurgerIcon from '../../assets/icons/burger.svg';
     </figure>
 
     <div class="flex gap-2 bg-[#24C7B3] p-2 rounded-3xl justify-center items-center">
-        <footer>
-            <input class="bg-transparent text-[#fff] focus:outline-none placeholder:text-[#fff]" type="text" placeholder="Search..." />
+        <footer  class="flex gap-2">
+            <input class="hidden font-inter font-black bg-transparent text-[#fff] focus:outline-none placeholder:text-[#fff]
+            sm:block" type="text" placeholder="Search..." />
             <button>
-                <img class="size-4" src={SearchIcon.src} alt="search" />
+                <IcoImg src={SearchIcon.src} alt="search" />
             </button>
         </footer>
         <div class="flex [&>figure]:border-l [&>figure]:px-2 gap-2 justify-center items-center"> 
-            <figure>
-                <img class="size-4" src={DashboardIcon.src} alt="dashboard" />
-            </figure>
-
-            <figure>
-                <img src={BurgerIcon.src} alt="burger" />
-            </figure>
+            
+            <IcoImg src={DashboardIcon.src} alt="dashboard" />
+            
+            <IcoImg src={BurgerIcon.src} alt="burger" />
         </div>
-        <figure>
-            <img src="" alt="a">
-        </figure>
+        
+        <IcoImg src={UserImg.src} alt="user"  class:list={['size-6', 'rounded-full', 'border-2', 'border-[#fff]', 'bg-[#fff]']} />
     </div>
 </header>
