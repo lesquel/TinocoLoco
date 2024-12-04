@@ -56,20 +56,7 @@ INSTALLED_APPS = [
 
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
 
-
-# CLOUDINARY_CLOUD_NAME = os.getenv("CLOUDINARY_NAME")
-# CLOUDINARY_API_KEY = os.getenv("CLOUDINARY_API_KEY")
-# CLOUDINARY_API_SECRET = os.getenv("CLOUDINARY_API_SECRET")
-# CLOUDINARY_SECURE= os.getenv("CLOUDINARY_SECURE", default=True)
-
-# # Configuration
-# cloudinary.config(
-#     cloud_name=CLOUDINARY_CLOUD_NAME,
-#     api_key=CLOUDINARY_API_KEY,
-#     api_secret=CLOUDINARY_API_SECRET,
-#     secure=CLOUDINARY_SECURE
-# )
-
+# Configuracion de cloudinary
 cloudinary.config(
     cloud_name=env("CLOUDINARY_NAME"),
     api_key=env("CLOUDINARY_API_KEY"),
@@ -117,8 +104,6 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 
 # Database
-
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -128,7 +113,6 @@ DATABASES = {
 
 
 # Password validation
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -145,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Modifico esto para que funcione con mi modelo de usuario
-# AUTH_USER_MODEL = 'your_app_name.CustomUser' #Cambiar 'your_app_name' por el nombre de la app que se haya
+AUTH_USER_MODEL = "user.CustomUser" #Cambiar 'your_app_name' por el nombre de la app que se haya
 
 
 # Internationalization
