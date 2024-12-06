@@ -6,12 +6,11 @@ from django.contrib.auth.models import (
 from django.db import models
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
-
+from rest_framework.authtoken.models import Token
 CLIENT_ROLE = _("Cliente")
 BUSINESS_OWNER_ROLE = _("Dueño de Negocio")
 ADMIN_ROLE = _("Administrador")
 
-INVALID_ROLE_ERROR = _("El rol seleccionado no es válido.")
 
 
 # Verbose name para los campos
@@ -30,6 +29,11 @@ SEX_VERBOSE = _("Sexo")
 
 MALE = _("Masculino")
 FEAMALE = _("Femenino")
+
+ENGLISH = _("Inglés")
+SPANISH = _("Español")
+
+LANGUAGE_VERBOSE = _("Idioma")
 
 IS_ACTIVE_VERBOSE = _("Activo")
 IS_STAFF_VERBOSE = _("Staff")
@@ -58,6 +62,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
     SEX_CHOICES = (("M", MALE), ("F", FEAMALE))
 
+    LANGUAGE_CHOICES = (("es", SPANISH), ("en", ENGLISH))
+
     identity_card = models.CharField(
         max_length=10,
         unique=True,
@@ -81,26 +87,28 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     password = models.CharField(max_length=128, verbose_name=PASSWORD_VERBOSE)
     sex = models.CharField(
         max_length=1,
-        blank=True, null=True,
-        choices=(("M", "Masculino"), ("F", "Femenino")),
+        blank=True,
+        null=True,
+        choices=(("M", MALE), ("F", FEAMALE)),
         verbose_name=SEX_VERBOSE,
     )
+
+    preferred_language = models.CharField(
+        max_length=2, choices=LANGUAGE_CHOICES, default="es", verbose_name=LANGUAGE_VERBOSE
+    )
+
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="client")
+    
+    
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["email"]
-
-    def clean_role(self):
-        if self.role not in dict(self.ROLE_CHOICES).keys():
-            raise ValidationError(INVALID_ROLE_ERROR)
-        return self.role
-
+    REQUIRED_FIELDS = ["email"] 
+    
     def save(self, *args, **kwargs):
-        self.full_clean()
         super().save(*args, **kwargs)
 
     def __str__(self):

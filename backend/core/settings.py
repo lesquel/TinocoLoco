@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework.authtoken",
     "cloudinary",
     "cloudinary_storage",
     "corsheaders",
@@ -71,14 +72,24 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",  # Se agrega esto para el acople con djnago
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    # "core.middleware.custom_locale_middleware.CustomLocaleMiddleware",  # Se agrega esto para la traduccion de idiomas
     "django.middleware.locale.LocaleMiddleware",  # Se agrega esto para la traduccion de idiomas
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "user.middleware.language_middleware.LanguageMiddleware",  # Se agrega esto para la traduccion de idiomas automatica al iniciar sesion
 ]
+    
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
 
 
 ROOT_URLCONF = "core.urls"
@@ -129,26 +140,28 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Modifico esto para que funcione con mi modelo de usuario
-AUTH_USER_MODEL = "user.CustomUser" #Cambiar 'your_app_name' por el nombre de la app que se haya
+AUTH_USER_MODEL = "user.CustomUser"
 
 
 # Internationalization
-LANGUAGE_CODE = env("LANGUAGE_CODE", default="en")
+LANGUAGE_CODE = env("LANGUAGE_CODE")
 
 
 # En caso de que de errores: instalar lo siguiente desde mingw-64: pacman -S mingw-w64-x86_64-gettext
 # O tambien, agregar la siguiente ruta a variable de entorno: C:\msys64\usr\bin
 
-languages_str = env("LANGUAGES", default='[("en", _("English")), ("es", _("Spanish"))]')
-LANGUAGES = eval(languages_str)
+LANGUAGES = eval(env("LANGUAGES"))
 
 
 LOCALE_PATHS = [env("LOCALE_PATHS", default=os.path.join(BASE_DIR, "locale"))]
 
+LANGUAGE_COOKIE_NAME = "cookie_language_tinocoloco"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = env("TIME_ZONE")
 
 USE_I18N = True
+USE_L10N = True
+
 
 USE_TZ = True
 

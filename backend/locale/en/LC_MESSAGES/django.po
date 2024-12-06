@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-02 21:13-0500\n"
+"POT-Creation-Date: 2024-12-06 16:01-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,78 +17,253 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\business_configuration\models.py:8 .\business_configuration\models.py:30
+#: .\business_configuration\models.py:10 .\business_configuration\models.py:32
 msgid "Nombre del negocio"
 msgstr "Business Name"
 
-#: .\business_configuration\models.py:9 .\business_configuration\models.py:34
+#: .\business_configuration\models.py:11 .\business_configuration\models.py:36
 msgid "Direccion del negocio"
 msgstr "Business Address"
 
-#: .\business_configuration\models.py:10 .\business_configuration\models.py:35
+#: .\business_configuration\models.py:12 .\business_configuration\models.py:37
 msgid "Número de teléfono del negocio"
 msgstr "Business Phone Number"
 
-#: .\business_configuration\models.py:11 .\business_configuration\models.py:36
+#: .\business_configuration\models.py:13 .\business_configuration\models.py:38
 msgid "Correo electrónico del negocio"
 msgstr "Business Email"
 
-#: .\business_configuration\models.py:12 .\business_configuration\models.py:37
+#: .\business_configuration\models.py:14 .\business_configuration\models.py:39
 msgid "URL del sitio web del negocio"
 msgstr "Business Website URL"
 
-#: .\business_configuration\models.py:13 .\business_configuration\models.py:38
+#: .\business_configuration\models.py:15 .\business_configuration\models.py:40
 msgid "URL de Facebook del negocio"
 msgstr "Business Facebook URL"
 
-#: .\business_configuration\models.py:14 .\business_configuration\models.py:39
+#: .\business_configuration\models.py:16 .\business_configuration\models.py:41
 msgid "URL de Instagram del negocio"
 msgstr "Business Instagram URL"
 
-#: .\business_configuration\models.py:15 .\business_configuration\models.py:40
+#: .\business_configuration\models.py:17 .\business_configuration\models.py:42
 msgid "URL de X (anteriormente Twitter) del negocio"
 msgstr "Business X URL"
 
-#: .\business_configuration\models.py:17 .\business_configuration\models.py:42
+#: .\business_configuration\models.py:19 .\business_configuration\models.py:44
 msgid "Número de cuenta bancaria 1 del negocio"
 msgstr "Business Bank Account Number 1"
 
-#: .\business_configuration\models.py:18 .\business_configuration\models.py:43
+#: .\business_configuration\models.py:20 .\business_configuration\models.py:45
 msgid "Nombre del banco 1 del negocio"
 msgstr "Business Bank Name 1"
 
-#: .\business_configuration\models.py:19 .\business_configuration\models.py:44
+#: .\business_configuration\models.py:21 .\business_configuration\models.py:46
 msgid "Tipo de cuenta bancaria 1 del negocio"
 msgstr "Business Bank Account Type 1"
 
-#: .\business_configuration\models.py:21 .\business_configuration\models.py:46
+#: .\business_configuration\models.py:23 .\business_configuration\models.py:48
 msgid "Número de cuenta bancaria 2 del negocio"
 msgstr "Business Bank Account Number 2"
 
-#: .\business_configuration\models.py:22 .\business_configuration\models.py:47
+#: .\business_configuration\models.py:24 .\business_configuration\models.py:49
 msgid "Nombre del banco 2 del negocio"
 msgstr "Business Bank Name 2"
 
-#: .\business_configuration\models.py:23 .\business_configuration\models.py:48
+#: .\business_configuration\models.py:25 .\business_configuration\models.py:50
 msgid "Tipo de cuenta bancaria 2 del negocio"
 msgstr "Business Bank Account Type 2"
 
-#: .\business_configuration\models.py:25 .\business_configuration\models.py:50
+#: .\business_configuration\models.py:27 .\business_configuration\models.py:52
 msgid "Configuracion del negocio"
 msgstr "Business Configuration"
 
-#: .\business_configuration\models.py:26 .\business_configuration\models.py:51
+#: .\business_configuration\models.py:28 .\business_configuration\models.py:53
 msgid "Configuraciones del negocio"
 msgstr "Business Configurations"
 
-#: .\business_configuration\models.py:31
+#: .\business_configuration\models.py:33
 msgid "Logo del negocio"
 msgstr "Business Logo"
 
-#: .\business_configuration\models.py:53 .\business_configuration\views.py:10
+#: .\business_configuration\models.py:55
 msgid "Solo puede haber una configuración de negocio."
 msgstr "Only one business configuration can exits"
 
+#: .\business_configuration\models.py:58
+msgid "Ahorro"
+msgstr "Savings"
+
+#: .\business_configuration\models.py:59
+msgid "Corriente"
+msgstr "Checking"
+
 #: .\business_configuration\views.py:9
 msgid "Configuración del negocio no encontrada."
-msgstr "Business configurationn not found"
+msgstr "Business configuration not found."
+
+#: .\user\models.py:10
+msgid "Cliente"
+msgstr "Client"
+
+#: .\user\models.py:11
+msgid "Dueño de Negocio"
+msgstr "Business Owner"
+
+#: .\user\models.py:12
+msgid "Administrador"
+msgstr "Administrator"
+
+#: .\user\models.py:17
+msgid "Cédula"
+msgstr "ID Number"
+
+#: .\user\models.py:18
+msgid "Correo electrónico"
+msgstr "Email Address"
+
+#: .\user\models.py:19
+msgid "Nombre"
+msgstr "First Name"
+
+#: .\user\models.py:20
+msgid "Apellido"
+msgstr "Last Name"
+
+#: .\user\models.py:21
+msgid "Contraseña"
+msgstr "Password"
+
+#: .\user\models.py:22
+msgid "Nombre de Usuario"
+msgstr "Username"
+
+#: .\user\models.py:23
+msgid "Nacionalidad"
+msgstr "Nationality"
+
+#: .\user\models.py:24
+msgid "Fecha de Registro"
+msgstr "Registration Date"
+
+#: .\user\models.py:25
+msgid "Teléfono"
+msgstr "Phone Number"
+
+#: .\user\models.py:26
+msgid "Dirección"
+msgstr "Address"
+
+#: .\user\models.py:27
+msgid "Rol"
+msgstr "Role"
+
+#: .\user\models.py:28
+msgid "Sexo"
+msgstr "Gender"
+
+#: .\user\models.py:30
+msgid "Masculino"
+msgstr "Male"
+
+#: .\user\models.py:31
+msgid "Femenino"
+msgstr "Female"
+
+#: .\user\models.py:33
+msgid "Inglés"
+msgstr "English"
+
+#: .\user\models.py:34
+msgid "Español"
+msgstr "Spanish"
+
+#: .\user\models.py:36
+msgid "Idioma"
+msgstr "Language"
+
+#: .\user\models.py:38
+msgid "Activo"
+msgstr "Active"
+
+#: .\user\models.py:39
+msgid "Staff"
+msgstr "Staff"
+
+#: .\user\serializers.py:8
+msgid "Por favor, ingresar su nombre de usuario."
+msgstr "Please enter your username."
+
+#: .\user\serializers.py:9
+msgid "Por favor, ingresar su correo electrónico."
+msgstr "Please enter your email address."
+
+#: .\user\serializers.py:10
+msgid "Por favor, ingresar su contraseña."
+msgstr "Please enter your password."
+
+#: .\user\serializers.py:11
+msgid "Este nombre de usuario ya está en uso."
+msgstr "This username is already in use."
+
+#: .\user\serializers.py:12
+msgid "Este número de cédula ya está registrado."
+msgstr "This ID number is already registered."
+
+#: .\user\serializers.py:13
+msgid "Este correo electrónico ya está registrado."
+msgstr "This email address is already registered."
+
+#: .\user\serializers.py:14
+msgid "Rol inválido"
+msgstr "Invalid role"
+
+#: .\user\serializers.py:15
+msgid "Sexo inválido"
+msgstr "Invalid gender"
+
+#: .\user\views.py:15
+msgid "Por favor, ingresar su usuario y contraseña"
+msgstr "Please enter your username and password."
+
+#: .\user\views.py:16
+msgid "Credenciales inválidas"
+msgstr "Invalid credentials."
+
+#: .\user\views.py:17
+msgid "Ya ha iniciado sesión"
+msgstr "You are already logged in."
+
+#: .\user\views.py:18 .\user\views.py:24
+msgid "No ha iniciado sesión"
+msgstr "You are not logged in."
+
+#: .\user\views.py:19
+msgid "Desconectado exitosamente"
+msgstr "Successfully logged out."
+
+#: .\user\views.py:20
+msgid "Datos inválidos"
+msgstr "Invalid data."
+
+#: .\user\views.py:21
+msgid "No tiene permisos para realizar esta acción"
+msgstr "You do not have permission to perform this action."
+
+#: .\user\views.py:22
+msgid "Usuario no encontrado"
+msgstr "User not found."
+
+#: .\user\views.py:23
+msgid "Usuario eliminado exitosamente"
+msgstr "User successfully deleted."
+
+#: .\user\views.py:27
+msgid "Idioma no soportado"
+msgstr "Language not suported"
+
+#: .\user\views.py:28
+msgid "Idioma actualizado correctamente a {}."
+msgstr "Language updated successfully to {}"
+
+#~ msgid "FUNCIONA MALDITASEA"
+#~ msgstr "JUST WORK FUCK"

@@ -9,10 +9,8 @@ class BusinessConfigurationSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessConfiguration
         fields = "__all__"
-        extra_fields = ["business_logo_url"]
 
 
-        
 
     def get_business_logo_url(self, obj):
         return obj.get_logo_url() if obj.business_logo else None
