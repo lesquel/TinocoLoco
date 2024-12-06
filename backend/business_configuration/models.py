@@ -3,6 +3,8 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 from cloudinary.models import CloudinaryField
+from cloudinary.utils import cloudinary_url
+
 
 # Definir constantes para los nombres de los campos
 BUSINESS_NAME_VERBOSE = _("Nombre del negocio")
@@ -53,15 +55,36 @@ META_VERBOSE_NAME_PLURAL = _("Configuraciones del negocio")
 ONLY_ONE_CONFIGURATION_ERROR = _("Solo puede haber una configuración de negocio.")
 
 
+ACCOUNT_TYPE_SAVINGS = _("Ahorro")
+ACCOUNT_TYPE_CURRENT = _("Corriente")
+
+
+class BusinessConfigurationManager(models.Manager):
+    def create(self, *args, **kwargs):
+        return super().create(*args, **kwargs)
+
+    def get_or_create_unique(self, **kwargs):
+        try:
+            if self.model.objects.exists():
+                return self.model.objects.first(), False
+            return self.create(**kwargs), True
+        except ValidationError as e:
+            return None, False
+
+
 class BusinessConfiguration(models.Model):
     class Meta:
         verbose_name = META_VERBOSE_NAME
         verbose_name_plural = META_VERBOSE_NAME_PLURAL
 
+    ACCOUNT_TYPE_CHOICES = [
+        ("saving", ACCOUNT_TYPE_SAVINGS),
+        ("current", ACCOUNT_TYPE_CURRENT),
+    ]
+
     business_name = models.CharField(
         max_length=50, verbose_name=BUSINESS_NAME_VERBOSE, default="Tinocoloco"
     )
-
 
     business_logo = CloudinaryField(
         BUSINESS_LOGO_VERBOSE,
@@ -112,8 +135,9 @@ class BusinessConfiguration(models.Model):
     )
     business_bank_account_type_1 = models.CharField(
         max_length=15,
+        choices=ACCOUNT_TYPE_CHOICES,
         verbose_name=BUSINESS_BANK_ACCOUNT_TYPE_1_VERBOSE,
-        default="Ahorro",
+        default="saving",
     )
     business_bank_account_number_2 = models.CharField(
         max_length=15,
@@ -129,18 +153,27 @@ class BusinessConfiguration(models.Model):
     )
     business_bank_account_type_2 = models.CharField(
         max_length=15,
+        choices=ACCOUNT_TYPE_CHOICES,
         blank=True,
         null=True,
         verbose_name=BUSINESS_BANK_ACCOUNT_TYPE_2_VERBOSE,
     )
 
+    objects = BusinessConfigurationManager()
+
+    def get_logo_url(self):
+        if self.business_logo:
+            print(cloudinary_url(self.business_logo.public_id))
+            url, options = cloudinary_url(self.business_logo.public_id)
+            return url
+        return None
+
     def clean(self):
-        # Validar que solo haya una configuración de negocio
         if BusinessConfiguration.objects.exists() and not self.pk:
             raise ValidationError(ONLY_ONE_CONFIGURATION_ERROR)
 
     def save(self, *args, **kwargs):
-        self.full_clean()  # Llamada a la validación personalizada (clean)
+        self.full_clean() 
         super().save(*args, **kwargs)
 
     def __str__(self):
