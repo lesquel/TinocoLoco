@@ -5,12 +5,7 @@ from django.contrib.auth.models import (
 )
 from django.db import models
 from django.utils.translation import gettext as _
-from django.core.exceptions import ValidationError
-from rest_framework.authtoken.models import Token
-CLIENT_ROLE = _("Cliente")
-BUSINESS_OWNER_ROLE = _("Dueño de Negocio")
-ADMIN_ROLE = _("Administrador")
-
+from user.choices import SexChoices, RoleChoices, LanguageChoices
 
 
 # Verbose name para los campos
@@ -27,11 +22,6 @@ ADDRESS_VERBOSE = _("Dirección")
 ROLE_VERBOSE = _("Rol")
 SEX_VERBOSE = _("Sexo")
 
-MALE = _("Masculino")
-FEAMALE = _("Femenino")
-
-ENGLISH = _("Inglés")
-SPANISH = _("Español")
 
 LANGUAGE_VERBOSE = _("Idioma")
 
@@ -55,14 +45,8 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    ROLE_CHOICES = (
-        ("client", CLIENT_ROLE),
-        ("business_owner", BUSINESS_OWNER_ROLE),
-        ("admin", ADMIN_ROLE),
-    )
-    SEX_CHOICES = (("M", MALE), ("F", FEAMALE))
 
-    LANGUAGE_CHOICES = (("es", SPANISH), ("en", ENGLISH))
+
 
     identity_card = models.CharField(
         max_length=10,
@@ -89,15 +73,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         max_length=1,
         blank=True,
         null=True,
-        choices=(("M", MALE), ("F", FEAMALE)),
+        choices=SexChoices.choices,
         verbose_name=SEX_VERBOSE,
     )
 
     preferred_language = models.CharField(
-        max_length=2, choices=LANGUAGE_CHOICES, default="es", verbose_name=LANGUAGE_VERBOSE
+        max_length=2, choices=LanguageChoices.choices, default=LanguageChoices.ENGLISH, verbose_name=LANGUAGE_VERBOSE
     )
 
-    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="client")
+    role = models.CharField(max_length=20, choices=RoleChoices.choices, default=RoleChoices.CLIENT)
     
     
     is_active = models.BooleanField(default=True)

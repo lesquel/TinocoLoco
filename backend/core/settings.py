@@ -40,20 +40,28 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 # Application definition
 
 INSTALLED_APPS = [
+    # Django Default Apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Third-party Apps
     "rest_framework",
     "rest_framework.authtoken",
     "cloudinary",
     "cloudinary_storage",
     "corsheaders",
-    "business_configuration.apps.BusinessConfigurationConfig",
-    "user.apps.UserConfig",
+    # Project Apps
+    "business_configuration",
+    "user",
+    "event",
+    "event_rental",
+    "generics",
+    "service",
 ]
+
 
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
 
@@ -80,7 +88,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "user.middleware.language_middleware.LanguageMiddleware",  # Se agrega esto para la traduccion de idiomas automatica al iniciar sesion
 ]
-    
+
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [

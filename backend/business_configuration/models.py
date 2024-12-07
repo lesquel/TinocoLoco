@@ -3,7 +3,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
 from cloudinary.models import CloudinaryField
-from cloudinary.utils import cloudinary_url
 
 
 # Definir constantes para los nombres de los campos
@@ -161,19 +160,12 @@ class BusinessConfiguration(models.Model):
 
     objects = BusinessConfigurationManager()
 
-    def get_logo_url(self):
-        if self.business_logo:
-            print(cloudinary_url(self.business_logo.public_id))
-            url, options = cloudinary_url(self.business_logo.public_id)
-            return url
-        return None
-
     def clean(self):
         if BusinessConfiguration.objects.exists() and not self.pk:
             raise ValidationError(ONLY_ONE_CONFIGURATION_ERROR)
 
     def save(self, *args, **kwargs):
-        self.full_clean() 
+        self.full_clean()
         super().save(*args, **kwargs)
 
     def __str__(self):
