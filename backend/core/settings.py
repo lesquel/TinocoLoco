@@ -39,21 +39,27 @@ ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 # Application definition
 
-INSTALLED_APPS = [
-    # Django Default Apps
+DEFAULT_DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Third-party Apps
+]
+
+
+THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     "cloudinary",
     "cloudinary_storage",
     "corsheaders",
-    # Project Apps
+    "drf_yasg",
+]
+
+
+LOCAL_APPS = [
     "business_configuration",
     "user",
     "event",
@@ -61,6 +67,8 @@ INSTALLED_APPS = [
     "generics",
     "service",
 ]
+
+INSTALLED_APPS = DEFAULT_DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS")
@@ -97,6 +105,8 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
 }
 
 

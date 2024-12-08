@@ -1,10 +1,11 @@
+from drf_yasg.utils import swagger_auto_schema
+from django.utils.translation import gettext as _
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny,IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework import status
 from .serializers import BusinessConfigurationSerializer
 from .models import BusinessConfiguration
-from django.utils.translation import gettext as _
 
 CONFIGURATION_NOT_FOUND_ERROR = _("Configuración del negocio no encontrada.")
 
@@ -12,18 +13,30 @@ CONFIGURATION_NOT_FOUND_ERROR = _("Configuración del negocio no encontrada.")
 class BusinessConfigurationDetailView(APIView):
 
     def get_permissions(self):
-        if self.request.method in ["GET",]:
+        if self.request.method in [
+            "GET",
+        ]:
             return [AllowAny()]
-        elif self.request.method in ["PUT",]:
+        elif self.request.method in [
+            "PUT",
+        ]:
             return [IsAdminUser()]
         return super().get_permissions()
 
+    @swagger_auto_schema(
+        responses={200: BusinessConfigurationSerializer()},
+        operation_description="Retrieve business configuration",
+    )
     def get(self, request, *args, **kwargs):
         configuration, _ = BusinessConfiguration.objects.get_or_create()
-
         serializer = BusinessConfigurationSerializer(configuration)
         return Response({"configuration": serializer.data}, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(
+        request_body=BusinessConfigurationSerializer,
+        responses={200: BusinessConfigurationSerializer()},
+        operation_description="Update business configuration",
+    )
     def put(self, request, *args, **kwargs):
         configuration = BusinessConfiguration.objects.first()
         if configuration is None:
