@@ -15,12 +15,11 @@ MUST_PROVIDE_BOTH_EMAIL_AND_PASSWORD = _("Por favor, ingresar su usuario y contr
 class BaseError(Exception):
     def __init__(self, message=None, code=None):
         super().__init__(self._serialize_errors(message))
-
         self.code = code or status.HTTP_500_INTERNAL_SERVER_ERROR
 
     def _serialize_errors(self, errors):
         if isinstance(errors, list):
-            return [str(e) for e in errors]
+            return {"error": [str(e) for e in errors]}
 
         if isinstance(errors, dict):
             serialized = {}
@@ -28,7 +27,10 @@ class BaseError(Exception):
                 serialized[key] = [str(e) for e in error_list]
             return serialized
 
-        return {str(errors)}
+        # Si el error es un string o cualquier otro tipo, conviértelo en un diccionario
+        return {"error": [str(errors)]}
+
+
 
 
 class ValidationError(BaseError):
@@ -39,6 +41,7 @@ class ValidationError(BaseError):
 class InvalidRoleError(BaseError):
     def __init__(self):
         super().__init__(INVALID_ROLE, status.HTTP_400_BAD_REQUEST)
+
 
 class MissingFieldsLoginError(BaseError):
     def __init__(

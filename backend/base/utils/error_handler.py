@@ -1,4 +1,3 @@
-from rest_framework.exceptions import ErrorDetail
 from rest_framework.response import Response
 from rest_framework import status
 from functools import wraps
@@ -18,11 +17,13 @@ class ErrorHandler:
                 return func(*args, **kwargs)
 
             except errors.BaseError as e:
-                return self._handle_error(str(e), e.code)
+                # Maneja errores personalizados
+                return self._handle_error(e.args[0], e.code)
 
             except Exception as e:
+                # Maneja excepciones generales
                 return self._handle_error(
-                    {"error": str(e)},
+                    {"error": [str(e)]},
                     self.default_code or status.HTTP_500_INTERNAL_SERVER_ERROR,
                 )
 
@@ -32,9 +33,12 @@ class ErrorHandler:
         """
         Envía la respuesta con la estructura de error esperada.
         """
+        # Garantiza que los mensajes siempre estén en el formato adecuado
+        if not isinstance(message, dict):
+            message = {"error": [str(message)]}
+
         error_response = {
-            "error": True,
-            "message": self.message + ": " + str(message) if self.message else message,
+            "errors": self.message + ": " + str(message) if self.message else message,
             "code": code,
         }
         return Response(error_response, status=code)

@@ -41,6 +41,7 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, username, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("role", RoleChoices.ADMIN)
         return self.create_user(username, email, password, **extra_fields)
 
 
@@ -81,11 +82,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         max_length=2, choices=LanguageChoices.choices, default=LanguageChoices.ENGLISH, verbose_name=LANGUAGE_VERBOSE
     )
 
-    role = models.CharField(max_length=20, choices=RoleChoices.choices, default=RoleChoices.CLIENT)
+    role = models.CharField(max_length=20, choices=RoleChoices.choices, default=RoleChoices.COSTUMER)
     
     
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
@@ -93,6 +95,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["email"] 
     
     def save(self, *args, **kwargs):
+        
         super().save(*args, **kwargs)
 
     def __str__(self):

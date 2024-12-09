@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-06 16:01-0500\n"
+"POT-Creation-Date: 2024-12-08 19:43-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
 "1 : 2;\n"
+
+#: .\base\utils\errors.py:6
+msgid "No ha iniciado sesión"
+msgstr ""
+
+#: .\base\utils\errors.py:7
+msgid "Idioma no soportado"
+msgstr ""
+
+#: .\base\utils\errors.py:8
+msgid "Credenciales inválidas"
+msgstr ""
+
+#: .\base\utils\errors.py:9
+msgid "No tiene permisos para realizar esta acción"
+msgstr ""
+
+#: .\base\utils\errors.py:10
+msgid "Usuario no encontrado"
+msgstr ""
+
+#: .\base\utils\errors.py:11
+msgid "Rol inválido"
+msgstr ""
+
+#: .\base\utils\errors.py:12
+msgid "Por favor, ingresar su usuario y contraseña"
+msgstr ""
 
 #: .\business_configuration\models.py:10 .\business_configuration\models.py:32
 msgid "Nombre del negocio"
@@ -91,178 +119,190 @@ msgstr ""
 msgid "Solo puede haber una configuración de negocio."
 msgstr ""
 
-#: .\business_configuration\models.py:58
-msgid "Ahorro"
-msgstr ""
-
-#: .\business_configuration\models.py:59
-msgid "Corriente"
-msgstr ""
-
-#: .\business_configuration\views.py:9
+#: .\business_configuration\views.py:10
 msgid "Configuración del negocio no encontrada."
 msgstr ""
 
-#: .\user\models.py:10
-msgid "Cliente"
+#: .\event\models\event_category.py:5
+msgid "Imagen del tipo de evento"
 msgstr ""
 
-#: .\user\models.py:11
-msgid "Dueño de Negocio"
+#: .\event_rental\choices\event_rental_status.py:6
+msgid "Pendiente"
 msgstr ""
 
-#: .\user\models.py:12
-msgid "Administrador"
+#: .\event_rental\choices\event_rental_status.py:7
+msgid "Confirmado"
 msgstr ""
 
-#: .\user\models.py:17
-msgid "Cédula"
+#: .\event_rental\choices\event_rental_status.py:8
+msgid "Cancelado"
 msgstr ""
 
-#: .\user\models.py:18
-msgid "Correo electrónico"
+#: .\event_rental\choices\event_rental_status.py:9
+msgid "Completado"
 msgstr ""
 
-#: .\user\models.py:19
-msgid "Nombre"
+#: .\event_rental\choices\event_rental_status.py:10
+msgid "En progreso"
 msgstr ""
 
-#: .\user\models.py:20
-msgid "Apellido"
+#: .\event_rental\choices\event_rental_status.py:11
+msgid "En espera"
 msgstr ""
 
-#: .\user\models.py:21
-msgid "Contraseña"
+#: .\event_rental\choices\payment_method.py:5
+msgid "Efectivo"
 msgstr ""
 
-#: .\user\models.py:22
-msgid "Nombre de Usuario"
+#: .\event_rental\choices\payment_method.py:6
+msgid "Tarjeta de crédito"
 msgstr ""
 
-#: .\user\models.py:23
-msgid "Nacionalidad"
+#: .\event_rental\choices\payment_method.py:7
+msgid "Tarjeta de débito"
 msgstr ""
 
-#: .\user\models.py:24
-msgid "Fecha de Registro"
+#: .\event_rental\choices\payment_method.py:8
+msgid "Transferencia bancaria"
 msgstr ""
 
-#: .\user\models.py:25
-msgid "Teléfono"
+#: .\event_rental\choices\payment_method.py:9
+msgid "Otro"
 msgstr ""
 
-#: .\user\models.py:26
-msgid "Dirección"
+#: .\event_rental\models\rental_status_history.py:21
+msgid "Estado de alquiler de {} cambiado a {} por {} el {}"
 msgstr ""
 
-#: .\user\models.py:27
-msgid "Rol"
+#: .\service\models\service_category.py:5
+msgid "Imagen del tipo de servicio"
 msgstr ""
 
-#: .\user\models.py:28
-msgid "Sexo"
-msgstr ""
-
-#: .\user\models.py:30
-msgid "Masculino"
-msgstr ""
-
-#: .\user\models.py:31
-msgid "Femenino"
-msgstr ""
-
-#: .\user\models.py:33
+#: .\user\choices\language_choices.py:5
 msgid "Inglés"
 msgstr ""
 
-#: .\user\models.py:34
+#: .\user\choices\language_choices.py:6
 msgid "Español"
 msgstr ""
 
-#: .\user\models.py:36
+#: .\user\choices\role_choices.py:6
+msgid "Administrador"
+msgstr ""
+
+#: .\user\choices\role_choices.py:7
+msgid "Cliente"
+msgstr ""
+
+#: .\user\choices\sex_choices.py:7
+msgid "Masculino"
+msgstr ""
+
+#: .\user\choices\sex_choices.py:8
+msgid "Femenino"
+msgstr ""
+
+#: .\user\models.py:12
+msgid "Cédula"
+msgstr ""
+
+#: .\user\models.py:13
+msgid "Correo electrónico"
+msgstr ""
+
+#: .\user\models.py:14
+msgid "Nombre"
+msgstr ""
+
+#: .\user\models.py:15
+msgid "Apellido"
+msgstr ""
+
+#: .\user\models.py:16
+msgid "Contraseña"
+msgstr ""
+
+#: .\user\models.py:17
+msgid "Nombre de Usuario"
+msgstr ""
+
+#: .\user\models.py:18
+msgid "Nacionalidad"
+msgstr ""
+
+#: .\user\models.py:19
+msgid "Fecha de Registro"
+msgstr ""
+
+#: .\user\models.py:20
+msgid "Teléfono"
+msgstr ""
+
+#: .\user\models.py:21
+msgid "Dirección"
+msgstr ""
+
+#: .\user\models.py:22
+msgid "Rol"
+msgstr ""
+
+#: .\user\models.py:23
+msgid "Sexo"
+msgstr ""
+
+#: .\user\models.py:26
 msgid "Idioma"
 msgstr ""
 
-#: .\user\models.py:38
+#: .\user\models.py:28
 msgid "Activo"
 msgstr ""
 
-#: .\user\models.py:39
+#: .\user\models.py:29
 msgid "Staff"
 msgstr ""
 
-#: .\user\serializers.py:8
-msgid "Por favor, ingresar su nombre de usuario."
-msgstr ""
-
-#: .\user\serializers.py:9
-msgid "Por favor, ingresar su correo electrónico."
-msgstr ""
-
-#: .\user\serializers.py:10
-msgid "Por favor, ingresar su contraseña."
-msgstr ""
-
-#: .\user\serializers.py:11
+#: .\user\serializers\base_user_serializer.py:7
+#: .\user\serializers\update_user_serializer.py:9
 msgid "Este nombre de usuario ya está en uso."
 msgstr ""
 
-#: .\user\serializers.py:12
+#: .\user\serializers\base_user_serializer.py:8
+#: .\user\serializers\update_user_serializer.py:10
 msgid "Este número de cédula ya está registrado."
 msgstr ""
 
-#: .\user\serializers.py:13
+#: .\user\serializers\base_user_serializer.py:9
+#: .\user\serializers\update_user_serializer.py:11
 msgid "Este correo electrónico ya está registrado."
 msgstr ""
 
-#: .\user\serializers.py:14
-msgid "Rol inválido"
-msgstr ""
-
-#: .\user\serializers.py:15
+#: .\user\serializers\base_user_serializer.py:10
+#: .\user\serializers\update_user_serializer.py:12
 msgid "Sexo inválido"
 msgstr ""
 
-#: .\user\views.py:15
-msgid "Por favor, ingresar su usuario y contraseña"
+#: .\user\serializers\create_user_serializer.py:8
+msgid "Por favor, ingresar su nombre de usuario."
 msgstr ""
 
-#: .\user\views.py:16
-msgid "Credenciales inválidas"
+#: .\user\serializers\create_user_serializer.py:9
+msgid "Por favor, ingresar su correo electronico."
 msgstr ""
 
-#: .\user\views.py:17
-msgid "Ya ha iniciado sesión"
+#: .\user\serializers\create_user_serializer.py:10
+msgid "Por favor, ingresar su contrasena."
 msgstr ""
 
-#: .\user\views.py:18 .\user\views.py:24
-msgid "No ha iniciado sesión"
-msgstr ""
-
-#: .\user\views.py:19
+#: .\user\views.py:26
 msgid "Desconectado exitosamente"
 msgstr ""
 
-#: .\user\views.py:20
-msgid "Datos inválidos"
-msgstr ""
-
-#: .\user\views.py:21
-msgid "No tiene permisos para realizar esta acción"
-msgstr ""
-
-#: .\user\views.py:22
-msgid "Usuario no encontrado"
-msgstr ""
-
-#: .\user\views.py:23
+#: .\user\views.py:27
 msgid "Usuario eliminado exitosamente"
 msgstr ""
 
-#: .\user\views.py:27
-msgid "Idioma no soportado"
-msgstr ""
-
-#: .\user\views.py:28
+#: .\user\views.py:29
 msgid "Idioma actualizado correctamente a {}."
 msgstr ""

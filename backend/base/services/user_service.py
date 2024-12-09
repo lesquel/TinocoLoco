@@ -43,8 +43,5 @@ class UserService:
 
     @staticmethod
     def change_user_language(user, language):
-        if language not in dict(settings.LANGUAGES):
-            raise errors.InvalidLanguage()
-
         user.preferred_language = language
         user.save()

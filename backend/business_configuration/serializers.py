@@ -11,7 +11,7 @@ class BusinessConfigurationSerializer(serializers.ModelSerializer):
         model = BusinessConfiguration
         fields = "__all__"
 
-
+    
 
     def get_business_logo_url(self, obj):
         return ImageUtils.get_image_url(obj.business_logo) 
