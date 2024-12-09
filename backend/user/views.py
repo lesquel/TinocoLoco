@@ -102,7 +102,10 @@ class UserViewSet(ViewSet):
     def login(self, request):
 
         serializer = LoginUserSerializer(data=request.data)
+        print(serializer) 
         if serializer.is_valid():
+            print(1)
+            print(serializer.validated_data)
             token = serializer.validated_data.get("token")
             user = serializer.validated_data.get("user")
             return Response(

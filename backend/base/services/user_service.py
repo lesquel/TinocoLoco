@@ -12,7 +12,10 @@ class UserService:
     @staticmethod
     def login_user(username, password):
         user = authenticate(username=username, password=password)
+        print("user_service.py")
+        print(user)
         if not user:
+            print("No user")
             return None, None
         token, _ = Token.objects.get_or_create(user=user)
         return token, user
