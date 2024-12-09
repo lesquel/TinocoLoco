@@ -2,8 +2,8 @@ from django.utils.translation import gettext as _
 from rest_framework import serializers
 from user.models import CustomUser
 from .base_user_serializer import BaseUserSerializer
-
-
+from base.services import UserService
+from base.utils import errors
 ERROR_MESSAGES = {
     "MUST_PROVIDE_USERNAME": _("Por favor, ingresar su nombre de usuario."),
     "MUST_PROVIDE_EMAIL": _("Por favor, ingresar su correo electronico."),
@@ -29,9 +29,11 @@ class CreateUserSerializer(BaseUserSerializer):
         error_messages={"required": ERROR_MESSAGES["MUST_PROVIDE_PASSWORD"]},
     )
 
-    def create(self, validated_data):
-        username = validated_data.pop("username")
-        email = validated_data.pop("email")
-        password = validated_data.pop("password")
+    def create(self, data):
+        username = data.pop("username")
+        email = data.pop("email")
+        password = data.pop("password")
         user = CustomUser.objects.create_user(username, email, password)
-        return user
+        token = UserService.get_token(user)
+
+        return {"user": user, "token": token}

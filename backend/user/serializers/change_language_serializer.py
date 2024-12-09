@@ -7,11 +7,12 @@ from base.services import UserService
 
 
 class ChangeLanguageSerializer(serializers.Serializer):
-    language = serializers.CharField(required=True, )
+    preferred_language = serializers.CharField(required=True, )
 
     def update(self, instance, validated_data):
-        language = validated_data["language"]
+        language = validated_data["preferred_language"]
         UserService.change_user_language(instance, language)
+        return instance
 
     def validate_preferred_language(self, value):
         if value not in dict(settings.LANGUAGES):

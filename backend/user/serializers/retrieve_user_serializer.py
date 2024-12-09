@@ -14,3 +14,5 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
             "sex",
         ]  
         read_only_fields = ["id", "username", "email"] 
+
+    

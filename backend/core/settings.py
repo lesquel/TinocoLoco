@@ -88,6 +88,12 @@ cloudinary.config(
 
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
+
+CUSTOM_MIDDLEWARE = [
+    "middlewares.language_middleware.LanguageMiddleware",  # Se agrega esto para la traduccion de idiomas automatica al iniciar sesion
+    "middlewares.error_handler_middleware.ErrorHandlerMiddleware",  # Se agrega esto para el manejo de errores
+]
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",  # Se agrega esto para el acople con djnago
     "django.middleware.security.SecurityMiddleware",
@@ -98,8 +104,9 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "user.middleware.language_middleware.LanguageMiddleware",  # Se agrega esto para la traduccion de idiomas automatica al iniciar sesion
-]
+] + CUSTOM_MIDDLEWARE
+
+
 
 
 REST_FRAMEWORK = {

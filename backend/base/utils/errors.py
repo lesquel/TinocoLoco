@@ -8,7 +8,7 @@ LANGUAGE_NOT_SUPORTED = _("Idioma no soportado")
 INVALID_CREDENTIALS = _("Credenciales inválidas")
 DONT_HAVE_PERMISSIONS = _("No tiene permisos para realizar esta acción")
 USER_NOT_FOUND = _("Usuario no encontrado")
-INVALID_ROLE= _("Rol inválido")
+INVALID_ROLE = _("Rol inválido")
 MUST_PROVIDE_BOTH_EMAIL_AND_PASSWORD = _("Por favor, ingresar su usuario y contraseña")
 
 
@@ -27,10 +27,7 @@ class BaseError(Exception):
                 serialized[key] = [str(e) for e in error_list]
             return serialized
 
-        # Si el error es un string o cualquier otro tipo, conviértelo en un diccionario
         return {"error": [str(errors)]}
-
-
 
 
 class ValidationError(BaseError):
