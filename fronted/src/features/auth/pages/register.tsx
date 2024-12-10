@@ -9,11 +9,14 @@ import { CiUser } from "react-icons/ci";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
+import { saveToken } from "../utils/saveToken";
+import { useRouter } from "next/navigation"; // Importa useRouter para redireccionar
 
 export const Register = () => {
   const [loading, setLoading] = useState(false); // Estado de carga
   const [error, setError] = useState<string | null>(null); // Estado de error
   const { register, handleSubmit, formState: { errors }} = useForm<IURegister>();
+  const router = useRouter(); // Inicializa el hook de enrutamiento
 
   const onSubmit = async (data: IURegister) => {
     setLoading(true);
@@ -27,7 +30,9 @@ export const Register = () => {
         console.error("Error en el registro:", response.errors);
       } else {
         console.log("Usuario registrado:", response);
-        // Redirigir o realizar alguna acción adicional
+        saveToken({ token: response.token });
+        // Redirige al usuario a la página de inicio de sesión
+        router.push("/"); // Redirecciona a login
       }
     } catch (error) {
       setError("Hubo un error inesperado. Intenta de nuevo.");
