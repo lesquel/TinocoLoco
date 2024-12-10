@@ -3,7 +3,7 @@ from rest_framework import status
 from django.urls import reverse
 from ..models import BusinessConfiguration
 from rest_framework.authtoken.models import Token
-from user.models import CustomUser
+from users.models import CustomUser
 
 
 class BusinessConfigurationSuperUserTest(APITestCase):

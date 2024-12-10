@@ -61,11 +61,12 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "business_configuration",
-    "user",
-    "event",
-    "event_rental",
-    "generics",
-    "service",
+    "users",
+    "events",
+    "event_rentals",
+    "services",
+    "photos",
+    "reviews",
 ]
 
 INSTALLED_APPS = DEFAULT_DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -168,8 +169,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Modifico esto para que funcione con mi modelo de usuario
-AUTH_USER_MODEL = "user.CustomUser"
+# Modifico esto para que
+# funcione con mi modelo de usuario
+AUTH_USER_MODEL = "users.CustomUser"
 
 
 # Internationalization
