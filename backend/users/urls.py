@@ -4,7 +4,7 @@ from . import views
 from django.urls import path, include
 
 user_router = DefaultRouter()
-user_router.register("user", views.UserViewSet, basename="user")
+user_router.register("", views.UserViewSet, basename="user")
 
 urlpatterns = [
     path("", include(user_router.urls)),
