@@ -39,4 +39,9 @@ urlpatterns = [
     # Rutas de la aplicacion
     path("business-configuration/", include("business_configuration.urls")),
     path("user/", include("user.urls")),
+    path("event/", include("event.urls")),
+    path("event-rental/", include("event_rental.urls")),
+    path("generics/", include("generics.urls")),
+    path("service/", include("service.urls")),
+    
 ]

@@ -7,7 +7,7 @@ from base.services import UserService
 
 
 class ChangeLanguageSerializer(serializers.Serializer):
-    preferred_language = serializers.CharField(required=True, )
+    preferred_language = serializers.ChoiceField(choices=LanguageChoices.choices)
 
     def update(self, instance, validated_data):
         language = validated_data["preferred_language"]

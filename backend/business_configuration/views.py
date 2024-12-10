@@ -7,8 +7,7 @@ from .serializers import BusinessConfigurationSerializer
 from .models import BusinessConfiguration
 
 from base.utils import schema_wrapper, schema_wrapper_response_only
-
-CONFIGURATION_NOT_FOUND_ERROR = _("Configuración del negocio no encontrada.")
+from base.utils import errors
 
 
 class BusinessConfigurationDetailView(APIView):
@@ -24,21 +23,17 @@ class BusinessConfigurationDetailView(APIView):
             return [IsAdminUser()]
         return super().get_permissions()
 
-
     @schema_wrapper_response_only(BusinessConfigurationSerializer)
     def get(self, request, *args, **kwargs):
         configuration, _ = BusinessConfiguration.objects.get_or_create()
         serializer = BusinessConfigurationSerializer(configuration)
         return Response({"configuration": serializer.data}, status=status.HTTP_200_OK)
-    
+
     @schema_wrapper(BusinessConfigurationSerializer, BusinessConfigurationSerializer)
     def put(self, request, *args, **kwargs):
         configuration = BusinessConfiguration.objects.first()
         if configuration is None:
-            return Response(
-                {"errors": CONFIGURATION_NOT_FOUND_ERROR},
-                status=status.HTTP_404_NOT_FOUND,
-            )
+            raise errors.ConfigurationNotFoundError()
 
         serializer = BusinessConfigurationSerializer(
             instance=configuration, data=request.data, partial=True

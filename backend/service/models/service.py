@@ -10,7 +10,7 @@ class Service(models.Model):
     services_last_actualization_date = models.DateField(auto_now=True)
     service_vigency = models.BooleanField()
 
-    service_type = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
+    service_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
     
     
     def __str__(self):

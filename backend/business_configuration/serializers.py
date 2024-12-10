@@ -1,6 +1,8 @@
 from rest_framework import serializers
-from .models import BusinessConfiguration
+
 from base.utils import ImageUtils
+
+from .models import BusinessConfiguration
 
 
 class BusinessConfigurationSerializer(serializers.ModelSerializer):
@@ -10,8 +12,6 @@ class BusinessConfigurationSerializer(serializers.ModelSerializer):
     class Meta:
         model = BusinessConfiguration
         fields = "__all__"
-
-    
 
     def get_business_logo_url(self, obj):
         return ImageUtils.get_image_url(obj.business_logo) 
