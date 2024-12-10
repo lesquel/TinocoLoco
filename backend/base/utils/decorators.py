@@ -3,7 +3,7 @@ from drf_yasg.utils import swagger_auto_schema
 
 
 def schema_wrapper(serializer_class, response_serializer=None, code=200):
-        """Este decorador se encarga de agregar la documentación de swagger a las vistas de Django Rest Framework."""
+        """Este decorador se encarga de agregar la  documentación de swagger a las vistas de Django Rest Framework."""
 
         def decorator(func):
             return swagger_auto_schema(

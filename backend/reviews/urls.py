@@ -1,11 +1,10 @@
 from django.urls import path, include
-# from rest_framework.routers import DefaultRouter
-# from .views import EventView,EventCategoryView
+from rest_framework.routers import DefaultRouter
+from .views import ReviewView
 
-# event_router = DefaultRouter()
-# event_router.register("", EventView, basename="event")
-# event_router.register("category", EventCategoryView, basename="event_category")
+review_router = DefaultRouter()
+review_router.register("", ReviewView, basename="event")
 
 urlpatterns = [
-    # path("", include(event_router.urls))
+    path("", include(review_router.urls))
 ]
