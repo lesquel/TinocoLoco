@@ -1,2 +1,0 @@
-from .service_view import ServiceView
-from .service_category_view import ServiceCategoryView

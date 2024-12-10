@@ -1,1 +1,0 @@
-from .bank_account_type import BankAccountType
