@@ -1,12 +1,12 @@
 const peticionPost = async () => {
     try {
-        const response = await fetch('http://127.0.0.1:8000/user/login/', { // Añade la barra al final
+        const response = await fetch('http://127.0.0.1:8000/users/login/', { // Añade la barra al final
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "username": "miquel",
+                "username": "miquesl",
                 "password": "less12345"
             }),
         });
