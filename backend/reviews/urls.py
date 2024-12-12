@@ -3,8 +3,6 @@ from rest_framework.routers import DefaultRouter
 from .views import ReviewView
 
 review_router = DefaultRouter()
-review_router.register("", ReviewView, basename="review")
+review_router.register("review", ReviewView, basename="review")
 
-urlpatterns = [
-       # path("", include(review_router.urls))
-]
+urlpatterns = review_router.urls

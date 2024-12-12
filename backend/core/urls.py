@@ -44,5 +44,7 @@ urlpatterns = [
     path("services/", include("services.urls")),
     path("photos/", include("photos.urls")),
     path("reviews/", include("reviews.urls")),
+    path("promotions/", include("promotions.urls")),
+    path("contingencies/", include("contingencies.urls")),
     
 ]

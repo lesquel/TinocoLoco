@@ -3,7 +3,7 @@ from django.conf import settings
 
 from users.choices import LanguageChoices
 from base.utils import errors
-from base.services import UserService
+from base.system_services import UserService
 
 
 class ChangeLanguageSerializer(serializers.Serializer):

@@ -8,6 +8,4 @@ service_router.register("service", ServiceView, basename='service')
 service_router.register("category", ServiceCategoryView, basename='service_category')
 
 # Incluir las URLs del router
-urlpatterns = [
-    path('', include(service_router.urls)),
-]
+urlpatterns = service_router.urls

@@ -56,6 +56,7 @@ THIRD_PARTY_APPS = [
     "cloudinary_storage",
     "corsheaders",
     "drf_yasg",
+    "django_filters",
 ]
 
 
@@ -67,6 +68,8 @@ LOCAL_APPS = [
     "services",
     "photos",
     "reviews",
+    "promotions",
+    "contingencies",
 ]
 
 INSTALLED_APPS = DEFAULT_DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -91,8 +94,8 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 
 CUSTOM_MIDDLEWARE = [
-    "middlewares.language_middleware.LanguageMiddleware",  # Se agrega esto para la traduccion de idiomas automatica al iniciar sesion
-    "middlewares.error_handler_middleware.ErrorHandlerMiddleware",  # Se agrega esto para el manejo de errores
+    "base.middlewares.language_middleware.LanguageMiddleware",  # Se agrega esto para la traduccion de idiomas automatica al iniciar sesion
+    # "base.middlewares.error_handler_middleware.ErrorHandlerMiddleware",  # Se agrega esto para el manejo de errores
 ]
 
 MIDDLEWARE = [
@@ -108,8 +111,6 @@ MIDDLEWARE = [
 ] + CUSTOM_MIDDLEWARE
 
 
-
-
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.TokenAuthentication",
@@ -117,8 +118,10 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,
+    "DEFAULT_PAGINATION_CLASS": "base.pagination.pagination.CustomPagination",
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ],
 }
 
 

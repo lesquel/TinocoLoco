@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from base.utils import errors
-from base.services import UserService
+from base.system_services import UserService
 from django.utils.translation import gettext as _
 
 
