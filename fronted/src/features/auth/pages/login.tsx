@@ -1,6 +1,6 @@
 "use client"; // Asegúrate de que este componente se ejecute en el cliente
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation"; // Usa el enrutador de Next.js
 import { Input } from "@/features/auth/components/input";
 import { SectionAuth } from "@/features/auth/components/sectionAuth";
@@ -14,6 +14,8 @@ import { saveToken } from "@/features/auth/utils/saveToken";
 import { isLoggedInRequired } from "@/features/auth/utils/isLoggedInRequired";
 
 export const Login = ({ params }: { params: { next: string } }) => {
+    const [loading, setLoading] = useState(false); // Estado de carga
+    const [error, setError] = useState<string | null>(null); // Estado de error
     const router = useRouter();
     const { register, handleSubmit, formState: { errors } } = useForm<IURegister>();
 
@@ -23,15 +25,22 @@ export const Login = ({ params }: { params: { next: string } }) => {
     }, []); // Esto se ejecutará solo después de que el componente haya sido montado
 
     const onSubmit = async (data: IURegister) => {
+        setLoading(true); // Activar estado de carga
+        setError(null); // Resetear el error antes de intentar el login
+
         try {
             const response = await loginService(data);
             if (response.token) {
                 saveToken({ token: response.token });
                 router.push(params.next || "/"); // Redirige a la página de inicio o a la página 'next'
+            } else {
+                setError("Credenciales incorrectas. Intenta de nuevo.");
             }
         } catch (error) {
-            console.error("Error during login:", error);
-            // Aquí puedes mostrar un mensaje de error al usuario
+            setError("Hubo un error inesperado. Intenta de nuevo.");
+            console.error("Error durante el login:", error);
+        } finally {
+            setLoading(false); // Desactivar estado de carga
         }
     };
 
@@ -44,6 +53,8 @@ export const Login = ({ params }: { params: { next: string } }) => {
             linkHrefFooter="/accounts/register"
             linkNameFooter="Registrarse"
         >
+            {error && <div className="text-red-500 text-sm mb-4">{error}</div>} {/* Mostrar mensaje de error */}
+
             <Input
                 type="text"
                 placeholder="Usuario"
@@ -63,7 +74,7 @@ export const Login = ({ params }: { params: { next: string } }) => {
             >
                 <FaRegEyeSlash size={24} />
             </Input>
-            <BtnAuth text="Iniciar Sesión" />
+            <BtnAuth text={loading ? "Iniciando sesión..." : "Iniciar Sesión"} disabled={loading} />
         </SectionAuth>
     );
 };
