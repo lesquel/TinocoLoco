@@ -5,11 +5,19 @@ from base.utils import ImageUtils
 from ..models import EventCategory
 
 
-class EventCategorySerializer(serializers.ModelSerializer):
+class CreateEventCategorySerializer(serializers.ModelSerializer):
+    event_category_image = serializers.ImageField()
+    class Meta:
+        model = EventCategory
+        fields = ['event_category_name', 'event_category_image', 'event_category_description']
+        
+        
+class RetrieveEventCategorySerializer(serializers.ModelSerializer):
     event_category_image_url = serializers.SerializerMethodField()
     class Meta:
         model = EventCategory
-        fields = "__all__"
+        fields = ['id', 'event_category_name', 'event_category_image_url', 'event_category_description', 'created_at']
+        read_only_fields = fields
         
     def get_event_category_image_url(self, obj):
         return ImageUtils.get_image_url(obj.event_category_image)

@@ -1,0 +1,2 @@
+from .promotion_view import PromotionView
+from .promotion_category_view import PromotionCategoryView

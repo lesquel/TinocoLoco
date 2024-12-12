@@ -1,6 +1,7 @@
 from django.db import models
 from .event_category import EventCategory
-
+from photos.models import Photo
+from django.contrib.contenttypes.fields import GenericRelation
 
 class Event(models.Model):
     event_name = models.CharField(max_length=100)
@@ -10,7 +11,9 @@ class Event(models.Model):
     event_extra_hour_rate = models.DecimalField(max_digits=10, decimal_places=2)
     event_creation_date = models.DateField(auto_now_add=True)
     event_last_actualization_date = models.DateField(auto_now=True)
-    event_type = models.ForeignKey(EventCategory, on_delete=models.CASCADE)
+    event_category = models.ForeignKey(EventCategory, on_delete=models.CASCADE)
+    
+    photos = GenericRelation(Photo)
     
     def __str__(self):
         return self.event_name

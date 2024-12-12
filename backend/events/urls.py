@@ -6,6 +6,4 @@ event_router = DefaultRouter()
 event_router.register("event", EventView, basename="event")
 event_router.register("category", EventCategoryView, basename="event_category")
 
-urlpatterns = [
-    path("", include(event_router.urls))
-]
+urlpatterns = event_router.urls

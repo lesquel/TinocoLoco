@@ -5,7 +5,7 @@ from users.models import CustomUser
 
 
 class Review(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
@@ -16,7 +16,7 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ("content_type", "object_id", "user")
+        unique_together = ("content_type", "object_id", "author")
     
     def __str__(self):
-        return f"Rating of {self.rating_score} by {self.user} on {self.content_object}"
+        return f"Rating of {self.rating_score} by {self.author} on {self.content_object}"

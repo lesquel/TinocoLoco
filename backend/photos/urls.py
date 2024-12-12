@@ -1,10 +1,8 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import PhotoView
+from .views import PhotoViewSet
 
 photo_router = DefaultRouter()
-photo_router.register("", PhotoView, basename="photo")
+photo_router.register("", PhotoViewSet, basename="photo")
 
-urlpatterns = [
-    path("", include(photo_router.urls)),
-]
+urlpatterns = photo_router.urls

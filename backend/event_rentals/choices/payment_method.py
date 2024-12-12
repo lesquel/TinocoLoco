@@ -2,8 +2,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 class PaymentMethod(models.TextChoices):
-    CASH = 'CASH', _('Efectivo')
-    CREDIT_CARD = 'CREDIT_CARD', _('Tarjeta de crédito')
-    DEBIT_CARD = 'DEBIT_CARD', _('Tarjeta de débito')
-    BANK_TRANSFER = 'BANK_TRANSFER', _('Transferencia bancaria')
-    OTHER = 'OTHER', _('Otro')
+    CASH = 'cash', _('Efectivo')
+    CREDIT_CARD = 'credit_card', _('Tarjeta de crédito')
+    DEBIT_CARD = 'debit_card', _('Tarjeta de débito')
+    BANK_TRANSFER = 'bank_transfer', _('Transferencia bancaria')
+    OTHER = 'other', _('Otro')

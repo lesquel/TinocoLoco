@@ -1,0 +1,1 @@
+from .contingency_impact_level import ContingencyImpactLevel

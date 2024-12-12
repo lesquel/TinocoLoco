@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.contenttypes.fields import GenericRelation
+from photos.models import Photo
 from .service_category import ServiceCategory
     
 
@@ -9,9 +11,9 @@ class Service(models.Model):
     service_creation_date = models.DateField(auto_now_add=True)
     services_last_actualization_date = models.DateField(auto_now=True)
     service_vigency = models.BooleanField()
-
     service_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
     
+    photos = GenericRelation(Photo)
     
     def __str__(self):
         return self.service_name
