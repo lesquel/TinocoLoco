@@ -15,6 +15,9 @@ class ServiceFilter(filters.FilterSet):
     max_cost = filters.NumberFilter(
         field_name="service_unitary_cost", lookup_expr="lte"
     )
+    
+    
+    
     creation_date = filters.DateFromToRangeFilter(
         field_name="service_creation_date"
     )

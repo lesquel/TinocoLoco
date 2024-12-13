@@ -6,11 +6,11 @@ from cloudinary.models import CloudinaryField
 from base.utils import errors
 
 
-PHOTO_STR = _("Foto de {} {}")
+PHOTO_STR = _("Foto de {}")
 # Error messages
-REQUIRED_FIELDS_ERROR = _("content_type_id and object_id are required fields.")
-INVALID_CONTENT_TYPE = _("Invalid content_type_id.")
-PHOTO_ASSOCIATION_ERROR = _("Photo cannot be associated with {}.")
+REQUIRED_FIELDS_ERROR = _("El tipo de contenido y el id del objeto son requeridos.")
+INVALID_CONTENT_TYPE = _("El tipo de contenido no es válido.")
+PHOTO_ASSOCIATION_ERROR = _("Foto no puede ser asociada con {}.")
 
 
 class PhotoManager(models.Manager):
@@ -23,9 +23,8 @@ class PhotoManager(models.Manager):
         return [EventRental, Service, Event]
 
     def validate_content_type(self, content_type, object_id):
-        """
-        Validate content type and object id
-        """
+
+
         if not content_type or not object_id:
             raise errors.ValidationError(REQUIRED_FIELDS_ERROR)
 
@@ -57,6 +56,10 @@ class Photo(models.Model):
     class Meta:
         indexes = [models.Index(fields=["content_type", "object_id"])]
 
+    
+    @property
+    def content_type_name(self):
+        return self.content_type.model
     def clean(self):
 
         self.__class__.objects.validate_content_type(self.content_type, self.object_id)
@@ -66,4 +69,4 @@ class Photo(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return PHOTO_STR.format(self.content_type.model, self.content_object)
+        return PHOTO_STR.format(self.content_object)

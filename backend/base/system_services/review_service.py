@@ -1,5 +1,5 @@
 from reviews.models import Review
-from .Iservice import IService
+from ..interfaces.Iservice import IService
 
 class ReviewService(IService):
     model = Review

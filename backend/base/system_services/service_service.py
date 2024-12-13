@@ -1,6 +1,6 @@
 from services.models import Service
-from .Iservice import IService
+from base.interfaces import IAnaliticService
 
 
-class ServiceService(IService):
+class ServiceService(IAnaliticService):
     model = Service

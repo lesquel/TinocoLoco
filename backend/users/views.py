@@ -71,13 +71,13 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
 
-        user = UserService.get_user_by_id(pk)
+        user = UserService.get_by_id(pk)
 
         serializer = self.get_serializer(instance=user)
         return Response({"user": serializer.data}, status=status.HTTP_200_OK)
 
     def update(self, request, pk=None):
-        user_to_update = UserService.get_user_by_id(pk)
+        user_to_update = UserService.get_by_id(pk)
 
         serializer = self.get_serializer(
             instance=user_to_update,
@@ -97,10 +97,10 @@ class UserViewSet(viewsets.ModelViewSet):
         )
 
     def destroy(self, request, pk=None):
-        user_to_delete = UserService.get_user_by_id(pk)
+        user_to_delete = UserService.get_by_id(pk)
 
         UserService.delete_user(user_to_delete)
-        return Response({"detail": USER_DELETED}, status=status.HTTP_200_OK)
+        return Response({"detail": USER_DELETED}, status=status.HTTP_204_NO_CONTENT)
 
     @action(
         detail=False,
@@ -121,12 +121,15 @@ class UserViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_200_OK,
             )
 
-    @action(detail=False, methods=["post"], permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=["post"])
     def logout(self, request):
         UserService.logout_user(request.user)
         return Response({"detail": SUCCESSFULLY_LOGGED_OUT}, status=status.HTTP_200_OK)
 
-    @action(detail=False, methods=["put"], permission_classes=[IsAuthenticated])
+    @action(
+        detail=False,
+        methods=["put"],
+    )
     def change_language(self, request):
         user = request.user
         serializer = self.get_serializer(instance=user, data=request.data)

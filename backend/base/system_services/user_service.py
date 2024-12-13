@@ -1,7 +1,7 @@
 from rest_framework.authentication import authenticate
 from rest_framework.authtoken.models import Token
 
-from .Iservice import IService
+from ..interfaces.Iservice import IService
 
 
 from base.utils import errors
@@ -26,13 +26,6 @@ class UserService(IService):
     @classmethod
     def delete_user(cls, user):
         user.delete()
-
-    @classmethod
-    def get_user_by_id(cls, user_id):
-        try:
-            return CustomUser.objects.get(id=user_id)
-        except CustomUser.DoesNotExist:
-            raise errors.UserNotFoundError()
 
     @classmethod
     def validate_token(cls, user):

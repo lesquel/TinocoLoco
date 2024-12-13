@@ -9,3 +9,4 @@ from .event_rental_service import EventRentalService
 from .promotion_service import PromotionService
 from .promotion_category_service import PromotionCategoryService
 from .review_service import ReviewService
+from .photo_service import PhotoService

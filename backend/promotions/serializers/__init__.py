@@ -1,2 +1,2 @@
-from .promotion_serializer import PromotionSerializer
+from .promotion_serializer import CreatePromotionSerializer, RetrievePromotionSerializer
 from .promotion_category_serializer import PromotionCategorySerializer

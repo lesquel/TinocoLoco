@@ -1,5 +1,5 @@
 from services.models import ServiceCategory
-from .Iservice import IService
+from ..interfaces.Iservice import IService
 
 class ServiceCategoryService(IService):
     model = ServiceCategory

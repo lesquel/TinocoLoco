@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 from django.utils.translation import gettext as _
 from ..models import Photo
@@ -9,7 +10,7 @@ ERROR_MESSAGES = {
 class CreatePhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
-        fields = ["id", "image", "object_id"]
+        fields = ["id", "image"]
 
 
     image = serializers.ImageField(
@@ -19,22 +20,21 @@ class CreatePhotoSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         image = validated_data.get("image")
-        object_id = validated_data.get("object_id")
         related_instance = self.context.get("related_instance")
-        print(related_instance)
+        object_id = related_instance.id
+        
+        
         if not related_instance:
             raise serializers.ValidationError(
                 {"error": _("El modelo relacionado no fue proporcionado.")}
             )
 
+        content_type = ContentType.objects.get_for_model(related_instance)
+
         photo = Photo.objects.create(
-            image=image,
+            content_type=content_type,
             object_id=object_id,
             content_object=related_instance,  
+            image=image,
         )
         return photo
-
-    def update(self, instance, validated_data):
-        instance.image = validated_data.get("image", instance.image)
-        instance.save()
-        return instance

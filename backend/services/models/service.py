@@ -13,7 +13,7 @@ class Service(models.Model):
     service_vigency = models.BooleanField()
     service_category = models.ForeignKey(ServiceCategory, on_delete=models.CASCADE)
     
-    photos = GenericRelation(Photo)
+    photos = GenericRelation(Photo, related_query_name='services')
     
     def __str__(self):
         return self.service_name
