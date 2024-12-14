@@ -10,3 +10,7 @@ class EventRentalService(AService):
         queryset = cls.get_all()
         return queryset.order_by("-visualizations")
     
+    @classmethod
+    def change_status(cls, event_rental, status, user):
+        event_rental.change_status(status, user)
+        return event_rental

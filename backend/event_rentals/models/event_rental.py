@@ -6,8 +6,8 @@ from reviews.models import Review
 from services.models import Service
 from promotions.models import Promotion
 from photos.models import Photo
-from reviews.models import Review
 from ..choices import PaymentMethod
+from .rental_status_history import RentalStatusHistory
 
 
 class EventRental(models.Model):
@@ -53,9 +53,34 @@ class EventRental(models.Model):
         on_delete=models.SET_NULL,
     )
 
+    current_status = models.OneToOneField(
+        RentalStatusHistory, on_delete=models.CASCADE, null=True, blank=True
+    )
+
     def increment_visualizations(self):
         self.visualizations += 1
         self.save()
+
+    def change_status(self, status, user):
+        new_status = RentalStatusHistory.objects.create(
+            rental=self, status=status, changed_by=user
+        )
+        self.current_status = new_status
+        self.save(update_fields=["current_status"])  
+
+    def save(self, *args, **kwargs):
+        is_new = self.pk is None  
+        super().save(*args, **kwargs)
+
+        if is_new:
+            
+            initial_status = RentalStatusHistory.objects.create(
+                rental=self,
+                status="Activo",  
+                changed_by=None,  
+            )
+            self.current_status = initial_status
+            super().save(update_fields=["current_status"])  
 
     def __str__(self):
         return f"{self.event} - {self.event_rental_date}"

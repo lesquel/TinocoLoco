@@ -8,7 +8,7 @@ from users.permissions import IsAdminOrReadOnly
 from photos.serializers import CreatePhotoSerializer, RetrievePhotoSerializer
 from reviews.serializers import CreateReviewSerializer, RetrieveReviewSerializer
 from ..filters import EventRentalFilter
-from ..serializers import EventRentalSerializer
+from ..serializers import EventRentalSerializer, ChangeEventRentalStatusSerializer
 
 
 class EventRentalViewSet(viewsets.ModelViewSet):
@@ -23,13 +23,16 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             return CreatePhotoSerializer
         elif self.action == "add_review":
             return CreateReviewSerializer
+        elif self.action == "change_status":
+            return ChangeEventRentalStatusSerializer
         return EventRentalSerializer
 
     def retrieve(self, request, pk=None):
         event_rental = EventRentalService.get_by_id(pk)
+
         event_rental.increment_visualizations()
         serializer = self.get_serializer(instance=event_rental)
-        return Response(serializer.data)
+        return Response({"event_rental": serializer.data})
 
     @action(detail=False, methods=["get"], url_path="most-viewed")
     def most_viewed(self, request):
@@ -84,3 +87,18 @@ class EventRentalViewSet(viewsets.ModelViewSet):
 
         return Response({"review": RetrieveReviewSerializer(instance=review).data})
 
+    @action(detail=True, methods=["get"], url_path="change-status")
+    def change_status(self, request, pk=None):
+        event_rental = EventRentalService.get_by_id(pk)
+        serializer = self.get_serializer(
+            instance=event_rental, data=request.data, context={"request": request}
+        )
+        
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        event_rental = serializer.save()
+
+        return Response(
+            {"event_rental": EventRentalSerializer(instance=event_rental).data}
+        )
