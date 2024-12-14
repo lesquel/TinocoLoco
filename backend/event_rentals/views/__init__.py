@@ -1,0 +1,1 @@
+from .event_rental_view import EventRentalViewSet

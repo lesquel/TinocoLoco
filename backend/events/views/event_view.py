@@ -2,9 +2,11 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.permissions import IsAuthenticated
 from users.permissions import IsAdminOrReadOnly
 from base.system_services import EventService
-from photos.models import Photo
+
+from reviews.serializers import RetrieveReviewSerializer, CreateReviewSerializer
 from photos.serializers import CreatePhotoSerializer, RetrievePhotoSerializer
 from ..filters import EventFilter
 from ..serializers import EventSerializer
@@ -20,6 +22,8 @@ class EventView(viewsets.ModelViewSet):
     def get_serializer_class(self):
         if self.action == "upload_image":
             return CreatePhotoSerializer
+        elif self.action == "add_review":
+            return CreateReviewSerializer
         return EventSerializer
 
     def retrieve(self, request, pk=None):
@@ -45,9 +49,6 @@ class EventView(viewsets.ModelViewSet):
         event = EventService.get_by_id(pk)
         image = request.FILES.get("image")
 
-        if not image:
-            return Response({"message": "Please upload an image"}, status=400)
-
         serializer = self.get_serializer(
             data={"image": image, "object_id": pk},
             context={"related_instance": event},
@@ -58,3 +59,27 @@ class EventView(viewsets.ModelViewSet):
         photo = serializer.save()
 
         return Response({"photo": RetrievePhotoSerializer(instance=photo).data})
+
+    @action(detail=True, methods=["post"], url_path="add-review", permission_classes=[IsAuthenticated])
+    def add_review(self, request, pk=None):
+        event_rental = EventService.get_by_id(pk)
+        user = request.user
+
+        rating_score = request.data.get("rating_score")
+        rating_comment = request.data.get("rating_comment")
+
+        serializer = self.get_serializer(
+            data={
+                "author": user.id,
+                "rating_score": rating_score,
+                "rating_comment": rating_comment,
+            },
+            context={"related_instance": event_rental},
+        )
+
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        service = serializer.save()
+
+        return Response({"review": RetrieveReviewSerializer(instance=service).data})

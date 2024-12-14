@@ -1,1 +1,1 @@
-from .review_filter import ReviewFilter
+from .event_rental_filter import EventRentalFilter

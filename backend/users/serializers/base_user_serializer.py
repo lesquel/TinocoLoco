@@ -3,12 +3,7 @@ from users.models import CustomUser
 from base.utils import errors
 from django.utils.translation import gettext as _
 
-ERROR_MESSAGES = {
-    "USERNAME_ALREADY_EXISTS": _("Este nombre de usuario ya está en uso."),
-    "IDENTITY_CARD_ALREADY_EXISTS": _("Este número de cédula ya está registrado."),
-    "EMAIL_ALREADY_EXISTS": _("Este correo electrónico ya está registrado."),
-    "INVALID_SEX": _("Sexo inválido"),
-}
+from ..messages import ERROR_MESSAGES
 
 
 class BaseUserSerializer(serializers.ModelSerializer):
@@ -48,7 +43,7 @@ class BaseUserSerializer(serializers.ModelSerializer):
 
         if query.exists():
             error_message = ERROR_MESSAGES[f"{field_name.upper()}_ALREADY_EXISTS"]
-            raise serializers.ValidationError(error_message)
+            raise errors.ValidationError(error_message)
 
         return value
 

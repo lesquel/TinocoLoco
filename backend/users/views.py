@@ -19,10 +19,7 @@ from .serializers import (
     ChangeLanguageSerializer,
 )
 from .filters import UserFilter
-
-SUCCESSFULLY_LOGGED_OUT = _("Desconectado exitosamente")
-USER_DELETED = _("Usuario eliminado exitosamente")
-LANGUAGE_UPDATED = _("Idioma actualizado correctamente a {}.")
+from .messages import SUCCESS_MESSAGES
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -98,7 +95,10 @@ class UserViewSet(viewsets.ModelViewSet):
         user_to_delete = UserService.get_by_id(pk)
 
         UserService.delete_user(user_to_delete)
-        return Response({"detail": USER_DELETED}, status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {"detail": SUCCESS_MESSAGES["USER_DELETED"]},
+            status=status.HTTP_204_NO_CONTENT,
+        )
 
     @action(
         detail=False,
@@ -122,7 +122,9 @@ class UserViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=["post"])
     def logout(self, request):
         UserService.logout_user(request.user)
-        return Response({"detail": SUCCESSFULLY_LOGGED_OUT}, status=status.HTTP_200_OK)
+        return Response(
+            {"detail": SUCCESS_MESSAGES["LOGGED_OUT"]}, status=status.HTTP_200_OK
+        )
 
     @action(
         detail=False,
@@ -136,7 +138,7 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer.save()
         return Response(
             {
-                "detail": LANGUAGE_UPDATED.format(
+                "detail": SUCCESS_MESSAGES["LANGUAGE_UPDATED"].format(
                     serializer.data.get("preferred_language")
                 )
             },

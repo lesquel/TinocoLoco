@@ -3,13 +3,8 @@ from rest_framework import serializers
 from users.models import CustomUser
 from .base_user_serializer import BaseUserSerializer
 from base.system_services import UserService
-from base.utils import errors
 
-ERROR_MESSAGES = {
-    "MUST_PROVIDE_USERNAME": _("Por favor, ingresar su nombre de usuario."),
-    "MUST_PROVIDE_EMAIL": _("Por favor, ingresar su correo electronico."),
-    "MUST_PROVIDE_PASSWORD": _("Por favor, ingresar su contrasena."),
-}
+from ..messages import ERROR_MESSAGES
 
 
 class CreateUserSerializer(BaseUserSerializer):

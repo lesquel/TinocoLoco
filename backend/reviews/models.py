@@ -1,7 +1,24 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import gettext as _
 from django.db import models
 from users.models import CustomUser
+
+from base.utils import errors
+from .messages import ERROR_MESSAGES
+RATING_MESSAGE = _("{}: {} - {}")
+
+
+class ReviewManager(models.Manager):
+    def create(self, *args, **kwargs):
+        author = kwargs.get("author")
+        content_type = kwargs.get("content_type")
+        object_id = kwargs.get("object_id")
+
+        if self.filter(author=author, content_type=content_type, object_id=object_id).exists():
+            raise errors.ValidationError(ERROR_MESSAGES["AUTHOR_CONTENT_TYPE_OBJECT_ID_EXISTS"])
+
+        return super().create(*args, **kwargs)
 
 
 class Review(models.Model):
@@ -15,8 +32,23 @@ class Review(models.Model):
     rating_comment = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    objects = ReviewManager()
+
     class Meta:
-        unique_together = ("content_type", "object_id", "author")
-    
+        constraints = [
+            models.UniqueConstraint(
+                fields=["content_type", "object_id", "author"],
+                name="unique_review_per_author",
+            )
+        ]
+
+
+
+
+
+    @property
+    def content_type_name(self):
+        return self.content_type.model
+
     def __str__(self):
-        return f"Rating of {self.rating_score} by {self.author} on {self.content_object}"
+        return RATING_MESSAGE.format(self.author, self.rating_score, self.content_object)

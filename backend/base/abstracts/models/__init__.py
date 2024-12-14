@@ -1,1 +1,1 @@
-from .visualizations_counter_mixin import Product
+from .abstract_product import Product

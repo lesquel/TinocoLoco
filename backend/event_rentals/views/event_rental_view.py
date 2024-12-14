@@ -1,61 +1,50 @@
 from rest_framework import viewsets, status
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
-from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
 
-from django.utils.translation import gettext as _
-
+from base.system_services import EventRentalService
 from users.permissions import IsAdminOrReadOnly
-from base.system_services import ServiceService
-
-from reviews.serializers import RetrieveReviewSerializer, CreateReviewSerializer
 from photos.serializers import CreatePhotoSerializer, RetrievePhotoSerializer
-from ..serializers import ServiceSerializer
-from ..filters import ServiceFilter
+from reviews.serializers import CreateReviewSerializer, RetrieveReviewSerializer
+from ..filters import EventRentalFilter
+from ..serializers import EventRentalSerializer
 
 
-class ServiceView(viewsets.ModelViewSet):
+class EventRentalViewSet(viewsets.ModelViewSet):
     http_method_names = ["get", "post", "put", "delete"]
-    filterset_class = ServiceFilter
+    queryset = EventRentalService.get_all().order_by("-id")
     permission_classes = [IsAdminOrReadOnly]
-    queryset = ServiceService.get_all()
     parser_classes = [MultiPartParser, FormParser]
+    filterset_class = EventRentalFilter
 
     def get_serializer_class(self):
         if self.action == "upload_image":
             return CreatePhotoSerializer
         elif self.action == "add_review":
             return CreateReviewSerializer
-        return ServiceSerializer
+        return EventRentalSerializer
 
     def retrieve(self, request, pk=None):
-        service = ServiceService.get_by_id(pk)
-        service.increment_visualitations()
-        serializer = self.get_serializer(instance=service)
-        print("serializer", serializer.data)
+        event_rental = EventRentalService.get_by_id(pk)
+        event_rental.increment_visualizations()
+        serializer = self.get_serializer(instance=event_rental)
         return Response(serializer.data)
-
-    @action(detail=False, methods=["get"], url_path="most-popular")
-    def most_popular(self, request):
-        queryset = ServiceService.get_most_populars()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({"most_popular": serializer.data}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["get"], url_path="most-viewed")
     def most_viewed(self, request):
-        queryset = ServiceService.get_most_viewed()
+        queryset = EventRentalService.get_most_viewed()
         serializer = self.get_serializer(queryset, many=True)
         return Response({"most_viewed": serializer.data}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=["post"], url_path="upload-photo")
     def upload_image(self, request, pk=None):
-        service = ServiceService.get_by_id(pk)
+        event_rental = EventRentalService.get_by_id(pk)
         image = request.FILES.get("image")
 
         serializer = self.get_serializer(
             data={"image": image, "object_id": pk},
-            context={"related_instance": service},
+            context={"related_instance": event_rental},
         )
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -64,14 +53,9 @@ class ServiceView(viewsets.ModelViewSet):
 
         return Response({"photo": RetrievePhotoSerializer(instance=photo).data})
 
-    @action(
-        detail=True,
-        methods=["post"],
-        url_path="add-review",
-        permission_classes=[IsAuthenticated],
-    )
+    @action(detail=True, methods=["post"], url_path="add-review")
     def add_review(self, request, pk=None):
-        event_rental = ServiceService.get_by_id(pk)
+        event_rental = EventRentalService.get_by_id(pk)
         user = request.user
 
         rating_score = request.data.get("rating_score")
@@ -89,6 +73,14 @@ class ServiceView(viewsets.ModelViewSet):
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        service = serializer.save()
+        review = serializer.save()
 
-        return Response({"review": RetrieveReviewSerializer(instance=service).data})
+        if user.is_superuser:
+            event_rental.owner_rating = review
+        else:
+            event_rental.costumer_rating = review
+
+        event_rental.save()
+
+        return Response({"review": RetrieveReviewSerializer(instance=review).data})
+

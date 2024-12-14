@@ -3,12 +3,7 @@ from base.utils import errors
 from base.system_services import UserService
 from django.utils.translation import gettext as _
 
-
-ERROR_MESSAGES = {
-    "MUST_PROVIDE_USERNAME": _("Por favor, ingresar su nombre de usuario."),
-    "MUST_PROVIDE_EMAIL": _("Por favor, ingresar su correo electronico."),
-    "MUST_PROVIDE_PASSWORD": _("Por favor, ingresar su contrasena."),
-}
+from ..messages import ERROR_MESSAGES
 
 
 class LoginUserSerializer(serializers.Serializer):

@@ -1,16 +1,21 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
+from users.models import CustomUser
 from events.models import Event
 from reviews.models import Review
 from services.models import Service
 from promotions.models import Promotion
 from photos.models import Photo
+from reviews.models import Review
 from ..choices import PaymentMethod
-from .admin_rating import AdminRating
 
 
 class EventRental(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event_rentals")
+    event = models.ForeignKey(
+        Event, on_delete=models.CASCADE, related_name="event_rentals"
+    )
+
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     event_rental_date = models.DateField()
     event_rental_start_time = models.TimeField()
     event_rental_planified_end_time = models.TimeField()
@@ -23,29 +28,34 @@ class EventRental(models.Model):
     event_rental_observation = models.TextField(blank=True, null=True)
     event_rental_min_attendees = models.IntegerField()
     event_rental_max_attendees = models.IntegerField()
-
+    event_rental_creation_date = models.DateTimeField(auto_now_add=True)
     promotions = models.ManyToManyField(
         Promotion, blank=True, related_name="event_rentals"
     )
-    services = models.ManyToManyField(
-        Service, blank=True, related_name="event_rentals"
-    )
-    photos = GenericRelation(Photo)
+    services = models.ManyToManyField(Service, blank=True, related_name="event_rentals")
 
-    customer_rating = models.OneToOneField(
+    photos = GenericRelation(Photo, related_query_name="event_rentals")
+    visualizations = models.IntegerField(default=0)
+
+    owner_rating = models.OneToOneField(
+        Review,
+        related_name="owner_event_rental",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+
+    costumer_rating = models.OneToOneField(
         Review,
         related_name="customer_event_rental",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
     )
-    owner_rating = models.OneToOneField(
-        AdminRating,
-        related_name="owner_event_rental",
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-    )
+
+    def increment_visualizations(self):
+        self.visualizations += 1
+        self.save()
 
     def __str__(self):
         return f"{self.event} - {self.event_rental_date}"

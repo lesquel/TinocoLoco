@@ -1,6 +1,7 @@
-from django.urls import path
-from .views import BusinessConfigurationDetailView
+from .views import BusinessConfigurationViewSet
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path("", BusinessConfigurationDetailView.as_view(), name="business-configuration"),
-]
+router = DefaultRouter()
+router.register("configuration", BusinessConfigurationViewSet, basename="configuration")
+
+urlpatterns = router.urls

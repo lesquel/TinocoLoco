@@ -5,12 +5,7 @@ from base.utils import errors
 from .base_user_serializer import BaseUserSerializer
 
 
-ERROR_MESSAGES = {
-    "USERNAME_ALREADY_EXISTS": _("Este nombre de usuario ya está en uso."),
-    "IDENTITY_CARD_ALREADY_EXISTS": _("Este número de cédula ya está registrado."),
-    "EMAIL_ALREADY_EXISTS": _("Este correo electrónico ya está registrado."),
-    "INVALID_SEX": _("Sexo inválido"),
-}
+
 
 
 class UpdateUserSerializer(BaseUserSerializer):

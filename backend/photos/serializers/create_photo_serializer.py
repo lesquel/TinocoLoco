@@ -1,11 +1,9 @@
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import serializers
 from django.utils.translation import gettext as _
-from ..models import Photo
 
-ERROR_MESSAGES = {
-    "MUST_PROVIDE_IMAGE": _("Por favor, subir una imagen."),
-}
+from ..messages import ERROR_MESSAGES
+from ..models import Photo
 
 class CreatePhotoSerializer(serializers.ModelSerializer):
     class Meta:

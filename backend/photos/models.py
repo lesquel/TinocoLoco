@@ -53,10 +53,7 @@ class Photo(models.Model):
 
     objects = PhotoManager()
 
-    class Meta:
-        indexes = [models.Index(fields=["content_type", "object_id"])]
 
-    
     @property
     def content_type_name(self):
         return self.content_type.model

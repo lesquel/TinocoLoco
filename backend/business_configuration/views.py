@@ -1,48 +1,49 @@
-from django.utils.translation import gettext as _
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny, IsAdminUser
-from rest_framework import status
-from .serializers import BusinessConfigurationSerializer
+from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser
+from .serializers import (
+    CreateBusinessConfigurationSerializer,
+    RetrieveBusinessConfigurationSerializer,
+)
 from .models import BusinessConfiguration
-
-from base.utils import schema_wrapper, schema_wrapper_response_only
 from base.utils import errors
 
 
-class BusinessConfigurationDetailView(APIView):
+class BusinessConfigurationViewSet(viewsets.ModelViewSet):
+    queryset = BusinessConfiguration.objects.all()
+    serializer_class = CreateBusinessConfigurationSerializer
+    parser_classes = [MultiPartParser]
+
+    http_method_names = ["get", "put"]
 
     def get_permissions(self):
-        if self.request.method in [
-            "GET",
-        ]:
-            return [AllowAny()]
-        elif self.request.method in [
-            "PUT",
-        ]:
+        if self.action == "update":
             return [IsAdminUser()]
+        elif self.action == "retrieve":
+            return [AllowAny()]
         return super().get_permissions()
 
-    @schema_wrapper_response_only(BusinessConfigurationSerializer)
-    def get(self, request, *args, **kwargs):
+    def get_serializer_class(self):
+        if self.action == "retrieve":
+            return RetrieveBusinessConfigurationSerializer
+        return CreateBusinessConfigurationSerializer
+
+    def retrieve(self, request, *args, **kwargs):
         configuration, _ = BusinessConfiguration.objects.get_or_create()
-        serializer = BusinessConfigurationSerializer(configuration)
+        serializer = self.get_serializer(configuration)
         return Response({"configuration": serializer.data}, status=status.HTTP_200_OK)
 
-    @schema_wrapper(BusinessConfigurationSerializer, BusinessConfigurationSerializer)
-    def put(self, request, *args, **kwargs):
+    def update(self, request, *args, **kwargs):
         configuration = BusinessConfiguration.objects.first()
-        if configuration is None:
+        if not configuration:
             raise errors.ConfigurationNotFoundError()
 
-        serializer = BusinessConfigurationSerializer(
+        serializer = self.get_serializer(
             instance=configuration, data=request.data, partial=True
         )
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(
-                {"configuration": serializer.data}, status=status.HTTP_200_OK
-            )
-        return Response(
-            {"errors": serializer.errors}, status=status.HTTP_400_BAD_REQUEST
-        )
+        if not serializer.is_valid():
+            raise errors.ValidationError(serializer.errors)
+
+        serializer.save()
+        return Response({"configuration": serializer.data}, status=status.HTTP_200_OK)
