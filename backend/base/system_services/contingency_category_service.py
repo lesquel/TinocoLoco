@@ -1,5 +1,5 @@
 from contingencies.models import ContingencyCategory
-from ..interfaces.Iservice import IService
+from ..abstracts.Aservice import AService
 
-class ContingencyCategoryService(IService):
+class ContingencyCategoryService(AService):
     model = ContingencyCategory

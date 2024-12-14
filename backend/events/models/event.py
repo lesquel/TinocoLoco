@@ -1,19 +1,25 @@
 from django.db import models
-from .event_category import EventCategory
-from photos.models import Photo
 from django.contrib.contenttypes.fields import GenericRelation
 
-class Event(models.Model):
+from base.abstracts import Product
+
+from reviews.models import Review
+from photos.models import Photo
+
+from .event_category import EventCategory
+
+
+class Event(Product):
     event_name = models.CharField(max_length=100)
     event_description = models.CharField(max_length=500)
     event_reference_value = models.DecimalField(max_digits=10, decimal_places=2)
     event_allowed_hours = models.IntegerField()
     event_extra_hour_rate = models.DecimalField(max_digits=10, decimal_places=2)
-    event_creation_date = models.DateField(auto_now_add=True)
-    event_last_actualization_date = models.DateField(auto_now=True)
     event_category = models.ForeignKey(EventCategory, on_delete=models.CASCADE)
+
     
-    photos = GenericRelation(Photo)
-    
+    reviews = GenericRelation(Review, related_query_name='events')
+    photos = GenericRelation(Photo, related_query_name='events')
+
     def __str__(self):
         return self.event_name

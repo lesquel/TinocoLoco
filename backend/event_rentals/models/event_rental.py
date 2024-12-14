@@ -10,7 +10,7 @@ from .admin_rating import AdminRating
 
 
 class EventRental(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="event_rentals")
     event_rental_date = models.DateField()
     event_rental_start_time = models.TimeField()
     event_rental_planified_end_time = models.TimeField()

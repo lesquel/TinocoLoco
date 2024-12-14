@@ -1,5 +1,5 @@
 from contingencies.models import Contingency
-from ..interfaces.Iservice import IService
+from ..abstracts.Aservice import AService
 
-class ContingencyService(IService):
+class ContingencyService(AService):
     model = Contingency

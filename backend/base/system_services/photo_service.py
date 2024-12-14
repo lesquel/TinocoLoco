@@ -1,5 +1,5 @@
 from photos.models import Photo
-from ..interfaces.Iservice import IService
+from ..abstracts.Aservice import AService
 
-class PhotoService(IService):
+class PhotoService(AService):
     model = Photo

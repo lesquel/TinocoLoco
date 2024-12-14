@@ -2,14 +2,13 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 from django.utils.translation import gettext as _
 
+from base.abstracts import Product
 
-
-class EventCategory(models.Model):
+class EventCategory(Product):
 
     event_category_name = models.CharField(max_length=100)
     event_category_description = models.CharField(max_length=500)
     event_category_image = CloudinaryField(null=True, blank=True)
-    created_at = models.DateField(auto_now_add=True)
 
     def __str__(self) -> str:
         return self.event_category_name

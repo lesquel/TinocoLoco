@@ -36,3 +36,7 @@ python manage.py compilemessages
 
 // Force migrate
 python manage.py migrate --run-syncdb 
+
+
+// Delete migrations
+Get-ChildItem -Recurse -Filter "*.pyc" -Path .\ -Include "*/migrations/*.pyc" | Remove-Item

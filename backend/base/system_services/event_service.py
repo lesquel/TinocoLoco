@@ -1,8 +1,8 @@
 from django.db.models import Count
 from events.models import Event
-from base.interfaces import IAnaliticService
+from base.abstracts import AAnaliticService
 
 
-class EventService(IAnaliticService):
+class EventService(AAnaliticService):
 
     model = Event

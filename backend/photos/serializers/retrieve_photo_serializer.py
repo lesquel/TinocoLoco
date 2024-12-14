@@ -7,7 +7,8 @@ class RetrievePhotoSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
     class Meta:
         model = Photo
-        fields = ["id", "image", "image_url", "content_type","content_type_name", "object_id"]
+        fields = [field.name for field in model._meta.fields] + ['image_url']
+
         read_only_fields = fields
 
     def get_image_url(self, obj):

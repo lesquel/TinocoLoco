@@ -5,7 +5,7 @@ from base.utils import errors
 NOT_FOUND = _("{} not found")
 
 
-class IService(ABC):
+class AService(ABC):
     model = None
 
     @classmethod

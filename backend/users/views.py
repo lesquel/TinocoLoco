@@ -2,15 +2,13 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser
 
 from django.utils.translation import gettext as _
 
 
 from base.system_services import UserService
-from base.utils import (
-    errors,
-)
+from base.utils import errors
 
 from .permissions import IsAdminOrOwner
 from .serializers import (

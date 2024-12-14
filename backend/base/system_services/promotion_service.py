@@ -1,4 +1,4 @@
 from promotions.models import Promotion
-from ..interfaces.Iservice import IService
-class PromotionService(IService):
+from ..abstracts.Aanalitics_service import AAnaliticService
+class PromotionService(AAnaliticService):
     model = Promotion

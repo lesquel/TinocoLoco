@@ -14,7 +14,6 @@ class CreateServiceCategorySerializer(serializers.ModelSerializer):
             "service_category_name",
             "service_category_image",
             "service_category_description",
-            "created_at",
         ]
 
 
@@ -24,14 +23,7 @@ class RetrieveServiceCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ServiceCategory
-        fields = [
-            "id",
-            "service_category_name",
-            "service_category_image",
-            "service_category_image_url",
-            "service_category_description",
-            "created_at",
-        ]
+        fields = [field.name for field in model._meta.fields] + ['service_category_image_url']
         read_only_fields = fields
 
     def get_service_category_image_url(self, obj):

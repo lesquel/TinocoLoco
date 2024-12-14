@@ -1,5 +1,5 @@
 from events.models import EventCategory
-from ..interfaces.Iservice import IService
+from ..abstracts.Aservice import AService
 
-class EventCategoryService(IService):
+class EventCategoryService(AService):
     model = EventCategory

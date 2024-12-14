@@ -12,7 +12,6 @@ class CreatePromotionSerializer(serializers.ModelSerializer):
             "promotion_name",
             "promotion_image",
             "promotion_description",
-            "created_at",
         ]
 
 
@@ -21,13 +20,8 @@ class RetrievePromotionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Promotion
-        fields = [
-            "promotion_name",
-            "promotion_image",
-            "promotion_image_url",
-            "promotion_description",
-            "created_at",
-        ]
+        fields = [field.name for field in model._meta.fields] + ['promotion_image_url']
+
 
     def get_promotion_image_url(self, obj):
         return ImageUtils.get_image_url(obj.promotion_image)

@@ -22,11 +22,23 @@ class EventView(viewsets.ModelViewSet):
             return CreatePhotoSerializer
         return EventSerializer
 
+    def retrieve(self, request, pk=None):
+        event = EventService.get_by_id(pk)
+        event.increment_visualizations()
+        serializer = self.get_serializer(event)
+        return Response({"event": serializer.data})
+
     @action(detail=False, methods=["get"], url_path="most-popular")
     def most_popular(self, request):
-        queryset = EventService.most_popular()
-        serializer = EventSerializer(queryset, many=True)
+        queryset = EventService.get_most_populars()
+        serializer = self.get_serializer(queryset, many=True)
         return Response({"most_popular": serializer.data})
+
+    @action(detail=False, methods=["get"], url_path="most-viewed")
+    def most_viewed(self, request):
+        queryset = EventService.get_most_viewed()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({"most_viewed": serializer.data}, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=["post"], url_path="upload-photo")
     def upload_image(self, request, pk=None):
@@ -36,7 +48,7 @@ class EventView(viewsets.ModelViewSet):
         if not image:
             return Response({"message": "Please upload an image"}, status=400)
 
-        serializer = CreatePhotoSerializer(
+        serializer = self.get_serializer(
             data={"image": image, "object_id": pk},
             context={"related_instance": event},
         )

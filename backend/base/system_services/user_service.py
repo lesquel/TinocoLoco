@@ -1,14 +1,14 @@
 from rest_framework.authentication import authenticate
 from rest_framework.authtoken.models import Token
 
-from ..interfaces.Iservice import IService
+from ..abstracts.Aservice import AService
 
 
 from base.utils import errors
 from users.models import CustomUser
 
 
-class UserService(IService):
+class UserService(AService):
     model = CustomUser
 
     @classmethod

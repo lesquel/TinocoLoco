@@ -23,11 +23,25 @@ class ServiceView(viewsets.ModelViewSet):
             return CreatePhotoSerializer
         return ServiceSerializer
 
+    def retrieve(self, request, pk=None):
+        service = ServiceService.get_by_id(pk)
+        service.increment_visualitations()
+        serializer = self.get_serializer(instance=service)
+        return Response(serializer.data)
+
     @action(detail=False, methods=["get"], url_path="most-popular")
     def most_popular(self, request):
         queryset = ServiceService.get_most_populars()
         serializer = ServiceSerializer(queryset, many=True)
         return Response({"most_popular": serializer.data}, status=status.HTTP_200_OK)
+
+    @action(detail=False, methods=["get"], url_path="most-viewed")
+    def most_viewed(self, request):
+        queryset = ServiceService.get_most_viewed()
+        serializer = ServiceSerializer(queryset, many=True)
+        return Response({"most_viewed": serializer.data}, status=status.HTTP_200_OK)
+    
+    
 
     @action(detail=True, methods=["post"], url_path="upload-photo")
     def upload_image(self, request, pk=None):

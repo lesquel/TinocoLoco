@@ -1,5 +1,5 @@
 from promotions.models import PromotionCategory
-from ..interfaces.Iservice import IService
+from ..abstracts.Aservice import AService
 
-class PromotionCategoryService(IService):
+class PromotionCategoryService(AService):
     model = PromotionCategory
