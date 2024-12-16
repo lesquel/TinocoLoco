@@ -1,7 +1,6 @@
-from .views import BusinessConfigurationViewSet
-from rest_framework.routers import DefaultRouter
+from django.urls import path
+from .views import BusinessConfigurationDetailAPIView
 
-router = DefaultRouter()
-router.register("configuration", BusinessConfigurationViewSet, basename="configuration")
-
-urlpatterns = router.urls
+urlpatterns = [
+    path("configuration/", BusinessConfigurationDetailAPIView.as_view(), name="business-configuration"),
+]

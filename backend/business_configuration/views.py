@@ -1,45 +1,37 @@
-from rest_framework import viewsets, status
+from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser
+from rest_framework import status
 from .serializers import (
-    CreateBusinessConfigurationSerializer,
     RetrieveBusinessConfigurationSerializer,
+    UpdateBusinessConfigurationSerializer,
 )
 from .models import BusinessConfiguration
+
+
 from base.utils import errors
+from base.utils import schema_wrapper, schema_wrapper_response_only
 
 
-class BusinessConfigurationViewSet(viewsets.ModelViewSet):
-    queryset = BusinessConfiguration.objects.all()
-    serializer_class = CreateBusinessConfigurationSerializer
-    parser_classes = [MultiPartParser]
+class BusinessConfigurationDetailAPIView(APIView):
+    permission_classes = [AllowAny]
 
-    http_method_names = ["get", "put"]
-
-    def get_permissions(self):
-        if self.action == "update":
-            return [IsAdminUser()]
-        elif self.action == "retrieve":
-            return [AllowAny()]
-        return super().get_permissions()
-
-    def get_serializer_class(self):
-        if self.action == "retrieve":
-            return RetrieveBusinessConfigurationSerializer
-        return CreateBusinessConfigurationSerializer
-
-    def retrieve(self, request, *args, **kwargs):
+    @schema_wrapper_response_only(RetrieveBusinessConfigurationSerializer)
+    def get(self, request, *args, **kwargs):
         configuration, _ = BusinessConfiguration.objects.get_or_create()
-        serializer = self.get_serializer(configuration)
+        serializer = RetrieveBusinessConfigurationSerializer(configuration)
         return Response({"configuration": serializer.data}, status=status.HTTP_200_OK)
 
-    def update(self, request, *args, **kwargs):
+    @schema_wrapper(
+        UpdateBusinessConfigurationSerializer, RetrieveBusinessConfigurationSerializer
+    )
+    def put(self, request, *args, **kwargs):
+        self.permission_classes = [IsAdminUser]
         configuration = BusinessConfiguration.objects.first()
         if not configuration:
             raise errors.ConfigurationNotFoundError()
 
-        serializer = self.get_serializer(
+        serializer = UpdateBusinessConfigurationSerializer(
             instance=configuration, data=request.data, partial=True
         )
         if not serializer.is_valid():

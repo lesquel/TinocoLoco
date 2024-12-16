@@ -21,10 +21,8 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
 
-    # Esto es para la documentacion de la API
+docs_patters = [
     path(
         "swagger<format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"
     ),
@@ -34,8 +32,9 @@ urlpatterns = [
         name="schema-swagger-ui",
     ),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
+]
 
-
+api_patterns = [
     # Rutas de la aplicacion
     path("business-configuration/", include("business_configuration.urls")),
     path("users/", include("users.urls")),
@@ -46,5 +45,13 @@ urlpatterns = [
     path("photos/", include("photos.urls")),
     path("promotions/", include("promotions.urls")),
     path("contingencies/", include("contingencies.urls")),
-    
 ]
+
+
+urlpatterns = (
+    [
+        path("admin/", admin.site.urls),
+    ]
+    + docs_patters
+    + api_patterns
+)

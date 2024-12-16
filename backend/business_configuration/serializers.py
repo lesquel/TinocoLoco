@@ -5,8 +5,7 @@ from base.utils import ImageUtils
 from .models import BusinessConfiguration
 
 
-class CreateBusinessConfigurationSerializer(serializers.ModelSerializer):
-    # Con serializerMethodField se puede modificar la logica de como un campo se serializa
+class UpdateBusinessConfigurationSerializer(serializers.ModelSerializer):
     business_logo = serializers.ImageField()
     class Meta:
         model = BusinessConfiguration
@@ -15,7 +14,6 @@ class CreateBusinessConfigurationSerializer(serializers.ModelSerializer):
 
 
 class RetrieveBusinessConfigurationSerializer(serializers.ModelSerializer):
-    # Con serializerMethodField se puede modificar la logica de como un campo se serializa
     business_logo_url = serializers.SerializerMethodField()
 
     class Meta:

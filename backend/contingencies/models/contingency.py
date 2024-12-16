@@ -3,8 +3,7 @@ from django.db import models
 # Create your models here.
 from event_rentals.models import EventRental
 
-from .contingency_category import ContingencyCategory
-from ..choices import ContingencyImpactLevel
+from ..choices import ContingencyImpactLevel, ContingencyCategory
 
 
 class Contingency(models.Model):
@@ -13,8 +12,10 @@ class Contingency(models.Model):
     contingency_impact_level = models.CharField(
         max_length=50, choices=ContingencyImpactLevel.choices
     )
-    contingency_category = models.ForeignKey(
-        ContingencyCategory, on_delete=models.CASCADE
+    contingency_category = models.CharField(
+        max_length=50,
+        choices=ContingencyCategory.choices,
+        default=ContingencyCategory.OTHER,
     )
 
     contingency_penalty_amount = models.DecimalField(max_digits=10, decimal_places=2)
