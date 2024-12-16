@@ -29,6 +29,7 @@ class EventRental(models.Model):
     event_rental_min_attendees = models.IntegerField()
     event_rental_max_attendees = models.IntegerField()
     event_rental_creation_date = models.DateTimeField(auto_now_add=True)
+    
     promotions = models.ManyToManyField(
         Promotion, blank=True, related_name="event_rentals"
     )

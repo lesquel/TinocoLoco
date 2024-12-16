@@ -13,3 +13,4 @@ class ContingencyView(viewsets.ModelViewSet):
     permission_classes = [IsAdminOrReadOnly]
     queryset = ContingencyService.get_all().order_by("contingency_date_occurred")
     filterset_class = ContingencyFilter
+

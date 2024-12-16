@@ -93,12 +93,18 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(
             instance=event_rental, data=request.data, context={"request": request}
         )
-        
+
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
+
         event_rental = serializer.save()
 
         return Response(
             {"event_rental": EventRentalSerializer(instance=event_rental).data}
         )
+
+    @action(detail=False, methods=["get"], url_path="my-rentals")
+    def my_rentals(self, request):
+        queryset = EventRentalService.get_all().filter(owner=request.user)
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({"my_rentals": serializer.data}, status=status.HTTP_200_OK)
