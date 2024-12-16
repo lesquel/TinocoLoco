@@ -9,3 +9,4 @@ class EventRentalStatus(models.TextChoices):
     COMPLETED = "completed", _("Completado")
     IN_PROGRESS = "in_progress", _("En progreso")
     ON_HOLD = "on_hold", _("En espera")
+    

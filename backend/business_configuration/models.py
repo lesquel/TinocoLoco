@@ -62,7 +62,7 @@ class BusinessConfiguration(models.Model):
     business_bank_account_type_1 = models.CharField(
         max_length=15,
         choices=BankAccountType.choices,
-        default=BankAccountType.SAVINGS,
+        default=BankAccountType.SAVINGS.value,
     )
     business_bank_account_number_2 = models.CharField(
         max_length=15,

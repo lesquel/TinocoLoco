@@ -15,7 +15,7 @@ class Contingency(models.Model):
     contingency_category = models.CharField(
         max_length=50,
         choices=ContingencyCategory.choices,
-        default=ContingencyCategory.OTHER,
+        default=ContingencyCategory.OTHER.value,
     )
 
     contingency_penalty_amount = models.DecimalField(max_digits=10, decimal_places=2)

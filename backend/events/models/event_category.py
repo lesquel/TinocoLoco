@@ -1,6 +1,5 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
-from django.utils.translation import gettext as _
 
 from base.abstracts import Product
 

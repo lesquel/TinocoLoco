@@ -15,8 +15,9 @@ class RentalStatusHistory(models.Model):
     status = models.CharField(
         max_length=50,
         choices=EventRentalStatus.choices,
-        default=EventRentalStatus.IN_PROGRESS,
+        default=EventRentalStatus.IN_PROGRESS.value,
     )
+    reason = models.TextField(blank=True, null=True)    
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

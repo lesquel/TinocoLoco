@@ -29,7 +29,7 @@ class EventRental(models.Model):
     event_rental_min_attendees = models.IntegerField()
     event_rental_max_attendees = models.IntegerField()
     event_rental_creation_date = models.DateTimeField(auto_now_add=True)
-    
+
     promotions = models.ManyToManyField(
         Promotion, blank=True, related_name="event_rentals"
     )
@@ -67,21 +67,21 @@ class EventRental(models.Model):
             rental=self, status=status, changed_by=user
         )
         self.current_status = new_status
-        self.save(update_fields=["current_status"])  
+        self.save(update_fields=["current_status"])
 
     def save(self, *args, **kwargs):
-        is_new = self.pk is None  
+        is_new = self.pk is None
         super().save(*args, **kwargs)
 
         if is_new:
-            
+
             initial_status = RentalStatusHistory.objects.create(
                 rental=self,
-                status="Activo",  
-                changed_by=None,  
+                status="Activo",
+                changed_by=None,
             )
             self.current_status = initial_status
-            super().save(update_fields=["current_status"])  
+            super().save(update_fields=["current_status"])
 
     def __str__(self):
         return f"{self.event} - {self.event_rental_date}"

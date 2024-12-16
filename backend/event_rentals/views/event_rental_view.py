@@ -8,7 +8,11 @@ from users.permissions import IsAdminOrReadOnly
 from photos.serializers import CreatePhotoSerializer, RetrievePhotoSerializer
 from reviews.serializers import CreateReviewSerializer, RetrieveReviewSerializer
 from ..filters import EventRentalFilter
-from ..serializers import EventRentalSerializer, ChangeEventRentalStatusSerializer
+from ..serializers import (
+    EventRentalSerializer,
+    ChangeEventRentalStatusSerializer,
+    RentalStatusHistorySerializer,
+)
 
 
 class EventRentalViewSet(viewsets.ModelViewSet):
@@ -25,6 +29,8 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             return CreateReviewSerializer
         elif self.action == "change_status":
             return ChangeEventRentalStatusSerializer
+        elif self.action == "status_history":
+            return RentalStatusHistorySerializer
         return EventRentalSerializer
 
     def retrieve(self, request, pk=None):
@@ -87,7 +93,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
 
         return Response({"review": RetrieveReviewSerializer(instance=review).data})
 
-    @action(detail=True, methods=["get"], url_path="change-status")
+    @action(detail=True, methods=["post"], url_path="change-status")
     def change_status(self, request, pk=None):
         event_rental = EventRentalService.get_by_id(pk)
         serializer = self.get_serializer(
@@ -102,6 +108,12 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         return Response(
             {"event_rental": EventRentalSerializer(instance=event_rental).data}
         )
+
+    @action(detail=True, methods=["get"], url_path="status-history")
+    def status_history(self, request, pk=None):
+        queryset = EventRentalService.get_by_id(pk).rental.all()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({"history": serializer.data}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["get"], url_path="my-rentals")
     def my_rentals(self, request):

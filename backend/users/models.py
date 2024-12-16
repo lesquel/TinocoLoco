@@ -4,7 +4,6 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
-from django.utils.translation import gettext as _
 from users.choices import SexChoices, RoleChoices, LanguageChoices
 
 
@@ -20,7 +19,7 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, username, email, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
-        extra_fields.setdefault("role", RoleChoices.ADMIN)
+        extra_fields.setdefault("role", RoleChoices.ADMIN.value)
         return self.create_user(username, email, password, **extra_fields)
 
 
@@ -67,11 +66,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     preferred_language = models.CharField(
         max_length=2,
         choices=LanguageChoices.choices,
-        default=LanguageChoices.ENGLISH,
+        default=LanguageChoices.ENGLISH.value,
     )
 
     role = models.CharField(
-        max_length=20, choices=RoleChoices.choices, default=RoleChoices.COSTUMER
+        max_length=20, choices=RoleChoices.choices, default=RoleChoices.COSTUMER.value
     )
 
     is_active = models.BooleanField(default=True)
