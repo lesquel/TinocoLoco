@@ -37,7 +37,6 @@ class EventRental(DirtyFieldsMixin,models.Model):
     promotions = models.ManyToManyField(
         Promotion, blank=True, related_name="event_rentals"
     )
-    services = models.ManyToManyField(Service, blank=True, related_name="event_rentals")
 
     photos = GenericRelation(Photo, related_query_name="event_rentals")
     visualizations = models.IntegerField(default=0)

@@ -5,7 +5,11 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
-from base.system_services import EventRentalService
+from base.system_services import (
+    EventRentalService,
+    ServiceService,
+    ServicesEventRentalService,
+)
 from users.permissions import IsAdminOrOwner, IsOwner, HasVerifiedEmail
 from photos.serializers import CreatePhotoSerializer, RetrievePhotoSerializer
 from reviews.serializers import CreateReviewSerializer, RetrieveReviewSerializer
@@ -16,14 +20,12 @@ from ..serializers import (
     ChangeEventRentalStatusSerializer,
     RentalStatusHistorySerializer,
     ConfirmEventRentalStatusSerializer,
+    RetrieveServiceEventRentalSerializer,
+    CreateServiceEventRentalSerializer,
 )
 
 
 class EventRentalViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet for managing Event Rentals with various actions such as uploading photos, adding reviews,
-    changing status, and more.
-    """
 
     http_method_names = ["get", "post", "put", "delete"]
     queryset = EventRentalService.get_all().order_by("-id")
@@ -40,6 +42,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             "confirm_rental": ConfirmEventRentalStatusSerializer,
             "upload_image": CreatePhotoSerializer,
             "add_review": CreateReviewSerializer,
+            "add_service": CreateServiceEventRentalSerializer,
         }
         return action_serializers.get(self.action, EventRentalSerializer)
 
@@ -49,15 +52,21 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             permission_classes = [AllowAny]
         elif self.action in ["create"]:
             permission_classes = [HasVerifiedEmail]
-        elif self.action in ["add_review", "confirm_rental", "my_rentals"]:
+        elif self.action in ["confirm_rental", "my_rentals"]:
             permission_classes = [IsOwner]
-        elif self.action in ["update", "partial_update"]:
+        elif self.action in [
+            "update",
+            "partial_update",
+            "add_review",
+        ]:
             permission_classes = [IsAdminOrOwner]
         elif self.action in [
             "destroy",
             "change_status",
             "status_history",
             "upload_image",
+            "add_service",
+            "remove_service",
         ]:
             permission_classes = [IsAdminUser]
         else:
@@ -157,3 +166,75 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         rentals = EventRentalService.get_all().filter(owner=request.user)
         serializer = self.get_serializer(rentals, many=True)
         return Response({"my_rentals": serializer.data}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"], url_path="add-service")
+    def add_service(self, request, pk=None):
+
+        event_rental = self.get_object()
+
+        serializer = CreateServiceEventRentalSerializer(
+            data=request.data, context={"event_rental": event_rental}
+        )
+
+        if serializer.is_valid(raise_exception=True):
+            event_rental_service = serializer.save()
+
+            service_serializer = RetrieveServiceEventRentalSerializer(
+                event_rental_service
+            )
+
+            return Response(
+                {"event_rental_service": service_serializer.data},
+                status=status.HTTP_201_CREATED,
+            )
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=["post"], url_path="remove-service")
+    def remove_service(self, request, pk=None):
+        event_rental = self.get_object()
+        if event_rental.status != "pending":
+            return Response(
+                {
+                    "detail": "No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        service_id = request.data.get("service_id")
+
+        if not service_id:
+            return Response(
+                {"detail": "service_id es obligatorio."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        service = ServiceService.get_by_id(service_id)
+
+        event_rental_service = (
+            ServicesEventRentalService.get_all()
+            .filter(eventrental=event_rental, service=service)
+            .first()
+        )
+
+        if not event_rental_service:
+            return Response(
+                {
+                    "detail": "Este servicio no está asociado con este alquiler de evento."
+                },
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        ServicesEventRentalService.delete(event_rental_service.id)
+
+        return Response(
+            {"detail": "Servicio eliminado correctamente."},
+            status=status.HTTP_204_NO_CONTENT,
+        )
+
+    @action(detail=True, methods=["get"], url_path="services")
+    def services(self, request, pk=None):
+
+        event_rental = self.get_object()
+        services = event_rental.event_rental_services.all()
+        serializer = RetrieveServiceEventRentalSerializer(services, many=True)
+        return Response({"services": serializer.data}, status=status.HTTP_200_OK)

@@ -1,2 +1,3 @@
 from .event_rental import EventRental
 from .rental_status_history import RentalStatusHistory
+from .event_rental_service import ServicesEventRental

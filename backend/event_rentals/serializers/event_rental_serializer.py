@@ -6,7 +6,7 @@ from photos.serializers import RetrievePhotoSerializer
 
 from ..models import EventRental
 from .rental_status_history_serializer import RentalStatusHistorySerializer
-
+from ..messages import ERROR_MESSAGES
 
 class EventRentalSerializer(serializers.ModelSerializer):
     photos = RetrievePhotoSerializer(many=True, read_only=True)
@@ -31,3 +31,9 @@ class EventRentalSerializer(serializers.ModelSerializer):
             "current_status",
         )
 
+    def validate(self, attrs):
+        if attrs.get("event_rental_end") <= attrs.get("event_rental_start"):
+            raise serializers.ValidationError(
+                ERROR_MESSAGES["INVALID_START_END_DATE"]
+            )
+        return attrs

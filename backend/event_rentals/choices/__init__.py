@@ -1,2 +1,3 @@
 from .event_rental_status import EventRentalStatus
 from .payment_method import PaymentMethod
+from .event_rental_services_status import EventRentalServiceStatus
