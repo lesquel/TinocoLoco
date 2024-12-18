@@ -7,7 +7,6 @@ from base.utils import generate_confirmation_code
 from users.models.user import CustomUser
 from events.models import Event
 from reviews.models import Review
-from services.models import Service
 from promotions.models import Promotion
 from photos.models import Photo
 from ..choices import PaymentMethod
