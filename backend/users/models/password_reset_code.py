@@ -4,6 +4,7 @@ from django.utils.timezone import now
 from datetime import timedelta
 from users.models import CustomUser
 
+
 class PasswordResetCode(models.Model):
     user = models.ForeignKey(
         CustomUser,
@@ -11,7 +12,7 @@ class PasswordResetCode(models.Model):
         related_name="reset_codes",
     )
     code = models.CharField(
-        max_length=10, 
+        max_length=10,
         unique=True,
     )
     created_at = models.DateTimeField(
@@ -30,7 +31,6 @@ class PasswordResetCode(models.Model):
 
         expiration_time = self.created_at + timedelta(hours=24)
         return now() > expiration_time
-    
 
     def __str__(self):
         return f"Reset code for {self.user.email}"

@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
-import random
+from django.utils.crypto import get_random_string
 
 from users.choices import SexChoices, RoleChoices, LanguageChoices
 
@@ -98,4 +98,4 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
     def generate_verification_code(self):
-        self.email_verification_code = f"{random.randint(100000, 999999)}"
+        self.email_verification_code = get_random_string(length=6)
