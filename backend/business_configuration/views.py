@@ -8,8 +8,6 @@ from .serializers import (
     UpdateBusinessConfigurationSerializer,
 )
 from .models import BusinessConfiguration
-
-
 from base.utils import errors, schema_wrapper, schema_wrapper_response_only
 
 

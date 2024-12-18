@@ -9,7 +9,7 @@ from ..models import Review
 class CreateReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ["author","rating_score", "rating_comment"]
+        fields = ["rating_score", "rating_comment"]
 
     def validate_rating_score(self, value):
         if value < 0 or value > 5:
@@ -18,23 +18,10 @@ class CreateReviewSerializer(serializers.ModelSerializer):
             )
         return value
 
-    def validate_owner_rating(self, value):
-        if EventRental.objects.filter(owner_rating=value).exists():
-            raise serializers.ValidationError(
-                _("Esta calificación ya está asociada a otro alquiler.")
-            )
-        return value
-
-    def validate_costumer_rating(self, value):
-        if EventRental.objects.filter(costumer_rating=value).exists():
-            raise serializers.ValidationError(
-                _("Esta calificación ya está asociada a otro alquiler.")
-            )
-        return value
 
     def create(self, validated_data):
         print(validated_data)
-        author = validated_data.get("author")
+        owner = self.context.get("owner")
         related_instance = self.context.get("related_instance")
         object_id = related_instance.id
         rating_score = validated_data.get("rating_score")
@@ -45,7 +32,7 @@ class CreateReviewSerializer(serializers.ModelSerializer):
                 {"error": _("El modelo relacionado no fue proporcionado.")}
             )
             
-        print(author)
+        print(owner)
         print(related_instance)
         print(object_id)
         print(rating_score)
@@ -56,7 +43,7 @@ class CreateReviewSerializer(serializers.ModelSerializer):
         content_type = ContentType.objects.get_for_model(related_instance)
         try:
             review = Review.objects.create(
-                author=author,
+                owner=owner,
                 content_type=content_type,
                 object_id=object_id,
                 content_object=related_instance,

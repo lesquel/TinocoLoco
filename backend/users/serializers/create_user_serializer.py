@@ -1,6 +1,6 @@
 from django.utils.translation import gettext as _
 from rest_framework import serializers
-from users.models import CustomUser
+from users.models.user import CustomUser
 from .base_user_serializer import BaseUserSerializer
 from base.system_services import UserService
 

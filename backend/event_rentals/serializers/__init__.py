@@ -1,3 +1,4 @@
 from .event_rental_serializer import EventRentalSerializer
 from .change_event_rental_status_serializer import ChangeEventRentalStatusSerializer
 from .rental_status_history_serializer import RentalStatusHistorySerializer
+from .confirm_event_rental_serializer import ConfirmEventRentalStatusSerializer

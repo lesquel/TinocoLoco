@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from users.models import CustomUser
+from users.models.user import CustomUser
 from base.utils import errors
 from django.utils.translation import gettext as _
 

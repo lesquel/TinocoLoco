@@ -40,3 +40,6 @@ python manage.py migrate --run-syncdb
 
 // Delete migrations
 Get-ChildItem -Recurse -Filter "*.pyc" -Path .\ -Include "*/migrations/*.pyc" | Remove-Item
+
+
+Get-ChildItem -Recurse -Path . -Filter "*.py" -Exclude "__init__.py" | Where-Object { $_.FullName -match '\\migrations\\' } | Remove-Item

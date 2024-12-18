@@ -4,7 +4,7 @@ from django.urls import reverse
 from rest_framework.authtoken.models import Token
 
 # Create your tests here.
-from .models import CustomUser
+from .models.user import CustomUser
 
 
 class CustomUserTest(APITestCase):

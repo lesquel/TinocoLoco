@@ -45,7 +45,7 @@ class PromotionView(viewsets.ModelViewSet):
         return Response({"most_viewed": serializer.data}, status=status.HTTP_200_OK)
 
 
-    @action(detail=True, methods=["post"], url_path="add-review", permission_classes=[IsAuthenticated])
+    @action(detail=True, methods=["post"], url_path="add-review", permission_classes=[IsAuthenticated]) 
     def add_review(self, request, pk=None):
         promotion = PromotionService.get_by_id(pk)
         user = request.user

@@ -8,7 +8,7 @@ class Promotion(Product):
     promotion_name = models.CharField(max_length=100)
     promotion_description = models.TextField()
     promotion_category = models.ForeignKey(PromotionCategory, on_delete=models.CASCADE)
-    promotion_discount_percentage = models.FloatField()
+    promotion_discount_percentage = models.FloatField(blank=True, null=True)
     valid_from = models.DateField()
     valid_until = models.DateField()
     promotion_image = CloudinaryField(blank=True, null=True)

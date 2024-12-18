@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from users.models import CustomUser
+from users.models.user import CustomUser
 
 class RetrieveUserSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()

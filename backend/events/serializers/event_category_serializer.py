@@ -7,6 +7,7 @@ from ..models import EventCategory
 
 class CreateEventCategorySerializer(serializers.ModelSerializer):
     event_category_image = serializers.ImageField()
+    
 
     class Meta:
         model = EventCategory

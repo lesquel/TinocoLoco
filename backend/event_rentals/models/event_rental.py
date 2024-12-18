@@ -1,6 +1,10 @@
 from django.db import models
+from dirtyfields import DirtyFieldsMixin
 from django.contrib.contenttypes.fields import GenericRelation
-from users.models import CustomUser
+
+
+from base.utils import generate_confirmation_code
+from users.models.user import CustomUser
 from events.models import Event
 from reviews.models import Review
 from services.models import Service
@@ -10,7 +14,7 @@ from ..choices import PaymentMethod
 from .rental_status_history import RentalStatusHistory
 
 
-class EventRental(models.Model):
+class EventRental(DirtyFieldsMixin,models.Model):
     event = models.ForeignKey(
         Event, on_delete=models.CASCADE, related_name="event_rentals"
     )
@@ -21,7 +25,7 @@ class EventRental(models.Model):
     event_rental_planified_end_time = models.TimeField()
     event_rental_end_time = models.TimeField()
     event_rental_cost = models.FloatField()
-    event_rental_cancelled_value_in_advance = models.FloatField()
+    event_rental_cancelled_value_in_advance = models.FloatField(default=0, blank=True, null=True)
     event_rental_payment_method = models.CharField(
         max_length=50, choices=PaymentMethod.choices
     )
@@ -58,6 +62,8 @@ class EventRental(models.Model):
         RentalStatusHistory, on_delete=models.CASCADE, null=True, blank=True
     )
 
+    confirmation_code = models.CharField(max_length=50, blank=True, null=True)
+
     def increment_visualizations(self):
         self.visualizations += 1
         self.save()
@@ -72,7 +78,8 @@ class EventRental(models.Model):
     def save(self, *args, **kwargs):
         is_new = self.pk is None
         super().save(*args, **kwargs)
-
+        if not self.confirmation_code:
+            self.confirmation_code = generate_confirmation_code()
         if is_new:
 
             initial_status = RentalStatusHistory.objects.create(
@@ -81,7 +88,8 @@ class EventRental(models.Model):
                 changed_by=None,
             )
             self.current_status = initial_status
-            super().save(update_fields=["current_status"])
+
+        super().save(update_fields=["current_status"])
 
     def __str__(self):
         return f"{self.event} - {self.event_rental_date}"

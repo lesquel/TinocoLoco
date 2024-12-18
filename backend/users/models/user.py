@@ -4,6 +4,8 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.db import models
+import random
+
 from users.choices import SexChoices, RoleChoices, LanguageChoices
 
 
@@ -13,7 +15,10 @@ class CustomUserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
+        user.generate_verification_code()
         user.save(using=self._db)
+        from base.system_services import UserService
+        UserService.send_verification_code(user)
         return user
 
     def create_superuser(self, username, email, password=None, **extra_fields):
@@ -43,6 +48,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         unique=True,
     )
+    email_verified = models.BooleanField(default=False)
+    email_verification_code = models.CharField(max_length=6, blank=True, null=True)
+    
     first_name = models.CharField(
         max_length=30,
         blank=True,
@@ -72,6 +80,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     role = models.CharField(
         max_length=20, choices=RoleChoices.choices, default=RoleChoices.COSTUMER.value
     )
+    
+    date_joined = models.DateTimeField(auto_now_add=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -82,9 +92,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]
 
-    def save(self, *args, **kwargs):
-
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.username
+
+
+    def generate_verification_code(self):
+        self.email_verification_code = f"{random.randint(100000, 999999)}"

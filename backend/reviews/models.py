@@ -2,7 +2,7 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import gettext as _
 from django.db import models
-from users.models import CustomUser
+from users.models.user import CustomUser
 
 from base.utils import errors
 from .messages import ERROR_MESSAGES
@@ -11,18 +11,18 @@ RATING_MESSAGE = _("{}: {} - {}")
 
 class ReviewManager(models.Manager):
     def create(self, *args, **kwargs):
-        author = kwargs.get("author")
+        owner = kwargs.get("owner")
         content_type = kwargs.get("content_type")
         object_id = kwargs.get("object_id")
 
-        if self.filter(author=author, content_type=content_type, object_id=object_id).exists():
-            raise errors.ValidationError(ERROR_MESSAGES["AUTHOR_CONTENT_TYPE_OBJECT_ID_EXISTS"])
+        if self.filter(owner=owner, content_type=content_type, object_id=object_id).exists():
+            raise errors.ValidationError(ERROR_MESSAGES["OWNER_CONTENT_TYPE_OBJECT_ID_EXISTS"])
 
         return super().create(*args, **kwargs)
 
 
 class Review(models.Model):
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
@@ -37,8 +37,8 @@ class Review(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["content_type", "object_id", "author"],
-                name="unique_review_per_author",
+                fields=["content_type", "object_id", "owner"],
+                name="unique_review_per_owner",
             )
         ]
 
@@ -51,4 +51,4 @@ class Review(models.Model):
         return self.content_type.model
 
     def __str__(self):
-        return RATING_MESSAGE.format(self.author, self.rating_score, self.content_object)
+        return RATING_MESSAGE.format(self.owner, self.rating_score, self.content_object)

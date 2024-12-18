@@ -1,16 +1,23 @@
 from rest_framework import viewsets, status
-from users.permissions import IsAdminOrReadOnly, IsAdminOrOwner
+from users.permissions import IsAdminOrOwner
 from rest_framework.response import Response
 from django.utils.translation import gettext as _
 from base.system_services import ReviewService
-from .serializers import CreateReviewSerializer
+from .serializers import CreateReviewSerializer, RetrieveReviewSerializer
 from .messages import SUCCESS_MESSAGES
 class ReviewView(viewsets.ModelViewSet):
     serializer_class = CreateReviewSerializer
-    http_method_names = ["delete"]
-    permission_classes = [IsAdminOrReadOnly, IsAdminOrOwner]
+    http_method_names = ["get","delete"]
+    permission_classes = [IsAdminOrOwner]
     queryset = ReviewService.get_all()
     
+    def get_serializer_class(self):
+        action_serializers = {
+            "create": CreateReviewSerializer,
+            "retrieve": RetrieveReviewSerializer,
+        }
+        return action_serializers.get(self.action, CreateReviewSerializer)
+
 
     def delete(self, request, pk=None):
         review = ReviewService.get_by_id(pk)

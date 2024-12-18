@@ -1,7 +1,7 @@
 from django.db import models
 from event_rentals.choices import EventRentalStatus
 from django.utils.translation import gettext_lazy as _
-from users.models import CustomUser
+from users.models.user import CustomUser
 
 
 STATE_CHANGES = _("Estado de alquiler de {} cambiado a {} por {} el {}")
@@ -15,7 +15,7 @@ class RentalStatusHistory(models.Model):
     status = models.CharField(
         max_length=50,
         choices=EventRentalStatus.choices,
-        default=EventRentalStatus.IN_PROGRESS.value,
+        default=EventRentalStatus.PENDING.value,
     )
     reason = models.TextField(blank=True, null=True)    
     created_at = models.DateTimeField(auto_now_add=True)

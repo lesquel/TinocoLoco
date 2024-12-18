@@ -3,9 +3,9 @@ from rest_framework.authtoken.models import Token
 
 from ..abstracts.Aservice import AService
 
-
+from .email_service import EmailService
 from base.utils import errors
-from users.models import CustomUser
+from users.models.user import CustomUser
 
 
 class UserService(AService):
@@ -19,6 +19,13 @@ class UserService(AService):
         token = cls.get_token(user)
         return token, user
 
+    @classmethod
+    def get_user_by_email(cls, email):
+        try:
+            return CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            raise errors.UserNotFoundError()
+    
     @classmethod
     def logout_user(cls, user):
         cls.validate_token(user).delete()
@@ -46,3 +53,14 @@ class UserService(AService):
     def change_user_language(cls, user, language):
         user.preferred_language = language
         user.save()
+
+    
+    @classmethod
+    def send_verification_code(cls, user):
+        EmailService.send_user_verification_code(user)
+        
+        
+    @classmethod
+    def send_reset_password_code(cls, user, reset_code):
+        EmailService.send_password_reset_mail(user, reset_code)
+        

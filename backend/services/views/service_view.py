@@ -29,8 +29,14 @@ class ServiceView(viewsets.ModelViewSet):
             return CreateReviewSerializer
         return ServiceSerializer
 
+    def get_object(self):
+        obj = ServiceService.get_by_id(self.kwargs.get("pk"))
+        self.check_object_permissions(self.request, obj)
+        return obj
+    
+    
     def retrieve(self, request, pk=None):
-        service = ServiceService.get_by_id(pk)
+        service = self.get_object()
         service.increment_visualitations()
         serializer = self.get_serializer(instance=service)
         print("serializer", serializer.data)
@@ -50,7 +56,7 @@ class ServiceView(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["post"], url_path="upload-photo")
     def upload_image(self, request, pk=None):
-        service = ServiceService.get_by_id(pk)
+        service = self.get_object()
         image = request.FILES.get("image")
 
         serializer = self.get_serializer(
@@ -71,19 +77,17 @@ class ServiceView(viewsets.ModelViewSet):
         permission_classes=[IsAuthenticated],
     )
     def add_review(self, request, pk=None):
-        event_rental = ServiceService.get_by_id(pk)
-        user = request.user
+        event_rental = self.get_object()
 
         rating_score = request.data.get("rating_score")
         rating_comment = request.data.get("rating_comment")
 
         serializer = self.get_serializer(
             data={
-                "author": user.id,
                 "rating_score": rating_score,
                 "rating_comment": rating_comment,
             },
-            context={"related_instance": event_rental},
+            context={"related_instance": event_rental, "owner": request.user},
         )
 
         if not serializer.is_valid():
@@ -92,3 +96,11 @@ class ServiceView(viewsets.ModelViewSet):
         service = serializer.save()
 
         return Response({"review": RetrieveReviewSerializer(instance=service).data})
+
+    
+    @action(detail=True, methods=["get"], url_path="reviews")
+    def reviews(self, request, pk=None):
+        service = ServiceService.get_by_id(pk)
+        reviews = service.get_reviews()
+        serializer = RetrieveReviewSerializer(reviews, many=True)
+        return Response(serializer.data)
