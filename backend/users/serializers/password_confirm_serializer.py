@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import SetPasswordForm
 from rest_framework import serializers
 from ..models import PasswordResetCode
+from base.system_services import UserService
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
     code = serializers.CharField(max_length=10)
@@ -27,12 +28,8 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         reset_code = PasswordResetCode.objects.get(code=code)
         user = reset_code.user
 
-        form = SetPasswordForm(user=user, data={'new_password': new_password})
-        if form.is_valid():
-            form.save()
-
-
-            reset_code.is_used = True
-            reset_code.save()
+        UserService.change_user_password(user, new_password)
+        reset_code.is_used = True
+        reset_code.save()
 
         return {"message": "Contraseña restablecida con éxito."}

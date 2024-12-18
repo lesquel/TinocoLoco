@@ -4,6 +4,6 @@ from .create_user_serializer import CreateUserSerializer
 from .update_user_serializer import UpdateUserSerializer
 from .change_language_serializer import ChangeLanguageSerializer
 
-from .password_reset_serializer import PasswordResetRequestSerializer
+from .password_reset_request_serializer import PasswordResetRequestSerializer
 from .password_confirm_serializer import PasswordResetConfirmSerializer
 from .validate_email_serializer import ValidateEmailSerializer

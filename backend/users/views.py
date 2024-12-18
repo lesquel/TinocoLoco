@@ -5,7 +5,6 @@ from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 
 
 from base.system_services import UserService
-from base.utils import errors
 
 from .permissions import IsAdminOrSelf, HasVerifiedEmail
 from .serializers import (
@@ -29,7 +28,7 @@ class UserViewSet(viewsets.ModelViewSet):
     http_method_names = ["get", "post", "put", "delete"]
 
     def get_permissions(self):
-        print(self.action)
+
         if self.action in ["create", "login"]:
             permission_classes = [AllowAny]
         elif self.action in [
@@ -40,14 +39,11 @@ class UserViewSet(viewsets.ModelViewSet):
             permission_classes = [HasVerifiedEmail]
         elif self.action in ["destroy", "retrieve"]:
             permission_classes = [IsAdminOrSelf]
-        elif self.action in [
-            "logout",
-            "change_language",
-            "validate_email",
-        ]:
+        elif self.action in ["logout", "change_language", "validate_email"]:
             permission_classes = [IsAuthenticated]
         else:
             permission_classes = [IsAdminUser]
+
         return [permission() for permission in permission_classes]
 
     def get_serializer_class(self):
@@ -169,10 +165,10 @@ class UserViewSet(viewsets.ModelViewSet):
         url_path="send-password-reset-code",
     )
     def send_password_reset_code(self, request):
-        serializer = self.get_serializer(data=request.data)
+
+        serializer = self.get_serializer(data=request.data, context={"request": request})
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data.get("user")
-        UserService.send_password_reset_code(user)
+        serializer.save()
         return Response(
             {"detail": SUCCESS_MESSAGES["PASSWORD_RESET_CODE_SENT"]},
             status=status.HTTP_200_OK,
@@ -187,7 +183,8 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        print(f"User: {user}")
         return Response(
-            {"detail": SUCCESS_MESSAGES["PASSWORD_RESET"]},
+            {"detail": SUCCESS_MESSAGES["PASSWORD_RESET_SUCCESS"]},
             status=status.HTTP_200_OK,
         )

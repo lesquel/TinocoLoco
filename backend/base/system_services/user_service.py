@@ -25,6 +25,11 @@ class UserService(AService):
             return CustomUser.objects.get(email=email)
         except CustomUser.DoesNotExist:
             raise errors.UserNotFoundError()
+
+    @classmethod
+    def change_user_password(cls, user, password):
+        user.set_password(password)
+        user.save()
     
     @classmethod
     def logout_user(cls, user):

@@ -31,3 +31,6 @@ class PasswordResetCode(models.Model):
         expiration_time = self.created_at + timedelta(hours=24)
         return now() > expiration_time
     
+
+    def __str__(self):
+        return f"Reset code for {self.user.email}"
