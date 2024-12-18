@@ -28,7 +28,7 @@ class ValidateEmailSerializer(serializers.Serializer):
         expiration_time = user.date_joined + timedelta(hours=24)
         if now() > expiration_time:
             user.generate_verification_code()
-            raise serializers.ValidationError("El código de verificación ha expirado.")
+            raise serializers.ValidationError("El código de verificación ha expirado. Se ha enviado un nuevo código a su correo electrónico.")
 
         user.email_verified = True
         user.save()
