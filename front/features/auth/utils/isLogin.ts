@@ -1,6 +1,6 @@
 "use client";
 
-import { getTokenFromCookie } from "@/features/auth/utils/getToken";
+import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 
 export const isLogin = () => {
   if (typeof window === "undefined") return false; // Evitar SSR

@@ -1,4 +1,4 @@
-import { getTokenFromCookie } from "@/features/auth/utils/getToken";
+import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { NextResponse } from "next/server";
 
 export const loginRequired = () => {

@@ -14,6 +14,10 @@ export const siteConfig = {
       label: "Events",
       href: "/events",
     },
+    services : {
+      label: "Services",
+      href: "/services",
+    },
     blog : {
       label: "Blog",
       href: "/blog",
@@ -25,8 +29,8 @@ export const siteConfig = {
   },
   navMenuItems: {
     account: {
-      label: "Profile",
-      href: "/profile",
+      label: "Account",
+      href: "/accounts",
     },
     login: {
       label: "Login",
