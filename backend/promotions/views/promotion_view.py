@@ -28,7 +28,7 @@ class PromotionView(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         promotion = PromotionService.get_by_id(pk)
-        promotion.increment_visualizations()
+        promotion.increase_view_count()
         serializer = self.get_serializer(promotion)
         return Response({"event": serializer.data})
 

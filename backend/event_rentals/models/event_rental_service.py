@@ -1,14 +1,14 @@
 from django.db import models
 from ..choices import EventRentalServiceStatus
 from .event_rental import EventRental
-
+from services.models import Service
 
 class ServicesEventRental(models.Model):
     eventrental = models.ForeignKey(
         EventRental, on_delete=models.CASCADE, related_name="event_rental_services"
     )
     service = models.ForeignKey(
-        "services.Service",
+        Service,
         on_delete=models.CASCADE,
         related_name="event_rental_services",
     )

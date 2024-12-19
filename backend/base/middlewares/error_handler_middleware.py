@@ -4,9 +4,7 @@ from base.utils import errors
 
 
 class ErrorHandlerMiddleware:
-    """
-    Middleware to handle exceptions globally, similar to the provided decorator-based ErrorHandler.
-    """
+
 
     def __init__(self, get_response):
         self.get_response = get_response

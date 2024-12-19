@@ -21,7 +21,7 @@ class CreatePromotionSerializer(serializers.ModelSerializer):
             "id",
             "creation_date",
             "last_actualization_date",
-            "visualizations",
+            "view_count",
         ]
 
 

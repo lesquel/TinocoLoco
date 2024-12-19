@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Product(models.Model):
-    visualizations = models.IntegerField(default=0)
+    view_count = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
     creation_date = models.DateField(auto_now_add=True)
     last_actualization_date = models.DateField(auto_now=True)
@@ -10,8 +10,8 @@ class Product(models.Model):
     class Meta:
         abstract = True
 
-    def increment_visualizations(self):
-        self.visualizations += 1
+    def increase_view_count(self):
+        self.view_count += 1
         self.save()
 
 

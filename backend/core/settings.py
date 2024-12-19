@@ -80,7 +80,7 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 CUSTOM_MIDDLEWARE = [
     "base.middlewares.language_middleware.LanguageMiddleware",  # Se agrega esto para la traduccion de idiomas automatica al iniciar sesion
-    "base.middlewares.error_handler_middleware.ErrorHandlerMiddleware",  # Se agrega esto para el manejo de errores
+    # "base.middlewares.error_handler_middleware.ErrorHandlerMiddleware",  # Se agrega esto para el manejo de errores
 ]
 
 MIDDLEWARE = [

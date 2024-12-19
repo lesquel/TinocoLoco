@@ -16,5 +16,5 @@ class EventSerializer(serializers.ModelSerializer):
             "creation_date",
             "last_actualization_date",
             "photos",
-            "visualizations",
+            "view_count",
         )

@@ -28,7 +28,7 @@ class EventView(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         event = EventService.get_by_id(pk)
-        event.increment_visualizations()
+        event.increase_view_count()
         serializer = self.get_serializer(event)
         return Response({"event": serializer.data})
 

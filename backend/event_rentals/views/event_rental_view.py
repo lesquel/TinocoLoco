@@ -81,7 +81,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         event_rental = self.get_object()
-        event_rental.increment_visualizations()
+        event_rental.increase_view_count()
         serializer = self.get_serializer(instance=event_rental)
         return Response({"event_rental": serializer.data})
 

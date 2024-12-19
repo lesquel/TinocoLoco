@@ -37,7 +37,7 @@ class ServiceView(viewsets.ModelViewSet):
     
     def retrieve(self, request, pk=None):
         service = self.get_object()
-        service.increment_visualitations()
+        service.increase_view_count()
         serializer = self.get_serializer(instance=service)
         print("serializer", serializer.data)
         return Response(serializer.data)

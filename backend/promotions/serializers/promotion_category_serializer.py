@@ -9,4 +9,4 @@ class PromotionCategorySerializer(serializers.ModelSerializer):
         model = PromotionCategory
         fields = "__all__"
         
-        read_only_fields = ['id', "visualizations"]
+        read_only_fields = ['id', "view_count"]

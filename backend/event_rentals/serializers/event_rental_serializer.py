@@ -24,7 +24,7 @@ class EventRentalSerializer(serializers.ModelSerializer):
 
         read_only_fields = (
             "owner",
-            "visualizations",
+            "view_count",
             "confirmation_code",
             "owner_rating",
             "costumer_rating",
