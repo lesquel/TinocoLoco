@@ -9,8 +9,10 @@ class ServiceCategoryFilter(filters.FilterSet):
     description = filters.CharFilter(
         field_name="service_category_description", lookup_expr="icontains"
     )
-    created_at = filters.DateFromToRangeFilter(field_name="created_at")
+    creation_date = filters.DateFromToRangeFilter(field_name="creation_date")
+    
+    is_active = filters.BooleanFilter(field_name="is_active")
 
     class Meta:
         model = ServiceCategory
-        fields = ["name", "description"]
+        fields = ["name", "description", "creation_date", "is_active"]

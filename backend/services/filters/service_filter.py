@@ -3,9 +3,7 @@ from ..models import Service
 
 
 class ServiceFilter(filters.FilterSet):
-    name = filters.CharFilter(
-        field_name="service_name", lookup_expr="icontains"
-    )
+    name = filters.CharFilter(field_name="service_name", lookup_expr="icontains")
     description = filters.CharFilter(
         field_name="service_description", lookup_expr="icontains"
     )
@@ -15,13 +13,9 @@ class ServiceFilter(filters.FilterSet):
     max_cost = filters.NumberFilter(
         field_name="service_unitary_cost", lookup_expr="lte"
     )
-    
-    
-    
-    creation_date = filters.DateFromToRangeFilter(
-        field_name="service_creation_date"
-    )
-    vigency = filters.BooleanFilter(field_name="service_vigency")
+
+    creation_date = filters.DateFromToRangeFilter(field_name="service_creation_date")
+    is_active = filters.BooleanFilter(field_name="is_active")
     category = filters.CharFilter(
         field_name="service_category__service_category_name", lookup_expr="icontains"
     )
@@ -34,6 +28,6 @@ class ServiceFilter(filters.FilterSet):
             "min_cost",
             "max_cost",
             "creation_date",
-            "vigency",
+            "is_active",
             "category",
         ]

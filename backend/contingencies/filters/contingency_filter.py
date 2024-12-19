@@ -3,7 +3,7 @@ from ..models import Contingency
 
 
 class ContingencyFilter(filters.FilterSet):
-    event = filters.CharFilter(field_name="event_id", lookup_expr="exact")
+    event_rental = filters.CharFilter(field_name="event_rental_id", lookup_expr="exact")
     description = filters.CharFilter(
         field_name="contingency_description", lookup_expr="icontains"
     )
@@ -27,7 +27,7 @@ class ContingencyFilter(filters.FilterSet):
     class Meta:
         model = Contingency
         fields = [
-            "event",
+            "event_rental",
             "description",
             "impact_level",
             "category",

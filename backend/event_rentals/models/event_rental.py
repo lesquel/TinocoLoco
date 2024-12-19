@@ -38,7 +38,7 @@ class EventRental(DirtyFieldsMixin,models.Model):
     )
 
     photos = GenericRelation(Photo, related_query_name="event_rentals")
-    visualizations = models.IntegerField(default=0)
+    view_count = models.IntegerField(default=0)
 
     owner_rating = models.OneToOneField(
         Review,
@@ -62,8 +62,8 @@ class EventRental(DirtyFieldsMixin,models.Model):
 
     confirmation_code = models.CharField(max_length=50, blank=True, null=True)
 
-    def increment_visualizations(self):
-        self.visualizations += 1
+    def increase_view_count(self):
+        self.view_count += 1
         self.save()
 
     def change_status(self, status, user):

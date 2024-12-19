@@ -8,7 +8,7 @@ class PromotionFilter(filters.FilterSet):
         field_name="promotion_description", lookup_expr="icontains"
     )
     category = filters.CharFilter(
-        field_name="promotion_category_id",
+        field_name="promotion_category__promotion_category_name",
         lookup_expr="exact",
     )
     discount_percentage = filters.NumberFilter(
@@ -16,6 +16,7 @@ class PromotionFilter(filters.FilterSet):
     )
     valid_from = filters.DateFilter(field_name="valid_from", lookup_expr="icontains")
     valid_until = filters.DateFilter(field_name="valid_until", lookup_expr="icontains")
+    is_active = filters.BooleanFilter(field_name="is_active")
 
     class Meta:
         model = Promotion
@@ -26,4 +27,5 @@ class PromotionFilter(filters.FilterSet):
             "discount_percentage",
             "valid_from",
             "valid_until",
+            "is_active",
         ]

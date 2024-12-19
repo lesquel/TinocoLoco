@@ -27,7 +27,10 @@ class EventFilter(filters.FilterSet):
         field_name="event_last_actualization_date"
     )
     category = filters.CharFilter(
-        field_name="event_category_id", lookup_expr="exact")
+        field_name="event_category__event_category_name", lookup_expr="icontains"
+    )
+    
+    is_active = filters.BooleanFilter(field_name="is_active")
 
     class Meta:
         model = Event
@@ -42,4 +45,5 @@ class EventFilter(filters.FilterSet):
             "creation_date",
             "last_actualization_date",
             "category",
+            "is_active",
         ]

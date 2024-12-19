@@ -3,8 +3,9 @@ from ..models import EventRental
 
 
 class EventRentalFilter(filters.FilterSet):
-    event = filters.CharFilter(field_name="event_id", lookup_expr="exact")
-    user = filters.CharFilter(field_name="owner_id", lookup_expr="exact")
+    event = filters.CharFilter(field_name="event__event_name", lookup_expr="icontains")
+
+    owner = filters.CharFilter(field_name="owner__username", lookup_expr="icontains")
     event_rental_date = filters.DateFilter()
     min_cost = filters.NumberFilter(field_name="event_rental_cost", lookup_expr="gte")
     max_cost = filters.NumberFilter(field_name="event_rental_cost", lookup_expr="lte")
@@ -17,16 +18,16 @@ class EventRentalFilter(filters.FilterSet):
     payment_method = filters.CharFilter(
         field_name="event_rental_payment_method", lookup_expr="exact"
     )
-    promotion = filters.CharFilter(field_name="promotions_id", lookup_expr="exact")
+    promotion = filters.CharFilter(field_name="promotions__promotion_name", lookup_expr="icontains")
     service = filters.CharFilter(
-        field_name="event_rental_services__service_id", lookup_expr="exact"
+        field_name="event_rental_services__service_name", lookup_expr="icontains"
     )
 
     class Meta:
         model = EventRental
         fields = [
             "event",
-            "user",
+            "owner",
             "event_rental_date",
             "min_cost",
             "max_cost",
