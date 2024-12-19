@@ -1,6 +1,6 @@
 import { FetchApiService } from "@/services/api/FetchApiService";
-import type { IURegister, IULogin } from "@/services/interfaces/IUauth";
-import { endPoints } from "@/services/utils/endPoints";
+import type { IURegister, IULogin } from "@/interfaces/IUauth";
+import { endPoints } from "@/config/endPoints";
 
 const api = new FetchApiService();
 

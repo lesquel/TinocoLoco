@@ -1,7 +1,7 @@
 "use client"; 
 import { Button, Form, Input } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { IURegister } from "@/services/interfaces/IUauth";
+import { IURegister } from "@/interfaces/IUauth";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { validationRules } from "@/features/auth/utils/validations";
 import { useRouter } from "next/navigation";

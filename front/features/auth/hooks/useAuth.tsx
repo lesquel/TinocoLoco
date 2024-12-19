@@ -1,5 +1,5 @@
-import { IURegister } from "@/services/interfaces/IUauth";
-import { saveToken } from "@/features/auth/utils/saveToken";
+import { IURegister } from "@/interfaces/IUauth";
+import { saveToken } from "@/features/auth/utils/saveUserInfo";
 import { useState } from "react";
 import { useAsyncAction } from "../../../hooks/useAsyncAction";
 
@@ -21,7 +21,7 @@ export const useAuth = (setError: any, api: any) => {
         });
         setGeneralError("Error en el formulario");
       } else {
-        saveToken({ token: response?.token });
+        saveToken(response);
         onSuccess?.(response);
       }
     });

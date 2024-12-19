@@ -1,5 +1,5 @@
-import { ApiService } from "@/services/interfaces/IUApiservices";
-import { TypeMethod } from "@/services/types/typeMethod";
+import { ApiService } from "@/interfaces/IUApiservices";
+import { TypeMethod } from "@/types/typeMethod";
 
 const host = process.env.BACKEND_HOST || "http://localhost:8000/";
 

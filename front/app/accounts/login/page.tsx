@@ -1,12 +1,13 @@
 "use client"; 
 import { Button, Form, Input } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
-import { IURegister } from "@/services/interfaces/IUauth";
+import { IURegister } from "@/interfaces/IUauth";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { validationRules } from "@/features/auth/utils/validations";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { login as loginService } from "@/features/auth/services/auth";
+import {}
 
 export const Login = ({ params }: { params: { next: string } }) => {
   const router = useRouter();
@@ -55,7 +56,7 @@ export const Login = ({ params }: { params: { next: string } }) => {
         label="Contraseña"
         type="password"
         aria-describedby="password-error"
-        {...register("password", validationRules.password)}
+        {...register("password")}
       />
 
       <Button

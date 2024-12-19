@@ -1,7 +1,7 @@
 
 import { FetchApiService } from "@/services/api/FetchApiService"
-import { IUBusiness } from "@/services/interfaces/IUBusiness"
-import { endPoints } from "@/services/utils/endPoints"
+import { IUBusiness } from "@/interfaces/IUBusiness"
+import { endPoints } from "@/config/endPoints"
 
 const api = new FetchApiService()
 
