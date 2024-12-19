@@ -5,7 +5,7 @@ from ..abstracts.Aservice import AService
 
 from .email_service import EmailService
 from base.utils import errors
-from users.models.user import CustomUser
+from apps.users.models.user import CustomUser
 
 
 class UserService(AService):

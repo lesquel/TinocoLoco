@@ -1,6 +1,6 @@
 
 from base.utils import errors
-from event_rentals.models import EventRental
+from apps.event_rentals.models import EventRental
 from ..abstracts.Aservice import AService
 from .email_service import EmailService
 

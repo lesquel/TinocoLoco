@@ -1,6 +1,6 @@
 from django.db.models import Count
 
-from services.models import Service
+from apps.services.models import Service
 from base.abstracts import AAnaliticService
 
 

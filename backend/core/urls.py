@@ -36,15 +36,15 @@ docs_patters = [
 
 api_patterns = [
     # Rutas de la aplicacion
-    path("business-configuration/", include("business_configuration.urls")),
-    path("users/", include("users.urls")),
-    path("events/", include("events.urls")),
-    path("event-rentals/", include("event_rentals.urls")),
-    path("services/", include("services.urls")),
-    path("reviews/", include("reviews.urls")),
-    path("photos/", include("photos.urls")),
-    path("promotions/", include("promotions.urls")),
-    path("contingencies/", include("contingencies.urls")),
+    path("business-configuration/", include("apps.business_configuration.urls")),
+    path("users/", include("apps.users.urls")),
+    path("events/", include("apps.events.urls")),
+    path("event-rentals/", include("apps.event_rentals.urls")),
+    path("services/", include("apps.services.urls")),
+    path("reviews/", include("apps.reviews.urls")),
+    path("photos/", include("apps.photos.urls")),
+    path("promotions/", include("apps.promotions.urls")),
+    path("contingencies/", include("apps.contingencies.urls")),
 ]
 
 

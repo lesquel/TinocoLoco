@@ -46,15 +46,15 @@ THIRD_PARTY_APPS = [
 
 
 LOCAL_APPS = [
-    "business_configuration",
-    "users",
-    "events",
-    "event_rentals",
-    "services",
-    "photos",
-    "reviews",
-    "promotions",
-    "contingencies",
+    "apps.business_configuration",
+    "apps.users",
+    "apps.events",
+    "apps.event_rentals",
+    "apps.services",
+    "apps.photos",
+    "apps.reviews",
+    "apps.promotions",
+    "apps.contingencies",
 ]
 
 INSTALLED_APPS = DEFAULT_DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

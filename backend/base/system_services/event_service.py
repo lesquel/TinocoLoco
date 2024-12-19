@@ -1,5 +1,5 @@
 from django.db.models import Count
-from events.models import Event
+from apps.events.models import Event
 from base.abstracts import AAnaliticService
 
 

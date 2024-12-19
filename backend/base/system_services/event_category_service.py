@@ -1,4 +1,4 @@
-from events.models import EventCategory
+from apps.events.models import EventCategory
 from ..abstracts.Aservice import AService
 
 class EventCategoryService(AService):
