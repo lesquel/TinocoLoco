@@ -8,8 +8,8 @@ class PromotionFilter(filters.FilterSet):
         field_name="promotion_description", lookup_expr="icontains"
     )
     category = filters.CharFilter(
-        field_name="promotion_category__promotion_category_name",
-        lookup_expr="icontains",
+        field_name="promotion_category_id",
+        lookup_expr="exact",
     )
     discount_percentage = filters.NumberFilter(
         field_name="promotion_discount_percentage", lookup_expr="icontains"
