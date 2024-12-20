@@ -3,6 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from .models import Contingency
 
+@admin.register(Contingency)
 class ContingencyAdmin(admin.ModelAdmin):
     list_display = (
         "event_rental",
@@ -21,4 +22,3 @@ class ContingencyAdmin(admin.ModelAdmin):
         "contingency_description",
     )
 
-admin.site.register(Contingency, ContingencyAdmin)

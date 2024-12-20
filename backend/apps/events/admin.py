@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from .models import Event, EventCategory
 
-
+@admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = [
         "event_name",
@@ -28,11 +28,8 @@ class EventAdmin(admin.ModelAdmin):
         "event_category",
     ]
 
-
+@admin.register(EventCategory)
 class EventCategoryAdmin(admin.ModelAdmin):
     list_display = ["event_category_name", "event_category_description","creation_date"]
     search_fields = ["event_category_name"]
     list_filter = ["creation_date"]
-
-admin.site.register(Event, EventAdmin)
-admin.site.register(EventCategory, EventCategoryAdmin)

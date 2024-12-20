@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import User, Group
 from django.utils.translation import gettext_lazy as _
 from django.urls import path, include
 
@@ -8,17 +9,11 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 
-from apps.business_configuration.models import BusinessConfiguration
+from base.admin_site import CustomAdminSite
 
-
-configuration, created = BusinessConfiguration.objects.get_or_create()
-
-
-index_message = _("Bienvenido a la administracion de {}")
-
-admin.site.site_header = f"{configuration.business_name} Admin"
-admin.site.site_title = f"{configuration.business_name} Admin"
-admin.site.index_title = index_message.format(configuration.business_name)
+custom_admin_site = CustomAdminSite(name="custom_admin")
+for model, model_admin in admin.site._registry.items():
+    custom_admin_site.register(model, model_admin.__class__)
 
 
 # Esto es para la documentacion de la API
@@ -64,7 +59,7 @@ api_patterns = [
 
 urlpatterns = (
     [
-        path("admin/", admin.site.urls),
+        path("admin/", custom_admin_site.urls),
     ]
     + docs_patters
     + api_patterns
