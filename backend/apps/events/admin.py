@@ -4,17 +4,10 @@ from apps.reviews.admin import ReviewInline
 # Register your models here.
 from .models import Event, EventCategory
 
-
-
-
-
-
-
-
-
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = [
+        "id",
         "event_name",
         "event_reference_value",
         "event_allowed_hours",
@@ -32,17 +25,12 @@ class EventAdmin(admin.ModelAdmin):
         "creation_date",
     ]
 
-    list_display_links = [
-        "event_name",
-        "event_category",
-    ]
-
     inlines = [PhotoInline, ReviewInline]
-
 
 @admin.register(EventCategory)
 class EventCategoryAdmin(admin.ModelAdmin):
     list_display = [
+        "id",  
         "event_category_name",
         "event_category_description",
         "creation_date",
