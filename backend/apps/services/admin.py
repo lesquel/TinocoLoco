@@ -1,20 +1,10 @@
 from django.contrib import admin
-from django.contrib.contenttypes.admin import GenericTabularInline
 
-from apps.reviews.models import Review
-from apps.photos.models import Photo
+from apps.reviews.admin import ReviewInline
+from apps.photos.admin import PhotoInline
 
 from .models import Service, ServiceCategory
 # Register your models here.
-
-class ReviewInline(GenericTabularInline):
-    model = Review
-    extra = 0
-    
-
-class PhotoInline(GenericTabularInline):
-    model = Photo
-    extra = 0
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):

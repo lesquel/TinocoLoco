@@ -1,7 +1,12 @@
 from django.contrib import admin
+from django.contrib.contenttypes.admin import GenericTabularInline
 
 # Register your models here.
 from .models import Review
+
+class ReviewInline(GenericTabularInline):
+    model = Review
+    extra = 0
 
 
 @admin.register(Review)

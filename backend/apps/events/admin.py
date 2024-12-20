@@ -1,19 +1,16 @@
 from django.contrib import admin
-from django.contrib.contenttypes.admin import GenericTabularInline
-
-from apps.photos.models import Photo
-from apps.reviews.models import Review
+from apps.photos.admin import PhotoInline
+from apps.reviews.admin import ReviewInline
 # Register your models here.
 from .models import Event, EventCategory
 
 
-class PhotoInline(GenericTabularInline):
-    model = Photo
-    extra = 0
 
-class ReviewInline(GenericTabularInline):
-    model = Review
-    extra = 0
+
+
+
+
+
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):

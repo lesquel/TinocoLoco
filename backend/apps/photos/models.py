@@ -18,6 +18,7 @@ class PhotoManager(models.Manager):
         return [EventRental, Service, Event]
 
     def validate_content_type(self, content_type, object_id):
+        
         if not content_type or not object_id:
             raise errors.ValidationError(ERROR_MESSAGES["REQUIRED_FIELDS_ERROR"])
 
@@ -63,7 +64,8 @@ class Photo(models.Model):
         return self.content_type.model
 
     def clean(self):
-        self.__class__.objects.validate_content_type(self.content_type, self.object_id)
+        if getattr(self, "content_type", None) and getattr(self, "object_id", None):
+            self.__class__.objects.validate_content_type(self.content_type, self.object_id)
 
     def save(self, *args, **kwargs):
         self.clean()
