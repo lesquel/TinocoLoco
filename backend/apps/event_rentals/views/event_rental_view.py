@@ -10,6 +10,8 @@ from base.system_services import (
     ServiceService,
     ServicesEventRentalService,
 )
+
+from base.utils import errors
 from apps.users.permissions import IsAdminOrOwner, IsOwner, HasVerifiedEmail
 from apps.photos.serializers import CreatePhotoSerializer, RetrievePhotoSerializer
 from apps.reviews.serializers import CreateReviewSerializer, RetrieveReviewSerializer
@@ -194,19 +196,11 @@ class EventRentalViewSet(viewsets.ModelViewSet):
     def remove_service(self, request, pk=None):
         event_rental = self.get_object()
         if event_rental.status != "pending":
-            return Response(
-                {
-                    "detail": "No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
-                },
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            raise errors.CannotDeletePendingEventRentalError()
         service_id = request.data.get("service_id")
 
         if not service_id:
-            return Response(
-                {"detail": "service_id es obligatorio."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+            raise errors.ServiceIdRequiredError()
 
         service = ServiceService.get_by_id(service_id)
 
@@ -217,12 +211,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         )
 
         if not event_rental_service:
-            return Response(
-                {
-                    "detail": "Este servicio no está asociado con este alquiler de evento."
-                },
-                status=status.HTTP_404_NOT_FOUND,
-            )
+            raise errors.ServiceNotAssociatedError()
 
         ServicesEventRentalService.delete(event_rental_service.id)
 

@@ -1,29 +1,23 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import gettext as _
 from cloudinary.models import CloudinaryField
+
 from base.utils import errors
-
-
-PHOTO_STR = _("Foto de {}")
-
-from .messages import ERROR_MESSAGES
+from .messages import ERROR_MESSAGES, VARIABLE_NAMES_PHOTO
 
 
 
 class PhotoManager(models.Manager):
     @property
     def allowed_models(self):
-        from services.models import Service
-        from events.models import Event
-        from event_rentals.models import EventRental
+        from apps.services.models import Service
+        from apps.events.models import Event
+        from apps.event_rentals.models import EventRental
 
         return [EventRental, Service, Event]
 
     def validate_content_type(self, content_type, object_id):
-
-
         if not content_type or not object_id:
             raise errors.ValidationError(ERROR_MESSAGES["REQUIRED_FIELDS_ERROR"])
 
@@ -45,19 +39,30 @@ class PhotoManager(models.Manager):
 
 
 class Photo(models.Model):
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    class Meta:
+        verbose_name = VARIABLE_NAMES_PHOTO["META_VERBOSE_NAME"]
+        verbose_name_plural = VARIABLE_NAMES_PHOTO["META_VERBOSE_NAME_PLURAL"]
+
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        verbose_name=VARIABLE_NAMES_PHOTO["CONTENT_TYPE"],
+    )
+    object_id = models.PositiveIntegerField(
+        verbose_name=VARIABLE_NAMES_PHOTO["OBJECT_ID"],
+    )
     content_object = GenericForeignKey("content_type", "object_id")
-    image = CloudinaryField()
+    image = CloudinaryField(
+        verbose_name=VARIABLE_NAMES_PHOTO["IMAGE"],
+    )
 
     objects = PhotoManager()
-
 
     @property
     def content_type_name(self):
         return self.content_type.model
-    def clean(self):
 
+    def clean(self):
         self.__class__.objects.validate_content_type(self.content_type, self.object_id)
 
     def save(self, *args, **kwargs):
@@ -65,4 +70,4 @@ class Photo(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return PHOTO_STR.format(self.content_object)
+        return self.image.url

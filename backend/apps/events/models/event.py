@@ -1,22 +1,45 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
 
+from ..messages import VARIABLE_NAMES_EVENT
 from base.abstracts import Product
-
 from apps.reviews.models import Review
 from apps.photos.models import Photo
 from .event_category import EventCategory
 
 
 class Event(Product):
-    event_name = models.CharField(max_length=100)
-    event_description = models.CharField(max_length=500)
-    event_reference_value = models.DecimalField(max_digits=10, decimal_places=2)
-    event_allowed_hours = models.IntegerField()
-    event_extra_hour_rate = models.DecimalField(max_digits=10, decimal_places=2)
-    event_category = models.ForeignKey(EventCategory, on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = VARIABLE_NAMES_EVENT["META_VERBOSE_NAME"]
+        verbose_name_plural = VARIABLE_NAMES_EVENT["META_VERBOSE_NAME_PLURAL"]
 
-    
+    event_name = models.CharField(
+        max_length=100,
+        verbose_name=VARIABLE_NAMES_EVENT["EVENT_NAME"],
+    )
+    event_description = models.CharField(
+        max_length=500,
+        verbose_name=VARIABLE_NAMES_EVENT["EVENT_DESCRIPTION"],
+    )
+    event_reference_value = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name=VARIABLE_NAMES_EVENT["EVENT_REFERENCE_VALUE"],
+    )
+    event_allowed_hours = models.IntegerField(
+        verbose_name=VARIABLE_NAMES_EVENT["EVENT_ALLOWED_HOURS"],
+    )
+    event_extra_hour_rate = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name=VARIABLE_NAMES_EVENT["EVENT_EXTRA_HOUR_RATE"],
+    )
+    event_category = models.ForeignKey(
+        EventCategory,
+        on_delete=models.CASCADE,
+        verbose_name=VARIABLE_NAMES_EVENT["EVENT_CATEGORY"],
+    )
+
     reviews = GenericRelation(Review, related_query_name='events')
     photos = GenericRelation(Photo, related_query_name='events')
 

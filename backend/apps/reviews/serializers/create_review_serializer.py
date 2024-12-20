@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import gettext as _
 from django.db.utils import IntegrityError
 from ..models import Review
+from ..messages import ERROR_MESSAGES
 
 
 class CreateReviewSerializer(serializers.ModelSerializer):
@@ -13,10 +13,9 @@ class CreateReviewSerializer(serializers.ModelSerializer):
     def validate_rating_score(self, value):
         if value < 0 or value > 5:
             raise serializers.ValidationError(
-                _("La calificación debe estar entre 0 y 5.")
+                ERROR_MESSAGES["RATING_MUST_BE_BETWEEN_1_AND_5"]
             )
         return value
-
 
     def create(self, validated_data):
         print(validated_data)
@@ -27,10 +26,7 @@ class CreateReviewSerializer(serializers.ModelSerializer):
         rating_comment = validated_data.get("rating_comment")
 
         if not related_instance:
-            raise serializers.ValidationError(
-                {"error": _("El modelo relacionado no fue proporcionado.")}
-            )
-            
+            raise serializers.ValidationError(ERROR_MESSAGES["MODEL_DOES_NOT_EXIST"])
 
         content_type = ContentType.objects.get_for_model(related_instance)
         try:
@@ -45,9 +41,5 @@ class CreateReviewSerializer(serializers.ModelSerializer):
             return review
         except IntegrityError:
             raise serializers.ValidationError(
-                {
-                    "detail": _(
-                        "Ya existe una reseña para este autor y objeto relacionado."
-                    )
-                }
+                ERROR_MESSAGES["OWNER_CONTENT_TYPE_OBJECT_ID_EXISTS"]
             )

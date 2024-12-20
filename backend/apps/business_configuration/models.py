@@ -1,10 +1,10 @@
-# models.py
 from django.db import models
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext as _
 from cloudinary.models import CloudinaryField
+from django.core.exceptions import ValidationError
 
 from base.utils import errors
+
+from .messages import VARIABLE_NAMES_BUSINESS_CONFIGURATION
 from .choices import BankAccountType
 
 
@@ -23,62 +23,114 @@ class BusinessConfigurationManager(models.Manager):
 
 class BusinessConfiguration(models.Model):
 
-    business_name = models.CharField(max_length=50, default="Tinocoloco")
+    class Meta:
+        verbose_name = VARIABLE_NAMES_BUSINESS_CONFIGURATION["META_VERBOSE_NAME"]
+        verbose_name_plural = VARIABLE_NAMES_BUSINESS_CONFIGURATION[
+            "META_VERBOSE_NAME_PLURAL"
+        ]
+
+    business_name = models.CharField(
+        max_length=50,
+        default="Tinocoloco",
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_NAME"],
+    )
 
     business_logo = CloudinaryField(
         null=True,
         blank=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_LOGO"],
     )
 
     business_address = models.CharField(
         max_length=255,
         blank=True,
         null=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_ADDRESS"],
     )
+
     business_phone_number = models.CharField(
         max_length=15,
         blank=True,
         null=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_PHONE_NUMBER"],
     )
-    business_email = models.EmailField(default="tinocoloco265@gmail.com")
-    business_website_url = models.URLField(blank=True, null=True)
+
+    business_email = models.EmailField(
+        default="tinocoloco265@gmail.com",
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_EMAIL"],
+    )
+
+    business_website_url = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_WEBSITE_URL"],
+    )
+
     business_facebook_url = models.URLField(
         blank=True,
         null=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_FACEBOOK_URL"],
     )
+
     business_instagram_url = models.URLField(
         blank=True,
         null=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_INSTAGRAM_URL"],
     )
-    business_x_url = models.URLField(blank=True, null=True)
+
+    business_x_url = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_X_URL"],
+    )
+
     business_bank_account_number_1 = models.CharField(
         max_length=15,
         default="000000000000000",
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION[
+            "BUSINESS_BANK_ACCOUNT_NUMBER_1"
+        ],
     )
+
     business_bank_name_1 = models.CharField(
         max_length=40,
         default="Banco Genérico",
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_BANK_NAME_1"],
     )
+
     business_bank_account_type_1 = models.CharField(
         max_length=15,
         choices=BankAccountType.choices,
         default=BankAccountType.SAVINGS.value,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION[
+            "BUSINESS_BANK_ACCOUNT_TYPE_1"
+        ],
     )
+
     business_bank_account_number_2 = models.CharField(
         max_length=15,
         blank=True,
         null=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION[
+            "BUSINESS_BANK_ACCOUNT_NUMBER_2"
+        ],
     )
+
     business_bank_name_2 = models.CharField(
         max_length=40,
         blank=True,
         null=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION["BUSINESS_BANK_NAME_2"],
     )
+
     business_bank_account_type_2 = models.CharField(
         max_length=15,
         choices=BankAccountType.choices,
         blank=True,
         null=True,
+        verbose_name=VARIABLE_NAMES_BUSINESS_CONFIGURATION[
+            "BUSINESS_BANK_ACCOUNT_TYPE_2"
+        ],
     )
 
     objects = BusinessConfigurationManager()

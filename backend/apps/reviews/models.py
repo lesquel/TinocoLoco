@@ -1,12 +1,13 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 from django.db import models
 from apps.users.models.user import CustomUser
 
 from base.utils import errors
-from .messages import ERROR_MESSAGES
-RATING_MESSAGE = _("{}: {} - {}")
+from .messages import ERROR_MESSAGES, VARIABLE_NAMES_REVIEW
+
+
 
 
 class ReviewManager(models.Manager):
@@ -22,19 +23,9 @@ class ReviewManager(models.Manager):
 
 
 class Review(models.Model):
-    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey("content_type", "object_id")
-
-    rating_score = models.PositiveIntegerField(choices=[(i, i) for i in range(0, 6)])
-    rating_comment = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    objects = ReviewManager()
-
     class Meta:
+        verbose_name = VARIABLE_NAMES_REVIEW["META_VERBOSE_NAME"]
+        verbose_name_plural = VARIABLE_NAMES_REVIEW["META_VERBOSE_NAME_PLURAL"]
         constraints = [
             models.UniqueConstraint(
                 fields=["content_type", "object_id", "owner"],
@@ -42,13 +33,41 @@ class Review(models.Model):
             )
         ]
 
+    owner = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        verbose_name=VARIABLE_NAMES_REVIEW["OWNER"],
+    )
 
+    content_type = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
+        verbose_name=VARIABLE_NAMES_REVIEW["CONTENT_TYPE"],
+    )
+    object_id = models.PositiveIntegerField(
+        verbose_name=VARIABLE_NAMES_REVIEW["OBJECT_ID"],
+    )
+    content_object = GenericForeignKey("content_type", "object_id")
 
+    rating_score = models.PositiveIntegerField(
+        choices=[(i, i) for i in range(0, 6)],
+        verbose_name=VARIABLE_NAMES_REVIEW["RATING_SCORE"],
+    )
+    rating_comment = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name=VARIABLE_NAMES_REVIEW["RATING_COMMENT"],
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name=VARIABLE_NAMES_REVIEW["CREATED_AT"],
+    )
 
+    objects = ReviewManager()
 
     @property
     def content_type_name(self):
         return self.content_type.model
 
     def __str__(self):
-        return RATING_MESSAGE.format(self.owner, self.rating_score, self.content_object)
+        return  f"{self.owner}: {self.content_object} - {self.rating_score}"

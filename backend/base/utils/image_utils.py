@@ -5,7 +5,7 @@ class ImageUtils:
     def get_image_url(image):
         try:
             if image:
-                url = cloudinary.api.resource(image.public_id).get("url")
+                url = image.url
                 return url
             return None
         except Exception as e:

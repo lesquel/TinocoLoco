@@ -1,6 +1,6 @@
 from rest_framework import status
 from .baseError import BaseError
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 # Translated error messages
 HAVENT_LOGGED_IN = _("No ha iniciado sesión")

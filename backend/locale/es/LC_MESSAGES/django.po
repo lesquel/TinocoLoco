@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-08 19:43-0500\n"
+"POT-Creation-Date: 2024-12-19 20:46-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,290 +19,879 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
 "1 : 2;\n"
 
-#: .\base\utils\errors.py:6
-msgid "No ha iniciado sesión"
-msgstr ""
+#: .\apps\business_configuration\choices\bank_account_type.py:5
+msgid "Ahorros"
+msgstr "Ahorros"
 
-#: .\base\utils\errors.py:7
-msgid "Idioma no soportado"
-msgstr ""
+#: .\apps\business_configuration\choices\bank_account_type.py:6
+msgid "Corriente"
+msgstr "Corriente"
 
-#: .\base\utils\errors.py:8
-msgid "Credenciales inválidas"
-msgstr ""
-
-#: .\base\utils\errors.py:9
-msgid "No tiene permisos para realizar esta acción"
-msgstr ""
-
-#: .\base\utils\errors.py:10
-msgid "Usuario no encontrado"
-msgstr ""
-
-#: .\base\utils\errors.py:11
-msgid "Rol inválido"
-msgstr ""
-
-#: .\base\utils\errors.py:12
-msgid "Por favor, ingresar su usuario y contraseña"
-msgstr ""
-
-#: .\business_configuration\models.py:10 .\business_configuration\models.py:32
+#: .\apps\business_configuration\messages\variable_names.py:4
 msgid "Nombre del negocio"
-msgstr ""
+msgstr "Nombre del negocio"
 
-#: .\business_configuration\models.py:11 .\business_configuration\models.py:36
-msgid "Direccion del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:12 .\business_configuration\models.py:37
-msgid "Número de teléfono del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:13 .\business_configuration\models.py:38
-msgid "Correo electrónico del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:14 .\business_configuration\models.py:39
-msgid "URL del sitio web del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:15 .\business_configuration\models.py:40
-msgid "URL de Facebook del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:16 .\business_configuration\models.py:41
-msgid "URL de Instagram del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:17 .\business_configuration\models.py:42
-msgid "URL de X (anteriormente Twitter) del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:19 .\business_configuration\models.py:44
-msgid "Número de cuenta bancaria 1 del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:20 .\business_configuration\models.py:45
-msgid "Nombre del banco 1 del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:21 .\business_configuration\models.py:46
-msgid "Tipo de cuenta bancaria 1 del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:23 .\business_configuration\models.py:48
-msgid "Número de cuenta bancaria 2 del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:24 .\business_configuration\models.py:49
-msgid "Nombre del banco 2 del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:25 .\business_configuration\models.py:50
-msgid "Tipo de cuenta bancaria 2 del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:27 .\business_configuration\models.py:52
-msgid "Configuracion del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:28 .\business_configuration\models.py:53
-msgid "Configuraciones del negocio"
-msgstr ""
-
-#: .\business_configuration\models.py:33
+#: .\apps\business_configuration\messages\variable_names.py:5
 msgid "Logo del negocio"
-msgstr ""
+msgstr "Logo del negocio"
 
-#: .\business_configuration\models.py:55
-msgid "Solo puede haber una configuración de negocio."
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:6
+msgid "Dirección del negocio"
+msgstr "Dirección del negocio"
 
-#: .\business_configuration\views.py:10
-msgid "Configuración del negocio no encontrada."
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:7
+msgid "Número de teléfono del negocio"
+msgstr "Número de teléfono del negocio"
 
-#: .\event\models\event_category.py:5
-msgid "Imagen del tipo de evento"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:8
+msgid "Correo electrónico del negocio"
+msgstr "Correo electrónico del negocio"
 
-#: .\event_rental\choices\event_rental_status.py:6
-msgid "Pendiente"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:9
+msgid "Sitio web del negocio"
+msgstr "Sitio web del negocio"
 
-#: .\event_rental\choices\event_rental_status.py:7
-msgid "Confirmado"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:10
+msgid "URL de Facebook del negocio"
+msgstr "URL de Facebook del negocio"
 
-#: .\event_rental\choices\event_rental_status.py:8
-msgid "Cancelado"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:11
+msgid "URL de Instagram del negocio"
+msgstr "URL de Instagram del negocio"
 
-#: .\event_rental\choices\event_rental_status.py:9
-msgid "Completado"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:12
+msgid "URL de X (anteriormente Twitter) del negocio"
+msgstr "URL de X (anteriormente Twitter) del negocio"
 
-#: .\event_rental\choices\event_rental_status.py:10
-msgid "En progreso"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:13
+msgid "Número de cuenta bancaria 1"
+msgstr "Número de cuenta bancaria 1"
 
-#: .\event_rental\choices\event_rental_status.py:11
-msgid "En espera"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:14
+msgid "Nombre del banco 1"
+msgstr "Nombre del banco 1"
 
-#: .\event_rental\choices\payment_method.py:5
-msgid "Efectivo"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:15
+msgid "Tipo de cuenta bancaria 1"
+msgstr "Tipo de cuenta bancaria 1"
 
-#: .\event_rental\choices\payment_method.py:6
-msgid "Tarjeta de crédito"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:16
+msgid "Número de cuenta bancaria 2"
+msgstr "Número de cuenta bancaria 2"
 
-#: .\event_rental\choices\payment_method.py:7
-msgid "Tarjeta de débito"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:17
+msgid "Nombre del banco 2"
+msgstr "Nombre del banco 2"
 
-#: .\event_rental\choices\payment_method.py:8
-msgid "Transferencia bancaria"
-msgstr ""
+#: .\apps\business_configuration\messages\variable_names.py:18
+msgid "Tipo de cuenta bancaria 2"
+msgstr "Tipo de cuenta bancaria 2"
 
-#: .\event_rental\choices\payment_method.py:9
+#: .\apps\business_configuration\messages\variable_names.py:19
+msgid "Configuración de negocio"
+msgstr "Configuración de negocio"
+
+#: .\apps\business_configuration\messages\variable_names.py:20
+msgid "Configuraciones de negocio"
+msgstr "Configuraciones de negocio"
+
+#: .\apps\contingencies\choices\contingency_category.py:4
+msgid "Cancelacion"
+msgstr "Cancelacion"
+
+#: .\apps\contingencies\choices\contingency_category.py:5
+msgid "Daño"
+msgstr "Daño"
+
+#: .\apps\contingencies\choices\contingency_category.py:6
+msgid "Retraso"
+msgstr "Retraso"
+
+#: .\apps\contingencies\choices\contingency_category.py:7
+msgid "Falla de Equipo"
+msgstr "Falla de Equipo"
+
+#: .\apps\contingencies\choices\contingency_category.py:8
+msgid "Fuerza Mayor"
+msgstr "Fuerza Mayor"
+
+#: .\apps\contingencies\choices\contingency_category.py:9
+msgid "Seguro"
+msgstr "Seguro"
+
+#: .\apps\contingencies\choices\contingency_category.py:10
+#: .\apps\event_rentals\choices\payment_method.py:9
 msgid "Otro"
-msgstr ""
+msgstr "Otro"
 
-#: .\event_rental\models\rental_status_history.py:21
-msgid "Estado de alquiler de {} cambiado a {} por {} el {}"
-msgstr ""
+#: .\apps\contingencies\choices\contingency_impact_level.py:5
+msgid "Bajo"
+msgstr "Bajo"
 
-#: .\service\models\service_category.py:5
-msgid "Imagen del tipo de servicio"
-msgstr ""
+#: .\apps\contingencies\choices\contingency_impact_level.py:6
+msgid "Medio"
+msgstr "Medio"
 
-#: .\user\choices\language_choices.py:5
+#: .\apps\contingencies\choices\contingency_impact_level.py:7
+msgid "Alto"
+msgstr "Alto"
+
+#: .\apps\contingencies\choices\contingency_impact_level.py:8
+msgid "Crítico"
+msgstr "Crítico"
+
+#: .\apps\contingencies\choices\contingency_impact_level.py:9
+msgid "Extremo"
+msgstr "Extremo"
+
+#: .\apps\contingencies\messages\variable_names.py:4
+#: .\apps\contingencies\migrations\messages\variable_names.py:10
+msgid "Contingencia"
+msgstr "Contingencia"
+
+#: .\apps\contingencies\messages\variable_names.py:5
+#: .\apps\contingencies\migrations\messages\variable_names.py:11
+msgid "Contingencias"
+msgstr "Contingencias"
+
+#: .\apps\contingencies\messages\variable_names.py:6
+msgid "Alquiler de Evento"
+msgstr "Alquiler de evento"
+
+#: .\apps\contingencies\messages\variable_names.py:7
+#: .\apps\event_rentals\messages\variable_names.py:9
+msgid "Descripción"
+msgstr "Descripción"
+
+#: .\apps\contingencies\messages\variable_names.py:8
+msgid "Nivel de Impacto"
+msgstr "Nivel de Impacto"
+
+#: .\apps\contingencies\messages\variable_names.py:9
+msgid "Categoría"
+msgstr "Categoría"
+
+#: .\apps\contingencies\messages\variable_names.py:10
+
+msgid "Monto de Penalización"
+msgstr "Monto de Penalización"
+
+#: .\apps\contingencies\messages\variable_names.py:11
+msgid "Fecha Ocurrida"
+msgstr "Fecha Ocurrida"
+
+#: .\apps\contingencies\migrations\messages\variable_names.py:4
+#: .\apps\event_rentals\messages\variable_names.py:4
+#: .\apps\event_rentals\messages\variable_names.py:36
+msgid "Alquiler de evento"
+msgstr "Alquiler de evento"
+
+#: .\apps\contingencies\migrations\messages\variable_names.py:5
+msgid "Descripción de la contingencia"
+msgstr "Descripción de la contingencia"
+
+#: .\apps\contingencies\migrations\messages\variable_names.py:6
+msgid "Nivel de impacto de la contingencia"
+msgstr "Nivel de impacto de la contingencia"
+
+#: .\apps\contingencies\migrations\messages\variable_names.py:7
+msgid "Categoría de la contingencia"
+msgstr "Categoría de la contingencia"
+
+#: .\apps\contingencies\migrations\messages\variable_names.py:8
+msgid "Monto de la penalización de la contingencia"
+msgstr "Monto de la penalización de la contingencia"
+
+#: .\apps\contingencies\migrations\messages\variable_names.py:9
+msgid "Fecha en la que ocurrió la contingencia"
+msgstr "Fecha en la que ocurrió la contingencia"
+
+#: .\apps\event_rentals\choices\event_rental_services_status.py:6
+#: .\apps\event_rentals\choices\event_rental_status.py:6
+msgid "Pendiente"
+msgstr "Pendiente"
+
+#: .\apps\event_rentals\choices\event_rental_services_status.py:7
+msgid "Entregado"
+msgstr "Entregado"
+
+#: .\apps\event_rentals\choices\event_rental_services_status.py:8
+#: .\apps\event_rentals\choices\event_rental_status.py:8
+msgid "Cancelado"
+msgstr "Cancelado"
+
+#: .\apps\event_rentals\choices\event_rental_services_status.py:9
+msgid "Devuelto"
+msgstr "Devuelto"
+
+#: .\apps\event_rentals\choices\event_rental_services_status.py:10
+msgid "Perdido"
+msgstr "Perdido"
+
+#: .\apps\event_rentals\choices\event_rental_services_status.py:11
+msgid "Dañado"
+msgstr "Dañado"
+
+#: .\apps\event_rentals\choices\event_rental_services_status.py:12
+msgid "En uso"
+msgstr "En uso"
+
+#: .\apps\event_rentals\choices\event_rental_status.py:7
+msgid "Confirmado"
+msgstr "Confirmado"
+
+#: .\apps\event_rentals\choices\event_rental_status.py:9
+msgid "Completado"
+msgstr "Completado"
+
+#: .\apps\event_rentals\choices\event_rental_status.py:10
+msgid "En progreso"
+msgstr "En progreso"
+
+#: .\apps\event_rentals\choices\event_rental_status.py:11
+msgid "En espera"
+msgstr "En espera"
+
+#: .\apps\event_rentals\choices\payment_method.py:5
+msgid "Efectivo"
+msgstr "Efectivo"
+
+#: .\apps\event_rentals\choices\payment_method.py:6
+msgid "Tarjeta de crédito"
+msgstr "Tarjeta de crédito"
+
+#: .\apps\event_rentals\choices\payment_method.py:7
+msgid "Tarjeta de débito"
+msgstr "Tarjeta de débito"
+
+#: .\apps\event_rentals\choices\payment_method.py:8
+msgid "Transferencia bancaria"
+msgstr "Transferencia bancaria"
+
+#: .\apps\event_rentals\messages\error_messages.py:4
+msgid "Estado de alquiler inválido"
+msgstr "Estado de alquiler inválido"
+
+#: .\apps\event_rentals\messages\error_messages.py:5
+msgid "La fecha de inicio no puede ser mayor que la fecha de fin"
+msgstr "La fecha de inicio no puede ser mayor que la fecha de fin"
+
+#: .\apps\event_rentals\messages\variable_names.py:5
+#: .\apps\services\messages\variable_names.py:21
+msgid "Servicio"
+msgstr "Servicio"
+
+#: .\apps\event_rentals\messages\variable_names.py:6
+msgid "Cantidad del servicio"
+msgstr "Cantidad del servicio"
+
+#: .\apps\event_rentals\messages\variable_names.py:7
+#: .\apps\event_rentals\messages\variable_names.py:47
+msgid "Estado"
+msgstr "Estado"
+
+#: .\apps\event_rentals\messages\variable_names.py:8
+msgid "Fecha de entrega"
+msgstr "Fecha de entrega"
+
+#: .\apps\event_rentals\messages\variable_names.py:10
+msgid "Observación del servicio"
+msgstr "Observación del servicio"
+
+#: .\apps\event_rentals\messages\variable_names.py:11
+msgid "Servicio de alquiler de evento"
+msgstr "Servicio de alquiler de evento"
+
+#: .\apps\event_rentals\messages\variable_names.py:12
+msgid "Servicios de alquiler de evento"
+msgstr "Servicios de alquiler de evento"
+
+#: .\apps\event_rentals\messages\variable_names.py:17
+#: .\apps\events\messages\variable_names.py:19
+msgid "Evento"
+msgstr "Evento"
+
+#: .\apps\event_rentals\messages\variable_names.py:18
+#: .\apps\reviews\messages\variable_names.py:4
+msgid "Propietario"
+msgstr "Propietario"
+
+#: .\apps\event_rentals\messages\variable_names.py:19
+msgid "Fecha de alquiler del evento"
+msgstr "Fecha de alquiler del evento"
+
+#: .\apps\event_rentals\messages\variable_names.py:20
+msgid "Hora de inicio del alquiler"
+msgstr "Hora de inicio del alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:21
+msgid "Hora de fin planificada del alquiler"
+msgstr "Hora de fin planificada del alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:22
+msgid "Hora de fin del alquiler"
+msgstr "Hora de fin del alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:23
+msgid "Costo del alquiler"
+msgstr "Costo del alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:24
+msgid "Valor cancelado por adelantado del alquiler"
+msgstr "Valor cancelado por adelantado del alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:25
+msgid "Método de pago del alquiler"
+msgstr "Método de pago del alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:26
+msgid "Observación del alquiler"
+msgstr "Observación del alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:27
+msgid "Mínimo de asistentes al alquiler"
+msgstr "Mínimo de asistentes al alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:28
+msgid "Máximo de asistentes al alquiler"
+msgstr "Máximo de asistentes al alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:29
+msgid "Fecha de creación del alquiler"
+msgstr "Fecha de creación del alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:30
+#: .\apps\promotions\messages\variable_names.py:20
+msgid "Promociones"
+msgstr "Promociones"
+
+#: .\apps\event_rentals\messages\variable_names.py:31
+msgid "Contador de vistas"
+msgstr "Contador de vistas"
+
+#: .\apps\event_rentals\messages\variable_names.py:32
+msgid "Calificación del propietario"
+msgstr "Calificación del propietario"
+
+#: .\apps\event_rentals\messages\variable_names.py:33
+msgid "Calificación del cliente"
+msgstr "Calificación del cliente"
+
+#: .\apps\event_rentals\messages\variable_names.py:34
+msgid "Estado actual"
+msgstr "Estado actual"
+
+#: .\apps\event_rentals\messages\variable_names.py:35
+msgid "Código de confirmación"
+msgstr "Código de confirmación"
+
+#: .\apps\event_rentals\messages\variable_names.py:37
+msgid "Alquileres de evento"
+msgstr "Alquileres de evento"
+
+#: .\apps\event_rentals\messages\variable_names.py:45
+msgid "Alquiler"
+msgstr "Alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:46
+msgid "Cambiado por"
+msgstr "Cambiado por"
+
+#: .\apps\event_rentals\messages\variable_names.py:48
+msgid "Razón"
+msgstr "Razón"
+
+#: .\apps\event_rentals\messages\variable_names.py:49
+msgid "Fecha de cambio"
+msgstr "Fecha de cambio"
+
+#: .\apps\event_rentals\messages\variable_names.py:50
+msgid "Historial de estado del alquiler"
+msgstr "Historial de estado del alquiler"
+
+#: .\apps\event_rentals\messages\variable_names.py:51
+msgid "Historial de estado de alquileres"
+msgstr "Historial de estado de alquileres"
+
+#: .\apps\events\messages\variable_names.py:4
+msgid "Nombre de la categoría del evento"
+msgstr "Nombre de la categoría del evento"
+
+#: .\apps\events\messages\variable_names.py:5
+msgid "Descripción de la categoría del evento"
+msgstr "Descripción de la categoría del evento"
+
+#: .\apps\events\messages\variable_names.py:6
+msgid "Imagen de la categoría del evento"
+msgstr "Imagen de la categoría del evento"
+
+#: .\apps\events\messages\variable_names.py:7
+msgid "Categoría de evento"
+msgstr "Categoría de evento"
+
+#: .\apps\events\messages\variable_names.py:8
+msgid "Categorías de evento"
+msgstr "Categorías de evento"
+
+#: .\apps\events\messages\variable_names.py:13
+msgid "Nombre del evento"
+msgstr "Nombre del evento"
+
+#: .\apps\events\messages\variable_names.py:14
+msgid "Descripción del evento"
+msgstr "Descripción del evento"
+
+#: .\apps\events\messages\variable_names.py:15
+msgid "Valor de referencia del evento"
+msgstr "Valor de referencia del evento"
+
+#: .\apps\events\messages\variable_names.py:16
+msgid "Horas permitidas del evento"
+msgstr "Horas permitidas del evento"
+
+#: .\apps\events\messages\variable_names.py:17
+msgid "Tarifa por hora extra del evento"
+msgstr "Tarifa por hora extra del evento"
+
+#: .\apps\events\messages\variable_names.py:18
+msgid "Categoría del evento"
+msgstr "Categoría del evento"
+
+#: .\apps\events\messages\variable_names.py:20
+msgid "Eventos"
+msgstr "Eventos"
+
+#: .\apps\photos\messages\error_messages.py:4
+msgid "Por favor, subir una imagen."
+msgstr "Por favor, subir una imagen."
+
+#: .\apps\photos\messages\error_messages.py:5
+msgid "El tipo de contenido y el id del objeto son requeridos."
+msgstr "El tipo de contenido y el id del objeto son requeridos."
+
+#: .\apps\photos\messages\error_messages.py:6
+msgid "El tipo de contenido no es válido."
+msgstr "El tipo de contenido no es válido."
+
+#: .\apps\photos\messages\error_messages.py:7
+msgid "Foto no puede ser asociada con {}."
+msgstr "Foto no puede ser asociada con {}."
+
+#: .\apps\photos\messages\success_messages.py:5
+msgid "La foto ha sido eliminada."
+msgstr "La foto ha sido eliminada."
+
+#: .\apps\photos\messages\variable_names.py:4
+#: .\apps\reviews\messages\variable_names.py:5
+msgid "Tipo de contenido"
+msgstr "Tipo de contenido"
+
+#: .\apps\photos\messages\variable_names.py:5
+#: .\apps\reviews\messages\variable_names.py:6
+msgid "ID del objeto"
+msgstr "ID del objeto"
+
+#: .\apps\photos\messages\variable_names.py:6
+msgid "Imagen"
+msgstr "Imagen"
+
+#: .\apps\photos\messages\variable_names.py:7
+msgid "Foto"
+msgstr "Foto"
+
+#: .\apps\photos\messages\variable_names.py:8
+msgid "Fotos"
+msgstr "Fotos"
+
+#: .\apps\photos\messages\variable_names.py:9
+msgid "Foto de {}"
+msgstr "Foto de {}"
+
+#: .\apps\photos\serializers\create_photo_serializer.py:27
+msgid "El modelo relacionado no fue proporcionado."
+msgstr "El modelo relacionado no fue proporcionado."
+
+#: .\apps\promotions\messages\variable_names.py:4
+msgid "Nombre de la categoría de promoción"
+msgstr "Nombre de la categoría de promoción"
+
+#: .\apps\promotions\messages\variable_names.py:5
+msgid "Descripción de la categoría de promoción"
+msgstr "Descripción de la categoría de promoción"
+
+#: .\apps\promotions\messages\variable_names.py:6
+#: .\apps\promotions\messages\variable_names.py:14
+msgid "Categoría de promoción"
+msgstr "Categoría de promoción"
+
+#: .\apps\promotions\messages\variable_names.py:7
+msgid "Categorías de promoción"
+msgstr "Categorías de promoción"
+
+#: .\apps\promotions\messages\variable_names.py:12
+msgid "Nombre de la promoción"
+msgstr "Nombre de la promoción"
+
+#: .\apps\promotions\messages\variable_names.py:13
+msgid "Descripción de la promoción"
+msgstr "Descripción de la promoción"
+
+#: .\apps\promotions\messages\variable_names.py:15
+msgid "Porcentaje de descuento"
+msgstr "Porcentaje de descuento"
+
+#: .\apps\promotions\messages\variable_names.py:16
+msgid "Válido desde"
+msgstr "Válido desde"
+
+#: .\apps\promotions\messages\variable_names.py:17
+msgid "Válido hasta"
+msgstr "Válido hasta"
+
+#: .\apps\promotions\messages\variable_names.py:18
+msgid "Imagen de la promoción"
+msgstr "Imagen de la promoción"
+
+#: .\apps\promotions\messages\variable_names.py:19
+msgid "Promoción"
+msgstr "Promoción"
+
+#: .\apps\reviews\messages\error_messages.py:4
+msgid "Ya existe una reseña de este autor para este objeto."
+msgstr "Ya existe una reseña de este autor para este objeto."
+
+#: .\apps\reviews\messages\error_messages.py:5
+msgid "La calificación debe estar entre 1 y 5."
+msgstr "La calificación debe estar entre 1 y 5."
+
+#: .\apps\reviews\messages\error_messages.py:6
+msgid "La reseña no existe."
+msgstr "La reseña no existe."
+
+#: .\apps\reviews\messages\error_messages.py:7
+msgid "El modelo no existe."
+msgstr "El modelo no existe."
+
+#: .\apps\reviews\messages\error_messages.py:8
+msgid "Ya existe una reseña para este autor y objeto relacionado."
+msgstr "Ya existe una reseña para este autor y objeto relacionado."
+
+#: .\apps\reviews\messages\success_messages.py:5
+msgid "Reseña eliminada correctamente."
+msgstr "Reseña eliminada correctamente."
+
+#: .\apps\reviews\messages\variable_names.py:7
+msgid "Puntuación"
+msgstr "Puntuación"
+
+#: .\apps\reviews\messages\variable_names.py:8
+msgid "Comentario"
+msgstr "Comentario"
+
+#: .\apps\reviews\messages\variable_names.py:9
+#: .\base\abstracts\models\messages\variable_names.py:6
+msgid "Fecha de creación"
+msgstr "Fecha de creación"
+
+#: .\apps\reviews\messages\variable_names.py:10
+msgid "Reseña"
+msgstr "Reseña"
+
+#: .\apps\reviews\messages\variable_names.py:11
+msgid "Reseñas"
+msgstr "Reseñas"
+
+#: .\apps\reviews\messages\variable_names.py:12
+msgid "unique_review_per_owner"
+msgstr "unique_review_per_owner"
+
+#: .\apps\services\messages\variable_names.py:5
+msgid "Nombre de la categoría de servicio"
+msgstr "Nombre de la categoría de servicio"
+
+#: .\apps\services\messages\variable_names.py:6
+msgid "Descripción de la categoría de servicio"
+msgstr "Descripción de la categoría de servicio"
+
+#: .\apps\services\messages\variable_names.py:7
+msgid "Imagen de la categoría de servicio"
+msgstr "Imagen de la categoría de servicio"
+
+#: .\apps\services\messages\variable_names.py:8
+msgid "Categoría de servicio"
+msgstr "Categoría de servicio"
+
+#: .\apps\services\messages\variable_names.py:9
+msgid "Categorías de servicio"
+msgstr "Categorías de servicio"
+
+#: .\apps\services\messages\variable_names.py:15
+msgid "Nombre del servicio"
+msgstr "Nombre del servicio"
+
+#: .\apps\services\messages\variable_names.py:16
+msgid "Descripción del servicio"
+msgstr "Descripción del servicio"
+
+#: .\apps\services\messages\variable_names.py:17
+msgid "Costo unitario del servicio"
+msgstr "Costo unitario del servicio"
+
+#: .\apps\services\messages\variable_names.py:18
+msgid "Categoría del servicio"
+msgstr "Categoría del servicio"
+
+#: .\apps\services\messages\variable_names.py:19
+msgid "Reseñas del servicio"
+msgstr "Reseñas del servicio"
+
+#: .\apps\services\messages\variable_names.py:20
+msgid "Fotos del servicio"
+msgstr "Fotos del servicio"
+
+#: .\apps\services\messages\variable_names.py:22
+msgid "Servicios"
+msgstr "Servicios"
+
+#: .\apps\users\choices\language_choices.py:5
 msgid "Inglés"
-msgstr ""
+msgstr "Inglés"
 
-#: .\user\choices\language_choices.py:6
+#: .\apps\users\choices\language_choices.py:6
 msgid "Español"
-msgstr ""
+msgstr "Español"
 
-#: .\user\choices\role_choices.py:6
+#: .\apps\users\choices\role_choices.py:6
 msgid "Administrador"
-msgstr ""
+msgstr "Administrador"
 
-#: .\user\choices\role_choices.py:7
+#: .\apps\users\choices\role_choices.py:7
 msgid "Cliente"
-msgstr ""
+msgstr "Cliente"
 
-#: .\user\choices\sex_choices.py:7
+#: .\apps\users\choices\sex_choices.py:7
 msgid "Masculino"
-msgstr ""
+msgstr "Masculino"
 
-#: .\user\choices\sex_choices.py:8
+#: .\apps\users\choices\sex_choices.py:8
 msgid "Femenino"
-msgstr ""
+msgstr "Femenino"
 
-#: .\user\models.py:12
-msgid "Cédula"
-msgstr ""
-
-#: .\user\models.py:13
-msgid "Correo electrónico"
-msgstr ""
-
-#: .\user\models.py:14
-msgid "Nombre"
-msgstr ""
-
-#: .\user\models.py:15
-msgid "Apellido"
-msgstr ""
-
-#: .\user\models.py:16
-msgid "Contraseña"
-msgstr ""
-
-#: .\user\models.py:17
-msgid "Nombre de Usuario"
-msgstr ""
-
-#: .\user\models.py:18
-msgid "Nacionalidad"
-msgstr ""
-
-#: .\user\models.py:19
-msgid "Fecha de Registro"
-msgstr ""
-
-#: .\user\models.py:20
-msgid "Teléfono"
-msgstr ""
-
-#: .\user\models.py:21
-msgid "Dirección"
-msgstr ""
-
-#: .\user\models.py:22
-msgid "Rol"
-msgstr ""
-
-#: .\user\models.py:23
-msgid "Sexo"
-msgstr ""
-
-#: .\user\models.py:26
-msgid "Idioma"
-msgstr ""
-
-#: .\user\models.py:28
-msgid "Activo"
-msgstr ""
-
-#: .\user\models.py:29
-msgid "Staff"
-msgstr ""
-
-#: .\user\serializers\base_user_serializer.py:7
-#: .\user\serializers\update_user_serializer.py:9
+#: .\apps\users\messages\error_messages.py:4
 msgid "Este nombre de usuario ya está en uso."
-msgstr ""
+msgstr "Este nombre de usuario ya está en uso."
 
-#: .\user\serializers\base_user_serializer.py:8
-#: .\user\serializers\update_user_serializer.py:10
+#: .\apps\users\messages\error_messages.py:5
 msgid "Este número de cédula ya está registrado."
-msgstr ""
+msgstr "Este número de cédula ya está registrado."
 
-#: .\user\serializers\base_user_serializer.py:9
-#: .\user\serializers\update_user_serializer.py:11
+#: .\apps\users\messages\error_messages.py:6
 msgid "Este correo electrónico ya está registrado."
-msgstr ""
+msgstr "Este correo electrónico ya está registrado."
 
-#: .\user\serializers\base_user_serializer.py:10
-#: .\user\serializers\update_user_serializer.py:12
+#: .\apps\users\messages\error_messages.py:7
 msgid "Sexo inválido"
-msgstr ""
+msgstr "Sexo inválido"
 
-#: .\user\serializers\create_user_serializer.py:8
+#: .\apps\users\messages\error_messages.py:8
 msgid "Por favor, ingresar su nombre de usuario."
-msgstr ""
+msgstr "Por favor, ingresar su nombre de usuario."
 
-#: .\user\serializers\create_user_serializer.py:9
+#: .\apps\users\messages\error_messages.py:9
 msgid "Por favor, ingresar su correo electronico."
-msgstr ""
+msgstr "Por favor, ingresar su correo electronico."
 
-#: .\user\serializers\create_user_serializer.py:10
+#: .\apps\users\messages\error_messages.py:10
 msgid "Por favor, ingresar su contrasena."
-msgstr ""
+msgstr "Por favor, ingresar su contrasena."
 
-#: .\user\views.py:26
+#: .\apps\users\messages\success_messages.py:5
 msgid "Desconectado exitosamente"
-msgstr ""
+msgstr "Desconectado exitosamente"
 
-#: .\user\views.py:27
+#: .\apps\users\messages\success_messages.py:6
 msgid "Usuario eliminado exitosamente"
-msgstr ""
+msgstr "Usuario eliminado exitosamente"
 
-#: .\user\views.py:29
+#: .\apps\users\messages\success_messages.py:7
 msgid "Idioma actualizado correctamente a {}."
+msgstr "Idioma actualizado correctamente a {}."
+
+#: .\apps\users\messages\success_messages.py:8
+msgid "Correo electrónico verificado exitosamente"
+msgstr "Correo electrónico verificado exitosamente"
+
+#: .\apps\users\messages\success_messages.py:9
+msgid "El código ha sido enviado al correo electrónico."
+msgstr "El código ha sido enviado al correo electrónico."
+
+#: .\apps\users\messages\success_messages.py:10
+msgid "Contraseña restablecida con éxito."
+msgstr "Contraseña restablecida con éxito."
+
+#: .\apps\users\messages\variable_names.py:6
+msgid "Número de cédula"
+msgstr "Número de cédula"
+
+#: .\apps\users\messages\variable_names.py:7
+msgid "Nombre de usuario"
+msgstr "Nombre de usuario"
+
+#: .\apps\users\messages\variable_names.py:8
+msgid "Nacionalidad"
+msgstr "Nacionalidad"
+
+#: .\apps\users\messages\variable_names.py:9
+msgid "Correo electrónico"
+msgstr "Correo electrónico"
+
+#: .\apps\users\messages\variable_names.py:10
+msgid "Correo electrónico verificado"
+msgstr "Correo electrónico verificado"
+
+#: .\apps\users\messages\variable_names.py:11
+msgid "Código de verificación de correo"
+msgstr "Código de verificación de correo"
+
+#: .\apps\users\messages\variable_names.py:12
+msgid "Nombre"
+msgstr "Nombre"
+
+#: .\apps\users\messages\variable_names.py:13
+msgid "Apellido"
+msgstr "Apellido"
+
+#: .\apps\users\messages\variable_names.py:14
+msgid "Contraseña"
+msgstr "Contraseña"
+
+#: .\apps\users\messages\variable_names.py:15
+msgid "Sexo"
+msgstr "Sexo"
+
+#: .\apps\users\messages\variable_names.py:16
+msgid "Idioma preferido"
+msgstr "Idioma preferido"
+
+#: .\apps\users\messages\variable_names.py:17
+msgid "Rol"
+msgstr "Rol"
+
+#: .\apps\users\messages\variable_names.py:18
+msgid "Fecha de registro"
+msgstr "Fecha de registro"
+
+#: .\apps\users\messages\variable_names.py:19
+msgid "Está activo"
+msgstr "Está activo"
+
+#: .\apps\users\messages\variable_names.py:20
+msgid "Es personal"
+msgstr "Es personal"
+
+#: .\apps\users\messages\variable_names.py:21
+msgid "Es superusuario"
+msgstr "Es superusuario"
+
+#: .\apps\users\messages\variable_names.py:23
+#: .\apps\users\messages\variable_names.py:30
+msgid "Usuario"
+msgstr "Usuario"
+
+#: .\apps\users\messages\variable_names.py:24
+msgid "Usuarios"
+msgstr "Usuarios"
+
+#: .\apps\users\messages\variable_names.py:31
+msgid "Código"
+msgstr "Código"
+
+#: .\apps\users\messages\variable_names.py:32
+msgid "Creado En"
+msgstr "Creado En"
+
+#: .\apps\users\messages\variable_names.py:33
+msgid "Está Usado"
+msgstr "Está Usado"
+
+#: .\apps\users\messages\variable_names.py:34
+msgid "Código de Restablecimiento de Contraseña"
+msgstr "Código de Restablecimiento de Contraseña"
+
+#: .\apps\users\messages\variable_names.py:35
+msgid "Códigos de Restablecimiento de Contraseña"
+msgstr "Códigos de Restablecimiento de Contraseña"
+
+#: .\base\abstracts\Aservice.py:5
+msgid "{} not found"
+msgstr "{} not found"
+
+#: .\base\abstracts\models\messages\variable_names.py:4
+msgid "Visualizaciones"
+msgstr "Visualizaciones"
+
+#: .\base\abstracts\models\messages\variable_names.py:5
+msgid "Activo"
+msgstr "Activo"
+
+#: .\base\abstracts\models\messages\variable_names.py:7
+msgid "Fecha de última actualización"
+msgstr "Fecha de creación"
+
+#: .\base\utils\errors\business_configuration_related_errors.py:6
+msgid "Configuración del negocio no encontrada."
+msgstr "Configuración del negocio no encontrada."
+
+#: .\base\utils\errors\business_configuration_related_errors.py:7
+msgid "Solo puede haber una configuración de negocio."
+msgstr "Solo puede haber una configuración de negocio."
+
+#: .\base\utils\errors\business_logic_errors.py:5
+msgid "Not found"
+msgstr "No se ha encontrado"
+
+#: .\base\utils\errors\business_logic_errors.py:6
+msgid ""
+"No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
 msgstr ""
+"No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
+
+#: .\base\utils\errors\business_logic_errors.py:7
+msgid "service_id es obligatorio."
+msgstr "service_id es obligatorio."
+
+#: .\base\utils\errors\business_logic_errors.py:8
+msgid "Este servicio no está asociado con este alquiler de evento."
+msgstr "Este servicio no está asociado con este alquiler de evento."
+
+#: .\base\utils\errors\user_related_errors.py:6
+msgid "No ha iniciado sesión"
+msgstr "No ha iniciado sesión"
+
+#: .\base\utils\errors\user_related_errors.py:7
+msgid "Idioma no soportado"
+msgstr "Idioma no soportado"
+
+#: .\base\utils\errors\user_related_errors.py:8
+msgid "Credenciales inválidas"
+msgstr "Credenciales inválidas"
+
+#: .\base\utils\errors\user_related_errors.py:9
+msgid "No tiene permisos para realizar esta acción"
+msgstr "No tiene permisos para realizar esta acción"
+
+#: .\base\utils\errors\user_related_errors.py:10
+msgid "Usuario no encontrado"
+msgstr "Usuario no encontrado"
+
+#: .\base\utils\errors\user_related_errors.py:11
+msgid "Rol inválido"
+msgstr "Rol inválido"
+
+#: .\base\utils\errors\user_related_errors.py:12
+msgid "Por favor, ingresar su usuario y contraseña"
+msgstr "Por favor, ingresar su usuario y contraseña"
+
+#: .\core\urls.py:17
+msgid "Bienvenido a la administracion de {}"
+msgstr "Bienvenido a la administracion de {}"

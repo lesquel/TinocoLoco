@@ -1,10 +1,24 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 from django.urls import path, include
 
 # Se usa para la documentacion de la API
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+
+
+from apps.business_configuration.models import BusinessConfiguration
+
+
+configuration, created = BusinessConfiguration.objects.get_or_create()
+
+
+index_message = _("Bienvenido a la administracion de {}")
+
+admin.site.site_header = f"{configuration.business_name} Admin"
+admin.site.site_title = f"{configuration.business_name} Admin"
+admin.site.index_title = index_message.format(configuration.business_name)
 
 
 # Esto es para la documentacion de la API
