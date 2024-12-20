@@ -9,6 +9,9 @@ class CustomUserAdmin(admin.ModelAdmin):
     search_fields = ["identity_card",'email', 'first_name', 'last_name']
     list_filter = ['is_active', 'is_superuser', "sex"]
 
+
+
+
 @admin.register(PasswordResetCode)
 class PasswordResetCodeAdmin(admin.ModelAdmin):
     list_display = ['user', 'code', 'created_at']
