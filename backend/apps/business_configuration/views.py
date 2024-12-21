@@ -26,7 +26,7 @@ class BusinessConfigurationDetailAPIView(APIView):
     def get(self, request, *args, **kwargs):
         configuration, _ = BusinessConfiguration.objects.get_or_create()
         serializer = RetrieveBusinessConfigurationSerializer(configuration)
-        return Response({"configuration": serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @schema_wrapper(
         UpdateBusinessConfigurationSerializer, RetrieveBusinessConfigurationSerializer
@@ -40,8 +40,7 @@ class BusinessConfigurationDetailAPIView(APIView):
         serializer = UpdateBusinessConfigurationSerializer(
             instance=configuration, data=request.data, partial=True
         )
-        if not serializer.is_valid():
-            raise errors.ValidationError(serializer.errors)
+        serializer.is_valid(raise_exception=True)
 
         serializer.save()
-        return Response({"configuration": serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)

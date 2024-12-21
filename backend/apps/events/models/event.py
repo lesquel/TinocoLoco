@@ -40,8 +40,8 @@ class Event(Product):
         verbose_name=VARIABLE_NAMES_EVENT["EVENT_CATEGORY"],
     )
 
-    reviews = GenericRelation(Review, related_query_name='events')
-    photos = GenericRelation(Photo, related_query_name='events')
+    reviews = GenericRelation(Review, related_query_name='events', verbose_name=VARIABLE_NAMES_EVENT["REVIEWS"])
+    photos = GenericRelation(Photo, related_query_name='events',verbose_name=VARIABLE_NAMES_EVENT["PHOTOS"])
 
     def __str__(self):
         return self.event_name

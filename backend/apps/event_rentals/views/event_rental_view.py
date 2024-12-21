@@ -1,21 +1,22 @@
-from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
+from base.mixins import PaginationMixin
+from base.utils import errors
 from base.system_services import (
     EventRentalService,
     ServiceService,
     ServicesEventRentalService,
 )
 
-from base.utils import errors
 from apps.users.permissions import IsAdminOrOwner, IsOwner, HasVerifiedEmail
 from apps.photos.serializers import CreatePhotoSerializer, RetrievePhotoSerializer
 from apps.reviews.serializers import CreateReviewSerializer, RetrieveReviewSerializer
 
+from ..messages import SUCCESS_MESSAGES
 from ..filters import EventRentalFilter
 from ..serializers import (
     EventRentalSerializer,
@@ -27,7 +28,7 @@ from ..serializers import (
 )
 
 
-class EventRentalViewSet(viewsets.ModelViewSet):
+class EventRentalViewSet(viewsets.ModelViewSet, PaginationMixin):
 
     http_method_names = ["get", "post", "put", "delete"]
     queryset = EventRentalService.get_all().order_by("-id")
@@ -49,7 +50,6 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         return action_serializers.get(self.action, EventRentalSerializer)
 
     def get_permissions(self):
-        print(self.action)
         if self.action in ["list", "retrieve", "most_viewed"]:
             permission_classes = [AllowAny]
         elif self.action in ["create"]:
@@ -67,7 +67,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             "services",
             "change_status",
             "status_history",
-            "upload_image",
+            "upload_images",
             "add_service",
             "remove_service",
         ]:
@@ -84,38 +84,47 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         return obj
 
     def create(self, request):
-        serializer = self.get_serializer(data=request.data, context={"request": request})
+        serializer = self.get_serializer(
+            data=request.data, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
         event_rental = serializer.save()
         return Response(
-            {"event_rental": EventRentalSerializer(instance=event_rental).data},
+            EventRentalSerializer(instance=event_rental).data,
             status=status.HTTP_201_CREATED,
         )
-    
+
     def retrieve(self, request, pk=None):
         event_rental = self.get_object()
         event_rental.increase_view_count()
         serializer = self.get_serializer(instance=event_rental)
-        return Response({"event_rental": serializer.data})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["get"], url_path="most-viewed")
     def most_viewed(self, request):
 
-        queryset = EventRentalService.get_most_viewed()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({"most_viewed": serializer.data}, status=status.HTTP_200_OK)
+        most_viewed = EventRentalService.get_most_viewed()
+        return self.paginate_and_respond(most_viewed)
 
-    @action(detail=True, methods=["post"], url_path="upload-photo")
-    def upload_image(self, request, pk=None):
-
+    @action(detail=True, methods=["post"], url_path="upload-images")
+    def upload_images(self, request, pk=None):
         event_rental = self.get_object()
+        images = request.FILES.getlist("images")
+        if not images:
+            raise errors.business_logic_errors.MustProvideImageError
+
         serializer = self.get_serializer(
-            data={"image": request.FILES.get("image"), "object_id": pk},
+            data={"images": images},
             context={"related_instance": event_rental},
         )
         serializer.is_valid(raise_exception=True)
-        photo = serializer.save()
-        return Response({"photo": RetrievePhotoSerializer(instance=photo).data})
+
+        photos = serializer.save()
+
+        return Response(
+            RetrievePhotoSerializer(instance=photos, many=True).data,
+            status=status.HTTP_201_CREATED,
+        )
 
     @action(detail=True, methods=["post"], url_path="add-review")
     def add_review(self, request, pk=None):
@@ -137,7 +146,10 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             event_rental.costumer_rating = review
 
         event_rental.save()
-        return Response({"review": RetrieveReviewSerializer(instance=review).data})
+        return Response(
+            RetrieveReviewSerializer(instance=review).data,
+            status=status.HTTP_201_CREATED,
+        )
 
     @action(detail=False, methods=["post"], url_path="confirm-rental")
     def confirm_rental(self, request):
@@ -146,11 +158,12 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             data=request.data, context={"request": request}
         )
         serializer.is_valid(raise_exception=True)
+
         event_rental = EventRentalService.get_by_confirmation_code(
             request.data.get("confirmation_code")
         )
         return Response(
-            {"event_rental": EventRentalSerializer(instance=event_rental).data}
+            EventRentalSerializer(instance=event_rental).data, status=status.HTTP_200_OK
         )
 
     @action(detail=True, methods=["post"], url_path="change-status")
@@ -161,24 +174,23 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             instance=event_rental, data=request.data, context={"request": request}
         )
         serializer.is_valid(raise_exception=True)
+
         serializer.save()
         return Response(
-            {"event_rental": EventRentalSerializer(instance=event_rental).data}
+            EventRentalSerializer(instance=event_rental).data, status=status.HTTP_200_OK
         )
 
     @action(detail=True, methods=["get"], url_path="status-history")
     def status_history(self, request, pk=None):
 
         history = EventRentalService.get_by_id(pk).rental.all()
-        serializer = self.get_serializer(history, many=True)
-        return Response({"history": serializer.data}, status=status.HTTP_200_OK)
+        return self.paginate_and_respond(history)
 
     @action(detail=False, methods=["get"], url_path="my-rentals")
     def my_rentals(self, request):
 
         rentals = EventRentalService.get_all().filter(owner=request.user)
-        serializer = self.get_serializer(rentals, many=True)
-        return Response({"my_rentals": serializer.data}, status=status.HTTP_200_OK)
+        return self.paginate_and_respond(rentals)
 
     @action(detail=True, methods=["post"], url_path="add-service")
     def add_service(self, request, pk=None):
@@ -189,19 +201,15 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             data=request.data, context={"event_rental": event_rental}
         )
 
-        if serializer.is_valid(raise_exception=True):
-            event_rental_service = serializer.save()
+        serializer.is_valid(raise_exception=True)
+        event_rental_service = serializer.save()
 
-            service_serializer = RetrieveServiceEventRentalSerializer(
-                event_rental_service
-            )
+        service_serializer = RetrieveServiceEventRentalSerializer(event_rental_service)
 
-            return Response(
-                {"event_rental_service": service_serializer.data},
-                status=status.HTTP_201_CREATED,
-            )
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(
+            service_serializer.data,
+            status=status.HTTP_201_CREATED,
+        )
 
     @action(detail=True, methods=["post"], url_path="remove-service")
     def remove_service(self, request, pk=None):
@@ -227,7 +235,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         ServicesEventRentalService.delete(event_rental_service.id)
 
         return Response(
-            {"detail": "Servicio eliminado correctamente."},
+            {"detail": SUCCESS_MESSAGES["SERVICE_DELETED"]},
             status=status.HTTP_204_NO_CONTENT,
         )
 
@@ -237,4 +245,4 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         event_rental = self.get_object()
         services = event_rental.event_rental_services.all()
         serializer = RetrieveServiceEventRentalSerializer(services, many=True)
-        return Response({"services": serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)

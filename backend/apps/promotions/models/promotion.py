@@ -1,10 +1,13 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
+from django.contrib.contenttypes.fields import GenericRelation
 
-from .promotion_category import PromotionCategory
 from base.abstracts import Product
 
+from apps.reviews.models import Review
+
 from ..messages import VARIABLE_NAMES_PROMOTION
+from .promotion_category import PromotionCategory
 
 
 class Promotion(Product):
@@ -39,6 +42,12 @@ class Promotion(Product):
         blank=True,
         null=True,
         verbose_name=VARIABLE_NAMES_PROMOTION["PROMOTION_IMAGE"],
+    )
+
+    reviews = GenericRelation(
+        Review,
+        related_query_name="promotions",
+        verbose_name=VARIABLE_NAMES_PROMOTION["REVIEWS"],
     )
 
     def __str__(self):

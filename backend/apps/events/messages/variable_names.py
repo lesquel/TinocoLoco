@@ -16,6 +16,8 @@ VARIABLE_NAMES_EVENT = {
     "EVENT_ALLOWED_HOURS": _("Horas permitidas del evento"),
     "EVENT_EXTRA_HOUR_RATE": _("Tarifa por hora extra del evento"),
     "EVENT_CATEGORY": _("Categoría del evento"),
+    "REVIEWS": _("Reseñas del evento"),
+    "PHOTOS":_("Fotos del evento"),
     "META_VERBOSE_NAME": _("Evento"),
     "META_VERBOSE_NAME_PLURAL": _("Eventos"),
 }

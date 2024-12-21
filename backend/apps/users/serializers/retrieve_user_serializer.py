@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from ..models.user import CustomUser
 
+
 class RetrieveUserSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
+
     class Meta:
         model = CustomUser
         fields = [
@@ -14,7 +16,7 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
             "full_name",
             "role",
             "sex",
-        ]  
+        ]
         read_only_fields = fields
 
     def get_full_name(self, obj):

@@ -80,7 +80,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk=None):
         user = self.get_object()
         serializer = self.get_serializer(instance=user)
-        return Response({"user": serializer.data}, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update(self, request, pk=None):
         user_to_update = self.get_object()
@@ -93,7 +93,7 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
-            {"user": RetrieveUserSerializer(instance=serializer.instance).data},
+            RetrieveUserSerializer(instance=serializer.instance).data,
             status=status.HTTP_200_OK,
         )
 
@@ -182,8 +182,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def reset_password(self, request):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.save()
-        print(f"User: {user}")
+        serializer.save()
         return Response(
             {"detail": SUCCESS_MESSAGES["PASSWORD_RESET_SUCCESS"]},
             status=status.HTTP_200_OK,

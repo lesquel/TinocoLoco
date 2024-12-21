@@ -5,15 +5,17 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.permissions import IsAuthenticated
 
 from base.system_services import EventService
+from base.mixins import PaginationMixin
 
 from apps.users.permissions import IsAdminOrReadOnly
 from apps.reviews.serializers import RetrieveReviewSerializer, CreateReviewSerializer
 from apps.photos.serializers import CreatePhotoSerializer, RetrievePhotoSerializer
+from base.utils import errors
 from ..filters import EventFilter
 from ..serializers import EventSerializer
 
 
-class EventView(viewsets.ModelViewSet):
+class EventView(viewsets.ModelViewSet, PaginationMixin):
     http_method_names = ["get", "post", "put", "delete"]
     permission_classes = [IsAdminOrReadOnly]
     queryset = EventService.get_all()
@@ -21,49 +23,62 @@ class EventView(viewsets.ModelViewSet):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     def get_serializer_class(self):
-        if self.action == "upload_image":
+        if self.action == "upload_images":
             return CreatePhotoSerializer
         elif self.action == "add_review":
             return CreateReviewSerializer
         return EventSerializer
 
+    def get_object(self):
+        obj = EventService.get_by_id(self.kwargs.get("pk"))
+        self.check_object_permissions(self.request, obj)
+        return obj
+
     def retrieve(self, request, pk=None):
-        event = EventService.get_by_id(pk)
+        event = self.get_object()
         event.increase_view_count()
-        serializer = self.get_serializer(event)
-        return Response({"event": serializer.data})
+        serializer = self.get_serializer(instance=event)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=["get"], url_path="most-popular")
     def most_popular(self, request):
-        queryset = EventService.get_most_populars()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({"most_popular": serializer.data})
+        most_populars = EventService.get_most_populars()
+        return self.paginate_and_respond(most_populars)
 
     @action(detail=False, methods=["get"], url_path="most-viewed")
     def most_viewed(self, request):
-        queryset = EventService.get_most_viewed()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({"most_viewed": serializer.data}, status=status.HTTP_200_OK)
+        most_viewed = EventService.get_most_viewed()
+        return self.paginate_and_respond(most_viewed)
 
-    @action(detail=True, methods=["post"], url_path="upload-photo")
-    def upload_image(self, request, pk=None):
-        event = EventService.get_by_id(pk)
-        image = request.FILES.get("image")
+    @action(detail=True, methods=["post"], url_path="upload-images")
+    def upload_images(self, request, pk=None):
+        event = self.get_object()
+        images = request.FILES.getlist("images")
+        if not images:
+            raise errors.business_logic_errors.MustProvideImageError()
 
         serializer = self.get_serializer(
-            data={"image": image, "object_id": pk},
+            data={"images": images},
             context={"related_instance": event},
         )
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        photo = serializer.save()
+        serializer.is_valid(raise_exception=True)
 
-        return Response({"photo": RetrievePhotoSerializer(instance=photo).data})
+        photos = serializer.save()
 
-    @action(detail=True, methods=["post"], url_path="add-review", permission_classes=[IsAuthenticated])
+        return Response(
+            RetrievePhotoSerializer(instance=photos, many=True).data,
+            status=status.HTTP_201_CREATED,
+        )
+
+    @action(
+        detail=True,
+        methods=["post"],
+        url_path="add-review",
+        permission_classes=[IsAuthenticated],
+    )
     def add_review(self, request, pk=None):
-        event_rental = EventService.get_by_id(pk)
+        event_rental = self.get_object()
         user = request.user
 
         rating_score = request.data.get("rating_score")
@@ -78,9 +93,14 @@ class EventView(viewsets.ModelViewSet):
             context={"related_instance": event_rental},
         )
 
-        if not serializer.is_valid():
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer.is_valid(raise_exception=True)
 
         service = serializer.save()
 
-        return Response({"review": RetrieveReviewSerializer(instance=service).data})
+        return Response(RetrieveReviewSerializer(instance=service).data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=["get"], url_path="reviews")
+    def reviews(self, request, pk=None):
+        service = self.get_object()
+        reviews = service.reviews.all()
+        return self.paginate_and_respond(reviews)

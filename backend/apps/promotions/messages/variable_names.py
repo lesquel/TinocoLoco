@@ -16,6 +16,7 @@ VARIABLE_NAMES_PROMOTION = {
     "VALID_FROM": _("Válido desde"),
     "VALID_UNTIL": _("Válido hasta"),
     "PROMOTION_IMAGE": _("Imagen de la promoción"),
+    "REVIEWS": _("Reseñas de la promoción"),
     "META_VERBOSE_NAME": _("Promoción"),
     "META_VERBOSE_NAME_PLURAL": _("Promociones"),
 }

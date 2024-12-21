@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-19 20:46-0500\n"
+"POT-Creation-Date: 2024-12-20 23:27-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -167,7 +167,6 @@ msgid "Nivel de Impacto"
 msgstr "Impact Level"
 
 #: .\apps\contingencies\messages\variable_names.py:9
-
 msgid "Categoría"
 msgstr "Event category"
 
@@ -275,6 +274,10 @@ msgstr "Invalid Rental Status"
 msgid "La fecha de inicio no puede ser mayor que la fecha de fin"
 msgstr "The start date cannot be greater than the end date"
 
+#: .\apps\event_rentals\messages\success_messages.py:5
+msgid "Servicio eliminado exitosamente."
+msgstr "Service successfully deleted"
+
 #: .\apps\event_rentals\messages\variable_names.py:5
 #: .\apps\services\messages\variable_names.py:21
 msgid "Servicio"
@@ -306,7 +309,7 @@ msgid "Servicios de alquiler de evento"
 msgstr "Event Rental Services"
 
 #: .\apps\event_rentals\messages\variable_names.py:17
-#: .\apps\events\messages\variable_names.py:19
+#: .\apps\events\messages\variable_names.py:21
 msgid "Evento"
 msgstr "Event"
 
@@ -360,7 +363,7 @@ msgid "Fecha de creación del alquiler"
 msgstr "Rental creation date"
 
 #: .\apps\event_rentals\messages\variable_names.py:30
-#: .\apps\promotions\messages\variable_names.py:20
+#: .\apps\promotions\messages\variable_names.py:21
 msgid "Promociones"
 msgstr "Promotions"
 
@@ -456,7 +459,15 @@ msgstr "Event overtime rate"
 msgid "Categoría del evento"
 msgstr "Event category"
 
+#: .\apps\events\messages\variable_names.py:19
+msgid "Reseñas del evento"
+msgstr "Event reviews"
+
 #: .\apps\events\messages\variable_names.py:20
+msgid "Fotos del evento"
+msgstr "Event photos"
+
+#: .\apps\events\messages\variable_names.py:22
 msgid "Eventos"
 msgstr "Events"
 
@@ -506,7 +517,7 @@ msgstr "Photos"
 msgid "Foto de {}"
 msgstr "Photo of {}"
 
-#: .\apps\photos\serializers\create_photo_serializer.py:27
+#: .\apps\photos\serializers\create_photo_serializer.py:25
 msgid "El modelo relacionado no fue proporcionado."
 msgstr "The related model was not provided."
 
@@ -549,9 +560,13 @@ msgstr "Valid until"
 
 #: .\apps\promotions\messages\variable_names.py:18
 msgid "Imagen de la promoción"
-msgstr "Promotion image"
+msgstr "Promotion images"
 
 #: .\apps\promotions\messages\variable_names.py:19
+msgid "Reseñas de la promoción"
+msgstr "Promotion reviews"
+
+#: .\apps\promotions\messages\variable_names.py:20
 msgid "Promoción"
 msgstr "Promotion"
 
@@ -837,6 +852,14 @@ msgstr "Cash"
 msgid "Fecha de última actualización"
 msgstr "Creation date"
 
+#: .\base\admin_site\custom_admin_site.py:8
+msgid "Bienvenido a la administración"
+msgstr "Welcome to the administration"
+
+#: .\base\admin_site\custom_admin_site.py:17
+msgid "Bienvenido a la administración de {}"
+msgstr "Welcome to {} administration"
+
 #: .\base\utils\errors\business_configuration_related_errors.py:6
 msgid "Configuración del negocio no encontrada."
 msgstr "Business configuration not found."
@@ -860,6 +883,10 @@ msgstr "service_id is required."
 #: .\base\utils\errors\business_logic_errors.py:8
 msgid "Este servicio no está asociado con este alquiler de evento."
 msgstr "This service is not associated with this event rental."
+
+#: .\base\utils\errors\business_logic_errors.py:9
+msgid "Debe proporcionar al menos una imagen."
+msgstr "Must provide at least one image"
 
 #: .\base\utils\errors\user_related_errors.py:6
 msgid "No ha iniciado sesión"
@@ -888,7 +915,3 @@ msgstr "Invalid role"
 #: .\base\utils\errors\user_related_errors.py:12
 msgid "Por favor, ingresar su usuario y contraseña"
 msgstr "Please enter your username and password."
-
-#: .\core\urls.py:17
-msgid "Bienvenido a la administracion de {}"
-msgstr "Welcome to {} administration"

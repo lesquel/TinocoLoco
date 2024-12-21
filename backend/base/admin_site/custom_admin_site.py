@@ -16,9 +16,9 @@ class CustomAdminSite(AdminSite):
                 self.site_header = f"{configuration.business_name} Admin"
                 self.index_title = _("Bienvenido a la administración de {}").format(configuration.business_name)
         except BusinessConfiguration.DoesNotExist:
-            self.site_header = "Default Admin"
-            self.site_title = "Default Admin"
-            self.index_title = _("Bienvenido a la administración")
+            self.site_header = CustomAdminSite.site_header
+            self.site_title = CustomAdminSite.site_title
+            self.index_title = CustomAdminSite.index_title
 
         context['site_title'] = self.site_title
         context['site_header'] = self.site_header

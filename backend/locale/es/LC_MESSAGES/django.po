@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-19 20:46-0500\n"
+"POT-Creation-Date: 2024-12-20 23:27-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -172,7 +172,6 @@ msgid "Categoría"
 msgstr "Categoría"
 
 #: .\apps\contingencies\messages\variable_names.py:10
-
 msgid "Monto de Penalización"
 msgstr "Monto de Penalización"
 
@@ -276,6 +275,11 @@ msgstr "Estado de alquiler inválido"
 msgid "La fecha de inicio no puede ser mayor que la fecha de fin"
 msgstr "La fecha de inicio no puede ser mayor que la fecha de fin"
 
+#: .\apps\event_rentals\messages\success_messages.py:5
+
+msgid "Servicio eliminado exitosamente."
+msgstr "Servicio eliminado exitosamente"
+
 #: .\apps\event_rentals\messages\variable_names.py:5
 #: .\apps\services\messages\variable_names.py:21
 msgid "Servicio"
@@ -307,7 +311,7 @@ msgid "Servicios de alquiler de evento"
 msgstr "Servicios de alquiler de evento"
 
 #: .\apps\event_rentals\messages\variable_names.py:17
-#: .\apps\events\messages\variable_names.py:19
+#: .\apps\events\messages\variable_names.py:21
 msgid "Evento"
 msgstr "Evento"
 
@@ -361,7 +365,7 @@ msgid "Fecha de creación del alquiler"
 msgstr "Fecha de creación del alquiler"
 
 #: .\apps\event_rentals\messages\variable_names.py:30
-#: .\apps\promotions\messages\variable_names.py:20
+#: .\apps\promotions\messages\variable_names.py:21
 msgid "Promociones"
 msgstr "Promociones"
 
@@ -457,7 +461,17 @@ msgstr "Tarifa por hora extra del evento"
 msgid "Categoría del evento"
 msgstr "Categoría del evento"
 
+#: .\apps\events\messages\variable_names.py:19
+
+msgid "Reseñas del evento"
+msgstr "Reseñas del servicio"
+
 #: .\apps\events\messages\variable_names.py:20
+
+msgid "Fotos del evento"
+msgstr "Fotos del evento"
+
+#: .\apps\events\messages\variable_names.py:22
 msgid "Eventos"
 msgstr "Eventos"
 
@@ -507,7 +521,7 @@ msgstr "Fotos"
 msgid "Foto de {}"
 msgstr "Foto de {}"
 
-#: .\apps\photos\serializers\create_photo_serializer.py:27
+#: .\apps\photos\serializers\create_photo_serializer.py:25
 msgid "El modelo relacionado no fue proporcionado."
 msgstr "El modelo relacionado no fue proporcionado."
 
@@ -553,6 +567,10 @@ msgid "Imagen de la promoción"
 msgstr "Imagen de la promoción"
 
 #: .\apps\promotions\messages\variable_names.py:19
+msgid "Reseñas de la promoción"
+msgstr "Reseñas de la promoción"
+
+#: .\apps\promotions\messages\variable_names.py:20
 msgid "Promoción"
 msgstr "Promoción"
 
@@ -838,6 +856,14 @@ msgstr "Activo"
 msgid "Fecha de última actualización"
 msgstr "Fecha de creación"
 
+#: .\base\admin_site\custom_admin_site.py:8
+msgid "Bienvenido a la administración"
+msgstr "Bienvenido a la administracion"
+
+#: .\base\admin_site\custom_admin_site.py:17
+msgid "Bienvenido a la administración de {}"
+msgstr "Bienvenido a la administracion de {}"
+
 #: .\base\utils\errors\business_configuration_related_errors.py:6
 msgid "Configuración del negocio no encontrada."
 msgstr "Configuración del negocio no encontrada."
@@ -851,10 +877,8 @@ msgid "Not found"
 msgstr "No se ha encontrado"
 
 #: .\base\utils\errors\business_logic_errors.py:6
-msgid ""
-"No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
-msgstr ""
-"No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
+msgid "No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
+msgstr "No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
 
 #: .\base\utils\errors\business_logic_errors.py:7
 msgid "service_id es obligatorio."
@@ -863,6 +887,10 @@ msgstr "service_id es obligatorio."
 #: .\base\utils\errors\business_logic_errors.py:8
 msgid "Este servicio no está asociado con este alquiler de evento."
 msgstr "Este servicio no está asociado con este alquiler de evento."
+
+#: .\base\utils\errors\business_logic_errors.py:9
+msgid "Debe proporcionar al menos una imagen."
+msgstr "Debe proporcionar al menos una imagen"
 
 #: .\base\utils\errors\user_related_errors.py:6
 msgid "No ha iniciado sesión"
@@ -891,7 +919,3 @@ msgstr "Rol inválido"
 #: .\base\utils\errors\user_related_errors.py:12
 msgid "Por favor, ingresar su usuario y contraseña"
 msgstr "Por favor, ingresar su usuario y contraseña"
-
-#: .\core\urls.py:17
-msgid "Bienvenido a la administracion de {}"
-msgstr "Bienvenido a la administracion de {}"

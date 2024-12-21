@@ -35,7 +35,6 @@ class Contingency(models.Model):
         verbose_name=VARIABLE_NAMES_CONTINGENCY["CONTINGENCY_PENALTY_AMOUNT"],
     )
     contingency_date_occurred = models.DateTimeField(
-        auto_now_add=True,
         verbose_name=VARIABLE_NAMES_CONTINGENCY["CONTINGENCY_DATE_OCCURRED"],
     )
 

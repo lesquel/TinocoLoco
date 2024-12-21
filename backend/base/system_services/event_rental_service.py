@@ -11,7 +11,7 @@ class EventRentalService(AService):
     @classmethod
     def get_most_viewed(cls):
         queryset = cls.get_all()
-        return queryset.order_by("-visualizations")
+        return queryset.order_by("-view_count")
     
     @classmethod
     def change_status(cls, event_rental, status, user):
