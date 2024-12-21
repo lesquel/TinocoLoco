@@ -1,6 +1,6 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
-from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
@@ -17,7 +17,8 @@ class PromotionView(viewsets.ModelViewSet):
     permission_classes = [IsAdminOrReadOnly]
     queryset = PromotionService.get_all()
     filterset_class = PromotionFilter
-    parser_classes = [MultiPartParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+
 
     def get_serializer_class(self):
         if self.action in ["retrieve", "most_popular", "most_viewed"]:

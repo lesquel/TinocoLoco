@@ -1,6 +1,6 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 
@@ -19,7 +19,8 @@ class ServiceView(viewsets.ModelViewSet):
     filterset_class = ServiceFilter
     permission_classes = [IsAdminOrReadOnly]
     queryset = ServiceService.get_all()
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+
 
     def get_serializer_class(self):
         if self.action == "upload_image":

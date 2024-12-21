@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from .serializers import (
     RetrieveBusinessConfigurationSerializer,
     UpdateBusinessConfigurationSerializer,
@@ -12,7 +12,7 @@ from base.utils import errors, schema_wrapper, schema_wrapper_response_only
 
 
 class BusinessConfigurationDetailAPIView(APIView):
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     def get_permissions(self):
 

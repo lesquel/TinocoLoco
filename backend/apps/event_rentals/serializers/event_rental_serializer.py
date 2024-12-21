@@ -32,8 +32,18 @@ class EventRentalSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, attrs):
-        if attrs.get("event_rental_end") <= attrs.get("event_rental_start"):
+        if attrs.get("event_rental_planified_end_time") <= attrs.get("event_rental_start_time"):
+            raise serializers.ValidationError(
+                ERROR_MESSAGES["INVALID_START_END_DATE"]
+            )
+            
+        if attrs.get("event_rental_end_time") <= attrs.get("event_rental_start_time"):
             raise serializers.ValidationError(
                 ERROR_MESSAGES["INVALID_START_END_DATE"]
             )
         return attrs
+    
+    def create(self, validated_data):
+        request = self.context.get('request')
+        validated_data['owner'] = request.user
+        return super().create(validated_data)

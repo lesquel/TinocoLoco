@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from rest_framework.parsers import MultiPartParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from apps.users.permissions import IsAdminOrReadOnly
 from base.system_services import EventCategoryService
 from ..filters import EventCategoryFilter
@@ -12,7 +12,8 @@ class EventCategoryView(viewsets.ModelViewSet):
     permission_classes = [IsAdminOrReadOnly]
     queryset = EventCategoryService.get_all().order_by("id")
     filterset_class = EventCategoryFilter
-    parser_classes = [MultiPartParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+
 
     def get_serializer_class(self):
         if self.action in ["list", "retrieve"]:

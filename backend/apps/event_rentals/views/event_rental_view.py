@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
 from base.system_services import (
@@ -31,7 +31,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
 
     http_method_names = ["get", "post", "put", "delete"]
     queryset = EventRentalService.get_all().order_by("-id")
-    parser_classes = [MultiPartParser, FormParser]
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
     filterset_class = EventRentalFilter
 
     def get_serializer_class(self):
@@ -49,7 +49,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         return action_serializers.get(self.action, EventRentalSerializer)
 
     def get_permissions(self):
-
+        print(self.action)
         if self.action in ["list", "retrieve", "most_viewed"]:
             permission_classes = [AllowAny]
         elif self.action in ["create"]:
@@ -64,6 +64,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAdminOrOwner]
         elif self.action in [
             "destroy",
+            "services",
             "change_status",
             "status_history",
             "upload_image",
@@ -73,6 +74,7 @@ class EventRentalViewSet(viewsets.ModelViewSet):
             permission_classes = [IsAdminUser]
         else:
             permission_classes = [IsAuthenticated]
+
         return [permission() for permission in permission_classes]
 
     def get_object(self):
@@ -81,6 +83,15 @@ class EventRentalViewSet(viewsets.ModelViewSet):
         self.check_object_permissions(self.request, obj)
         return obj
 
+    def create(self, request):
+        serializer = self.get_serializer(data=request.data, context={"request": request})
+        serializer.is_valid(raise_exception=True)
+        event_rental = serializer.save()
+        return Response(
+            {"event_rental": EventRentalSerializer(instance=event_rental).data},
+            status=status.HTTP_201_CREATED,
+        )
+    
     def retrieve(self, request, pk=None):
         event_rental = self.get_object()
         event_rental.increase_view_count()
