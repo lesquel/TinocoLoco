@@ -5,4 +5,5 @@ ERROR_MESSAGES = {
     'REQUIRED_FIELDS_ERROR' : _("El tipo de contenido y el id del objeto son requeridos."),
     'INVALID_CONTENT_TYPE' : _("El tipo de contenido no es válido."),
     'PHOTO_ASSOCIATION_ERROR' : _("Foto no puede ser asociada con {}."),
+    "RELATED_INSTANCE_NOT_FOUND": _("No se encontró la instancia relacionada."),
 }

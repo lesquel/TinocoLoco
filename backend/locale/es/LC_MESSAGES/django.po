@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 23:27-0500\n"
+"POT-Creation-Date: 2024-12-21 00:28-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -275,8 +275,25 @@ msgstr "Estado de alquiler inválido"
 msgid "La fecha de inicio no puede ser mayor que la fecha de fin"
 msgstr "La fecha de inicio no puede ser mayor que la fecha de fin"
 
-#: .\apps\event_rentals\messages\success_messages.py:5
+#: .\apps\event_rentals\messages\error_messages.py:6
 
+msgid "El servicio no existe."
+msgstr "El servicio no existe."
+
+#: .\apps\event_rentals\messages\error_messages.py:7
+msgid "La cantidad de servicios debe ser mayor a 0."
+msgstr "La cantidad de servicios debe ser mayor a 0."
+
+#: .\apps\event_rentals\messages\error_messages.py:8
+
+msgid "La fecha de entrega no puede ser menor a la fecha del evento."
+msgstr "La fecha de entrega no puede ser menor a la fecha del evento."
+
+#: .\apps\event_rentals\messages\error_messages.py:9
+msgid "El evento ya tiene asociado el servicio."
+msgstr "El evento ya tiene asociado el servicio."
+
+#: .\apps\event_rentals\messages\success_messages.py:5
 msgid "Servicio eliminado exitosamente."
 msgstr "Servicio eliminado exitosamente"
 
@@ -462,12 +479,10 @@ msgid "Categoría del evento"
 msgstr "Categoría del evento"
 
 #: .\apps\events\messages\variable_names.py:19
-
 msgid "Reseñas del evento"
 msgstr "Reseñas del servicio"
 
 #: .\apps\events\messages\variable_names.py:20
-
 msgid "Fotos del evento"
 msgstr "Fotos del evento"
 
@@ -490,6 +505,10 @@ msgstr "El tipo de contenido no es válido."
 #: .\apps\photos\messages\error_messages.py:7
 msgid "Foto no puede ser asociada con {}."
 msgstr "Foto no puede ser asociada con {}."
+
+#: .\apps\photos\messages\error_messages.py:8
+msgid "No se encontró la instancia relacionada."
+msgstr "No se encontró la instancia relacionada."
 
 #: .\apps\photos\messages\success_messages.py:5
 msgid "La foto ha sido eliminada."
@@ -520,10 +539,6 @@ msgstr "Fotos"
 #: .\apps\photos\messages\variable_names.py:9
 msgid "Foto de {}"
 msgstr "Foto de {}"
-
-#: .\apps\photos\serializers\create_photo_serializer.py:25
-msgid "El modelo relacionado no fue proporcionado."
-msgstr "El modelo relacionado no fue proporcionado."
 
 #: .\apps\promotions\messages\variable_names.py:4
 msgid "Nombre de la categoría de promoción"

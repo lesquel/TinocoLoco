@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 23:27-0500\n"
+"POT-Creation-Date: 2024-12-21 00:28-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -274,6 +274,24 @@ msgstr "Invalid Rental Status"
 msgid "La fecha de inicio no puede ser mayor que la fecha de fin"
 msgstr "The start date cannot be greater than the end date"
 
+#: .\apps\event_rentals\messages\error_messages.py:6
+
+msgid "El servicio no existe."
+msgstr "The model does not exist."
+
+#: .\apps\event_rentals\messages\error_messages.py:7
+msgid "La cantidad de servicios debe ser mayor a 0."
+msgstr "Service quantity must be greater than 0."
+
+#: .\apps\event_rentals\messages\error_messages.py:8
+
+msgid "La fecha de entrega no puede ser menor a la fecha del evento."
+msgstr "The end date cannot be greater than the start date"
+
+#: .\apps\event_rentals\messages\error_messages.py:9
+msgid "El evento ya tiene asociado el servicio."
+msgstr "This event already has the service associated."
+
 #: .\apps\event_rentals\messages\success_messages.py:5
 msgid "Servicio eliminado exitosamente."
 msgstr "Service successfully deleted"
@@ -487,6 +505,10 @@ msgstr "Content type is not valid."
 msgid "Foto no puede ser asociada con {}."
 msgstr "Photo cannot be associated with {}."
 
+#: .\apps\photos\messages\error_messages.py:8
+msgid "No se encontró la instancia relacionada."
+msgstr "No related instance found."
+
 #: .\apps\photos\messages\success_messages.py:5
 msgid "La foto ha sido eliminada."
 msgstr "The photo has been deleted."
@@ -516,10 +538,6 @@ msgstr "Photos"
 #: .\apps\photos\messages\variable_names.py:9
 msgid "Foto de {}"
 msgstr "Photo of {}"
-
-#: .\apps\photos\serializers\create_photo_serializer.py:25
-msgid "El modelo relacionado no fue proporcionado."
-msgstr "The related model was not provided."
 
 #: .\apps\promotions\messages\variable_names.py:4
 msgid "Nombre de la categoría de promoción"

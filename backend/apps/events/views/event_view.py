@@ -18,7 +18,7 @@ from ..serializers import EventSerializer
 class EventView(viewsets.ModelViewSet, PaginationMixin):
     http_method_names = ["get", "post", "put", "delete"]
     permission_classes = [IsAdminOrReadOnly]
-    queryset = EventService.get_all()
+    queryset = EventService.get_all().order_by("-creation_date")
     filterset_class = EventFilter
     parser_classes = [MultiPartParser, FormParser, JSONParser]
 
@@ -27,6 +27,8 @@ class EventView(viewsets.ModelViewSet, PaginationMixin):
             return CreatePhotoSerializer
         elif self.action == "add_review":
             return CreateReviewSerializer
+        elif self.action == "reviews":
+            return RetrieveReviewSerializer
         return EventSerializer
 
     def get_object(self):

@@ -43,9 +43,9 @@ class EventRentalViewSet(viewsets.ModelViewSet, PaginationMixin):
             "change_status": ChangeEventRentalStatusSerializer,
             "status_history": RentalStatusHistorySerializer,
             "confirm_rental": ConfirmEventRentalStatusSerializer,
-            "upload_image": CreatePhotoSerializer,
+            "upload_images": CreatePhotoSerializer,
             "add_review": CreateReviewSerializer,
-            "add_service": CreateServiceEventRentalSerializer,
+            "add_services": CreateServiceEventRentalSerializer,
         }
         return action_serializers.get(self.action, EventRentalSerializer)
 
@@ -68,7 +68,7 @@ class EventRentalViewSet(viewsets.ModelViewSet, PaginationMixin):
             "change_status",
             "status_history",
             "upload_images",
-            "add_service",
+            "add_services",
             "remove_service",
         ]:
             permission_classes = [IsAdminUser]
@@ -183,7 +183,7 @@ class EventRentalViewSet(viewsets.ModelViewSet, PaginationMixin):
     @action(detail=True, methods=["get"], url_path="status-history")
     def status_history(self, request, pk=None):
 
-        history = EventRentalService.get_by_id(pk).rental.all()
+        history = self.get_object().rental.all()
         return self.paginate_and_respond(history)
 
     @action(detail=False, methods=["get"], url_path="my-rentals")
@@ -192,19 +192,24 @@ class EventRentalViewSet(viewsets.ModelViewSet, PaginationMixin):
         rentals = EventRentalService.get_all().filter(owner=request.user)
         return self.paginate_and_respond(rentals)
 
-    @action(detail=True, methods=["post"], url_path="add-service")
-    def add_service(self, request, pk=None):
+    @action(detail=True, methods=["post"], url_path="add-services")
+    def add_services(self, request, pk=None):
 
         event_rental = self.get_object()
 
-        serializer = CreateServiceEventRentalSerializer(
-            data=request.data, context={"event_rental": event_rental}
+
+        serializer = self.get_serializer(
+            data=request.data, context={"event_rental": event_rental}, many=True
         )
 
         serializer.is_valid(raise_exception=True)
-        event_rental_service = serializer.save()
+        event_rental_services = serializer.save()
 
-        service_serializer = RetrieveServiceEventRentalSerializer(event_rental_service)
+        service_serializer = RetrieveServiceEventRentalSerializer(
+            event_rental_services, many=True
+        )
+        
+        print(service_serializer.data)
 
         return Response(
             service_serializer.data,
