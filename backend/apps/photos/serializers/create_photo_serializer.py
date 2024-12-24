@@ -4,13 +4,13 @@ from base.utils import errors
 from ..messages import ERROR_MESSAGES
 from ..models import Photo
 
+
 class PhotoItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
         fields = ["image"]
 
     def validate(self, attrs):
-
         image = attrs.get("image")
         if not image:
             raise errors.MustProvideImageError()
@@ -28,7 +28,6 @@ class PhotoItemSerializer(serializers.ModelSerializer):
         photo = Photo.objects.create(
             content_type=content_type,
             object_id=related_instance.id,
-            content_object=related_instance,
             image=image,
         )
 
@@ -36,14 +35,18 @@ class PhotoItemSerializer(serializers.ModelSerializer):
 
 
 class CreatePhotoSerializer(serializers.ListSerializer):
-    child = PhotoItemSerializer()
+    
+    child = PhotoItemSerializer()  
 
     def create(self, validated_data):
+        related_instance = self.context.get("related_instance")
 
-        photos = []
-        for item in validated_data:
-        
-            photo = self.child.create(item) 
-            photos.append(photo)
+        if not related_instance:
+            raise errors.NotFoundError(ERROR_MESSAGES["RELATED_INSTANCE_NOT_FOUND"])
+
+        photos = [
+            self.child.create({**item, "content_object": related_instance})
+            for item in validated_data
+        ]
 
         return photos

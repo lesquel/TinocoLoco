@@ -37,4 +37,6 @@ class HasVerifiedEmail(BasePermission):
     def has_permission(self, request, view):
         if request.user.is_anonymous:
             return False
+        if request.user.is_superuser or request.user.is_staff:
+            return True
         return request.user.email_verified

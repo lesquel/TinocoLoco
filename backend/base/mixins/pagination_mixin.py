@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 class PaginationMixin:
-    def paginate_and_respond(self, queryset):
+    def paginate_and_respond(self, queryset,):
         page = self.paginate_queryset(queryset)
         
         if page is not None:
