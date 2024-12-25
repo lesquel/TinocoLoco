@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth.models import User, Group
-from django.utils.translation import gettext_lazy as _
 from django.urls import path, include
 
 # Se usa para la documentacion de la API
@@ -9,11 +7,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 
-from base.admin_site import CustomAdminSite
 
-custom_admin_site = CustomAdminSite(name="custom_admin")
-for model, model_admin in admin.site._registry.items():
-    custom_admin_site.register(model, model_admin.__class__)
 
 
 # Esto es para la documentacion de la API
@@ -59,8 +53,11 @@ api_patterns = [
 
 urlpatterns = (
     [
-        path("admin/", custom_admin_site.urls),
+        path("admin/", admin.site.urls),
     ]
     + docs_patters
     + api_patterns
 )
+
+
+
