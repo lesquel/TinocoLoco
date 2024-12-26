@@ -3,13 +3,18 @@ from .baseError import BaseError
 from django.utils.translation import gettext_lazy as _
 
 # Translated error messages
-HAVENT_LOGGED_IN = _("No ha iniciado sesión")
-LANGUAGE_NOT_SUPPORTED = _("Idioma no soportado")
-INVALID_CREDENTIALS = _("Credenciales inválidas")
-DONT_HAVE_PERMISSIONS = _("No tiene permisos para realizar esta acción")
-USER_NOT_FOUND = _("Usuario no encontrado")
 INVALID_ROLE = _("Rol inválido")
 MUST_PROVIDE_BOTH_EMAIL_AND_PASSWORD = _("Por favor, ingresar su usuario y contraseña")
+INVALID_CREDENTIALS = _("Credenciales inválidas")
+DONT_HAVE_PERMISSIONS = _("No tiene permisos para realizar esta acción")
+HAVENT_LOGGED_IN = _("No ha iniciado sesión")
+USER_NOT_FOUND = _("Usuario no encontrado")
+LANGUAGE_NOT_SUPPORTED = _("Idioma no soportado")
+USERNAME_ALREADY_EXISTS= _("Este nombre de usuario ya está en uso.")
+IDENTITY_CARD_ALREADY_EXISTS= _("Este número de cédula ya está registrado.")
+EMAIL_ALREADY_EXISTS = _("Este correo electrónico ya está registrado")
+EMAIL_ALREADY_EXISTS= _("Este correo electrónico ya está registrado.")
+
 
 # Custom exception classes
 class InvalidRoleError(BaseError):
@@ -45,3 +50,16 @@ class UserNotFoundError(BaseError):
 class InvalidLanguageError(BaseError):
     def __init__(self):
         super().__init__(message=LANGUAGE_NOT_SUPPORTED, code=status.HTTP_400_BAD_REQUEST, identifier="invalid_language")
+
+
+class UsernameAlreadyExistsError(BaseError):
+    def __init__(self):
+        super().__init__(message=USERNAME_ALREADY_EXISTS, code=status.HTTP_400_BAD_REQUEST, identifier="username")
+        
+class IdentityCardAlreadyExistsError(BaseError):
+    def __init__(self):
+        super().__init__(message=IDENTITY_CARD_ALREADY_EXISTS, code=status.HTTP_400_BAD_REQUEST, identifier="identity_card")
+        
+class EmailAlreadyExistsError(BaseError):
+    def __init__(self):
+        super().__init__(message=EMAIL_ALREADY_EXISTS, code=status.HTTP_400_BAD_REQUEST, identifier="email")

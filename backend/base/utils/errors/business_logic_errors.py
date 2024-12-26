@@ -2,7 +2,7 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import status
 from .baseError import BaseError
 
-NOT_FOUND = _("Not found")
+NOT_FOUND = _("No se encontró el recurso solicitado.")
 PENDING_EVENT_RENTAL = _("No puedes eliminar servicios de un alquiler de evento que no esté pendiente.")
 SERVICE_ID_REQUIRED = _("service_id es obligatorio.")
 SERVICE_NOT_ASSOCIATED = _("Este servicio no está asociado con este alquiler de evento.")

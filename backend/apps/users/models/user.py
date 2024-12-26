@@ -9,6 +9,7 @@ from django.utils.crypto import get_random_string
 from ..choices import SexChoices, RoleChoices, LanguageChoices
 from ..messages import VARIABLE_NAMES_USER
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, email, password=None, **extra_fields):
 
@@ -18,6 +19,7 @@ class CustomUserManager(BaseUserManager):
         user.generate_verification_code()
         user.save(using=self._db)
         from base.system_services import UserService
+
         UserService.send_verification_code(user)
         return user
 
@@ -32,12 +34,25 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = VARIABLE_NAMES_USER["META_VERBOSE_NAME"]
         verbose_name_plural = VARIABLE_NAMES_USER["META_VERBOSE_NAME_PLURAL"]
+
     identity_card = models.CharField(
         max_length=10,
         unique=True,
         blank=True,
         null=True,
         verbose_name=VARIABLE_NAMES_USER["IDENTITY_CARD"],
+    )
+    first_name = models.CharField(
+        max_length=30,
+        blank=True,
+        null=True,
+        verbose_name=VARIABLE_NAMES_USER["FIRST_NAME"],
+    )
+    last_name = models.CharField(
+        max_length=30,
+        blank=True,
+        null=True,
+        verbose_name=VARIABLE_NAMES_USER["LAST_NAME"],
     )
     username = models.CharField(
         max_length=30,
@@ -63,18 +78,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null=True,
         verbose_name=VARIABLE_NAMES_USER["EMAIL_VERIFICATION_CODE"],
-    )
-    first_name = models.CharField(
-        max_length=30,
-        blank=True,
-        null=True,
-        verbose_name=VARIABLE_NAMES_USER["FIRST_NAME"],
-    )
-    last_name = models.CharField(
-        max_length=30,
-        blank=True,
-        null=True,
-        verbose_name=VARIABLE_NAMES_USER["LAST_NAME"],
     )
     password = models.CharField(
         max_length=128,
@@ -127,3 +130,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def generate_verification_code(self):
         self.email_verification_code = get_random_string(length=6)
 
+    
+
+    
+    @property
+    def has_completed_profile(self):
+        required_fields = [
+            self.identity_card,
+            self.first_name,
+            self.last_name,
+            self.nacionality,
+            self.sex,
+        ]
+        return all(field for field in required_fields)

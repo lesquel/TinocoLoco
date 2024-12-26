@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-26 10:37-0500\n"
+"POT-Creation-Date: 2024-12-26 13:36-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -708,30 +708,18 @@ msgid "Femenino"
 msgstr "Female"
 
 #: .\apps\users\messages\error_messages.py:4
-msgid "Este nombre de usuario ya está en uso."
-msgstr "This username is already in use."
-
-#: .\apps\users\messages\error_messages.py:5
-msgid "Este número de cédula ya está registrado."
-msgstr "This ID number is already registered."
-
-#: .\apps\users\messages\error_messages.py:6
-msgid "Este correo electrónico ya está registrado."
-msgstr "This email is already registered."
-
-#: .\apps\users\messages\error_messages.py:7
 msgid "Sexo inválido"
 msgstr "Invalid gender"
 
-#: .\apps\users\messages\error_messages.py:8
+#: .\apps\users\messages\error_messages.py:5
 msgid "Por favor, ingresar su nombre de usuario."
 msgstr "Please enter your username."
 
-#: .\apps\users\messages\error_messages.py:9
+#: .\apps\users\messages\error_messages.py:6
 msgid "Por favor, ingresar su correo electronico."
 msgstr "Please enter your email."
 
-#: .\apps\users\messages\error_messages.py:10
+#: .\apps\users\messages\error_messages.py:7
 msgid "Por favor, ingresar su contrasena."
 msgstr "Please enter your password."
 
@@ -854,7 +842,7 @@ msgid "Códigos de Restablecimiento de Contraseña"
 msgstr "Password Reset Codes"
 
 #: .\base\abstracts\Aservice.py:5
-msgid "{} not found"
+msgid "{} no encontrado"
 msgstr "{} not found"
 
 #: .\base\abstracts\models\messages\variable_names.py:4
@@ -874,8 +862,8 @@ msgid "Solo puede haber una configuración de negocio."
 msgstr "There can only be one business configuration."
 
 #: .\base\utils\errors\business_logic_errors.py:5
-msgid "Not found"
-msgstr "Not found"
+msgid "No se encontró el recurso solicitado."
+msgstr "The requested resource was not found."
 
 #: .\base\utils\errors\business_logic_errors.py:6
 msgid ""
@@ -895,12 +883,12 @@ msgid "Debe proporcionar al menos una imagen."
 msgstr "Must provide at least one image"
 
 #: .\base\utils\errors\user_related_errors.py:6
-msgid "No ha iniciado sesión"
-msgstr "You are not logged in."
+msgid "Rol inválido"
+msgstr "Invalid role"
 
 #: .\base\utils\errors\user_related_errors.py:7
-msgid "Idioma no soportado"
-msgstr "Unsupported language"
+msgid "Por favor, ingresar su usuario y contraseña"
+msgstr "Please enter your username and password."
 
 #: .\base\utils\errors\user_related_errors.py:8
 msgid "Credenciales inválidas"
@@ -911,16 +899,32 @@ msgid "No tiene permisos para realizar esta acción"
 msgstr "You do not have permission to perform this action."
 
 #: .\base\utils\errors\user_related_errors.py:10
+msgid "No ha iniciado sesión"
+msgstr "You are not logged in."
+
+#: .\base\utils\errors\user_related_errors.py:11
 msgid "Usuario no encontrado"
 msgstr "User not found"
 
-#: .\base\utils\errors\user_related_errors.py:11
-msgid "Rol inválido"
-msgstr "Invalid role"
-
 #: .\base\utils\errors\user_related_errors.py:12
-msgid "Por favor, ingresar su usuario y contraseña"
-msgstr "Please enter your username and password."
+msgid "Idioma no soportado"
+msgstr "Unsupported language"
+
+#: .\base\utils\errors\user_related_errors.py:13
+msgid "Este nombre de usuario ya está en uso."
+msgstr "This username is already in use."
+
+#: .\base\utils\errors\user_related_errors.py:14
+msgid "Este número de cédula ya está registrado."
+msgstr "This ID number is already registered."
+
+#: .\base\utils\errors\user_related_errors.py:15
+msgid "Este correo electrónico ya está registrado"
+msgstr "This email is already registered."
+
+#: .\base\utils\errors\user_related_errors.py:16
+msgid "Este correo electrónico ya está registrado."
+msgstr "This email is already registered."
 
 #: .\base\utils\update_jazmin_settings.py:38
 msgid "Bienvenido a la administración de {}"

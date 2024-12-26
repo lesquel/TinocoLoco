@@ -12,6 +12,7 @@ from .cloudinary_settings import *
 from .auth_settings import *
 from .templates_settings import *
 from .rest_framework_settings import *
+from .email_settings import *
 
 # Inicializar variables de entorno
 env = environ.Env(DEBUG=(bool, False))
