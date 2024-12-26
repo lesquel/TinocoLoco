@@ -9,7 +9,7 @@ import {
   Accordion,
   AccordionItem,
 } from "@nextui-org/react"
-import { IUOneEvent } from "@/interfaces/IUevents";
+import { IUEvent, IUOneEvent } from "@/interfaces/IUevents";
 import { CiHeart } from "react-icons/ci";
 import { useCallback } from "react";
 import { getEvent } from "../services/events";
@@ -19,7 +19,7 @@ import { ImageCarousel } from "@/components/utils/carucelImg";
 
 export default function EventCard({ id }: { id: number }) {
   const fetchEvent = useCallback(() => getEvent(id), [id]);
-  const { data, error, isLoading } = useApiRequest<IUOneEvent>(fetchEvent);
+  const { data, error, isLoading } = useApiRequest<IUEvent>(fetchEvent);
 
   if (error) {
     return <div>Error al obtener los datos</div>;
@@ -28,7 +28,8 @@ export default function EventCard({ id }: { id: number }) {
     return <div>Cargando...</div>;
   }
 
-  const event = data.event;
+  const event = data;
+
 
   return (
     <Card className="w-full mx-auto">

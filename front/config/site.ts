@@ -32,6 +32,10 @@ export const siteConfig = {
       label: "Account",
       href: "/accounts",
     },
+    edit: {
+      label: "Editar Cuenta",
+      href: "/accounts/edit",
+    },
     login: {
       label: "Login",
       href: "/accounts/login",
