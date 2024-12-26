@@ -62,6 +62,7 @@ class UserService(AService):
     
     @classmethod
     def send_verification_code(cls, user):
+
         EmailService.send_user_verification_code(user)
         
         

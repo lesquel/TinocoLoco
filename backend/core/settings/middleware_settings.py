@@ -1,6 +1,6 @@
 CUSTOM_MIDDLEWARE = [
     "base.middlewares.language_middleware.LanguageMiddleware",  # Se agrega esto para la traduccion de idiomas automatica al iniciar sesion
-    "base.middlewares.error_handler_middleware.ErrorHandlerMiddleware",  # Se agrega esto para el manejo de errores
+    # "base.middlewares.error_handler_middleware.ErrorHandlerMiddleware",  # Se agrega esto para el manejo de errores
     "base.middlewares.update_jazzmin_config_middleware.UpdateJazzminConfigMiddleware",  # Se agrega esto para la actualizacion de la configuracion de Jazzmin
 ]
 

@@ -5,12 +5,11 @@ from django.utils.timezone import now
 
 
 class ValidateEmailSerializer(serializers.Serializer):
-    email = serializers.EmailField()
     verification_code = serializers.CharField(max_length=6)
 
     def validate(self, data):
 
-        email = data.get("email")
+        email = self.context["request"].user.email
         verification_code = data.get("verification_code")
 
         try:

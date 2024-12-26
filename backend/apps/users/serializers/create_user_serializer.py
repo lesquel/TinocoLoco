@@ -30,5 +30,7 @@ class CreateUserSerializer(BaseUserSerializer):
         password = data.pop("password")
         user = CustomUser.objects.create_user(username, email, password)
         token = UserService.get_token(user)
+        user.generate_verification_code()
+        UserService.send_verification_code(user)
 
         return {"user": user, "token": token}
