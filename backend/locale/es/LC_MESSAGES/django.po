@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-26 13:36-0500\n"
+"POT-Creation-Date: 2024-12-26 18:43-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -700,11 +700,11 @@ msgstr "Administrador"
 msgid "Cliente"
 msgstr "Cliente"
 
-#: .\apps\users\choices\sex_choices.py:7
+#: .\apps\users\choices\sex_choices.py:6
 msgid "Masculino"
 msgstr "Masculino"
 
-#: .\apps\users\choices\sex_choices.py:8
+#: .\apps\users\choices\sex_choices.py:7
 msgid "Femenino"
 msgstr "Femenino"
 
@@ -741,12 +741,21 @@ msgid "Correo electrónico verificado exitosamente"
 msgstr "Correo electrónico verificado exitosamente"
 
 #: .\apps\users\messages\success_messages.py:9
+
+msgid "El correo electrónico ya ha sido verificado."
+msgstr "El correo electrónico ya ha sido verificado."
+
+#: .\apps\users\messages\success_messages.py:10
 msgid "El código ha sido enviado al correo electrónico."
 msgstr "El código ha sido enviado al correo electrónico."
 
-#: .\apps\users\messages\success_messages.py:10
+#: .\apps\users\messages\success_messages.py:11
 msgid "Contraseña restablecida con éxito."
 msgstr "Contraseña restablecida con éxito."
+
+#: .\apps\users\messages\success_messages.py:12
+msgid "Código enviado exitosamente."
+msgstr "Código enviado exitosamente."
 
 #: .\apps\users\messages\variable_names.py:6
 msgid "Número de cédula"
@@ -931,4 +940,3 @@ msgstr "Este correo electrónico ya está registrado."
 #: .\base\utils\update_jazmin_settings.py:38
 msgid "Bienvenido a la administración de {}"
 msgstr "Bienvenido a la administracion de {}"
-
