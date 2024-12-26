@@ -28,15 +28,14 @@ export const LinksRegister = () => {
     <NavbarContent justify="end">
       {!userInfo ? (
         <>
-          <NavbarItem className="hidden lg:flex">
-            <Link
+          <NavbarItem>
+            <Button
+              as={Link}
               href={siteConfig.navMenuItems.login.href}
               className="text-foreground hover:text-primary transition-colors"
             >
               {siteConfig.navMenuItems.login.label}
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
+            </Button>
             <Button
               as={Link}
               color="primary"

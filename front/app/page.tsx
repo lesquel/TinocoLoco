@@ -5,9 +5,8 @@ import { MostViewedEvents } from "@/features/events/section/events/mostViewed";
 import { Section } from "@/components/sections/layout/section";
 import { Container } from "@/components/sections/layout/container";
 import { CategoryHome } from "@/features/events/section/category/categoryHome";
-import { MostPopularServices } from "@/features/services/section/mostPopularService";
-import { MostViewedSServices } from "@/features/services/section/mostViewedService";
-import Header from "@/components/sections/layout/header";
+import { MostPopularServices } from "@/features/services/section/services/mostPopularService";
+import { MostViewedSServices } from "@/features/services/section/services/mostViewedService";
 
 export default function Home() {
   return (

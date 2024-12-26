@@ -12,6 +12,14 @@ export interface IUUser {
     last_name?: string,
     full_name?: string,
     role?: Role,
-    sex?: string
+    sex?: string,
+    email_verified: boolean,
+    identity_card: string,
+    nacionality: string,
+    date_joined: string,
+    is_active: boolean,
+    preferred_language: string,
+    has_completed_profile: boolean,
   }
 }
+

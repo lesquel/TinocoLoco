@@ -6,6 +6,8 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Footer } from "@/components/sections/layout/footer/footer";
 import Header from "@/components/sections/layout/header";
+import { Toaster } from "react-hot-toast";
+import { InforVerificationToast } from "@/components/utils/toast/InforVerificationToast";
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +27,6 @@ export const viewport: Viewport = {
   ],
 };
 
-
 export default function RootLayout({
   children,
 }: {
@@ -37,16 +38,17 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
+        <Toaster />
+        <InforVerificationToast />
+
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <Header />
 
-            <main className="">
-              {children}
-            </main>
+            <main className="">{children}</main>
 
             <Footer />
           </div>
@@ -55,3 +57,4 @@ export default function RootLayout({
     </html>
   );
 }
+

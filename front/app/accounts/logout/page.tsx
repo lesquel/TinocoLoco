@@ -12,7 +12,7 @@ export default function Logout() {
   useEffect(() => {
     if (isLogin()) {
       logout(); 
-      router.push("/");
+      window.location.href = "/"; // Redirecciona al usuario a la página de inicio
     } else {
       router.push("/accounts/login"); 
     }

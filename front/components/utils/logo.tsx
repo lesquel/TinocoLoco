@@ -6,7 +6,6 @@ import { IUBusiness } from "@/interfaces/IUBusiness";
 import Image from "next/image";
 import { Skeleton } from "@nextui-org/react";
 
-
 export const Logo = () => {
     const { data, error, isLoading } = useApiRequest<IUBusiness>(getBusiness);
 
@@ -23,14 +22,14 @@ export const Logo = () => {
     }
 
     return (
-
-        <Image
-            src={data.business_logo_url}
-            alt={`${data.business_name} logo`}
-            width={150}
-            height={100}
-            className="object-contain"
-        />
+        <div className="h-[50px]"> {/* Contenedor con altura fija */}
+            <Image
+                src={data.business_logo_url}
+                alt={`${data.business_name} logo`}
+                width={150}
+                height={50}
+                className="object-contain w-auto h-full"
+            />
+        </div>
     );
 };
-

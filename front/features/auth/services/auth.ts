@@ -9,6 +9,7 @@ export const register = async (data: IURegister) => {
     url: endPoints.user.register,
     body: JSON.stringify(data),
   });
+  console.log("response:bwfevgbkweofwegg", response);
   return response;
 };
 

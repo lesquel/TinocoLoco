@@ -34,11 +34,11 @@ export const siteConfig = {
     },
     login: {
       label: "Login",
-      href: "accounts/login",
+      href: "/accounts/login",
     },
     register: {
       label: "Register",
-      href: "accounts/register",
+      href: "/accounts/register",
     },
     logout: {
       label: "Logout",

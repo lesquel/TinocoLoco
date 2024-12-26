@@ -2,7 +2,7 @@
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { TitleSection } from "@/components/utils/titleSection";
 import { IUMostServiceViewed, IUService } from "@/interfaces/IUservices";
-import { getMostViewedServices } from "../services/services";
+import { getMostViewedServices } from "../../services/services";
 import { CardBasic } from "@/components/utils/cardBasic";
 import NoFountServices from "@/public/images/no_fount_events.jpg"
 export function MostViewedSServices() {
