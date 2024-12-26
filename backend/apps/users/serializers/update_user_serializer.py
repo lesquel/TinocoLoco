@@ -1,14 +1,24 @@
-from django.utils.translation import gettext as _
 from rest_framework import serializers
-from ..choices import RoleChoices
 from base.utils import errors
+from ..models.user import CustomUser
+from ..choices import RoleChoices
 from .base_user_serializer import BaseUserSerializer
-from ..models import CustomUser
+
 
 class UpdateUserSerializer(BaseUserSerializer):
     password = serializers.CharField(write_only=True, required=False)
 
+    class Meta(BaseUserSerializer.Meta):
 
+        fields = [
+            "identity_card",
+            "username",
+            "first_name",
+            "last_name",
+            "password",
+            "sex",
+            "role",
+        ]
 
     def update(self, instance, validated_data):
         request_user = self.context["request"].user
@@ -39,7 +49,10 @@ class UpdateUserSerializer(BaseUserSerializer):
     def validate_identity_card(self, value):
         if not value:
             return value
-        return self.validate_unique_field(value, "identity_card")
+        if CustomUser.objects.filter(identity_card=value).exists():
+            raise errors.IdentityCardAlreadyExistsError()
+        return value
+
 
     def validate_role(self, value):
         if value not in RoleChoices.values:
