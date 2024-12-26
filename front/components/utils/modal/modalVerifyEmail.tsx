@@ -13,7 +13,7 @@ import { TbMailBitcoin } from "react-icons/tb";
 
 export  function  ModalVerifyEmail() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  
+
   const sendVerificationEmail = () => {
   };
 
@@ -41,7 +41,7 @@ export  function  ModalVerifyEmail() {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={}>
+                <Button color="primary" >
                   Volver a enviar
                 </Button>
                 <Button type="submit" color="primary" onPress={onClose}>
