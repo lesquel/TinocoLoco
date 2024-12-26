@@ -37,15 +37,15 @@ export const siteConfig = {
       href: "/accounts/edit",
     },
     login: {
-      label: "Login",
+      label: "Iniciar sesion",
       href: "/accounts/login",
     },
     register: {
-      label: "Register",
+      label: "Crear cuenta",
       href: "/accounts/register",
     },
     logout: {
-      label: "Logout",
+      label: "Cerrar sesion",
       href: "/accounts/logout",
     },
     dashboard: {
