@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from rest_framework.serializers import ValidationError
 from rest_framework import status
 from base.utils import errors
 
@@ -11,13 +12,16 @@ class ErrorHandlerMiddleware:
 
     def __call__(self, request):
         response = self.get_response(request)
+        
         return response
 
     def process_exception(self, request, exception):
         if isinstance(exception, errors.BaseError):
             identifier = getattr(exception, "identifier", "unknown_error")
             return self._handle_error(exception.args[0], exception.code, identifier)
-    
+        if isinstance(exception, ValidationError):
+            return self._handle_error(exception.detail, status.HTTP_400_BAD_REQUEST)
+        
         return self._handle_error(
             {"internal_server_error": [str(exception)]},
             status.HTTP_500_INTERNAL_SERVER_ERROR,

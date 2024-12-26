@@ -130,6 +130,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def generate_verification_code(self):
         self.email_verification_code = get_random_string(length=6)
 
+    
+
+    
     @property
     def has_completed_profile(self):
         required_fields = [

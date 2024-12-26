@@ -2,7 +2,7 @@ from django.utils.translation import gettext as _
 from abc import ABC
 from base.utils import errors
 
-NOT_FOUND = _("{} not found")
+NOT_FOUND = _("{} no encontrado")
 
 
 class AService(ABC):
