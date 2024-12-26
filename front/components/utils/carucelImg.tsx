@@ -4,8 +4,9 @@ import React, { useState } from 'react'
 import { Card, CardBody, Button, Image } from "@nextui-org/react"
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6'
 import No_Found_Event from "@/public/images/no_fount_events.jpg"
+import { IUImg } from '@/interfaces/IUimg'
 
-export function ImageCarousel({ images }: { images: string[] }) {
+export function ImageCarousel({ images }: { images: IUImg[] }) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const placeholderImage = No_Found_Event.src
 
@@ -25,7 +26,7 @@ export function ImageCarousel({ images }: { images: string[] }) {
         <Card className="w-full max-w-lg mx-auto h-[400px]">
             <CardBody className="p-0 relative h-full flex items-center justify-center overflow-hidden">
                 <Image
-                    src={images.length > 0 ? images[currentIndex] : placeholderImage}
+                    src={images.length > 0 ? images[currentIndex].image_url : placeholderImage}
                     alt={`Carousel image ${currentIndex + 1}`}
                     className="w-full h-full object-cover object-center"
                 />

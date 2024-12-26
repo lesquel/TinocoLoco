@@ -10,19 +10,19 @@ export const siteConfig = {
       label: "Home",
       href: "/",
     },
-    events : {
+    events: {
       label: "Events",
       href: "/events",
     },
-    services : {
+    services: {
       label: "Services",
       href: "/services",
     },
-    blog : {
+    blog: {
       label: "Blog",
       href: "/blog",
     },
-    about : {
+    about: {
       label: "About",
       href: "/about",
     },
@@ -36,7 +36,7 @@ export const siteConfig = {
       label: "Login",
       href: "accounts/login",
     },
-    register  : {
+    register: {
       label: "Register",
       href: "accounts/register",
     },
@@ -50,3 +50,4 @@ export const siteConfig = {
     },
   },
 };
+

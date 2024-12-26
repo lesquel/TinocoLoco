@@ -1,9 +1,10 @@
 "use client"
 import { useApiRequest } from "@/hooks/useApiRequest";
-import { CardServices } from "@/features/services/components/cardsServices";
 import { TitleSection } from "@/components/utils/titleSection";
 import { IUMostServiceViewed, IUService } from "@/interfaces/IUservices";
 import { getMostViewedServices } from "../services/services";
+import { CardBasic } from "@/components/utils/cardBasic";
+import NoFountServices from "@/public/images/no_fount_events.jpg"
 export function MostViewedSServices() {
     const { data, error } = useApiRequest<IUMostServiceViewed>(getMostViewedServices);
 
@@ -17,11 +18,16 @@ export function MostViewedSServices() {
     return (
         <div>
             <TitleSection title="Servicios" description="más vistos" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 mt-4">
-                {data.most_viewed.map((service: IUService) => {
-                    return <CardServices
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 mt-4">
+                {data.results.map((service: IUService) => {
+                    return <CardBasic
                         key={service.id}
-                        service={service}
+                        item={service}
+                        url="/services"
+                        imageKey="photos"
+                        titleKey="service_name"
+                        defaultImage={NoFountServices.src}
+                        idKey="id"
                     />
                 })}
 

@@ -1,7 +1,7 @@
 import { Container } from "@/components/sections/layout/container";
 import { Section } from "@/components/sections/layout/section";
-import { MostPopularEvents } from "@/features/events/section/mostPopular";
-import { MostViewedEvents } from "@/features/events/section/mostViewed";
+import { MostPopularEvents } from "@/features/events/section/events/mostPopular";
+import { MostViewedEvents } from "@/features/events/section/events/mostViewed";
 import ServicesCard from "@/features/services/components/ServicesCard";
 
 export default async function Event({ params }: { params: { id: string } }) {

@@ -1,19 +1,21 @@
 import { ApiService } from "@/interfaces/IUApiservices";
 import { TypeMethod } from "@/types/typeMethod";
 
-const host = process.env.BACKEND_HOST || "http://localhost:8000/";
+const host = process.env.BACKEND_HOST || "https://tinocoloco.onrender.com/";
 
 export class FetchApiService implements ApiService {
   async get<T>({ url, options }: { url: string; options?: RequestInit }): Promise<T> {
+    console.log("url:", url);
     return this.fetchData<T>({ url, method: "GET", options });
+    
   }
 
   async post<T>({ url, body, options }: { url: string; body?: any; options?: RequestInit }): Promise<T> {
     const newOptions = {
       ...options,
-      body: body ? JSON.stringify(body) : undefined,
+      body: body,
     };
-    console.log('body:', newOptions);
+    console.log("newOptions:", newOptions);
     return this.fetchData<T>({ url, method: "POST", options: newOptions });
   }
   
@@ -21,7 +23,7 @@ export class FetchApiService implements ApiService {
   async put<T>({ url, body, options }: { url: string; body?: any; options?: RequestInit }): Promise<T> {
     const newOptions = {
       ...options,
-      body: body ? JSON.stringify(body) : undefined,
+      body: body,
     };
     return this.fetchData<T>({ url, method: "PUT", options: newOptions });
   }
@@ -39,7 +41,7 @@ export class FetchApiService implements ApiService {
       },
       ...options,
     };
-    
+    console.log("defaultOptions:", defaultOptions);
     try {
       const response = await fetch(`${host}${url}`, defaultOptions);
       console.log('url:', `${host}${url}`);

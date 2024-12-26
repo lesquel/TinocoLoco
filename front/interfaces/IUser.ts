@@ -1,8 +1,8 @@
-enum Role {
+export enum Role {
   COSTUMER = "costumer",
+  ADMIN = "admin",
 }
 export interface IUUser {
-
   token: string,
   user: {
     id: number,

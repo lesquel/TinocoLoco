@@ -1,8 +1,8 @@
-import exp from "constants"
+import { IUImg } from "./IUimg"
 
 export interface IUEvent {
     id: number,
-    photos: [string],
+    photos: IUImg[],
     visualizations: number,
     is_active: boolean,
     creation_date: Date,
@@ -20,11 +20,21 @@ export interface IUOneEvent {
 }
 
 export interface IUMostEventViewed {
-    most_viewed: [IUEvent]
+    count: number,
+    next?: string,
+    previous?: string,
+    current_page: number,
+    page_size: number,
+    results: [IUEvent],
 }
 
 export interface IUMostEventPopular {
-    most_popular: [IUEvent]
+    count: number,
+    next?: string,
+    previous?: string,
+    current_page: number,
+    page_size: number,
+    results: [IUEvent],
 }
 
 export interface IUEvents {
