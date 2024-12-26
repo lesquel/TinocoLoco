@@ -12,7 +12,8 @@ from base.mixins import (
 )
 
 from apps.users.permissions import IsAdminOrReadOnly
-from apps.reviews.serializers import RetrieveReviewSerializer
+from apps.reviews.serializers import RetrieveReviewSerializer, CreateReviewSerializer
+from apps.photos.serializers import CreatePhotoSerializer
 from ..serializers import ServiceSerializer
 from ..filters import ServiceFilter
 
@@ -32,10 +33,14 @@ class ServiceView(
     parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     def get_serializer_class(self):
+        print(self.action)
         
         action_serializers = {
             "create": ServiceSerializer,
+            "add_review": CreateReviewSerializer,
             "reviews": RetrieveReviewSerializer,
+            "upload_images": CreatePhotoSerializer,
+            
         }
         return action_serializers.get(self.action, ServiceSerializer)
 
