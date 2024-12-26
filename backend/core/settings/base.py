@@ -40,17 +40,17 @@ ROOT_URLCONF = "core.urls"
 WSGI_APPLICATION = "core.wsgi.application"
 
 # Definir la URL para servir archivos estáticos
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 # Definir los directorios donde se encuentran los archivos estáticos
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Definir el directorio donde se recopilarán los archivos estáticos
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Definir el campo automático predeterminado para los modelos
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
