@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-21 00:28-0500\n"
+"POT-Creation-Date: 2024-12-26 10:37-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -275,7 +275,6 @@ msgid "La fecha de inicio no puede ser mayor que la fecha de fin"
 msgstr "The start date cannot be greater than the end date"
 
 #: .\apps\event_rentals\messages\error_messages.py:6
-
 msgid "El servicio no existe."
 msgstr "The model does not exist."
 
@@ -284,7 +283,6 @@ msgid "La cantidad de servicios debe ser mayor a 0."
 msgstr "Service quantity must be greater than 0."
 
 #: .\apps\event_rentals\messages\error_messages.py:8
-
 msgid "La fecha de entrega no puede ser menor a la fecha del evento."
 msgstr "The end date cannot be greater than the start date"
 
@@ -814,6 +812,7 @@ msgid "Fecha de registro"
 msgstr "Registration date"
 
 #: .\apps\users\messages\variable_names.py:19
+#: .\base\abstracts\models\messages\variable_names.py:5
 msgid "Está activo"
 msgstr "Is active"
 
@@ -862,21 +861,9 @@ msgstr "{} not found"
 msgid "Visualizaciones"
 msgstr "View count"
 
-#: .\base\abstracts\models\messages\variable_names.py:5
-msgid "Activo"
-msgstr "Cash"
-
 #: .\base\abstracts\models\messages\variable_names.py:7
 msgid "Fecha de última actualización"
 msgstr "Creation date"
-
-#: .\base\admin_site\custom_admin_site.py:8
-msgid "Bienvenido a la administración"
-msgstr "Welcome to the administration"
-
-#: .\base\admin_site\custom_admin_site.py:17
-msgid "Bienvenido a la administración de {}"
-msgstr "Welcome to {} administration"
 
 #: .\base\utils\errors\business_configuration_related_errors.py:6
 msgid "Configuración del negocio no encontrada."
@@ -891,7 +878,8 @@ msgid "Not found"
 msgstr "Not found"
 
 #: .\base\utils\errors\business_logic_errors.py:6
-msgid "No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
+msgid ""
+"No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
 msgstr "You cannot delete services from an event rental that is not pending."
 
 #: .\base\utils\errors\business_logic_errors.py:7
@@ -933,3 +921,7 @@ msgstr "Invalid role"
 #: .\base\utils\errors\user_related_errors.py:12
 msgid "Por favor, ingresar su usuario y contraseña"
 msgstr "Please enter your username and password."
+
+#: .\base\utils\update_jazmin_settings.py:38
+msgid "Bienvenido a la administración de {}"
+msgstr "Welcome to {} administration"

@@ -14,7 +14,7 @@ from base.system_services import (
 
 from apps.users.permissions import IsAdminOrOwner, IsOwner, HasVerifiedEmail
 from apps.reviews.serializers import CreateReviewSerializer, RetrieveReviewSerializer
-
+from apps.photos.serializers import CreatePhotoSerializer
 from ..messages import SUCCESS_MESSAGES
 from ..filters import EventRentalFilter
 from ..serializers import (
@@ -46,6 +46,7 @@ class EventRentalViewSet(
             "confirm_rental": ConfirmEventRentalStatusSerializer,
             "add_review": CreateReviewSerializer,
             "add_services": CreateServiceEventRentalSerializer,
+            "upload_images": CreatePhotoSerializer,
         }
         return action_serializers.get(self.action, EventRentalSerializer)
 

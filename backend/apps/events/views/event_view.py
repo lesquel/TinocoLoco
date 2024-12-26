@@ -11,7 +11,9 @@ from base.mixins import (
     RetrieveReviewsMixin,
     MetricsAnaliticsMixin,
 )
-from apps.reviews.serializers import RetrieveReviewSerializer
+
+from apps.reviews.serializers import RetrieveReviewSerializer, CreateReviewSerializer
+from apps.photos.serializers import CreatePhotoSerializer
 from apps.users.permissions import IsAdminOrReadOnly
 from base.utils import errors
 from ..filters import EventFilter
@@ -36,6 +38,9 @@ class EventView(
         action_serializers = {
             "create": EventSerializer,
             "reviews": RetrieveReviewSerializer,
+            "add_review": CreateReviewSerializer,
+            "reviews": RetrieveReviewSerializer,
+            "upload_images": CreatePhotoSerializer,
         }
         return action_serializers.get(self.action, EventSerializer)
 
