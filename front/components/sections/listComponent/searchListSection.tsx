@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { TitleSection } from "@/components/utils/titleSection";
 import { SearchForm } from "@/components/utils/SearchForm";
-import { ListComponent } from "@/components/sections/listComponent/lisComponent";
+import { ListComponent } from "@/components/sections/listComponent/listComponent";
 
 interface SearchableListSectionProps<T> {
   title: string;

@@ -11,11 +11,11 @@ export const siteConfig = {
       href: "/",
     },
     events: {
-      label: "Events",
+      label: "Eventos",
       href: "/events",
     },
     services: {
-      label: "Services",
+      label: "Servicios",
       href: "/services",
     },
     blog: {
@@ -29,7 +29,7 @@ export const siteConfig = {
   },
   navMenuItems: {
     account: {
-      label: "Account",
+      label: "Cuentas",
       href: "/accounts",
     },
     edit: {
@@ -37,15 +37,15 @@ export const siteConfig = {
       href: "/accounts/edit",
     },
     login: {
-      label: "Login",
+      label: "Iniciar sesion",
       href: "/accounts/login",
     },
     register: {
-      label: "Register",
+      label: "Crear cuenta",
       href: "/accounts/register",
     },
     logout: {
-      label: "Logout",
+      label: "Cerrar sesion",
       href: "/accounts/logout",
     },
     dashboard: {

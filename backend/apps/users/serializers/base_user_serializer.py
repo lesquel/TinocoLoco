@@ -5,26 +5,10 @@ from ..models.user import CustomUser
 
 
 class BaseUserSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(
-        required=False,
-    )
-    email = serializers.EmailField(
-        required=False,
-    )
 
     class Meta:
         model = CustomUser
-        fields = [
-            "id",
-            "identity_card",
-            "username",
-            "email",
-            "first_name",
-            "last_name",
-            "password",
-            "sex",
-            "role",
-        ]
+
 
     def handle_password(self, user, password):
         if password:
@@ -44,3 +28,4 @@ class BaseUserSerializer(serializers.ModelSerializer):
         if CustomUser.objects.filter(username=username).exists():
             raise errors.UsernameAlreadyExistsError()
         return username
+    

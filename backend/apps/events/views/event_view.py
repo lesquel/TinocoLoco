@@ -15,18 +15,17 @@ from base.mixins import (
 from apps.reviews.serializers import RetrieveReviewSerializer, CreateReviewSerializer
 from apps.photos.serializers import CreatePhotoSerializer
 from apps.users.permissions import IsAdminOrReadOnly
-from base.utils import errors
 from ..filters import EventFilter
 from ..serializers import EventSerializer
 
 
 class EventView(
-    viewsets.ModelViewSet,
+    MetricsAnaliticsMixin,
     PaginationMixin,
     UploadImagesViewMixin,
     AddReviewMixin,
     RetrieveReviewsMixin,
-    MetricsAnaliticsMixin,
+    viewsets.ModelViewSet,
 ):
     http_method_names = ["get", "post", "put", "delete"]
     permission_classes = [IsAdminOrReadOnly]
@@ -43,6 +42,7 @@ class EventView(
             "upload_images": CreatePhotoSerializer,
         }
         return action_serializers.get(self.action, EventSerializer)
+
 
     def get_object(self):
         obj = EventService.get_by_id(self.kwargs.get("pk"))

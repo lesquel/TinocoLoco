@@ -59,9 +59,9 @@ const DynamicForm = <T extends Record<string, any>>({
         max: config.validation?.max,
         validate: config.validation?.pattern
           ? (value: string) => {
-              const regex = new RegExp(config.validation!.pattern!.value);
-              return regex.test(value) || config.validation!.pattern!.message;
-            }
+            const regex = new RegExp(config.validation!.pattern!.value);
+            return regex.test(value) || config.validation!.pattern!.message;
+          }
           : undefined,
       }),
     };

@@ -20,7 +20,7 @@ export const TextareaForm = ({
         <Textarea
           {...field} // Propaga todos los valores de field (onChange, onBlur, ref, etc.)
           label={config.label}
-          placeholder={config.placeholder || `Enter ${config.label}`} // Placeholder predeterminado
+          placeholder={config.placeholder || `Ingrese ${config.label}`} // Placeholder predeterminado
           value={field.value || ""} // Asegura que el valor sea una cadena vacía si no tiene valor
           onChange={(e) => field.onChange(e.target.value)} // Pasa el valor al controlador
         />
