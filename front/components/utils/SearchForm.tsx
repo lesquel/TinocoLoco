@@ -39,9 +39,9 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
             render={({ field }) => (
               <Input
                 {...field}
-                label="Search"
+                label="Buscar"
                 
-                placeholder="Enter search value"
+                placeholder="Ingrese el valor a buscar"
                 className="flex-1 "
               />
             )}
@@ -53,7 +53,7 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
             render={({ field }) => (
               <Select
                 {...field}
-                label="Search In"
+                label="Campos de Búsqueda"
                 placeholder="Select field"
                 className="w-52"
                 defaultSelectedKeys={["name"]}

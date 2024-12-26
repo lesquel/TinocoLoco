@@ -20,18 +20,19 @@ export const CustomEmailVerificationToast: React.FC<CustomToastProps> = ({
   verificationLink,
 }) => {
   return (
-    <Card className="flex items-center justify-between max-w-96 gap-3 ">
+    <Card className="flex items-center justify-between max-w-96 gap-3">
       <CardBody className="flex flex-row items-center">
         <IoMdClose className="h-10 w-10 text-red-500" />
         <p className="mt-1 text-sm text-gray-500">
-          Click the link below to verify your email:
+          Haz click en el botón para verificar tu correo electrónico:
         </p>
         <Button
-        as={Link}
-        color="primary"
+          as={Link}
+          color="primary"
           href={verificationLink}
+          className="text-sm py-1 px-2"
         >
-          Verify Email
+          Verificar
         </Button>
       </CardBody>
     </Card>

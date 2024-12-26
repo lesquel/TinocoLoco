@@ -11,11 +11,11 @@ export const siteConfig = {
       href: "/",
     },
     events: {
-      label: "Events",
+      label: "Eventos",
       href: "/events",
     },
     services: {
-      label: "Services",
+      label: "Servicios",
       href: "/services",
     },
     blog: {
@@ -29,7 +29,7 @@ export const siteConfig = {
   },
   navMenuItems: {
     account: {
-      label: "Account",
+      label: "Cuentas",
       href: "/accounts",
     },
     edit: {

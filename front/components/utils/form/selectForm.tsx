@@ -23,7 +23,7 @@ export const SelectForm = ({ config, name, control }: { config: FieldConfig, nam
               </SelectItem>
             ))
           ) : (
-            <SelectItem value="">No options available</SelectItem> // Mensaje si no hay opciones
+            <SelectItem value="">No hay opciones disponibles</SelectItem> // Mensaje si no hay opciones
           )}
         </Select>
       )}

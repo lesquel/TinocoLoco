@@ -15,9 +15,10 @@ class UpdateUserSerializer(BaseUserSerializer):
             "username",
             "first_name",
             "last_name",
+            "nacionality",
             "password",
             "sex",
-            "role",
+            "preferred_language",
         ]
 
     def update(self, instance, validated_data):
