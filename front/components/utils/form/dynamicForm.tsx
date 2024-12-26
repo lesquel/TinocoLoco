@@ -144,7 +144,7 @@ const DynamicForm = <T extends Record<string, any>>({
         );
       })}
       <Button type="submit" variant="flat" className="mt-4">
-        Registrar Evento
+        Guardar
       </Button>
     </form>
   );

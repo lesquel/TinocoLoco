@@ -17,9 +17,10 @@ import { Section } from "@/components/sections/layout/section";
 import { TitleSection } from "@/components/utils/titleSection";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { ModalVerifyEmail } from "@/components/utils/modal/modalVerifyEmail";
 export default function Page() {
   const user = getTokenFromCookie()?.user;
-
+  console.log(user);
   return (
     <Container>
       <Section>
@@ -38,12 +39,7 @@ export default function Page() {
                 </Chip>
                 <div className="flex flex-row gap-2">
                   {!user?.email_verified ? (
-                    <div>
-                      <Chip size="sm" color="danger" variant="flat">
-                        Email no verificado
-                      </Chip>
-                      <Button color="primary">Resolver</Button>
-                    </div>
+                    <ModalVerifyEmail />
                   ) : (
                     <Chip size="sm" color="primary" variant="flat">
                       Email verificado
@@ -54,7 +50,13 @@ export default function Page() {
                       <Chip size="sm" color="danger" variant="flat">
                         Perfil incompleto
                       </Chip>
-                      <Button href={siteConfig.navMenuItems.edit.href} as={Link} color="primary">Resolver</Button>
+                      <Button
+                        href={siteConfig.navMenuItems.edit.href}
+                        as={Link}
+                        color="primary"
+                      >
+                        Resolver
+                      </Button>
                     </div>
                   ) : (
                     <Chip size="sm" color="danger" variant="flat">
@@ -71,22 +73,22 @@ export default function Page() {
           <Divider />
           <CardBody>
             <div className="space-y-3">
+            <div className="flex justify-between">
+                <p className="text-default-500">Cedula:</p>
+                <p>{user?.identity_card}</p>
+              </div>
               <div className="flex justify-between">
                 <p className="text-default-500">Email:</p>
                 <p>{user?.email}</p>
               </div>
-              {user?.first_name && (
-                <div className="flex justify-between">
-                  <p className="text-default-500">Nombre:</p>
-                  <p>{user?.first_name}</p>
-                </div>
-              )}
-              {user?.last_name && (
-                <div className="flex justify-between">
-                  <p className="text-default-500">Apellido:</p>
-                  <p>{user?.last_name}</p>
-                </div>
-              )}
+              <div className="flex justify-between">
+                <p className="text-default-500">Nombre:</p>
+                <p>{user?.first_name}</p>
+              </div>
+              <div className="flex justify-between">
+                <p className="text-default-500">Apellido:</p>
+                <p>{user?.last_name}</p>
+              </div>
               <div className="flex justify-between">
                 <p className="text-default-500">Sexo:</p>
                 <p>{user?.sex}</p>

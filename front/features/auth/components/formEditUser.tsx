@@ -7,6 +7,7 @@ import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { useCallback } from "react";
 import { editUser, getUser } from "../services/auth";
 import { useApiRequest } from "@/hooks/useApiRequest";
+import { saveToken } from "../utils/saveUserInfo";
 
 export default function FormEditUser() {
   const userInfo = getTokenFromCookie();
@@ -16,7 +17,13 @@ export default function FormEditUser() {
 
   const onSubmit = (formData: any) => {
     updateExecute({ ...formData, id: userInfo?.user?.id }, (response) => {
-      console.log("User updated successfully", response);
+      saveToken({
+        token: getTokenFromCookie()?.token,
+        user: response,
+      });
+      console.log("User updated successfully", response)
+      console.log(getTokenFromCookie())
+      window.location.href = "/accounts";
     });
   };
 
@@ -34,8 +41,6 @@ export default function FormEditUser() {
         onSubmit={onSubmit}
         initialData={data}
       />
-      {updateLoading && <div>Actualizando...</div>}
-      {updateError && <div>Error al actualizar el usuario: {updateError.message}</div>}
     </div>
   );
 }
