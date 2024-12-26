@@ -43,3 +43,7 @@ Get-ChildItem -Recurse -Filter "*.pyc" -Path .\ -Include "*/migrations/*.pyc" | 
 
 
 Get-ChildItem -Recurse -Path . -Filter "*.py" -Exclude "__init__.py" | Where-Object { $_.FullName -match '\\migrations\\' } | Remove-Item
+
+
+//Colect static
+python manage.py collectstatic --noinput
