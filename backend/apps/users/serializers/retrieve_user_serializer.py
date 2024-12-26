@@ -9,13 +9,20 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = [
             "id",
+            "identity_card",
             "username",
+            "nacionality",
             "email",
+            "email_verified",
+            "preferred_language",
+            "date_joined",
+            "is_active",
             "first_name",
             "last_name",
             "full_name",
-            "role",
             "sex",
+            "role",
+
         ]
         read_only_fields = fields
 
