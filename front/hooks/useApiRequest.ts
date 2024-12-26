@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect, useCallback } from 'react';
 
 export function useApiRequest<T>(apiFunction: () => Promise<T>, dependencies: any[] = []) {

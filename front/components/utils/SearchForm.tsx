@@ -29,7 +29,7 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
   }
 
   return (
-    <Card className="w-full mx-auto ">
+    <Card className="w-full mx-auto flex-1">
       <CardBody>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap gap-4 justify-center items-center">
           <Controller

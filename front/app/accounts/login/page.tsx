@@ -7,9 +7,8 @@ import { validationRules } from "@/features/auth/utils/validations";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { login as loginService } from "@/features/auth/services/auth";
-import {}
 
-export const Login = ({ params }: { params: { next: string } }) => {
+export const Login = () => {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
 
@@ -23,6 +22,7 @@ export const Login = ({ params }: { params: { next: string } }) => {
   const onSubmit = async (data: IURegister) => {
     handleRegister(data, (response: any) => {
       router.push("/"); 
+      console.log("response:vsgeg", response);
     });
   };
 
@@ -74,7 +74,7 @@ export const Login = ({ params }: { params: { next: string } }) => {
 export default function Page({ params }: { params: { next: string } }) {
   return (
     <div className="flex flex-col items-center justify-center  relative">
-      <Login params={params} />
+      <Login  />
     </div>
   );
 }

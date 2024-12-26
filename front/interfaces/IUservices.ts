@@ -1,6 +1,8 @@
+import { IUImg } from "./IUimg"
+
 export interface IUService {
     id: number,
-    photos: string[],
+    photos: IUImg[],
     visualizations: number,
     is_active: boolean,
     creation_date: Date,
@@ -44,9 +46,19 @@ export interface IUCategorys {
 }
 
 export interface IUMostServicePopular {
-    most_popular: [IUService]
+    count: number,
+    next?: string,
+    previous?: string,
+    current_page: number,
+    page_size: number,
+    results: [IUService]
 }
 
 export interface IUMostServiceViewed {
-    most_viewed: [IUService]
+    count: number,
+    next?: string,
+    previous?: string,
+    current_page: number,
+    page_size: number,
+    results: [IUService]
 }

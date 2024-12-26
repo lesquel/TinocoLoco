@@ -1,4 +1,5 @@
 import { login } from "@/features/auth/services/auth";
+import { image } from "@nextui-org/react";
 import { serialize } from "v8";
 
 export const endPoints = {
@@ -12,8 +13,10 @@ export const endPoints = {
     },
     events : {
         get : "events/event/",
+        post: "events/event/",
         category : {
             get: "events/category/",
+            post: "events/category/",
         },
         event :{
             mostPopular: {
@@ -22,12 +25,17 @@ export const endPoints = {
             mostViewed: {
                 get: "events/event/most-viewed/",
             },
-        }
+        },
+        image: {
+            post: "/upload-images/",
+        },
     },
     services : {
         get: "services/service/",
+        post: "services/service/",
         category : {
             get: "services/category/",
+            post: "services/category/",
         },
         service :{
             mostPopular: {
@@ -36,6 +44,10 @@ export const endPoints = {
             mostViewed: {
                 get: "services/service/most-viewed/",
             },
-        }
-    }
+        },
+        image: {
+            post: "/upload-images/",
+        },
+    },
+
 }

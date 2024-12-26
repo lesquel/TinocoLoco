@@ -7,7 +7,7 @@ const api = new FetchApiService();
 export const register = async (data: IURegister) => {
   const response = await api.post({
     url: endPoints.user.register,
-    body: data,
+    body: JSON.stringify(data),
   });
   return response;
 };
@@ -15,7 +15,7 @@ export const register = async (data: IURegister) => {
 export const login = async (data: IULogin) => {
   const response = await api.post({
     url: endPoints.user.login,
-    body: data,
+    body: JSON.stringify(data),
   });
   return response;
 };
