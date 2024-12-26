@@ -1,5 +1,3 @@
-
-
 CUSTOM_MIDDLEWARE = [
     "base.middlewares.language_middleware.LanguageMiddleware",  # Se agrega esto para la traduccion de idiomas automatica al iniciar sesion
     "base.middlewares.error_handler_middleware.ErrorHandlerMiddleware",  # Se agrega esto para el manejo de errores
@@ -9,6 +7,7 @@ CUSTOM_MIDDLEWARE = [
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",  # Se agrega esto para el acople con djnago
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",  # Se agrega esto para la traduccion de idiomas
     "django.middleware.common.CommonMiddleware",

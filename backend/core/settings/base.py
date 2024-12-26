@@ -1,5 +1,6 @@
 from pathlib import Path
 import environ
+import os
 
 # Importar configuraciones de varios módulos
 from .jazzmin_settings import *
@@ -40,7 +41,7 @@ ROOT_URLCONF = "core.urls"
 WSGI_APPLICATION = "core.wsgi.application"
 
 # Definir la URL para servir archivos estáticos
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Definir los directorios donde se encuentran los archivos estáticos
 STATICFILES_DIRS = [BASE_DIR / "static"]
@@ -54,3 +55,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Definir el campo automático predeterminado para los modelos
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+if not DEBUG:
+
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
