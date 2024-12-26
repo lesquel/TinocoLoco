@@ -58,14 +58,14 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
                 className="w-52"
                 defaultSelectedKeys={["name"]}
               >
-                <SelectItem key="name" value="name">Name</SelectItem>
-                <SelectItem key="description" value="description">Description</SelectItem>
+                <SelectItem key="name" value="name">Nombre</SelectItem>
+                <SelectItem key="description" value="description">Descripcion</SelectItem>
                 <SelectItem key="category" value="category">Category</SelectItem>
-                <SelectItem key="min_reference_value" value="min_reference_value">Min Reference Value</SelectItem>
-                <SelectItem key="max_reference_value" value="max_reference_value">Max Reference Value</SelectItem>
-                <SelectItem key="min_allowed_hours" value="min_allowed_hours">Min Allowed Hours</SelectItem>
-                <SelectItem key="max_allowed_hours" value="max_allowed_hours">Max Allowed Hours</SelectItem>
-                <SelectItem key="extra_hour_rate" value="extra_hour_rate">Extra Hour Rate</SelectItem>
+                <SelectItem key="min_reference_value" value="min_reference_value">Valor de Referencia Mínimo</SelectItem>
+                <SelectItem key="max_reference_value" value="max_reference_value">Valor de Referencia Máximo</SelectItem>
+                <SelectItem key="min_allowed_hours" value="min_allowed_hours">Horas Permitidas Mínimas</SelectItem>
+                <SelectItem key="max_allowed_hours" value="max_allowed_hours">Horas Permitidas Máximas</SelectItem>
+                <SelectItem key="extra_hour_rate" value="extra_hour_rate">Tarifa de Hora Extra</SelectItem>
               </Select>
             )}
           />

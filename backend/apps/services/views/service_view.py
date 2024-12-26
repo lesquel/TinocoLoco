@@ -19,12 +19,12 @@ from ..filters import ServiceFilter
 
 
 class ServiceView(
-    viewsets.ModelViewSet,
     PaginationMixin,
     UploadImagesViewMixin,
     AddReviewMixin,
     RetrieveReviewsMixin,
     MetricsAnaliticsMixin,
+    viewsets.ModelViewSet,
 ):
     http_method_names = ["get", "post", "put", "delete"]
     filterset_class = ServiceFilter

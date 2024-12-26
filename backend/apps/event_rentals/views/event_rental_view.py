@@ -28,7 +28,7 @@ from ..serializers import (
 
 
 class EventRentalViewSet(
-    viewsets.ModelViewSet, PaginationMixin, UploadImagesViewMixin, MetricsAnaliticsMixin
+    PaginationMixin, UploadImagesViewMixin, MetricsAnaliticsMixin, viewsets.ModelViewSet
 ):
 
     http_method_names = ["get", "post", "put", "delete"]

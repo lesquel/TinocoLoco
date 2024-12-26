@@ -15,13 +15,12 @@ export const Banner = () => {
 
             <div className="relative z-10 flex flex-col items-center justify-center h-screen px-4 text-center sm:px-6 lg:px-8">
                 <h2 className="text-3xl font-extrabold text-white sm:text-5xl">
-                    Let us find your{" "}
-                    <span className="text-rose-500">Forever Home.</span>
+                    Eventos inolvidades{" "}
+                    <span className="text-rose-500">a tu medida.</span>
                 </h2>
 
                 <p className="mt-4 max-w-lg text-white sm:text-xl sm:leading-relaxed">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus numquam
-                    ea!
+                    Tu evento, nuestra pasión. ¡Contrátanos!
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-4 justify-center">

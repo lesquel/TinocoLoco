@@ -21,6 +21,13 @@ export function FooterClientContent() {
     <>
       <ContactInfo business={business} />
       <SocialMedia business={business} />
+      <div className="mt-16 border-t border-divider pt-8">
+        <div className="w-full text-center">
+          <p className="text-sm text-foreground-500">
+            &copy; {new Date().getFullYear()} {business.business_name}. Todos los derechos reservados.
+          </p>
+        </div>
+      </div>
     </>
   );
 }
