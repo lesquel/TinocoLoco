@@ -35,13 +35,15 @@ export const getEvents = async (options?: any) => {
   const url = endPoints.events.get + (options ? construcUrl({ options }) : "");
   console.log("url:", url);
   const response = await api.get<IUEvents>({ url });
+  console.log("response: images", response);
   return response;
 };
 
 export const getEvent = async (id: number) => {
   const url = endPoints.events.get + id + "/";
   console.log("url:", url);
-  const response = await api.get<IUOneEvent>({ url });
+  const response = await api.get<IUEvent>({ url });
+  console.log("response: images", response);
   return response;
 };
 

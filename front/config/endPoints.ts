@@ -10,6 +10,8 @@ export const endPoints = {
     user : {
         register: "users/",
         login: "users/login/",
+        edit : "users/",
+        get : "users/",
     },
     events : {
         get : "events/event/",
