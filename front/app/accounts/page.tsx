@@ -13,10 +13,16 @@ import {
 import { IUUser } from "@/interfaces/IUser";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { CiEdit } from "react-icons/ci";
+import { Container } from "@/components/sections/layout/container";
+import { Section } from "@/components/sections/layout/section";
+import { TitleSection } from "@/components/utils/titleSection";
 export default function Page() {
   const user = getTokenFromCookie()?.user;
 
   return (
+    <Container>
+     <Section>
+     <TitleSection title="Mi Cuenta" description="Editar Datos" />
     <Card className="max-w-[600px] mx-auto">
       <CardHeader className="flex gap-3">
         <Avatar isBordered radius="full" size="lg" src={User.src} />
@@ -110,5 +116,7 @@ export default function Page() {
       </CardBody>
       <Divider />
     </Card>
+      </Section> 
+    </Container>
   );
 }
