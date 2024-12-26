@@ -42,6 +42,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         null=True,
         verbose_name=VARIABLE_NAMES_USER["IDENTITY_CARD"],
     )
+    first_name = models.CharField(
+        max_length=30,
+        blank=True,
+        null=True,
+        verbose_name=VARIABLE_NAMES_USER["FIRST_NAME"],
+    )
+    last_name = models.CharField(
+        max_length=30,
+        blank=True,
+        null=True,
+        verbose_name=VARIABLE_NAMES_USER["LAST_NAME"],
+    )
     username = models.CharField(
         max_length=30,
         unique=True,
@@ -66,18 +78,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null=True,
         verbose_name=VARIABLE_NAMES_USER["EMAIL_VERIFICATION_CODE"],
-    )
-    first_name = models.CharField(
-        max_length=30,
-        blank=True,
-        null=True,
-        verbose_name=VARIABLE_NAMES_USER["FIRST_NAME"],
-    )
-    last_name = models.CharField(
-        max_length=30,
-        blank=True,
-        null=True,
-        verbose_name=VARIABLE_NAMES_USER["LAST_NAME"],
     )
     password = models.CharField(
         max_length=128,
@@ -129,3 +129,14 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def generate_verification_code(self):
         self.email_verification_code = get_random_string(length=6)
+
+    @property
+    def has_completed_profile(self):
+        required_fields = [
+            self.identity_card,
+            self.first_name,
+            self.last_name,
+            self.nacionality,
+            self.sex,
+        ]
+        return all(field for field in required_fields)

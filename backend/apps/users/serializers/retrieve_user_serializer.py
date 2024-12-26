@@ -10,6 +10,9 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "identity_card",
+            "first_name",
+            "last_name",
+            "full_name",
             "username",
             "nacionality",
             "email",
@@ -17,12 +20,9 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
             "preferred_language",
             "date_joined",
             "is_active",
-            "first_name",
-            "last_name",
-            "full_name",
             "sex",
             "role",
-
+            "has_completed_profile",
         ]
         read_only_fields = fields
 
