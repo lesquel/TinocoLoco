@@ -49,7 +49,8 @@ class UpdateUserSerializer(BaseUserSerializer):
     def validate_identity_card(self, value):
         if not value:
             return value
-        if CustomUser.objects.filter(identity_card=value).exists():
+        request_user = self.context["request"].user
+        if CustomUser.objects.filter(identity_card=value).exclude(id=request_user.id).exists():
             raise errors.IdentityCardAlreadyExistsError()
         return value
 
