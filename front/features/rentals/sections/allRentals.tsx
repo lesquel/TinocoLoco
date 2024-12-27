@@ -14,7 +14,7 @@ export function AllRentals() {
         return <div>Cargando...</div>;
     }
     return (
-        <div>
+        <div className="flex flex-col gap-4">
             {data?.results.map((rental) => (
                 <CardRental key={rental.id} rental={rental} />
             ))}

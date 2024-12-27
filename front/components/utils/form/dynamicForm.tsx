@@ -10,14 +10,15 @@ interface DynamicFormProps<T> {
   formConfig: FormConfig;
   onSubmit: (data: T, photos: File[]) => void;
   initialData?: Partial<T>;
+  externalErrors?: Record<string, string>; // Manejo de errores externos
 }
 
 const DynamicForm = <T extends Record<string, any>>({
   formConfig,
   onSubmit,
   initialData = {},
+  externalErrors = {},
 }: DynamicFormProps<T>) => {
-  const [isClient, setIsClient] = useState(false);
   const [photos, setPhotos] = useState<File[]>([]);
 
   const {
@@ -25,13 +26,17 @@ const DynamicForm = <T extends Record<string, any>>({
     handleSubmit,
     control,
     formState: { errors },
+    setError,
   } = useForm<T>({
     defaultValues: initialData,
   });
 
+  // Actualizar errores externos
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    Object.entries(externalErrors).forEach(([fieldName, errorMessage]) => {
+      setError(fieldName as keyof T, { type: "manual", message: errorMessage });
+    });
+  }, [externalErrors, setError]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -68,17 +73,11 @@ const DynamicForm = <T extends Record<string, any>>({
       case "select":
         return (
           <Select key={fieldName} {...commonProps}>
-            {config.options ? (
-              config.options.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))
-            ) : (
-              <SelectItem key={`${fieldName}-none`} value="">
-                No hay opciones disponibles
+            {config.options?.map((option) => (
+              <SelectItem key={option.value} value={option.value}>
+                {option.label}
               </SelectItem>
-            )}
+            ))}
           </Select>
         );
       case "file":
@@ -91,7 +90,6 @@ const DynamicForm = <T extends Record<string, any>>({
             onChange={handleImageChange}
           />
         );
-      case "checkbox":
       case "checkbox":
         return (
           <Controller
@@ -108,20 +106,13 @@ const DynamicForm = <T extends Record<string, any>>({
             )}
           />
         );
-
       default:
         return null;
     }
   };
 
-  if (!isClient) {
-    return null;
-  }
-
   const handleFormSubmit = (data: T) => {
-    console.log("photos:", photos);
-    const finalData = { ...data, photos };
-    onSubmit(finalData, photos);
+    onSubmit(data, photos);
   };
 
   return (
@@ -132,9 +123,7 @@ const DynamicForm = <T extends Record<string, any>>({
       {Object.entries(formConfig).map(([fieldName, config]) => (
         <div key={fieldName}>
           {renderField(fieldName, config)}
-          <div className="text-red-500 text-sm">
-            {errors[fieldName]?.message || ""}
-          </div>
+          <div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
         </div>
       ))}
       <Button type="submit" variant="flat" className="mt-4">
