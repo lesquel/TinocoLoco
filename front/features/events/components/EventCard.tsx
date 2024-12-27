@@ -54,7 +54,7 @@ export default function EventCard({ id }: { id: number }) {
                   ${event.event_reference_value}
                 </span>
                 <Chip size="sm" variant="flat">
-                  {event.view_count} views
+                  {event.view_count} visualizaciones
                 </Chip>
               </div>
             </div>
