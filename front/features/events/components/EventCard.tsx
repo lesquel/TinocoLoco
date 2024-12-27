@@ -54,35 +54,35 @@ export default function EventCard({ id }: { id: number }) {
                   ${event.event_reference_value}
                 </span>
                 <Chip size="sm" variant="flat">
-                  {event.visualizations} views
+                  {event.view_count} views
                 </Chip>
               </div>
             </div>
 
-            <p className="text-default-500 line-clamp-3">{event.event_description}</p>
 
             <div>
-              <p className="text-sm text-default-500">Event Details:</p>
+              <p className="text-sm text-default-500">Detalles de eventos:</p>
               <div className="flex flex-wrap items-center gap-2 mt-1">
                 <Chip size="sm">
-                  {event.event_allowed_hours} hours included
+                  {event.event_allowed_hours} {event.event_allowed_hours === 1 ? 'hora extra permitida' : 'horas extras permitidas'}
                 </Chip>
                 <Chip size="sm">
-                  ${event.event_extra_hour_rate}/extra hour
+                  ${event.event_extra_hour_rate} extra por hora
                 </Chip>
               </div>
             </div>
 
             <Accordion>
-              <AccordionItem key="1" aria-label="Event Details" title="Event Details">
+              <AccordionItem key="2" aria-label="Descripción" title="Descripción">
+                <p>{event.event_description}</p>
+              </AccordionItem>
+              <AccordionItem key="1" aria-label="Detalles del evento" title="Detalles del evento">
                 <div className="space-y-2">
                   <ChipCategory idCategory={event.event_category} />
-                  <p>Created: {new Date(event.creation_date).toLocaleDateString()}</p>
-                  <p>Last Updated: {new Date(event.last_actualization_date).toLocaleDateString()}</p>
+                  <p>Precio del evento: ${event.event_reference_value}</p>
+                  <p>Fecha de creación: {new Date(event.creation_date).toLocaleDateString()}</p>
+                  <p>Fecha de actualización: {new Date(event.last_actualization_date).toLocaleDateString()}</p>
                 </div>
-              </AccordionItem>
-              <AccordionItem key="2" aria-label="Terms & Conditions" title="Terms & Conditions">
-                <p>Standard booking terms and conditions apply.</p>
               </AccordionItem>
             </Accordion>
 
@@ -92,15 +92,15 @@ export default function EventCard({ id }: { id: number }) {
                 color="primary"
                 size="lg"
               >
-                Book Now
+                Alquilar ahora
               </Button>
-              <Button
+              {/* <Button
                 isIconOnly
                 variant="flat"
                 size="lg"
               >
                 <CiHeart />
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>

@@ -60,7 +60,7 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
               >
                 <SelectItem key="name" value="name">Nombre</SelectItem>
                 <SelectItem key="description" value="description">Descripcion</SelectItem>
-                <SelectItem key="category" value="category">Category</SelectItem>
+                <SelectItem key="category" value="category">Categoria</SelectItem>
                 <SelectItem key="min_reference_value" value="min_reference_value">Valor de Referencia Mínimo</SelectItem>
                 <SelectItem key="max_reference_value" value="max_reference_value">Valor de Referencia Máximo</SelectItem>
                 <SelectItem key="min_allowed_hours" value="min_allowed_hours">Horas Permitidas Mínimas</SelectItem>
