@@ -20,7 +20,7 @@ class UserService(AService):
         return token, user
 
     @classmethod
-    def get_user_by_email(cls, email):
+    def get_by_email(cls, email):
         try:
             return CustomUser.objects.get(email=email)
         except CustomUser.DoesNotExist:
