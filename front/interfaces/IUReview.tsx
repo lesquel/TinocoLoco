@@ -8,3 +8,12 @@ export interface IUReview {
   owner: number;
   content_type: string;
 }
+
+export interface IUReviews {
+  count: number;
+  next?: string;
+  previous?: string;
+  current_page: number;
+  page_size: number;
+  results: [IUReview];
+}

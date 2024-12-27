@@ -12,8 +12,9 @@ export const endPoints = {
         login: "users/login/",
         edit : "users/",
         get : "users/",
-        sendVerificationEmail: "users/send-email-verification-code/",
-        verificationEmail: "users/validate-email/"
+        sendVerificationEmail: "users/send-email-validation-code/",
+        verificationEmail: "users/validate-email/",
+        sendPasswordResetCode: "users/send-password-reset-code/",
     },
     events : {
         get : "events/event/",
@@ -29,6 +30,10 @@ export const endPoints = {
             mostViewed: {
                 get: "events/event/most-viewed/",
             },
+        },
+        reviews: {
+            get: "/reviews/",
+            post: "/add-review/",
         },
         image: {
             post: "/upload-images/",

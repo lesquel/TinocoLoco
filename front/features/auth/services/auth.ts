@@ -58,7 +58,6 @@ export const sendVerificationEmail = async () => {
   console.log(getTokenFromCookie() , "getTokenFromCookie()");
   const response = await api.post({
     url: endPoints.user.sendVerificationEmail,
-    body: {},
     options: {
       headers: {
         Authorization: `token ${getTokenFromCookie()?.token}`,
@@ -73,6 +72,21 @@ export const sendVerificationEmail = async () => {
 export const verificationCodeEmail = async (data: IUcodeEmail) => {
   const response = await api.post({
     url: endPoints.user.verificationEmail,
+    data: JSON.stringify(data), 
+    options: {
+      headers: {
+        Authorization: `token ${getTokenFromCookie()?.token}`,
+        "Content-Type": "application/json",
+      },
+    },
+  });
+  return response;
+};
+
+
+const addReview = async (data: IUReview) => {
+  const response = await api.post({
+    url: endPoints.reviews.post,
     body: JSON.stringify(data),
     options: {
       headers: {

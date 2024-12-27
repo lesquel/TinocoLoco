@@ -15,6 +15,7 @@ import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { IUImg, IUUploadPhoto } from "@/interfaces/IUimg";
 import { image } from "@nextui-org/react";
 import { collectSegmentData } from "next/dist/server/app-render/collect-segment-data";
+import { IUReview, IUReviews } from "@/interfaces/IUReview";
 const api = new FetchApiService();
 
 export const getMostPopularEvents = async (): Promise<IUMostEventPopular> => {
@@ -126,3 +127,28 @@ export const createCategory = async (
   });
   return response;
 };
+
+
+
+
+export const getReviews = async (id: number) => {
+  const response = await api.get<IUReviews>({
+    url: endPoints.events.get + id + endPoints.events.reviews.get,
+  });
+  return response;
+};
+
+export const addReview = async (data: IUReview, id: number) => {
+  const response = await api.post<IUReview>({
+    url: endPoints.events.get + data.event_id + endPoints.events.reviews.post,
+    body: JSON.stringify(data),
+    options: {
+      headers: {
+        Authorization: `token ${getTokenFromCookie()?.token}`,
+        "Content-Type": "application/json",
+      },
+    },
+  });
+  return response;
+};
+

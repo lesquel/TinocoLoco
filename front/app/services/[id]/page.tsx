@@ -13,14 +13,6 @@ export default async function Event({ params }: { params: { id: string } }) {
             <Section>
                 <ServicesCard id={eventId} />
             </Section>
-
-            <Section>
-                <MostPopularEvents />
-            </Section>
-
-            <Section>
-                <MostViewedEvents />
-            </Section>
         </Container>
     );
 }

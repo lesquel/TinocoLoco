@@ -45,7 +45,7 @@ export const editUserConfigForm: FormConfig = {
     required: true,
   },
 
-  nacionality: {
+  nationality: {
     type: "text",
     label: "Nacionalidad",
     required: true,
