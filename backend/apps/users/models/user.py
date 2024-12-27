@@ -16,11 +16,7 @@ class CustomUserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(username=username, email=email, **extra_fields)
         user.set_password(password)
-        user.generate_verification_code()
-        user.save(using=self._db)
-        from base.system_services import UserService
-
-        UserService.send_verification_code(user)
+        user.save()  
         return user
 
     def create_superuser(self, username, email, password=None, **extra_fields):
@@ -59,7 +55,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         unique=True,
         verbose_name=VARIABLE_NAMES_USER["USERNAME"],
     )
-    nacionality = models.CharField(
+    nationality = models.CharField(
         max_length=20,
         blank=True,
         null=True,
@@ -129,6 +125,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def generate_verification_code(self):
         self.email_verification_code = get_random_string(length=6)
+        self.save()
+        return self.email_verification_code
 
     
 
@@ -138,8 +136,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         required_fields = [
             self.identity_card,
             self.first_name,
-            self.last_name,
-            self.nacionality,
+            self.nationality,
             self.sex,
         ]
         return all(field for field in required_fields)

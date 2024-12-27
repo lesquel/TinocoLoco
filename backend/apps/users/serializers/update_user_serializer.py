@@ -15,7 +15,7 @@ class UpdateUserSerializer(BaseUserSerializer):
             "username",
             "first_name",
             "last_name",
-            "nacionality",
+            "nationality",
             "password",
             "sex",
             "preferred_language",

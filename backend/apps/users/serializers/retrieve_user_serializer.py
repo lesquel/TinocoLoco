@@ -14,7 +14,7 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
             "last_name",
             "full_name",
             "username",
-            "nacionality",
+            "nationality",
             "email",
             "email_verified",
             "preferred_language",

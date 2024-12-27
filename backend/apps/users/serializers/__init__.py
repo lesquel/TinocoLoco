@@ -6,4 +6,5 @@ from .change_language_serializer import ChangeLanguageSerializer
 
 from .password_reset_request_serializer import PasswordResetRequestSerializer
 from .password_confirm_serializer import PasswordResetConfirmSerializer
+from .email_validation_code_serializer import EmailValidationCodeSerializer
 from .validate_email_serializer import ValidateEmailSerializer

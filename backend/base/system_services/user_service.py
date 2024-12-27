@@ -62,10 +62,11 @@ class UserService(AService):
     
     @classmethod
     def send_verification_code(cls, user):
+
         EmailService.send_user_verification_code(user)
         
         
     @classmethod
     def send_reset_password_code(cls, user, reset_code):
-        EmailService.send_password_reset_mail(user, reset_code)
+        EmailService.send_password_reset_code(user, reset_code)
         

@@ -1,0 +1,18 @@
+{% extends "users/email_base.html" %}
+
+{% block subject %}{{subject}}{% endblock %}
+{% block recipient_name %}{{ user.username }}{% endblock %}
+{% block content %}
+    <p>Tu reserva para el evento <b>{{ event_name }}</b> ha sido creada con éxito.</p>
+    <h3>Detalles de tu reserva:</h3>
+    <ul>
+        <li><b>Fecha:</b> {{ event_date }}</li>
+        <li><b>Horario:</b> {{ start_time }} - {{ end_time }}</li>
+        <li><b>Costo:</b> ${{ cost }}</li>
+        <li><b>Año: {{year}}</b></li>
+    </ul>
+    <p>Para confirmar tu reserva, utiliza el siguiente código:</p>
+    <h3 style="text-align: center; color: #007BFF;">{{ confirmation_code }}</h3>
+{% endblock %}
+
+{% block business_name %}{{business_configuration.business_name}}{% endblock business_name %}

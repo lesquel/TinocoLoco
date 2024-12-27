@@ -36,7 +36,9 @@ class PasswordResetCode(models.Model):
     @classmethod
     def generate_reset_code(cls, user):
         code = get_random_string(length=10)
-        return cls.objects.create(user=user, code=code)
+        object = cls.objects.create(user=user, code=code)
+        object.save()
+        return object
 
     def is_expired(self):
         expiration_time = self.created_at + timedelta(hours=24)

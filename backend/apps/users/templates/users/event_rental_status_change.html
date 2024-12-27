@@ -1,0 +1,16 @@
+{% extends "users/email_base.html" %}
+
+{% block subject %}{{subject}}{% endblock subject %}
+{% block recipent_name %}{{user.username}}{% endblock recipent_name %}
+{% block content %}
+    <p>Tu reserva para el evento <b>{{ event_name }}</b> ha sido actualizada.</p>
+    <h3>Detalles de tu reserva:</h3>
+    <ul>
+        <li><b>Fecha:</b> {{ event_date }}</li>
+        <li><b>Horario:</b> {{ start_time }} - {{ end_time }}</li>
+        <li><b>Costo:</b> ${{ cost }}</li>
+        <li><b>Estado:</b> {{ status }}</li>
+    </ul>
+    <p>Gracias por confiar en nosotros. Si tienes alguna consulta, no dudes en contactarnos.</p>
+{% endblock %}
+{% block business_name %}{{business_configuration.business_name}}{% endblock business_name %}
