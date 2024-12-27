@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
+from decimal import Decimal
 
 from base.utils import generate_confirmation_code
 from apps.users.models.user import CustomUser
@@ -117,11 +118,12 @@ class EventRental(models.Model):
 
     @property
     def event_rental_cost(self):
-        total = self.event.event_reference_value if self.event else 0
+        total = Decimal(self.event.event_reference_value) if self.event else Decimal(0)
         for service in self.event_rental_services.all():
-            total += service.price
+            total += Decimal(service.price)
         if self.promotion:
-            total -= total * self.promotion.promotion_discount_percentage / 100
+            discount = Decimal(self.promotion.promotion_discount_percentage) / Decimal(100)
+            total -= total * discount
         return total
 
     def increase_view_count(self):

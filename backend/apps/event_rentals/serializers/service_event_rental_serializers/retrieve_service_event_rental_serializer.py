@@ -3,8 +3,8 @@ from ...models import ServicesEventRental
 
 
 class RetrieveServiceEventRentalSerializer(serializers.ModelSerializer):
-    total = serializers.SerializerMethodField()
-
+    price = serializers.SerializerMethodField()
+    event_rental_service = serializers.SerializerMethodField()
     class Meta:
         model = ServicesEventRental
         fields = [
@@ -16,9 +16,7 @@ class RetrieveServiceEventRentalSerializer(serializers.ModelSerializer):
             "date_to_deliver",
             "description",
             "service_observation",
-            "total",
         ]
 
-    def get_total(self, obj: ServicesEventRental):
-        return obj.service.service_unitary_cost * obj.service_quantity
+
 
