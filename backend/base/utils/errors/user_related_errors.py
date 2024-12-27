@@ -13,13 +13,18 @@ LANGUAGE_NOT_SUPPORTED = _("Idioma no soportado")
 USERNAME_ALREADY_EXISTS= _("Este nombre de usuario ya está en uso.")
 IDENTITY_CARD_ALREADY_EXISTS= _("Este número de cédula ya está registrado.")
 EMAIL_ALREADY_EXISTS = _("Este correo electrónico ya está registrado")
-EMAIL_ALREADY_EXISTS= _("Este correo electrónico ya está registrado.")
+EMAIL_DOES_NOT_EXIST = _("Este correo electrónico no está registrado")
+
+INVALID_CODE = _("Código no válido.")
+CODE_EXPIRED = _("El código ha expirado.")
+CODE_USED = _("El código ya ha sido utilizado.")
+
 
 
 # Custom exception classes
 class InvalidRoleError(BaseError):
     def __init__(self):
-        super().__init__(message=INVALID_ROLE, code=status.HTTP_400_BAD_REQUEST, identifier="invalid_role")
+        super().__init__(message=INVALID_ROLE, code=status.HTTP_400_BAD_REQUEST, identifier="role")
 
 
 class MissingFieldsLoginError(BaseError):
@@ -49,7 +54,7 @@ class UserNotFoundError(BaseError):
 
 class InvalidLanguageError(BaseError):
     def __init__(self):
-        super().__init__(message=LANGUAGE_NOT_SUPPORTED, code=status.HTTP_400_BAD_REQUEST, identifier="invalid_language")
+        super().__init__(message=LANGUAGE_NOT_SUPPORTED, code=status.HTTP_400_BAD_REQUEST, identifier="language")
 
 
 class UsernameAlreadyExistsError(BaseError):
@@ -63,3 +68,19 @@ class IdentityCardAlreadyExistsError(BaseError):
 class EmailAlreadyExistsError(BaseError):
     def __init__(self):
         super().__init__(message=EMAIL_ALREADY_EXISTS, code=status.HTTP_400_BAD_REQUEST, identifier="email")
+
+class EmailDoesNotExistError(BaseError):
+    def __init__(self):
+        super().__init__(message=EMAIL_DOES_NOT_EXIST, code=status.HTTP_400_BAD_REQUEST, identifier="email")
+
+class InvalidCodeError(BaseError):
+    def __init__(self):
+        super().__init__(message=INVALID_CODE, code=status.HTTP_400_BAD_REQUEST, identifier="code")
+
+class CodeExpiredError(BaseError):
+    def __init__(self):
+        super().__init__(message=CODE_EXPIRED, code=status.HTTP_400_BAD_REQUEST, identifier="code")
+        
+class CodeUsedError(BaseError):
+    def __init__(self):
+        super().__init__(message=CODE_USED, code=status.HTTP_400_BAD_REQUEST, identifier="code")

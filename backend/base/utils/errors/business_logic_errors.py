@@ -12,8 +12,8 @@ class NotFoundError(BaseError):
     def __init__(self, message=NOT_FOUND, identifier="not_found"):
         super().__init__(message=message, code=status.HTTP_404_NOT_FOUND, identifier=identifier)
 
-class MustProvideImageError(BaseError):
-    def __init__(self, message=MUST_PROVIDE_IMAGE, identifier="must_provide_image"):
+class MustProvidePhotoError(BaseError):
+    def __init__(self, message=MUST_PROVIDE_IMAGE, identifier="photos"):
         super().__init__(message=message, code=status.HTTP_400_BAD_REQUEST, identifier=identifier)
 
 class CannotDeletePendingEventRentalError(BaseError):

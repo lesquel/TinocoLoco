@@ -52,23 +52,22 @@ export default function ServicesCard({ id }: { id: number }) {
                   ${data.service_unitary_cost}
                 </span>
                 <Chip size="sm" variant="flat">
-                  {data.visualizations} views
+                  {data.view_count} visualizaciones
                 </Chip>
               </div>
             </div>
 
-            <p className="text-default-500 line-clamp-3">{data.service_description}</p>
 
             <Accordion>
-              <AccordionItem key="1" aria-label="Event Details" title="Event Details">
-                <div className="space-y-2">
-                  <ChipCategory idCategory={data.service_category} />
-                  <p>Created: {new Date(data.creation_date).toLocaleDateString()}</p>
-                  <p>Last Updated: {new Date(data.last_actualization_date).toLocaleDateString()}</p>
-                </div>
+              <AccordionItem key="2" aria-label="Descripción" title="Descripción">
+              <p className="text-justify leading-relaxed whitespace-pre-line">{data.service_description}</p>
               </AccordionItem>
-              <AccordionItem key="2" aria-label="Terms & Conditions" title="Terms & Conditions">
-                <p>Standard booking terms and conditions apply.</p>
+              <AccordionItem key="1" aria-label="Detalles de servicio" title="Detalles de servicio">
+              <div className="space-y-2">
+                <ChipCategory idCategory={data.service_category} />
+                <p>Fecha de creacion: {new Date(data.creation_date).toLocaleDateString()}</p>
+                <p>Fecha de actualización: {new Date(data.last_actualization_date).toLocaleDateString()}</p>
+              </div>
               </AccordionItem>
             </Accordion>
 
@@ -78,15 +77,15 @@ export default function ServicesCard({ id }: { id: number }) {
                 color="primary"
                 size="lg"
               >
-                Book Now
+                Alquilar ahora
               </Button>
-              <Button
+              {/* <Button
                 isIconOnly
                 variant="flat"
                 size="lg"
               >
                 <CiHeart />
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>

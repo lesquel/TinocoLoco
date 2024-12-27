@@ -27,7 +27,7 @@ export function CreateForm() {
   };
 
   if (!formConfig) {
-    return <div>Loading...</div>;
+    return <div>Cargando...</div>;
   }
   return (
     <div className="flex flex-col justify-center items-center">

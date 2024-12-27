@@ -29,7 +29,6 @@ class UserViewSet(viewsets.ModelViewSet):
     http_method_names = ["get", "post", "put", "delete"]
 
     def get_permissions(self):
-        print("PERMISSION", self.action)
         if self.action in ["create", "login"]:
             permission_classes = [AllowAny]
         elif self.action in [
@@ -95,7 +94,7 @@ class UserViewSet(viewsets.ModelViewSet):
             instance=user_to_update,
             data=request.data,
             partial=True,
-            context={"request": request},
+            context={"user": request.user},
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -163,11 +162,9 @@ class UserViewSet(viewsets.ModelViewSet):
                 {"detail": SUCCESS_MESSAGES["EMAIL_ALREADY_VERIFIED"]},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-            
-        print(request.user)
-        print(request.data)
+
         serializer = self.get_serializer(
-            data=request.data, context={"request": request}
+            data=request.data, context={"email": request.user.email}
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -182,7 +179,9 @@ class UserViewSet(viewsets.ModelViewSet):
         url_path="validate-email",
     )
     def validate_email(self, request):
-        serializer = self.get_serializer(data=request.data, context={"request": request})
+        serializer = self.get_serializer(
+            data=request.data, context={"email": request.user.email}
+        )
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
@@ -198,7 +197,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def send_password_reset_code(self, request):
 
         serializer = self.get_serializer(
-            data=request.data, context={"request": request}
+            data=request.data, context={"email": request.user.email}
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()

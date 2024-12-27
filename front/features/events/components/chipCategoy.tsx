@@ -17,7 +17,7 @@ export function ChipCategory({ idCategory }: { idCategory: number }) {
     }
     return (
         <div>
-            Category: {" "} 
+            Categoría: {" "} 
             <Chip>
                 {data.event_category_name.toUpperCase()}
             </Chip>

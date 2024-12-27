@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.contenttypes.models import ContentType
 from django.db.utils import IntegrityError
+from base.utils import errors
 from ..models import Review
 from ..messages import ERROR_MESSAGES
 
@@ -12,21 +13,21 @@ class CreateReviewSerializer(serializers.ModelSerializer):
 
     def validate_rating_score(self, value):
         if value < 0 or value > 5:
-            raise serializers.ValidationError(
-                ERROR_MESSAGES["RATING_MUST_BE_BETWEEN_1_AND_5"]
-            )
+            raise errors.RatingMustBeBetween1And5()
         return value
 
     def create(self, validated_data):
-        print(validated_data)
         owner = self.context.get("owner")
         related_instance = self.context.get("related_instance")
+        
         object_id = related_instance.id
         rating_score = validated_data.get("rating_score")
         rating_comment = validated_data.get("rating_comment")
 
         if not related_instance:
-            raise serializers.ValidationError(ERROR_MESSAGES["MODEL_DOES_NOT_EXIST"])
+            raise errors.ValidationError(
+                ERROR_MESSAGES["RELATED_INSTANCE_DOES_NOT_EXIST"], "related_instance"
+            )
 
         content_type = ContentType.objects.get_for_model(related_instance)
         try:
@@ -40,6 +41,4 @@ class CreateReviewSerializer(serializers.ModelSerializer):
             )
             return review
         except IntegrityError:
-            raise serializers.ValidationError(
-                ERROR_MESSAGES["OWNER_CONTENT_TYPE_OBJECT_ID_EXISTS"]
-            )
+            raise errors.ReviewAlreadyExits()

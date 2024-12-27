@@ -3,7 +3,7 @@ import { IUImg } from "./IUimg"
 export interface IUService {
     id: number,
     photos: IUImg[],
-    visualizations: number,
+    view_count: number,
     is_active: boolean,
     creation_date: Date,
     last_actualization_date: Date,
@@ -25,7 +25,7 @@ export interface IUServices {
 
 export interface IUCategory {
     id: number,
-    visualizations: number,
+    view_count: number,
     is_active: boolean,
     creation_date: Date,
     last_actualization_date: Date,

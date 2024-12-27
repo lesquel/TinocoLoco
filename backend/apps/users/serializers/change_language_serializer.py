@@ -16,5 +16,5 @@ class ChangeLanguageSerializer(serializers.Serializer):
 
     def validate_preferred_language(self, value):
         if value not in dict(settings.LANGUAGES):
-            raise errors.InvalidLanguage()
+            raise errors.InvalidLanguageError()
         return value

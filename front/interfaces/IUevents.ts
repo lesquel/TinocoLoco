@@ -3,7 +3,7 @@ import { IUImg } from "./IUimg"
 export interface IUEvent {
     id: number,
     photos: IUImg[],
-    visualizations: number,
+    view_count: number,
     is_active: boolean,
     creation_date: Date,
     last_actualization_date: Date,
@@ -48,7 +48,7 @@ export interface IUEvents {
 
 export interface IUCategory {
     id: number,
-    visualizations: number,
+    view_count: number,
     is_active: boolean,
     creation_date: Date,
     last_actualization_date: Date,

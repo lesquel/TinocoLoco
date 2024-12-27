@@ -8,12 +8,11 @@ from ..models import PasswordResetCode
 class PasswordResetRequestSerializer(serializers.Serializer):
 
     def create(self, validated_data):
-        email = self.context["request"].user.email
+        email = self.context.get("email")
         user = UserService.get_user_by_email(email)
 
         reset_code = PasswordResetCode.generate_reset_code(user)
 
         UserService.send_reset_password_code(user, reset_code.code)
-        
-        return reset_code
 
+        return reset_code

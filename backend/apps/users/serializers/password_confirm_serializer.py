@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from ..models import PasswordResetCode
 from base.system_services import UserService
+from base.utils import errors
+from ..models import PasswordResetCode
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
     code = serializers.CharField(max_length=10)
@@ -10,13 +11,12 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         try:
             reset_code = PasswordResetCode.objects.get(code=value)
         except PasswordResetCode.DoesNotExist:
-            raise serializers.ValidationError("Código no válido.")
-
+            raise errors.InvalidCodeError()
         if reset_code.is_expired():
-            raise serializers.ValidationError("El código ha expirado.")
+            raise errors.CodeExpiredError()
         
         if reset_code.is_used:
-            raise serializers.ValidationError("El código ya ha sido utilizado.")
+            raise errors.CodeUsedError()
         
         return value
 
@@ -31,4 +31,4 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         reset_code.is_used = True
         reset_code.save()
 
-        return {"message": "Contraseña restablecida con éxito."}
+        return reset_code
