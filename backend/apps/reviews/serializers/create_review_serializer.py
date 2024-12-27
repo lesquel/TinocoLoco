@@ -19,6 +19,7 @@ class CreateReviewSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         owner = self.context.get("owner")
         related_instance = self.context.get("related_instance")
+        
         object_id = related_instance.id
         rating_score = validated_data.get("rating_score")
         rating_comment = validated_data.get("rating_comment")

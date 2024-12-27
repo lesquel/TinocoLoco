@@ -10,10 +10,6 @@ class BaseUserSerializer(serializers.ModelSerializer):
         model = CustomUser
 
 
-    def handle_password(self, user, password):
-        if password:
-            user.set_password(password)
-        return user
 
     def validate_email(self, email):
         if self.instance and self.instance.email == email:

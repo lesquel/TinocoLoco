@@ -25,11 +25,10 @@ class AddReviewMixin:
 
         serializer = CreateReviewSerializer(
             data={
-                "author": user.id,
                 "rating_score": rating_score,
                 "rating_comment": rating_comment,
             },
-            context={"related_instance": related_instance},
+            context={"owner": user, "related_instance": related_instance},
         )
 
         serializer.is_valid(raise_exception=True)

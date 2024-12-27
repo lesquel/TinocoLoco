@@ -3,7 +3,7 @@ from django.utils.timezone import now
 from datetime import timedelta
 from base.utils import errors
 
-from ..models import CustomUser
+from base.system_services import UserService
 
 
 class ValidateEmailSerializer(serializers.Serializer):
@@ -11,13 +11,10 @@ class ValidateEmailSerializer(serializers.Serializer):
 
     def validate(self, data):
 
-        email = self.context["request"].user.email
+        email = self.context.get("email")
         code = data.get("code")
 
-        try:
-            user = CustomUser.objects.get(email=email)
-        except CustomUser.DoesNotExist:
-            raise errors.EmailDoesNotExistError()
+        user = UserService.get_by_email(email)
 
         if user.email_verification_code != code:
             raise errors.InvalidCodeError()

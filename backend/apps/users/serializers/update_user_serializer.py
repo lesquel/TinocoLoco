@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from base.utils import errors
+from base.system_services import UserService
 from ..models.user import CustomUser
 from ..choices import RoleChoices
 from .base_user_serializer import BaseUserSerializer
@@ -22,7 +23,7 @@ class UpdateUserSerializer(BaseUserSerializer):
         ]
 
     def update(self, instance, validated_data):
-        request_user = self.context["request"].user
+        request_user = self.context.get("user")
         new_role = validated_data.get("role", None)
 
         if new_role:
@@ -39,7 +40,7 @@ class UpdateUserSerializer(BaseUserSerializer):
 
         password = validated_data.pop("password", None)
         if password:
-            self.handle_password(instance, password)
+            UserService.change_user_password(instance, password)
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
@@ -50,7 +51,7 @@ class UpdateUserSerializer(BaseUserSerializer):
     def validate_identity_card(self, value):
         if not value:
             return value
-        request_user = self.context["request"].user
+        request_user = self.context.get("user")
         if CustomUser.objects.filter(identity_card=value).exclude(id=request_user.id).exists():
             raise errors.IdentityCardAlreadyExistsError()
         return value

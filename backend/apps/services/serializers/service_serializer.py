@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from apps.services.models import Service
-from apps.reviews.serializers import RetrieveReviewSerializer
 from apps.photos.serializers import RetrievePhotoSerializer
 class ServiceSerializer(serializers.ModelSerializer):
     photos = RetrievePhotoSerializer(many=True, read_only=True)
