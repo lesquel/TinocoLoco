@@ -17,5 +17,5 @@ class RetrieveEventRentalSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventRental
         fields = "__all__"
-        read_only_fields = [field.name for field in model._meta.fields]
+        read_only_fields = [field.name for field in model._meta.fields] 
 

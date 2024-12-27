@@ -7,16 +7,8 @@ class RetrieveServiceEventRentalSerializer(serializers.ModelSerializer):
     event_rental_service = serializers.SerializerMethodField()
     class Meta:
         model = ServicesEventRental
-        fields = [
-            "id",
-            "event_rental",
-            "service",
-            "service_quantity",
-            "status",
-            "date_to_deliver",
-            "description",
-            "service_observation",
-        ]
+        fields = "__all__"
+        read_only_fields = [field.name for field in model._meta.fields]
 
 
 
