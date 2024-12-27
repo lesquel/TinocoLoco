@@ -72,13 +72,6 @@ export default function ServicesCard({ id }: { id: number }) {
             </Accordion>
 
             <div className="mt-4 flex gap-2">
-              <Button
-                className="flex-1"
-                color="primary"
-                size="lg"
-              >
-                Alquilar ahora
-              </Button>
               {/* <Button
                 isIconOnly
                 variant="flat"

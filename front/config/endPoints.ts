@@ -54,6 +54,10 @@ export const endPoints = {
                 get: "services/service/most-viewed/",
             },
         },
+        reviews: {
+            get: "/reviews/",
+            post: "/add-review/",
+        },
         image: {
             post: "/upload-images/",
         },

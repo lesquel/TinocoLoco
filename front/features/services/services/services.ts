@@ -10,6 +10,7 @@ import { construcUrl } from "@/services/utils/construcUrl";
 import { IUCategory, IUCategorys } from "@/interfaces/IUevents";
 import { IUUploadPhoto } from "@/interfaces/IUimg";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
+import { IUReview } from "@/interfaces/IUReview";
 const api = new FetchApiService();
 
 export const getMostPopularServices =
@@ -115,6 +116,28 @@ export const createCategory = async (data: IUCategory) => {
       headers: {
         Authorization: `token ${getTokenFromCookie()?.token}`,
         // No incluir "Content-Type"
+      },
+    },
+  });
+  return response;
+};
+
+
+export const getReviews = async (id: number) => {
+  const response = await api.get<IUReview>({
+    url: endPoints.services.get + id + endPoints.services.reviews.get,
+  });
+  return response;
+};
+
+export const addReview = async (data: IUReview, id: number) => {
+  const response = await api.post<IUReview>({
+    url: endPoints.services.get + data.id + endPoints.services.reviews.post,
+    body: JSON.stringify(data),
+    options: {
+      headers: {
+        Authorization: `token ${getTokenFromCookie()?.token}`,
+        "Content-Type": "application/json",
       },
     },
   });

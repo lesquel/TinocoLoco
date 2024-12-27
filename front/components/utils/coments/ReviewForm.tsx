@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
 import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { Button, Textarea } from "@nextui-org/react";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { FaStar } from "react-icons/fa6";
 import { addReview } from "@/features/events/services/events";
 import { IUReview } from "@/interfaces/IUReview";
-import { StarRating } from "./StarRating";
 
 interface ReviewFormData {
   rating_score: number;
@@ -14,59 +14,85 @@ interface ReviewFormData {
 }
 
 interface ReviewFormProps {
-  eventId: number;
+  id: number;
+  fetchData: (data: IUReview) => Promise<any>;
+  onReviewAdded: () => void;
 }
 
-export const ReviewForm: React.FC<ReviewFormProps> = ({ eventId }) => {
-  const { control, handleSubmit, reset } = useForm<ReviewFormData>();
-  const { error, loading, execute } = useAsyncAction(addReview);
+export const ReviewForm = ({
+  id,
+  fetchData,
+  onReviewAdded,
+}: ReviewFormProps) => {
+  const [rating, setRating] = useState<number>(0);
+  const { control, handleSubmit, setValue, reset } = useForm<ReviewFormData>();
+  const { error, loading, execute } = useAsyncAction(fetchData);
 
-  const handleFormSubmit = useCallback(async (data: ReviewFormData) => {
+  const handleFormSubmit = useCallback((data: ReviewFormData) => {
     const reviewData: IUReview = {
       ...data,
-      event_id: eventId,
+      rating_score: rating,
+      id: id,
     };
 
-    try {
-      await execute(reviewData);
-      console.log("Review submitted successfully");
-      reset(); // Reset the form after successful submission
-    } catch (error) {
-      console.error("Error submitting review:", error);
-    }
-  }, [eventId, execute, reset]);
+    execute(reviewData, (response) => {
+      console.log(response);
+      onReviewAdded();
+      reset();
+      setRating(0);
+    });
+  }, [execute, id, rating, onReviewAdded, reset]);
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
-      <Controller
-        name="rating_score"
-        control={control}
-        defaultValue={0}
-        rules={{ required: true, min: 1 }}
-        render={({ field }) => (
-          <StarRating
-            rating={field.value}
-            onRatingChange={(value) => field.onChange(value)}
-          />
-        )}
-      />
+      <div>
+        <p className="mb-2">Calificación:</p>
+        <div className="flex">
+          {[...Array(5)].map((_, index) => {
+            const ratingValue = index + 1;
+            return (
+              <FaStar
+                key={index}
+                className="cursor-pointer"
+                color={ratingValue <= rating ? "#ffc107" : "#e4e5e9"}
+                size={24}
+                onClick={() => {
+                  setRating(ratingValue);
+                  setValue("rating_score", ratingValue);
+                }}
+              />
+            );
+          })}
+        </div>
+      </div>
 
       <Controller
         name="rating_comment"
         control={control}
         defaultValue=""
-        rules={{ required: true }}
-        render={({ field }) => (
-          <Textarea
-            {...field}
-            label="Comentario"
-            placeholder="Escribe tu comentario aquí"
-            className="w-full"
-          />
+        rules={{ required: "El comentario es obligatorio." }}
+        render={({ field, fieldState }) => (
+          <>
+            <Textarea
+              {...field}
+              label="Comentario"
+              placeholder="Escribe tu comentario aquí"
+              className="w-full"
+            />
+            {fieldState.error && (
+              <p className="text-red-500 text-sm mt-1">
+                {fieldState.error.message}
+              </p>
+            )}
+          </>
         )}
       />
 
-      {error && <p className="text-red-500">Error al enviar el comentario.</p>}
+      {error && (
+        <p className="text-red-500 text-sm">
+          Error al enviar el comentario. Por favor, inténtalo nuevamente.
+        </p>
+      )}
       <Button type="submit" color="primary" isLoading={loading} disabled={loading}>
         Enviar comentario
       </Button>

@@ -140,7 +140,7 @@ export const getReviews = async (id: number) => {
 
 export const addReview = async (data: IUReview, id: number) => {
   const response = await api.post<IUReview>({
-    url: endPoints.events.get + data.event_id + endPoints.events.reviews.post,
+    url: endPoints.events.get + data.id + endPoints.events.reviews.post,
     body: JSON.stringify(data),
     options: {
       headers: {
