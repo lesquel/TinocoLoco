@@ -38,12 +38,12 @@
 </head>
 <body>
     <div class="container">
-        <h2>{{ subject }}</h2>
-        <p>Hola <b>{{ recipient_name }}</b>,</p>
+        <h2>{% block subject %}{% endblock subject %}</h2>
+        <p>Hola <b>{% block recipent_name %}{% endblock recipent_name %}</b></p>
         {% block content %}
         {% endblock %}
         <footer>
-            <p class="footer-text">&copy; {{ year }} {{business_configuration.business_name}}. Todos los derechos reservados.</p>
+            <p class="footer-text">&copy; {{ year }} {% block business_name %}{% endblock business_name %} . Todos los derechos reservados.</p>
         </footer>
     </div>
 </body>

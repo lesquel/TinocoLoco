@@ -1,7 +1,7 @@
-{% extends "email_templates/base_email.html" %}
+{% extends "users/email_base.html" %}
 
 {% block subject %}{{subject}}{% endblock %}
-{% block recipient_name %}{{ owner }}{% endblock %}
+{% block recipient_name %}{{ user.username }}{% endblock %}
 {% block content %}
     <p>Tu reserva para el evento <b>{{ event_name }}</b> ha sido creada con éxito.</p>
     <h3>Detalles de tu reserva:</h3>
@@ -14,3 +14,5 @@
     <p>Para confirmar tu reserva, utiliza el siguiente código:</p>
     <h3 style="text-align: center; color: #007BFF;">{{ confirmation_code }}</h3>
 {% endblock %}
+
+{% block business_name %}{{business_configuration.business_name}}{% endblock business_name %}

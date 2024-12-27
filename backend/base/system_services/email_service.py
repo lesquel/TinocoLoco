@@ -3,7 +3,11 @@ from django.conf import settings
 from django.template.loader import render_to_string
 import datetime
 
+def get_business_configuration():
+    from apps.business_configuration.models import BusinessConfiguration
 
+    configuration, created = BusinessConfiguration.objects.get_or_create()
+    return configuration
 class EmailService:
     @staticmethod
     def send_email(subject, recipient_list, html_message, plain_message=None):
@@ -22,7 +26,7 @@ class EmailService:
 
         context = {
             "subject": subject,
-            "owner": event_rental.owner,
+            "user": event_rental.owner,
             "event_name": event_rental.event,
             "event_date": event_rental.event_rental_date,
             "start_time": event_rental.event_rental_start_time,
@@ -30,14 +34,15 @@ class EmailService:
             "cost": event_rental.event_rental_cost,
             "confirmation_code": event_rental.confirmation_code,
             "year": datetime.datetime.now().year,
+            "business_configuration": get_business_configuration(),
         }
 
         html_message = render_to_string(
-            "email_templates/email_event_rental_confirmation.html", context
+            "users/email_event_rental_confirmation.html", context
         )
         plain_message = f"Hola {event_rental.owner}, tu reserva para el evento {event_rental.event} ha sido creada con éxito."
         recipent_list = [event_rental.owner.email]
-        cls.send_email(subject, recipent_list, html_message, plain_message) 
+        cls.send_email(subject, recipent_list, html_message, plain_message)
 
     @classmethod
     def send_event_rental_status_change(cls, event_rental):
@@ -47,7 +52,7 @@ class EmailService:
         subject = "Cambio de estado de reserva"
         context = {
             "subject": subject,
-            "owner": event_rental.owner,
+            "user": event_rental.owner,
             "event_name": event_rental.event,
             "event_date": event_rental.event_rental_date,
             "start_time": event_rental.event_rental_start_time,
@@ -55,24 +60,27 @@ class EmailService:
             "cost": event_rental.event_rental_cost,
             "status": event_rental.status,
             "year": datetime.datetime.now().year,
+            "business_configuration": get_business_configuration(),
         }
 
         html_message = render_to_string(
-            "email_templates/event_rental_status_change.html", context
+            "users/event_rental_status_change.html", context
         )
         plain_message = f"Hola {event_rental.owner}, tu reserva para el evento {event_rental.event} ha sido actualizada."
         recipient_list = [event_rental.owner.email]
         cls.send_email(subject, recipient_list, html_message, plain_message)
 
-
     @classmethod
     def send_user_verification_code(cls, user):
         subject = "Código de verificación"
         context = {
+            "subject": subject,
             "user": user,
             "year": datetime.datetime.now().year,
+            "business_configuration": get_business_configuration(),
         }
-        html_message = render_to_string("email_templates/email_verification_code.html", context)
+
+        html_message = render_to_string("users/email_verification_code.html", context)
         plain_message = f"Hola {user.username}, por favor ingresa el siguiente código para verificar tu cuenta: {user.email_verification_code}."
         recipient_list = [user.email]
         cls.send_email(subject, recipient_list, html_message, plain_message)
@@ -81,11 +89,13 @@ class EmailService:
     def send_password_reset_code(cls, user, reset_code):
         subject = "Restablecimiento de contraseña"
         context = {
+            "subject": subject,
             "user": user,
             "reset_code": reset_code,
             "year": datetime.datetime.now().year,
+            "business_configuration": get_business_configuration(),
         }
-        html_message = render_to_string("email_templates/email_reset_code.html", context)
+        html_message = render_to_string("users/email_reset_code.html", context)
         plain_message = (
             f"Hola {user.username},\n\n"
             f"Parece que has solicitado restablecer tu contraseña.\n\n"
