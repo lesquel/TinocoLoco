@@ -29,7 +29,7 @@ class UserViewSet(viewsets.ModelViewSet):
     http_method_names = ["get", "post", "put", "delete"]
 
     def get_permissions(self):
-
+        print(self.action)
         if self.action in ["create", "login"]:
             permission_classes = [AllowAny]
         elif self.action in [
