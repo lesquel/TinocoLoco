@@ -34,8 +34,6 @@ class UserViewSet(viewsets.ModelViewSet):
             permission_classes = [AllowAny]
         elif self.action in [
             "update",
-            "send_password_reset_code",
-            "reset_password",
         ]:
             permission_classes = [HasVerifiedEmail]
         elif self.action in ["destroy", "retrieve"]:
@@ -45,6 +43,8 @@ class UserViewSet(viewsets.ModelViewSet):
             "change_language",
             "validate_email",
             "send_email_validation_code",
+            "send_password_reset_code",
+            "reset_password",
         ]:
             permission_classes = [IsAuthenticated]
         else:
