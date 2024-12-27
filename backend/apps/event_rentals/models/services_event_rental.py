@@ -1,4 +1,5 @@
 from django.db import models
+from decimal import Decimal
 from apps.services.models import Service
 
 from base.utils import errors
@@ -78,7 +79,9 @@ class ServicesEventRental(models.Model):
 
     @property
     def price(self):
-        return self.service.service_unitary_cost * self.service_quantity
+        if self.service.service_unitary_cost is None:
+            return Decimal(0)
+        return Decimal(self.service.service_unitary_cost) * self.service_quantity
 
     def __str__(self):
         return f"{self.event_rental} | {self.service}"
