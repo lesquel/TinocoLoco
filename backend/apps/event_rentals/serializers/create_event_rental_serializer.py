@@ -4,8 +4,9 @@ from rest_framework import serializers
 from base.system_services import EventRentalService
 from ..models import EventRental
 
+from .base_event_rental_serializer import BaseEventRentalSerializer
 
-class CreateEventRentalSerializer(serializers.ModelSerializer):
+class CreateEventRentalSerializer(BaseEventRentalSerializer):
     class Meta:
         model = EventRental
         fields = [
@@ -19,7 +20,6 @@ class CreateEventRentalSerializer(serializers.ModelSerializer):
             "event_rental_max_attendees",
             "promotion",
         ]
-        
 
     def create(self, validated_data):
         validated_data["owner"] = self.context.get("user")

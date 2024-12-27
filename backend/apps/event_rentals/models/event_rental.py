@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
 from decimal import Decimal
+import datetime
 
 from base.utils import generate_confirmation_code
 from apps.users.models.user import CustomUser
@@ -122,7 +123,9 @@ class EventRental(models.Model):
         for service in self.event_rental_services.all():
             total += Decimal(service.price)
         if self.promotion:
-            discount = Decimal(self.promotion.promotion_discount_percentage) / Decimal(100)
+            discount = Decimal(self.promotion.promotion_discount_percentage) / Decimal(
+                100
+            )
             total -= total * discount
         return total
 
@@ -147,6 +150,14 @@ class EventRental(models.Model):
     def clean(self):
         if self.event_rental_min_attendees > self.event_rental_max_attendees:
             raise errors.InvalidMinAttendeesError()
+        if self.event_rental_cancelled_value_in_advance < 0:
+            raise errors.ValueCancellationInAdvanceMustBeGreaterThanZeroError()
+        if self.event_rental_date < self.event.event_start_date:
+            raise errors.EventRentalDateCannotBeLessThanTodayError()
+        if self.event_rental_date < self.event.event_start_date - datetime.timedelta(
+            days=3
+        ):
+            raise errors.EventRentalDateMustBeAtLeastThreeDaysInAdvanceError()
 
     def save(self, *args, **kwargs):
         is_new = self.pk is None

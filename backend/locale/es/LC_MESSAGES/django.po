@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-27 16:38-0500\n"
+"POT-Creation-Date: 2024-12-27 18:37-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -592,12 +592,12 @@ msgid "Promoción"
 msgstr "Promoción"
 
 #: .\apps\reviews\messages\error_messages.py:5
-#: .\base\utils\errors\reviews_relatated.py:6
+#: .\base\utils\errors\reviews_relatated_errors.py:6
 msgid "Ya existe una reseña de este autor para este objeto."
 msgstr "Ya existe una reseña de este autor para este objeto."
 
 #: .\apps\reviews\messages\error_messages.py:7
-#: .\base\utils\errors\reviews_relatated.py:5
+#: .\base\utils\errors\reviews_relatated_errors.py:5
 msgid "La calificación debe estar entre 1 y 5."
 msgstr "La calificación debe estar entre 1 y 5."
 
@@ -898,13 +898,30 @@ msgstr "Este servicio no está asociado con este alquiler de evento."
 msgid "Debe proporcionar al menos una imagen."
 msgstr "Debe proporcionar al menos una imagen"
 
-#: .\base\utils\errors\event_rentals_retaled.py:6
+#: .\base\utils\errors\event_rentals_retaled_erros.py:6
 msgid "Este alquiler ya ha sido confirmado"
 msgstr "Este alquiler ya ha sido confirmado"
 
-#: .\base\utils\errors\event_rentals_retaled.py:7
-msgid "El numero de asistentes minimo no puede ser mayor al numero de asistentes maximo"
-msgstr "El numero de asistentes minimo no puede ser mayor al numero de asistentes maximo"
+#: .\base\utils\errors\event_rentals_retaled_erros.py:7
+msgid ""
+"El numero de asistentes minimo no puede ser mayor al numero de asistentes "
+"maximo"
+msgstr ""
+"El numero de asistentes minimo no puede ser mayor al numero de asistentes "
+"maximo"
+
+#: .\base\utils\errors\event_rentals_retaled_erros.py:8
+msgid "El valor de cancelacion debe ser mayor a 0"
+msgstr "El valor de cancelacion debe ser mayor a 0."
+
+#: .\base\utils\errors\event_rentals_retaled_erros.py:9
+
+msgid "La fecha del alquiler no puede ser menor a la fecha actual"
+msgstr "La fecha del alquiler no puede ser menor a la fecha actual"
+
+#: .\base\utils\errors\event_rentals_retaled_erros.py:10
+msgid "El alquiler debe ser al menos con tres dias de anticipacion"
+msgstr "El alquiler debe ser al menos con tres dias de anticipacion"
 
 #: .\base\utils\errors\user_related_errors.py:6
 msgid "Rol inválido"
@@ -959,7 +976,6 @@ msgid "El código ha expirado."
 msgstr "El codigo ha expirado."
 
 #: .\base\utils\errors\user_related_errors.py:20
-
 msgid "El código ya ha sido utilizado."
 msgstr "El código ya ha sido utilizado."
 
