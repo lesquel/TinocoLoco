@@ -3,7 +3,9 @@ from rest_framework import serializers
 
 from ..models import EventRental
 
-class UpdateEventRentalSerializer(serializers.ModelSerializer):
+from .base_event_rental_serializer import BaseEventRentalSerializer
+
+class UpdateEventRentalSerializer(BaseEventRentalSerializer):
     class Meta:
         model = EventRental
         fields = [
