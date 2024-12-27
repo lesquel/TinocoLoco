@@ -19,6 +19,7 @@ class CreateEventRentalSerializer(serializers.ModelSerializer):
             "event_rental_max_attendees",
             "promotion",
         ]
+        
 
     def create(self, validated_data):
         validated_data["owner"] = self.context.get("user")
