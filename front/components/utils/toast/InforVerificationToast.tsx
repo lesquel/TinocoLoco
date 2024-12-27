@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoMdClose } from "react-icons/io";
 import Link from "next/link";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
-import { Button, Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Button, Card, CardBody } from "@nextui-org/react";
+import { siteConfig } from "@/config/site";
 
 interface CustomToastProps {
   t: {
@@ -13,18 +14,20 @@ interface CustomToastProps {
     id: string;
   };
   verificationLink: string;
+  text: string;
 }
 
-export const CustomEmailVerificationToast: React.FC<CustomToastProps> = ({
+const CustomToast: React.FC<CustomToastProps> = ({
   t,
   verificationLink,
+  text,
 }) => {
   return (
     <Card className="flex items-center justify-between max-w-96 gap-3">
       <CardBody className="flex flex-row items-center">
         <IoMdClose className="h-10 w-10 text-red-500" />
         <p className="mt-1 text-sm text-gray-500">
-          Haz click en el botón para verificar tu correo electrónico:
+          {text}
         </p>
         <Button
           as={Link}
@@ -40,26 +43,52 @@ export const CustomEmailVerificationToast: React.FC<CustomToastProps> = ({
 };
 
 export function InforVerificationToast() {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const userInfo = getTokenFromCookie();
-    if (!userInfo) {
-      return;
-    }
+    if (!userInfo) return;
+
     if (!userInfo?.user?.email_verified) {
       toast.custom(
         (t) => (
-          <CustomEmailVerificationToast
+          <CustomToast
             t={t}
-            verificationLink="/verify-email" // Replace with your actual verification link
+            text="Por favor, verifica tu correo electrónico para poder continuar."
+            verificationLink={siteConfig.navMenuItems.account.href}
           />
         ),
         {
-          duration: 3000, // 50 seconds
+          duration: 5000,
           position: "bottom-right",
         }
       );
     }
-  }, []);
 
-  return null; // This component doesn't render anything
+    if (!userInfo.user.has_completed_profile) {
+      toast.custom(
+        (t) => (
+          <CustomToast
+            t={t}
+            text="Por favor, completa tu perfil para poder continuar."
+            verificationLink={siteConfig.navMenuItems.account.href}
+          />
+        ),
+        {
+          duration: 5000,
+          position: "bottom-right",
+        }
+      );
+    }
+
+  }, [mounted]);
+
+  // No renderiza nada en el DOM directamente.
+  return null;
 }

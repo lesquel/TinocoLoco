@@ -1,8 +1,9 @@
 import { FetchApiService } from "@/services/api/FetchApiService";
 import type { IURegister, IULogin } from "@/interfaces/IUauth";
 import { endPoints } from "@/config/endPoints";
-import { IUUser } from "@/interfaces/IUser";
+import { IUcodeEmail, IUGetUser, IUUser } from "@/interfaces/IUser";
 import { getTokenFromCookie } from "../utils/getUserInfo";
+import { get } from "http";
 
 const api = new FetchApiService();
 
@@ -37,12 +38,14 @@ export const editUser = async (data: IUUser, id: number) => {
   });
   return response;
 };
+
 export const getUser = async (id: number) => {
-  const response = await api.get({
+  const response = await api.get<IUGetUser>({
     url: endPoints.user.get + id + "/",
     options : {
       headers: {
         Authorization: `token ${getTokenFromCookie()?.token}`,
+        "Content-Type": "application/json",
       },
     },
   });
@@ -51,9 +54,25 @@ export const getUser = async (id: number) => {
 
 
 
-const sendVerificationEmail = async (data: IUUser) => {
+export const sendVerificationEmail = async () => {
+  console.log(getTokenFromCookie() , "getTokenFromCookie()");
   const response = await api.post({
     url: endPoints.user.sendVerificationEmail,
+    body: {},
+    options: {
+      headers: {
+        Authorization: `token ${getTokenFromCookie()?.token}`,
+        "Content-Type": "application/json",
+      },
+    },
+  });
+  return response;
+};
+
+
+export const verificationCodeEmail = async (data: IUcodeEmail) => {
+  const response = await api.post({
+    url: endPoints.user.verificationEmail,
     body: JSON.stringify(data),
     options: {
       headers: {

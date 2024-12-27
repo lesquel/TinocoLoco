@@ -1,6 +1,5 @@
 "use client";
 import DynamicForm from "@/components/utils/form/dynamicForm";
-import { useForm } from "react-hook-form";
 import { editUserConfigForm } from "../utils/editUserConfigForm";
 import { getTokenFromCookie } from "../utils/getUserInfo";
 import { useAsyncAction } from "@/hooks/useAsyncAction";
@@ -18,7 +17,7 @@ export default function FormEditUser() {
   const onSubmit = (formData: any) => {
     updateExecute({ ...formData, id: userInfo?.user?.id }, (response) => {
       saveToken({
-        token: getTokenFromCookie()?.token,
+        token: userInfo?.token,
         user: response,
       });
       console.log("User updated successfully", response)
@@ -35,7 +34,7 @@ export default function FormEditUser() {
   }
 
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center  relative">
       <DynamicForm
         formConfig={editUserConfigForm}
         onSubmit={onSubmit}

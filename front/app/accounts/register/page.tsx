@@ -13,28 +13,34 @@ import { IoIosMail } from "react-icons/io"
 import { TitleSection } from "@/components/utils/titleSection"
 
 export const Register = () => {
-  const router = useRouter()
   const [isClient, setIsClient] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const { register, handleSubmit, formState: { errors }, setError } = useForm<IURegister>()
-  const { loading, error, handleRegister, generalError } = useAuth(setError, registerService)
+  const { handleRegister, generalError, loading } = useAuth(setError, registerService)
 
   useEffect(() => {
     setIsClient(true)
   }, [])
 
   const onSubmit = async (data: IURegister) => {
-    setIsSubmitting(true)
     try {
       await handleRegister(data, (response: any) => {
-        router.push("/")
+        if (response.errors) {
+          // Handle server-side errors
+          Object.keys(response.errors).forEach((field) => {
+            setError(field as keyof IURegister, {
+              type: "server",
+              message: response.errors[field].join(", ")
+            });
+          });
+        } else {
+          window.location.href = "/";
+        }
       })
     } catch (error) {
       console.error("Registration error:", error)
     } finally {
-      setIsSubmitting(false)
     }
   }
 
@@ -48,7 +54,7 @@ export const Register = () => {
     <Card className="w-full max-w-md">
       <CardHeader className="flex flex-col gap-1 items-center">
         <TitleSection title="Crear " description=" Cuenta" />
-        <p className="text-sm text-default-500">Please fill in the form to register</p>
+        <p className="text-sm text-default-500">Por favor, complete el formulario para registrarse.</p>
       </CardHeader>
       <CardBody>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -60,6 +66,7 @@ export const Register = () => {
             startContent={<IoIosMail className="text-default-400 pointer-events-none flex-shrink-0" />}
             {...register("email", validationRules.email)}
             errorMessage={errors.email?.message}
+            isInvalid={!!errors.email}
           />
 
           <Input
@@ -68,6 +75,7 @@ export const Register = () => {
             startContent={<FaUser className="text-default-400 pointer-events-none flex-shrink-0" />}
             {...register("username", validationRules.username)}
             errorMessage={errors.username?.message}
+            isInvalid={!!errors.username}
           />
 
           <Input
@@ -75,7 +83,7 @@ export const Register = () => {
             variant="bordered"
             startContent={<FaLock className="text-default-400 pointer-events-none flex-shrink-0" />}
             endContent={
-              <button type="button" onClick={toggleVisibility}>
+              <button type="button" onClick={toggleVisibility} className="bg-transparent border-none">
                 {isVisible ? (
                   <FaEyeSlash className="text-default-400 pointer-events-none" />
                 ) : (
@@ -86,22 +94,23 @@ export const Register = () => {
             type={isVisible ? "text" : "password"}
             {...register("password", validationRules.password)}
             errorMessage={errors.password?.message}
+            isInvalid={!!errors.password}
           />
 
           <Button
             type="submit"
             color="primary"
             variant="shadow"
-            isLoading={isSubmitting}
-            disabled={isSubmitting}
+            isLoading={loading}
+            disabled={loading}
             className="mt-2"
           >
-            {isSubmitting ? "Registering..." : "Register"}
+            {loading ? "Registrando..." : "Registrar"}
           </Button>
         </form>
         <div className="mt-4 text-center">
-          <span className="text-default-500">Already have an account? </span>
-          <Link href="/accounts/login" size="sm">Login</Link>
+          <span className="text-default-500">¿Ya tienes una cuenta? </span>
+          <Link href="/accounts/login" size="sm">Iniciar sesión</Link>
         </div>
       </CardBody>
     </Card>

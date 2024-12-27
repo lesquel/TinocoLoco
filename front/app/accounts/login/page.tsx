@@ -11,6 +11,7 @@ import { login as loginService } from "@/features/auth/services/auth"
 import { FaEyeSlash, FaEye, FaLock } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 import { TitleSection } from "@/components/utils/titleSection"
+import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo"
 
 export const Login = () => {
   const router = useRouter()
@@ -26,8 +27,10 @@ export const Login = () => {
 
   const onSubmit = async (data: IURegister) => {
     handleRegister(data, (response: any) => {
+      console.log("token:", 
+        getTokenFromCookie()
+      );
       window.location.href = "/"
-      console.log("response:vsgeg", response)
     })
   }
 

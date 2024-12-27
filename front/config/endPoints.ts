@@ -12,6 +12,8 @@ export const endPoints = {
         login: "users/login/",
         edit : "users/",
         get : "users/",
+        sendVerificationEmail: "users/send-email-verification-code/",
+        verificationEmail: "users/validate-email/"
     },
     events : {
         get : "events/event/",

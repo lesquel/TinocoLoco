@@ -1,6 +1,6 @@
 "use client";
 import User from "@/public/images/user.png";
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Card,
   CardHeader,
@@ -18,9 +18,48 @@ import { TitleSection } from "@/components/utils/titleSection";
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { ModalVerifyEmail } from "@/components/utils/modal/modalVerifyEmail";
+import { getUser } from "@/features/auth/services/auth";
+import { useApiRequest } from "@/hooks/useApiRequest";
+import { saveToken } from "@/features/auth/utils/saveUserInfo";
 export default function Page() {
-  const user = getTokenFromCookie()?.user;
-  console.log(user);
+  const infoUsuerToke = getTokenFromCookie();
+  const fetchUser = useCallback(() => getUser(infoUsuerToke?.user?.id), []);
+  const { data, error, isLoading } = useApiRequest(fetchUser);
+  console.log(
+    "dataefojbwedfguofówefówowfe´wogeifgweofgewgfówgwfeo´jwefgwogweu:",
+    infoUsuerToke
+  );
+  if (error) {
+    return <div>Error al obtener la información del usuario</div>;
+  }
+  if (!data) {
+    return <div>Cargando...</div>;
+  }
+  saveToken({
+    token: infoUsuerToke?.token,
+    user: data,
+  });
+  const user = data;
+
+  const userInfo = [
+    { label: "Cedula", value: user?.identity_card },
+    { label: "Email", value: user?.email },
+    { label: "Nombre", value: user?.first_name },
+    { label: "Apellido", value: user?.last_name },
+    { label: "Sexo", value: user?.sex },
+    { label: "Email Verificado", value: user?.email_verified ? "Si" : "No" },
+    { label: "Nacionalidad", value: user?.nacionality },
+    {
+      label: "Fecha de Registro",
+      value: new Date(user?.date_joined).toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }),
+    },
+    { label: "Estado", value: user?.is_active ? "Activo" : "Inactivo" },
+  ];
+
   return (
     <Container>
       <Section>
@@ -35,7 +74,7 @@ export default function Page() {
                 </p>
                 <p className="text-small text-default-500">@{user?.username}</p>
                 <Chip size="sm" color="primary" variant="flat">
-                  {user?.role}
+                  {user?.role || "customer"}
                 </Chip>
                 <div className="flex flex-row gap-2">
                   {!user?.email_verified ? (
@@ -45,23 +84,27 @@ export default function Page() {
                       Email verificado
                     </Chip>
                   )}
-                  {!user?.has_completed_profile ? (
-                    <div>
-                      <Chip size="sm" color="danger" variant="flat">
-                        Perfil incompleto
-                      </Chip>
-                      <Button
-                        href={siteConfig.navMenuItems.edit.href}
-                        as={Link}
-                        color="primary"
-                      >
-                        Resolver
-                      </Button>
-                    </div>
-                  ) : (
-                    <Chip size="sm" color="danger" variant="flat">
-                      Perfil completo
-                    </Chip>
+                  {user?.email_verified && (
+                    <>
+                      {!user?.has_completed_profile ? (
+                        <div>
+                          <Chip size="sm" color="danger" variant="flat">
+                            Perfil incompleto
+                          </Chip>
+                          <Button
+                            href={siteConfig.navMenuItems.edit.href}
+                            as={Link}
+                            color="primary"
+                          >
+                            Resolver
+                          </Button>
+                        </div>
+                      ) : (
+                        <Chip size="sm" color="primary" variant="flat">
+                          Perfil completo
+                        </Chip>
+                      )}
+                    </>
                   )}
                 </div>
               </div>
@@ -73,46 +116,12 @@ export default function Page() {
           <Divider />
           <CardBody>
             <div className="space-y-3">
-            <div className="flex justify-between">
-                <p className="text-default-500">Cedula:</p>
-                <p>{user?.identity_card}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-default-500">Email:</p>
-                <p>{user?.email}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-default-500">Nombre:</p>
-                <p>{user?.first_name}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-default-500">Apellido:</p>
-                <p>{user?.last_name}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-default-500">Sexo:</p>
-                <p>{user?.sex}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-default-500">Email Verificado:</p>
-                <p>{user?.email_verified ? "Si" : "No"}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-default-500">Identidad:</p>
-                <p>{user?.identity_card}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-default-500">Nacionalidad:</p>
-                <p>{user?.nacionality}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-default-500">Fecha de Registro:</p>
-                <p>{user?.date_joined}</p>
-              </div>
-              <div className="flex justify-between">
-                <p className="text-default-500">Estado:</p>
-                <p>{user?.is_active ? "Activo" : "Inactivo"}</p>
-              </div>
+              {userInfo.map(({ label, value }, index) => (
+                <div className="flex justify-between" key={index}>
+                  <p className="text-default-500">{label}:</p>
+                  <p>{value}</p>
+                </div>
+              ))}
             </div>
           </CardBody>
           <Divider />

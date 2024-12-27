@@ -15,7 +15,7 @@ import { siteConfig } from "@/config/site";
 import { useEffect, useState } from "react";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { IUUser, Role } from "@/interfaces/IUser";
-
+import User from "@/public/images/user.png";
 export const LinksRegister = () => {
   const [userInfo, setUserInfo] = useState<IUUser | null>(null);
 
@@ -58,7 +58,7 @@ export const LinksRegister = () => {
                   color="secondary"
                   name={userInfo?.user?.first_name}
                   size="sm"
-                  src={userInfo?.user?.first_name}
+                  src={User.src}
                 />
                 <span>{userInfo?.user?.first_name ?? "Usuario"}</span>
               </div>
