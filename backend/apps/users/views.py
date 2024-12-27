@@ -164,8 +164,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST,
             )
             
-        print(request.user)
-        print(request.data)
+
         serializer = self.get_serializer(
             data=request.data, context={"request": request}
         )

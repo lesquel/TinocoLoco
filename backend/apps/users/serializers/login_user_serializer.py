@@ -18,7 +18,6 @@ class LoginUserSerializer(serializers.Serializer):
     )
 
     def validate(self, data):
-
         username = data.pop("username")
         password = data.pop("password")
         if not username or not password:
@@ -30,3 +29,8 @@ class LoginUserSerializer(serializers.Serializer):
         data["user"] = user
 
         return data
+    
+    def validate_username(self, username):
+        if not UserService.get_user_by_username(username):
+            raise errors.UserNotFoundError()
+        return username

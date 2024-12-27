@@ -30,10 +30,10 @@ class UpdateUserSerializer(BaseUserSerializer):
                 raise errors.InvalidPermissionsError()
             try:
                 instance.role = (
-                    new_role if new_role in RoleChoices.values else RoleChoices.COSTUMER
+                    new_role if new_role in RoleChoices.values else RoleChoices.COSTUMER.value
                 )
-                instance.is_superuser = new_role == RoleChoices.ADMIN
-                instance.is_staff = new_role == RoleChoices.ADMIN
+                instance.is_superuser = new_role == RoleChoices.ADMIN.value
+                instance.is_staff = new_role == RoleChoices.ADMIN.value
             except KeyError:
                 raise errors.InvalidRoleError()
 

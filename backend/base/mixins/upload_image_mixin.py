@@ -14,7 +14,7 @@ class UploadImagesViewMixin:
         images = request.FILES.getlist("images")
 
         if not images:
-            raise errors.MustProvideImageError()
+            raise errors.MustProvidePhotoError()
 
         serializer = CreatePhotoSerializer(
             data=[{"image": img} for img in images],

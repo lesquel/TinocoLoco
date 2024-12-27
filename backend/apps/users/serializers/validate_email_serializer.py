@@ -1,33 +1,26 @@
 from rest_framework import serializers
-from ..models import CustomUser
-from datetime import timedelta
 from django.utils.timezone import now
+from datetime import timedelta
+from base.utils import errors
+
+from ..models import CustomUser
 
 
 class ValidateEmailSerializer(serializers.Serializer):
-    verification_code = serializers.CharField(max_length=6)
+    code = serializers.CharField(max_length=6)
 
     def validate(self, data):
 
         email = self.context["request"].user.email
-        verification_code = data.get("verification_code")
+        code = data.get("code")
 
         try:
             user = CustomUser.objects.get(email=email)
         except CustomUser.DoesNotExist:
-            raise serializers.ValidationError(
-                "El correo electrónico no está registrado."
-            )
+            raise errors.EmailDoesNotExistError()
 
-        if user.email_verification_code != verification_code:
-            raise serializers.ValidationError(
-                "El código de verificación es incorrecto."
-            )
-
-        expiration_time = user.date_joined + timedelta(hours=24)
-        if now() > expiration_time:
-            user.generate_verification_code()
-            raise serializers.ValidationError("El código de verificación ha expirado. Se ha enviado un nuevo código a su correo electrónico.")
+        if user.email_verification_code != code:
+            raise errors.InvalidCodeError()
 
         user.email_verified = True
         user.save()
@@ -35,5 +28,5 @@ class ValidateEmailSerializer(serializers.Serializer):
         return data
 
     def create(self, validated_data):
-        
+
         return validated_data

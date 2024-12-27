@@ -16,5 +16,4 @@ class BaseError(Exception):
                 serialized[key] = [str(e) for e in error_list]
             return serialized
 
-        # Default case: wrap single message into the identifier key
         return {self.identifier: [str(errors)]}

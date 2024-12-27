@@ -13,7 +13,7 @@ class PhotoItemSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         image = attrs.get("image")
         if not image:
-            raise errors.MustProvideImageError()
+            raise errors.MustProvidePhotoError()
         return attrs
 
     def create(self, validated_data):
