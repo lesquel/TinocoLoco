@@ -11,10 +11,7 @@ export default function AccountLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <main>
-      {children}
-      </main>
-  );
+  return <div className="flex max-w-6xl mx-auto">
+    {children}
+    </div>;
 }
-

@@ -14,7 +14,7 @@ export interface IUGetUser {
   sex?: string;
   email_verified: boolean;
   identity_card: string;
-  nacionality: string;
+  nationality: string;
   date_joined: string;
   is_active: boolean;
   preferred_language: string;

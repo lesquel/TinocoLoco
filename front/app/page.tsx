@@ -15,27 +15,29 @@ export default function Home() {
   return (
     <>
       <Banner />
-      <Container>
-        <Section>
-          <CategoryHome />
-        </Section>
+      <div className="flex max-w-6xl mx-auto">
+        <Container>
+          <Section>
+            <CategoryHome />
+          </Section>
 
-        <Section>
-          <MostPopularEvents />
-        </Section>
+          <Section>
+            <MostPopularEvents />
+          </Section>
 
-        <Section>
-          <MostViewedEvents />
-        </Section>
+          <Section>
+            <MostViewedEvents />
+          </Section>
 
-        <Section>
-          <MostPopularServices />
-        </Section>
+          <Section>
+            <MostPopularServices />
+          </Section>
 
-        <Section>
-          <MostViewedSServices />
-        </Section>
-      </Container>
+          <Section>
+            <MostViewedSServices />
+          </Section>
+        </Container>
+      </div>
     </>
   );
 }
