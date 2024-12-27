@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-26 18:43-0500\n"
+"POT-Creation-Date: 2024-12-27 16:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -293,6 +293,10 @@ msgstr "This event already has the service associated."
 #: .\apps\event_rentals\messages\success_messages.py:5
 msgid "Servicio eliminado exitosamente."
 msgstr "Service successfully deleted"
+
+#: .\apps\event_rentals\messages\success_messages.py:6
+msgid "Correo de confirmación de la reserva enviado exitosamente."
+msgstr "Reservation confirmation email sent successfully."
 
 #: .\apps\event_rentals\messages\variable_names.py:5
 #: .\apps\services\messages\variable_names.py:21
@@ -586,23 +590,25 @@ msgstr "Promotion reviews"
 msgid "Promoción"
 msgstr "Promotion"
 
-#: .\apps\reviews\messages\error_messages.py:4
+#: .\apps\reviews\messages\error_messages.py:5
+#: .\base\utils\errors\reviews_relatated.py:6
 msgid "Ya existe una reseña de este autor para este objeto."
 msgstr "A review from this author for this object already exists."
 
-#: .\apps\reviews\messages\error_messages.py:5
+#: .\apps\reviews\messages\error_messages.py:7
+#: .\base\utils\errors\reviews_relatated.py:5
 msgid "La calificación debe estar entre 1 y 5."
 msgstr "The rating must be between 1 and 5."
 
-#: .\apps\reviews\messages\error_messages.py:6
+#: .\apps\reviews\messages\error_messages.py:8
 msgid "La reseña no existe."
 msgstr "The review does not exist."
 
-#: .\apps\reviews\messages\error_messages.py:7
+#: .\apps\reviews\messages\error_messages.py:9
 msgid "El modelo no existe."
 msgstr "The model does not exist."
 
-#: .\apps\reviews\messages\error_messages.py:8
+#: .\apps\reviews\messages\error_messages.py:11
 msgid "Ya existe una reseña para este autor y objeto relacionado."
 msgstr "A review already exists for this author and related object."
 
@@ -890,6 +896,15 @@ msgstr "This service is not associated with this event rental."
 msgid "Debe proporcionar al menos una imagen."
 msgstr "Must provide at least one image"
 
+#: .\base\utils\errors\event_rentals_retaled.py:6
+msgid "Este alquiler ya ha sido confirmado"
+msgstr "This rental has already been confirmed"
+
+#: .\base\utils\errors\event_rentals_retaled.py:7
+
+msgid "El numero de asistentes minimo no puede ser mayor al numero de asistentes maximo"
+msgstr "The start date cannot be greater than the end date"
+
 #: .\base\utils\errors\user_related_errors.py:6
 msgid "Rol inválido"
 msgstr "Invalid role"
@@ -931,8 +946,21 @@ msgid "Este correo electrónico ya está registrado"
 msgstr "This email is already registered."
 
 #: .\base\utils\errors\user_related_errors.py:16
-msgid "Este correo electrónico ya está registrado."
-msgstr "This email is already registered."
+
+msgid "Este correo electrónico no está registrado"
+msgstr "This email is not registered."
+
+#: .\base\utils\errors\user_related_errors.py:18
+msgid "Código no válido."
+msgstr "Invalid code"
+
+#: .\base\utils\errors\user_related_errors.py:19
+msgid "El código ha expirado."
+msgstr "Code has expired."
+
+#: .\base\utils\errors\user_related_errors.py:20
+msgid "El código ya ha sido utilizado."
+msgstr "Code has already been used."
 
 #: .\base\utils\update_jazmin_settings.py:38
 msgid "Bienvenido a la administración de {}"

@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 ALREADY_CONFIRMED = _("Este alquiler ya ha sido confirmado")
-MIN_ATTENDEES_CANNOT_BE_GREATER_THAN_MAX_ATTENDEES = _("El numero de asistentes minimo no puede ser mayor al numero de asistent")
+MIN_ATTENDEES_CANNOT_BE_GREATER_THAN_MAX_ATTENDEES = _("El numero de asistentes minimo no puede ser mayor al numero de asistentes maximo")
 
 class InvalidMinAttendeesError(BaseError):
     def __init__(self, message=MIN_ATTENDEES_CANNOT_BE_GREATER_THAN_MAX_ATTENDEES, identifier="event_rental_min_attendees"):

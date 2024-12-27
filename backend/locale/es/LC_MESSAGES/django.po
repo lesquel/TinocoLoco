@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-26 18:43-0500\n"
+"POT-Creation-Date: 2024-12-27 16:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,6 +294,10 @@ msgstr "El evento ya tiene asociado el servicio."
 #: .\apps\event_rentals\messages\success_messages.py:5
 msgid "Servicio eliminado exitosamente."
 msgstr "Servicio eliminado exitosamente"
+
+#: .\apps\event_rentals\messages\success_messages.py:6
+msgid "Correo de confirmación de la reserva enviado exitosamente."
+msgstr "Correo de confirmación de la reserva enviado exitosamente."
 
 #: .\apps\event_rentals\messages\variable_names.py:5
 #: .\apps\services\messages\variable_names.py:21
@@ -587,23 +591,25 @@ msgstr "Reseñas de la promoción"
 msgid "Promoción"
 msgstr "Promoción"
 
-#: .\apps\reviews\messages\error_messages.py:4
+#: .\apps\reviews\messages\error_messages.py:5
+#: .\base\utils\errors\reviews_relatated.py:6
 msgid "Ya existe una reseña de este autor para este objeto."
 msgstr "Ya existe una reseña de este autor para este objeto."
 
-#: .\apps\reviews\messages\error_messages.py:5
+#: .\apps\reviews\messages\error_messages.py:7
+#: .\base\utils\errors\reviews_relatated.py:5
 msgid "La calificación debe estar entre 1 y 5."
 msgstr "La calificación debe estar entre 1 y 5."
 
-#: .\apps\reviews\messages\error_messages.py:6
+#: .\apps\reviews\messages\error_messages.py:8
 msgid "La reseña no existe."
 msgstr "La reseña no existe."
 
-#: .\apps\reviews\messages\error_messages.py:7
+#: .\apps\reviews\messages\error_messages.py:9
 msgid "El modelo no existe."
 msgstr "El modelo no existe."
 
-#: .\apps\reviews\messages\error_messages.py:8
+#: .\apps\reviews\messages\error_messages.py:11
 msgid "Ya existe una reseña para este autor y objeto relacionado."
 msgstr "Ya existe una reseña para este autor y objeto relacionado."
 
@@ -741,7 +747,6 @@ msgid "Correo electrónico verificado exitosamente"
 msgstr "Correo electrónico verificado exitosamente"
 
 #: .\apps\users\messages\success_messages.py:9
-
 msgid "El correo electrónico ya ha sido verificado."
 msgstr "El correo electrónico ya ha sido verificado."
 
@@ -893,6 +898,14 @@ msgstr "Este servicio no está asociado con este alquiler de evento."
 msgid "Debe proporcionar al menos una imagen."
 msgstr "Debe proporcionar al menos una imagen"
 
+#: .\base\utils\errors\event_rentals_retaled.py:6
+msgid "Este alquiler ya ha sido confirmado"
+msgstr "Este alquiler ya ha sido confirmado"
+
+#: .\base\utils\errors\event_rentals_retaled.py:7
+msgid "El numero de asistentes minimo no puede ser mayor al numero de asistentes maximo"
+msgstr "El numero de asistentes minimo no puede ser mayor al numero de asistentes maximo"
+
 #: .\base\utils\errors\user_related_errors.py:6
 msgid "Rol inválido"
 msgstr "Rol inválido"
@@ -934,8 +947,21 @@ msgid "Este correo electrónico ya está registrado"
 msgstr "Este correo electrónico ya está registrado."
 
 #: .\base\utils\errors\user_related_errors.py:16
-msgid "Este correo electrónico ya está registrado."
-msgstr "Este correo electrónico ya está registrado."
+msgid "Este correo electrónico no está registrado"
+msgstr "Este correo electrónico no está registrado."
+
+#: .\base\utils\errors\user_related_errors.py:18
+msgid "Código no válido."
+msgstr "Código no válido."
+
+#: .\base\utils\errors\user_related_errors.py:19
+msgid "El código ha expirado."
+msgstr "El codigo ha expirado."
+
+#: .\base\utils\errors\user_related_errors.py:20
+
+msgid "El código ya ha sido utilizado."
+msgstr "El código ya ha sido utilizado."
 
 #: .\base\utils\update_jazmin_settings.py:38
 msgid "Bienvenido a la administración de {}"
