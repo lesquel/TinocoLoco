@@ -89,6 +89,16 @@ export const LinksRegister = () => {
                 {siteConfig.navMenuItems.dashboard.label}
               </DropdownItem>
             ) : null}
+
+            {userInfo.user && userInfo.user.role !== Role.ADMIN ? (
+              <DropdownItem
+                key="dashboard"
+                href={siteConfig.navMenuItems.myRentals.href}
+                textValue="Admin Dashboard"
+              >
+                {siteConfig.navMenuItems.myRentals.label}
+              </DropdownItem>
+            ) : null}
             <DropdownItem
               key="logout"
               color="danger"

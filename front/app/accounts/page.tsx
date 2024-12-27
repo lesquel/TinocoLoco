@@ -48,7 +48,7 @@ export default function Page() {
     { label: "Apellido", value: user?.last_name },
     { label: "Sexo", value: user?.sex },
     { label: "Email Verificado", value: user?.email_verified ? "Si" : "No" },
-    { label: "Nacionalidad", value: user?.nacionality },
+    { label: "Nacionalidad", value: user?.nationality },
     {
       label: "Fecha de Registro",
       value: new Date(user?.date_joined).toLocaleDateString("es-ES", {

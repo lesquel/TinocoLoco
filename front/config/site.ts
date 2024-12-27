@@ -28,6 +28,19 @@ export const siteConfig = {
     },
   },
   navMenuItems: {
+    rentals: {
+      label: "Rentals",
+      add: {
+        href: "/rentals/add",
+      },
+      myRentals: {
+        href: "/rentals",
+      },
+    },
+    myRentals: {
+      label: "Mis Rentales",
+      href: "/rentals",
+    },
     account: {
       label: "Cuentas",
       href: "/accounts",
@@ -54,4 +67,3 @@ export const siteConfig = {
     },
   },
 };
-
