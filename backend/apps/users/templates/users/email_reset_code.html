@@ -1,8 +1,8 @@
 {% extends "users/email_base.html" %}
 
 
-{% block subject %}{{subject}}{% endblock %}
-{% block recipient_name %}{{ user.username }}{% endblock %}
+{% block subject %}{{subject}}{% endblock subject %}
+{% block recipient_name %}{{ user.username }}{% endblock recipient_name  %}
 {% block content %}
     <p>Parece que has solicitado restablecer tu contraseña.</p>
     <p>Por favor, utiliza el siguiente código para completar el proceso:</p>

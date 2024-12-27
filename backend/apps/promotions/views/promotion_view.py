@@ -22,14 +22,15 @@ class PromotionView(viewsets.ModelViewSet, PaginationMixin):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     def get_serializer_class(self):
-        if self.action in ["retrieve", "most_popular", "most_viewed"]:
-            return RetrievePromotionSerializer
-        elif self.action == "add_review":
-            return CreateReviewSerializer
-        elif self.action == "reviews":
-            return RetrieveReviewSerializer
-        return CreatePromotionSerializer
-    
+        serializer_classes = {
+            "retrieve": RetrievePromotionSerializer,
+            "list": RetrievePromotionSerializer,
+            "most_popular": RetrievePromotionSerializer,
+            "most_viewed": RetrievePromotionSerializer,
+            "add_review": CreateReviewSerializer,
+            "reviews": RetrieveReviewSerializer,
+        }
+        return serializer_classes.get(self.action, CreatePromotionSerializer)
     def get_object(self):
         obj = PromotionService.get_by_id(self.kwargs.get("pk"))
         self.check_object_permissions(self.request, obj)

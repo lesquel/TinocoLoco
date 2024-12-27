@@ -33,7 +33,6 @@ class ServiceView(
     parser_classes = [MultiPartParser, FormParser, JSONParser]
 
     def get_serializer_class(self):
-        print(self.action)
         
         action_serializers = {
             "create": ServiceSerializer,

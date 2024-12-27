@@ -18,10 +18,13 @@ from apps.photos.serializers import CreatePhotoSerializer
 from ..messages import SUCCESS_MESSAGES
 from ..filters import EventRentalFilter
 from ..serializers import (
-    EventRentalSerializer,
+    CreateEventRentalSerializer,
+    UpdateEventRentalSerializer,
+    RetrieveEventRentalSerializer,
     ChangeEventRentalStatusSerializer,
     RentalStatusHistorySerializer,
-    ConfirmEventRentalStatusSerializer,
+    SendEventRentalConfirmationCodeSerializer,
+    ConfirmEventRentalSerializer,
     RetrieveServiceEventRentalSerializer,
     CreateServiceEventRentalSerializer,
 )
@@ -38,17 +41,18 @@ class EventRentalViewSet(
 
     def get_serializer_class(self):
         action_serializers = {
-            "create": EventRentalSerializer,
-            "update": EventRentalSerializer,
-            "partial_update": EventRentalSerializer,
+            "create": CreateEventRentalSerializer,
+            "update": UpdateEventRentalSerializer,
+            "partial_update": UpdateEventRentalSerializer,
             "change_status": ChangeEventRentalStatusSerializer,
             "status_history": RentalStatusHistorySerializer,
-            "confirm_rental": ConfirmEventRentalStatusSerializer,
             "add_review": CreateReviewSerializer,
             "add_services": CreateServiceEventRentalSerializer,
             "upload_images": CreatePhotoSerializer,
+            "send_confirmation_email": SendEventRentalConfirmationCodeSerializer,
+            "confirm_rental": ConfirmEventRentalSerializer,
         }
-        return action_serializers.get(self.action, EventRentalSerializer)
+        return action_serializers.get(self.action, RetrieveEventRentalSerializer)
 
     def get_permissions(self):
         permission_map = {
@@ -61,13 +65,15 @@ class EventRentalViewSet(
             "update": [IsAdminOrOwner],
             "partial_update": [IsAdminOrOwner],
             "add_review": [IsAdminOrOwner],
+            "services": [IsAdminOrOwner],
+            "add_services": [IsAdminOrOwner],
+            "status_history": [IsAdminOrOwner],
             "destroy": [IsAdminUser],
-            "services": [IsAdminUser],
             "change_status": [IsAdminUser],
-            "status_history": [IsAdminUser],
             "upload_images": [IsAdminUser],
-            "add_services": [IsAdminUser],
             "remove_service": [IsAdminUser],
+            "send_confirmation_email": [IsOwner],
+            "confirm_rental": [IsOwner],
         }
         permission_classes = permission_map.get(self.action, [IsAuthenticated])
         return [permission() for permission in permission_classes]
@@ -93,12 +99,12 @@ class EventRentalViewSet(
 
     def create(self, request):
         serializer = self.get_serializer(
-            data=request.data, context={"request": request}
+            data=request.data, context={"user": request.user}
         )
         serializer.is_valid(raise_exception=True)
         event_rental = serializer.save()
         return Response(
-            EventRentalSerializer(instance=event_rental).data,
+            RetrieveEventRentalSerializer(instance=event_rental).data,
             status=status.HTTP_201_CREATED,
         )
 
@@ -121,33 +127,45 @@ class EventRentalViewSet(
             status=status.HTTP_201_CREATED,
         )
 
+    @action(detail=True, methods=["post"], url_path="send-confirmation-email")
+    def send_confirmation_email(self, request, pk=None):
+        event_rental = self.get_object()
+        serializer = self.get_serializer(data={},
+            context={"event_rental": event_rental},
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(
+            {"detail": SUCCESS_MESSAGES["CONFIRMATION_EMAIL_SENT"]},
+            status=status.HTTP_200_OK,
+        )
+
     @action(detail=False, methods=["post"], url_path="confirm-rental")
     def confirm_rental(self, request):
 
         serializer = self.get_serializer(
-            data=request.data, context={"request": request}
+            data=request.data, context={"user": request.user}
         )
         serializer.is_valid(raise_exception=True)
 
-        event_rental = EventRentalService.get_by_confirmation_code(
-            request.data.get("confirmation_code")
-        )
+        event_rental = serializer.update(serializer.instance, serializer.validated_data)
         return Response(
-            EventRentalSerializer(instance=event_rental).data, status=status.HTTP_200_OK
+            RetrieveEventRentalSerializer(instance=event_rental).data,
+            status=status.HTTP_200_OK,
         )
 
     @action(detail=True, methods=["post"], url_path="change-status")
     def change_status(self, request, pk=None):
-
         event_rental = self.get_object()
         serializer = self.get_serializer(
             instance=event_rental, data=request.data, context={"request": request}
         )
         serializer.is_valid(raise_exception=True)
 
-        serializer.save()
+        serializer.update(serializer.instance, serializer.validated_data)
         return Response(
-            EventRentalSerializer(instance=event_rental).data, status=status.HTTP_200_OK
+            RetrieveEventRentalSerializer(instance=event_rental).data,
+            status=status.HTTP_200_OK,
         )
 
     @action(detail=True, methods=["get"], url_path="status-history")
