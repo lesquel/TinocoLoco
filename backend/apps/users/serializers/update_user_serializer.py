@@ -31,7 +31,9 @@ class UpdateUserSerializer(BaseUserSerializer):
                 raise errors.InvalidPermissionsError()
             try:
                 instance.role = (
-                    new_role if new_role in RoleChoices.values else RoleChoices.COSTUMER.value
+                    new_role
+                    if new_role in RoleChoices.values
+                    else RoleChoices.COSTUMER.value
                 )
                 instance.is_superuser = new_role == RoleChoices.ADMIN.value
                 instance.is_staff = new_role == RoleChoices.ADMIN.value
@@ -52,12 +54,47 @@ class UpdateUserSerializer(BaseUserSerializer):
         if not value:
             return value
         request_user = self.context.get("user")
-        if CustomUser.objects.filter(identity_card=value).exclude(id=request_user.id).exists():
+        if (
+            CustomUser.objects.filter(identity_card=value)
+            .exclude(id=request_user.id)
+            .exists()
+        ):
             raise errors.IdentityCardAlreadyExistsError()
-        return value
+        if not value.isdigit() or len(value) != 10:
+            raise errors.InvalidIdentityCardError()
 
+        return value
 
     def validate_role(self, value):
         if value not in RoleChoices.values:
             raise errors.InvalidRoleError()
         return value
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
