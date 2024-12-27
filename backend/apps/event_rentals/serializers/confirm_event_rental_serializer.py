@@ -3,7 +3,7 @@ from base.system_services import EventRentalService
 from ..choices import EventRentalStatus
 
 
-class ConfirmEventRentalStatusSerializer(serializers.Serializer):
+class ConfirmEventRentalSerializer(serializers.Serializer):
     confirmation_code = serializers.CharField()
 
     def validate(self, attrs):
@@ -15,7 +15,7 @@ class ConfirmEventRentalStatusSerializer(serializers.Serializer):
         return attrs
 
     def update(self, instance, validated_data):
-        user = self.context.get("request").user
+        user = self.context.get("user")
         event_rental = validated_data.get("event_rental")
         EventRentalService.change_status(
             instance, EventRentalStatus.CONFIRMED.value, user

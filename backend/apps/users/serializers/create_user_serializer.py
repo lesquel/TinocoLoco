@@ -34,3 +34,4 @@ class CreateUserSerializer(BaseUserSerializer):
         UserService.send_verification_code(user)
 
         return {"user": user, "token": token}
+

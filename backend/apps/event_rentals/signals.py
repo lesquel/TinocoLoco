@@ -5,7 +5,7 @@ from base.system_services import EventRentalService
 
 @receiver(post_save, sender=EventRental)
 def send_confirmation_email(sender, instance, created, **kwargs):
-    if created:  
+    if created: 
         EventRentalService.send_confirmation_mail(instance)
 
 

@@ -11,4 +11,4 @@ class EmailValidationCodeSerializer(serializers.Serializer):
 
         UserService.send_verification_code(user)
 
-        return code
+        return user
