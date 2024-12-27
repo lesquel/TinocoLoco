@@ -1,0 +1,10 @@
+{% extends "email_templates/base_email.html" %}
+
+{% block content %}
+    <p>Hola <b>{{ user.username }}</b>,</p>
+    <p>Parece que has solicitado restablecer tu contraseña.</p>
+    <p>Por favor, utiliza el siguiente código para completar el proceso:</p>
+    <h3 style="text-align: center; color: #FF5733; margin: 20px 0;">{{ reset_code }}</h3>
+    <p>Si no solicitaste esto, puedes ignorar este correo.</p>
+    <p>Saludos cordiales,</p>
+{% endblock %}

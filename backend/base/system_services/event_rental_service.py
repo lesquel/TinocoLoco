@@ -27,8 +27,8 @@ class EventRentalService(AService):
 
     @classmethod
     def send_confirmation_mail(cls,event_rental):
-        EmailService.send_event_rental_confirmation_mail(event_rental)
+        EmailService.send_event_rental_confirmation(event_rental)
 
     @classmethod
     def send_status_change_mail(cls, event_rental):
-        EmailService.send_event_rental_status_change_mail(event_rental)
+        EmailService.send_event_rental_status_change(event_rental)
