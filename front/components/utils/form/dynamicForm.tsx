@@ -1,17 +1,10 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Input,
-  Textarea,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
+import { Button, Input, Textarea, Select, SelectItem } from "@nextui-org/react";
 import { useForm, Controller } from "react-hook-form";
 import { FieldConfig, FormConfig } from "@/interfaces/IUform";
 import { CustomCheckbox } from "./checkboxForm";
-
-
 
 interface DynamicFormProps<T> {
   formConfig: FormConfig;
@@ -37,10 +30,9 @@ const DynamicForm = <T extends Record<string, any>>({
   });
 
   useEffect(() => {
-    setIsClient(true); // Asegura que el componente se renderiza en el cliente
+    setIsClient(true);
   }, []);
 
-  // Manejo de cambio de imágenes
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const fileArray = Array.from(e.target.files);
@@ -48,7 +40,6 @@ const DynamicForm = <T extends Record<string, any>>({
     }
   };
 
-  // Renderizar campos dinámicamente
   const renderField = (fieldName: string, config: FieldConfig) => {
     const commonProps = {
       label: config.label,
@@ -59,9 +50,9 @@ const DynamicForm = <T extends Record<string, any>>({
         max: config.validation?.max,
         validate: config.validation?.pattern
           ? (value: string) => {
-            const regex = new RegExp(config.validation!.pattern!.value);
-            return regex.test(value) || config.validation!.pattern!.message;
-          }
+              const regex = new RegExp(config.validation!.pattern!.value);
+              return regex.test(value) || config.validation!.pattern!.message;
+            }
           : undefined,
       }),
     };
@@ -69,12 +60,14 @@ const DynamicForm = <T extends Record<string, any>>({
     switch (config.type) {
       case "text":
       case "number":
-        return <Input {...commonProps} type={config.type} />;
+      case "date":
+      case "time":
+        return <Input key={fieldName} {...commonProps} type={config.type} />;
       case "textarea":
-        return <Textarea {...commonProps} />;
+        return <Textarea key={fieldName} {...commonProps} />;
       case "select":
         return (
-          <Select {...commonProps}>
+          <Select key={fieldName} {...commonProps}>
             {config.options ? (
               config.options.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
@@ -82,7 +75,7 @@ const DynamicForm = <T extends Record<string, any>>({
                 </SelectItem>
               ))
             ) : (
-              <SelectItem key="none" value="">
+              <SelectItem key={`${fieldName}-none`} value="">
                 No hay opciones disponibles
               </SelectItem>
             )}
@@ -91,6 +84,7 @@ const DynamicForm = <T extends Record<string, any>>({
       case "file":
         return (
           <Input
+            key={fieldName}
             {...commonProps}
             type="file"
             multiple
@@ -98,13 +92,15 @@ const DynamicForm = <T extends Record<string, any>>({
           />
         );
       case "checkbox":
+      case "checkbox":
         return (
           <Controller
+            key={fieldName}
             control={control}
             name={fieldName}
             render={({ field }) => (
               <CustomCheckbox
-                checked={!!field.value} // Asegura que el valor sea booleano
+                checked={!!field.value}
                 onChange={(checked) => field.onChange(checked)}
               >
                 {config.label}
@@ -112,19 +108,20 @@ const DynamicForm = <T extends Record<string, any>>({
             )}
           />
         );
+
       default:
         return null;
     }
   };
 
   if (!isClient) {
-    return null; // Evitar renderizar en el servidor
+    return null;
   }
 
   const handleFormSubmit = (data: T) => {
     console.log("photos:", photos);
-    const finalData = { ...data, photos }; // Combina los datos del formulario con las fotos
-    onSubmit(finalData, photos); // Envía tanto los datos como los archivos
+    const finalData = { ...data, photos };
+    onSubmit(finalData, photos);
   };
 
   return (
@@ -132,17 +129,14 @@ const DynamicForm = <T extends Record<string, any>>({
       onSubmit={handleSubmit(handleFormSubmit)}
       className="w-full max-w-xs flex flex-col gap-4"
     >
-      {Object.keys(formConfig).map((fieldName) => {
-        const config = formConfig[fieldName];
-        return (
-          <div key={fieldName}>
-            {renderField(fieldName, config)}
-            <div className="text-red-500 text-sm">
-              {errors[fieldName]?.message || ""}
-            </div>
+      {Object.entries(formConfig).map(([fieldName, config]) => (
+        <div key={fieldName}>
+          {renderField(fieldName, config)}
+          <div className="text-red-500 text-sm">
+            {errors[fieldName]?.message || ""}
           </div>
-        );
-      })}
+        </div>
+      ))}
       <Button type="submit" variant="flat" className="mt-4">
         Guardar
       </Button>

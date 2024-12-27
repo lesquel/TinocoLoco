@@ -1,5 +1,6 @@
 import { login } from "@/features/auth/services/auth";
 import { image } from "@nextui-org/react";
+import { m } from "framer-motion";
 import { serialize } from "v8";
 
 export const endPoints = {
@@ -62,5 +63,26 @@ export const endPoints = {
             post: "/upload-images/",
         },
     },
-
+    rentals: {
+        get: "event-rentals/event-rental/",
+        post: "event-rentals/event-rental/",
+        put: "event-rentals/event-rental/",
+        myRentals : {
+            get : "event-rentals/event-rental/my-rentals/",
+        },
+        confirmRental: {
+            post: "event-rentals/event-rental/confirm-rental/",
+        },
+        services : {
+            get : "/services/",
+        },
+        images: {
+            post: "/upload-images/",
+        }
+    },
+    promotions: {
+        get: "promotions/promotion/",
+        post: "promotions/promotion/",
+    },
+    
 }

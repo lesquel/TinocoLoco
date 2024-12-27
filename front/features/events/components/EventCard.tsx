@@ -8,6 +8,7 @@ import {
   Chip,
   Accordion,
   AccordionItem,
+  user,
 } from "@nextui-org/react"
 import { IUEvent, IUOneEvent } from "@/interfaces/IUevents";
 import { CiHeart } from "react-icons/ci";
@@ -16,10 +17,17 @@ import { getEvent } from "../services/events";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { ChipCategory } from "./chipCategoy";
 import { ImageCarousel } from "@/components/utils/carucelImg";
+import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
+import { ConditionalRentalButton } from "./buttonAlquiler";
 
 export default function EventCard({ id }: { id: number }) {
   const fetchEvent = useCallback(() => getEvent(id), [id]);
   const { data, error, isLoading } = useApiRequest<IUEvent>(fetchEvent);
+
+  const userInfo = getTokenFromCookie();
+
+  userInfo?.user.email_verified
+  userInfo?.user.has_completed_profile
 
   if (error) {
     return <div>Error al obtener los datos</div>;
@@ -87,13 +95,7 @@ export default function EventCard({ id }: { id: number }) {
             </Accordion>
 
             <div className="mt-4 flex gap-2">
-              <Button
-                className="flex-1"
-                color="primary"
-                size="lg"
-              >
-                Alquilar ahora
-              </Button>
+              <ConditionalRentalButton id={event.id} />
               {/* <Button
                 isIconOnly
                 variant="flat"
