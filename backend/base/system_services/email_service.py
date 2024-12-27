@@ -23,6 +23,8 @@ class EmailService:
     def send_event_rental_confirmation(cls, event_rental):
 
         subject = "Confirmación de reserva"
+        print(event_rental.owner)
+        print(event_rental.owner.username)
 
         context = {
             "subject": subject,
@@ -36,7 +38,7 @@ class EmailService:
             "year": datetime.datetime.now().year,
             "business_configuration": get_business_configuration(),
         }
-
+        print(context)
         html_message = render_to_string(
             "users/email_event_rental_confirmation.html", context
         )

@@ -104,7 +104,7 @@ class EventRentalViewSet(
         serializer.is_valid(raise_exception=True)
         event_rental = serializer.save()
         return Response(
-            UpdateEventRentalSerializer(instance=event_rental).data,
+            RetrieveEventRentalSerializer(instance=event_rental).data,
             status=status.HTTP_201_CREATED,
         )
 
@@ -147,9 +147,10 @@ class EventRentalViewSet(
             data=request.data, context={"user": request.user}
         )
         serializer.is_valid(raise_exception=True)
-        event_rental = serializer.save()
+
+        event_rental = serializer.update(serializer.instance, serializer.validated_data)
         return Response(
-            UpdateEventRentalSerializer(instance=event_rental).data,
+            RetrieveEventRentalSerializer(instance=event_rental).data,
             status=status.HTTP_200_OK,
         )
 
@@ -161,9 +162,9 @@ class EventRentalViewSet(
         )
         serializer.is_valid(raise_exception=True)
 
-        serializer.save()
+        serializer.update(serializer.instance, serializer.validated_data)
         return Response(
-            UpdateEventRentalSerializer(instance=event_rental).data,
+            RetrieveEventRentalSerializer(instance=event_rental).data,
             status=status.HTTP_200_OK,
         )
 

@@ -141,7 +141,7 @@ class UserViewSet(viewsets.ModelViewSet):
     def change_language(self, request):
         serializer = self.get_serializer(instance=request.user, data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        serializer.update(request.user, serializer.validated_data)
         return Response(
             {
                 "detail": SUCCESS_MESSAGES["LANGUAGE_UPDATED"].format(

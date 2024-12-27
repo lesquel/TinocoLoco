@@ -1,7 +1,7 @@
 {% extends "users/email_base.html" %}
 
-{% block subject %}{{subject}}{% endblock %}
-{% block recipient_name %}{{ user.username }}{% endblock %}
+{% block subject %}{{subject}}{% endblock subject %}
+{% block recipient_name  %}{{ user.username }} {% endblock recipient_name  %}
 {% block content %}
     <p>Tu reserva para el evento <b>{{ event_name }}</b> ha sido creada con éxito.</p>
     <h3>Detalles de tu reserva:</h3>

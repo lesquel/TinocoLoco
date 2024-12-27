@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 
+from base.system_services import EventRentalService
 from ..models import EventRental
 
 
@@ -21,5 +22,8 @@ class CreateEventRentalSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data["owner"] = self.context.get("user")
-        
-        return super().create(validated_data)
+
+        event_rental = EventRental.objects.create(**validated_data)
+        event_rental.generate_confirmation_code()
+        EventRentalService.send_confirmation_mail(event_rental)
+        return event_rental
