@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-27 18:37-0500\n"
+"POT-Creation-Date: 2024-12-28 13:35-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,16 +168,16 @@ msgid "Nivel de Impacto"
 msgstr "Nivel de Impacto"
 
 #: .\apps\contingencies\messages\variable_names.py:9
-msgid "Categoría"
-msgstr "Categoría"
+msgid "Categoría de Contingencia"
+msgstr "Categoría de Contingencia"
 
 #: .\apps\contingencies\messages\variable_names.py:10
 msgid "Monto de Penalización"
 msgstr "Monto de Penalización"
 
 #: .\apps\contingencies\messages\variable_names.py:11
-msgid "Fecha Ocurrida"
-msgstr "Fecha Ocurrida"
+msgid "Hora Ocurrida"
+msgstr "Hora Ocurrida"
 
 #: .\apps\contingencies\migrations\messages\variable_names.py:4
 #: .\apps\event_rentals\messages\variable_names.py:4
@@ -881,20 +881,14 @@ msgid "No se encontró el recurso solicitado."
 msgstr "No se encontró el recurso solicitado."
 
 #: .\base\utils\errors\business_logic_errors.py:6
-msgid ""
-"No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
-msgstr ""
-"No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
-
-#: .\base\utils\errors\business_logic_errors.py:7
 msgid "service_id es obligatorio."
 msgstr "service_id es obligatorio."
 
-#: .\base\utils\errors\business_logic_errors.py:8
+#: .\base\utils\errors\business_logic_errors.py:7
 msgid "Este servicio no está asociado con este alquiler de evento."
 msgstr "Este servicio no está asociado con este alquiler de evento."
 
-#: .\base\utils\errors\business_logic_errors.py:9
+#: .\base\utils\errors\business_logic_errors.py:8
 msgid "Debe proporcionar al menos una imagen."
 msgstr "Debe proporcionar al menos una imagen"
 
@@ -902,7 +896,7 @@ msgstr "Debe proporcionar al menos una imagen"
 msgid "Este alquiler ya ha sido confirmado"
 msgstr "Este alquiler ya ha sido confirmado"
 
-#: .\base\utils\errors\event_rentals_retaled_erros.py:7
+#: .\base\utils\errors\event_rentals_retaled_erros.py:8
 msgid ""
 "El numero de asistentes minimo no puede ser mayor al numero de asistentes "
 "maximo"
@@ -910,75 +904,128 @@ msgstr ""
 "El numero de asistentes minimo no puede ser mayor al numero de asistentes "
 "maximo"
 
-#: .\base\utils\errors\event_rentals_retaled_erros.py:8
+#: .\base\utils\errors\event_rentals_retaled_erros.py:11
 msgid "El valor de cancelacion debe ser mayor a 0"
 msgstr "El valor de cancelacion debe ser mayor a 0."
 
-#: .\base\utils\errors\event_rentals_retaled_erros.py:9
-
+#: .\base\utils\errors\event_rentals_retaled_erros.py:14
 msgid "La fecha del alquiler no puede ser menor a la fecha actual"
 msgstr "La fecha del alquiler no puede ser menor a la fecha actual"
 
-#: .\base\utils\errors\event_rentals_retaled_erros.py:10
+#: .\base\utils\errors\event_rentals_retaled_erros.py:17
 msgid "El alquiler debe ser al menos con tres dias de anticipacion"
 msgstr "El alquiler debe ser al menos con tres dias de anticipacion"
+
+#: .\base\utils\errors\events_related_errors.py:5
+msgid "El valor de referencia debe ser mayor a 0"
+msgstr "El valor de referencia debe ser mayor a 0."
+
+#: .\base\utils\errors\events_related_errors.py:6
+
+msgid "La tarifa por hora extra debe ser mayor a 0 "
+msgstr "La tarifa por hora extra debe ser mayor a 0 "
+
+#: .\base\utils\errors\events_related_errors.py:7
+msgid "Las horas permitidas deben ser mayores a 0"
+msgstr "Las horas permitidas deben ser mayores a 0"
+
+#: .\base\utils\errors\events_related_errors.py:8
+msgid ""
+"No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
+msgstr ""
+"No puedes eliminar servicios de un alquiler de evento que no esté pendiente."
 
 #: .\base\utils\errors\user_related_errors.py:6
 msgid "Rol inválido"
 msgstr "Rol inválido"
 
 #: .\base\utils\errors\user_related_errors.py:7
+msgid "El nombre de usuario debe tener entre 5 y 30 caracteres"
+msgstr "El nombre de usuario debe tener entre 5 y 30 caracteres"
+
+#: .\base\utils\errors\user_related_errors.py:8
 msgid "Por favor, ingresar su usuario y contraseña"
 msgstr "Por favor, ingresar su usuario y contraseña"
 
-#: .\base\utils\errors\user_related_errors.py:8
+#: .\base\utils\errors\user_related_errors.py:9
 msgid "Credenciales inválidas"
 msgstr "Credenciales inválidas"
 
-#: .\base\utils\errors\user_related_errors.py:9
+#: .\base\utils\errors\user_related_errors.py:10
+msgid "Cédula inválida"
+msgstr "Cedula inválida"
+
+#: .\base\utils\errors\user_related_errors.py:11
+msgid "La cédula no puede contener letras"
+msgstr "La cédula no puede contener letras"
+
+#: .\base\utils\errors\user_related_errors.py:12
+msgid "La cédula no puede tener más de 10 dígitos"
+msgstr "La cédula no puede tener más de 10 dígitos"
+
+#: .\base\utils\errors\user_related_errors.py:14
+msgid "El nombre no puede tener más de 30 caracteres"
+msgstr "El nombre no puede tener más de 30 caracteres"
+
+#: .\base\utils\errors\user_related_errors.py:15
+msgid "El apellido no puede tener más de 30 caracteres"
+msgstr "El apellido no puede tener más de 30 caracteres"
+
+#: .\base\utils\errors\user_related_errors.py:16
+msgid "El nombre no puede contener números"
+msgstr "El nombre no puede contener números"
+
+#: .\base\utils\errors\user_related_errors.py:17
+msgid "El apellido no puede contener números"
+msgstr "El apellido no puede contener números"
+
+#: .\base\utils\errors\user_related_errors.py:19
 msgid "No tiene permisos para realizar esta acción"
 msgstr "No tiene permisos para realizar esta acción"
 
-#: .\base\utils\errors\user_related_errors.py:10
+#: .\base\utils\errors\user_related_errors.py:20
 msgid "No ha iniciado sesión"
 msgstr "No ha iniciado sesión"
 
-#: .\base\utils\errors\user_related_errors.py:11
+#: .\base\utils\errors\user_related_errors.py:21
 msgid "Usuario no encontrado"
 msgstr "Usuario no encontrado"
 
-#: .\base\utils\errors\user_related_errors.py:12
+#: .\base\utils\errors\user_related_errors.py:22
 msgid "Idioma no soportado"
 msgstr "Idioma no soportado"
 
-#: .\base\utils\errors\user_related_errors.py:13
+#: .\base\utils\errors\user_related_errors.py:23
 msgid "Este nombre de usuario ya está en uso."
 msgstr "Este nombre de usuario ya está en uso."
 
-#: .\base\utils\errors\user_related_errors.py:14
+#: .\base\utils\errors\user_related_errors.py:24
 msgid "Este número de cédula ya está registrado."
 msgstr "Este número de cédula ya está registrado."
 
-#: .\base\utils\errors\user_related_errors.py:15
+#: .\base\utils\errors\user_related_errors.py:25
 msgid "Este correo electrónico ya está registrado"
 msgstr "Este correo electrónico ya está registrado."
 
-#: .\base\utils\errors\user_related_errors.py:16
+#: .\base\utils\errors\user_related_errors.py:26
 msgid "Este correo electrónico no está registrado"
 msgstr "Este correo electrónico no está registrado."
 
-#: .\base\utils\errors\user_related_errors.py:18
+#: .\base\utils\errors\user_related_errors.py:28
 msgid "Código no válido."
 msgstr "Código no válido."
 
-#: .\base\utils\errors\user_related_errors.py:19
+#: .\base\utils\errors\user_related_errors.py:29
 msgid "El código ha expirado."
 msgstr "El codigo ha expirado."
 
-#: .\base\utils\errors\user_related_errors.py:20
+#: .\base\utils\errors\user_related_errors.py:30
 msgid "El código ya ha sido utilizado."
 msgstr "El código ya ha sido utilizado."
 
-#: .\base\utils\update_jazmin_settings.py:38
+#: .\base\utils\update_jazmin_settings.py:36
 msgid "Bienvenido a la administración de {}"
 msgstr "Bienvenido a la administracion de {}"
+
+#~ msgid "Categoría"
+#~ msgstr "Categoría"
