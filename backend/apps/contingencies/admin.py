@@ -6,11 +6,11 @@ from .models import Contingency
 @admin.register(Contingency)
 class ContingencyAdmin(admin.ModelAdmin):
     list_display = (
-        "event_rental",
+        "id",
+        "event_rental__id",
         "contingency_impact_level",
         "contingency_category",
         "contingency_penalty_amount",
-        "contingency_time_occurred",
         "contingency_date_occurred"
     )
     list_filter = (
