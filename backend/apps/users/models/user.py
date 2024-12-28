@@ -38,19 +38,16 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name=VARIABLE_NAMES_USER["IDENTITY_CARD"],
     )
     first_name = models.CharField(
-        max_length=30,
         blank=True,
         null=True,
         verbose_name=VARIABLE_NAMES_USER["FIRST_NAME"],
     )
     last_name = models.CharField(
-        max_length=30,
         blank=True,
         null=True,
         verbose_name=VARIABLE_NAMES_USER["LAST_NAME"],
     )
     username = models.CharField(
-        max_length=30,
         unique=True,
         verbose_name=VARIABLE_NAMES_USER["USERNAME"],
     )
@@ -83,7 +80,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
     preferred_language = models.CharField(
         choices=LanguageChoices.choices,
-        default=LanguageChoices.ENGLISH.value,
+        default=LanguageChoices.SPANISH.value,
         verbose_name=VARIABLE_NAMES_USER["PREFERRED_LANGUAGE"],
     )
     role = models.CharField(
