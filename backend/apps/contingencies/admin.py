@@ -10,12 +10,13 @@ class ContingencyAdmin(admin.ModelAdmin):
         "contingency_impact_level",
         "contingency_category",
         "contingency_penalty_amount",
-        "contingency_date_occurred",
+        "contingency_time_occurred",
+        "contingency_date_occurred"
     )
     list_filter = (
         "contingency_impact_level",
         "contingency_category",
-        "contingency_date_occurred",
+        "contingency_time_occurred",
     )
     search_fields = (
         "event_rental",
