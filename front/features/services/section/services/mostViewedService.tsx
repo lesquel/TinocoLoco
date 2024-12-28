@@ -6,7 +6,7 @@ import { getMostViewedServices } from "../../services/services";
 import { CardBasic } from "@/components/utils/cardBasic";
 import NoFountServices from "@/public/images/no_fount_events.jpg";
 import { useCallback } from "react";
-import { CardLoagin } from "@/components/utils/loagins/cardLoagin";
+import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 export function MostViewedSServices() {
   const fetchServices = useCallback(() => getMostViewedServices({ size: 6 }), []);
   const { data, error, isLoading } = useApiRequest<IUMostServiceViewed>(

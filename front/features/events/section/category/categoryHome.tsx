@@ -4,7 +4,7 @@ import { getCategorys } from "../../services/events";
 import { TitleSection } from "@/components/utils/titleSection";
 import { useCallback } from "react";
 import { CategoryCardBasic } from "@/components/utils/categoryBasic";
-import { CardLoagin } from "@/components/utils/loagins/cardLoagin";
+import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 
 export function CategoryHome() {
   const fetchCategorys = useCallback(() => getCategorys({ size: 5 }), []);

@@ -16,23 +16,30 @@ import { ChipCategory } from "./chipCategoy";
 import { ImageCarousel } from "@/components/utils/carucelImg";
 import { getService } from "../services/services";
 import { IUService } from "@/interfaces/IUservices";
+import { CardInfoLoadin } from "@/components/utils/loagins/cardInfoLoading";
 
 export default function ServicesCard({ id }: { id: number }) {
-  const fetchEvent = useCallback(() => getService(id), [id]);
+  const fetchEvent = useCallback(() => getService(id), []);
   const { data, error, isLoading } = useApiRequest<IUService>(fetchEvent);
 
   if (error) {
     return <div>Error al obtener los datos</div>;
   }
-  if (!data || isLoading) {
-    return <div>Cargando...</div>;
+  if (isLoading) {
+    return <div className="flex items-center justify-center p-4 w-full">
+      <CardInfoLoadin />
+    </div>;
+  }
+
+  if (!data) {
+    return <div>No se encontró el servicio solicitado.</div>;
   }
 
   return (
     <Card className="w-full mx-auto">
       <CardBody className="w-full">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-20">
-          <div className="relative p-4 max-h-[200px]">
+          <div className="relative p-4 ">
             <Chip
               className="absolute top-2 left-2 z-40"
               color="primary"

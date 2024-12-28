@@ -5,7 +5,7 @@ import { IUMostEventPopular, IUEvent } from "@/interfaces/IUevents";
 import { TitleSection } from "@/components/utils/titleSection";
 import { CardBasic } from "@/components/utils/cardBasic";
 import NoFountServices from "@/public/images/no_fount_events.jpg";
-import { CardLoagin } from "@/components/utils/loagins/cardLoagin";
+import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 
 export function MostPopularEvents() {
   const { data, error, isLoading } =
