@@ -8,6 +8,7 @@ from .base_user_serializer import BaseUserSerializer
 
 class UpdateUserSerializer(BaseUserSerializer):
     password = serializers.CharField(write_only=True, required=False)
+    
 
     class Meta(BaseUserSerializer.Meta):
 
