@@ -14,5 +14,4 @@ cloudinary.config(
     secure=env("CLOUDINARY_SECURE", default=True),
 )
 
-
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"

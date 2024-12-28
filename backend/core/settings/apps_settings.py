@@ -1,9 +1,6 @@
-# Application definition
-
 THEME_APPLICATION = [
     "jazzmin",
 ]
-
 DEFAULT_DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -12,8 +9,6 @@ DEFAULT_DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-
-
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
@@ -23,8 +18,6 @@ THIRD_PARTY_APPS = [
     "drf_yasg",
     "django_filters",
 ]
-
-
 LOCAL_APPS = [
     "apps.business_configuration",
     "apps.users",
@@ -36,9 +29,7 @@ LOCAL_APPS = [
     "apps.promotions",
     "apps.contingencies",
 ]
-
 INSTALLED_APPS = THEME_APPLICATION + DEFAULT_DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-
 
 SWAGGER_SETTINGS = {
     "DOC_EXPANSION": "none",

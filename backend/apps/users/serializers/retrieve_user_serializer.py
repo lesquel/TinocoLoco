@@ -3,7 +3,7 @@ from ..models.user import CustomUser
 
 
 class RetrieveUserSerializer(serializers.ModelSerializer):
-    full_name = serializers.SerializerMethodField()
+    full_name = serializers.CharField(read_only=True)
 
     class Meta:
         model = CustomUser
@@ -26,5 +26,3 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = fields
 
-    def get_full_name(self, obj):
-        return f"{obj.first_name} {obj.last_name}" if obj.first_name else ""
