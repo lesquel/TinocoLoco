@@ -5,20 +5,25 @@ import { IUEvent, IUMostEventViewed } from "@/interfaces/IUevents";
 import { TitleSection } from "@/components/utils/titleSection";
 import { CardBasic } from "@/components/utils/cardBasic";
 import NoFountServices from "@/public/images/no_fount_events.jpg";
+import { CardLoagin } from "@/components/utils/loagins/cardLoagin";
 export function MostViewedEvents() {
-  const { data, error } = useApiRequest<IUMostEventViewed>(getMostViewedEvents);
+  const { data, error,isLoading } = useApiRequest<IUMostEventViewed>(getMostViewedEvents);
 
   if (error) {
     return <div>Error al obtener los datos</div>;
   }
 
-  if (!data) {
-    return <div>Cargando...</div>;
+  if (isLoading) {
+    return <CardLoagin title="Eventos" description="más vistos" />;
+  }
+
+  if (!data?.results) {
+    return <div>No hay eventos</div>;
   }
   return (
     <div>
       <TitleSection title="Eventos" description="más vistos" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
         {data.results.map((event: IUEvent) => {
           return (
             <CardBasic<IUEvent>
