@@ -67,6 +67,9 @@ export const endPoints = {
         get: "event-rentals/event-rental/",
         post: "event-rentals/event-rental/",
         put: "event-rentals/event-rental/",
+        reviews: {
+            post: "/add-review/",
+        },
         myRentals : {
             get : "event-rentals/event-rental/my-rentals/",
         },

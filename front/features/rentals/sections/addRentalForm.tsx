@@ -61,8 +61,7 @@ export function AddRentalForm({ idEvent }: AddRentalFormProps) {
         return;
       }
       addServiceToRentalExecute({data: addedServices, rentalId: response.id}, (response)=>{
-        console.log("response addServiceToRentalExecute:", response);
-        // router.push(`${siteConfig.navMenuItems.rentals.href}/${response.id}`);
+        router.push(`${siteConfig.navMenuItems.rentals.href}/${response.id}`);
       });
     });
   };

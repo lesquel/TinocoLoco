@@ -1,7 +1,9 @@
 import { endPoints } from "@/config/endPoints";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
-import { IURentals, IUServiceToRentalAdd } from "@/interfaces/IURental";
+import { IURental, IURentals, IUServiceToRentalAdd } from "@/interfaces/IURental";
+import { IUReview, IUReviews } from "@/interfaces/IUReview";
 import { FetchApiService } from "@/services/api/FetchApiService";
+import { construcUrl } from "@/services/utils/construcUrl";
 
 const api = new FetchApiService();
 
@@ -17,10 +19,22 @@ export const getRentals = async () => {
     return response;
 }
 
+export const getRental = async (id: number) => {
+    const response = await api.get<IURental>({
+        url: endPoints.rentals.get + id ,
+        options: {
+            headers: {
+                "Authorization": `token ${getTokenFromCookie()?.token}`,
+            }
+        }
+    });
+    return response;
+}
 
-export const getMyRentals = async () => {
+
+export const getMyRentals = async ({options}: {options?: any}) => {
     const response = await api.get<IURentals>({
-        url: endPoints.rentals.myRentals.get,
+        url: endPoints.rentals.myRentals.get + (options ? construcUrl({ options }) : ""),
         options: {
             headers: {
                 "Authorization": `token ${getTokenFromCookie()?.token}`,
@@ -89,6 +103,21 @@ export const removeServiceFromRental = async (data: any) => {
 export const addServiceToRental = async ({data, rentalId}: {data: any, rentalId: number}) => {
     const response = await api.post<IUServiceToRentalAdd>({
         url: endPoints.rentals.get + rentalId + endPoints.rentals.services.post,
+        body: JSON.stringify(data),
+        options: {
+            headers: {
+                "Authorization": `token ${getTokenFromCookie()?.token}`,
+                "Content-Type": "application/json",
+            },
+        },
+    });
+    return response;
+}
+
+
+export const addReview = async (data: IUReview, id: number) => {
+    const response = await api.post<IUReview>({
+        url: endPoints.rentals.get + data.id + endPoints.rentals.reviews.post,
         body: JSON.stringify(data),
         options: {
             headers: {

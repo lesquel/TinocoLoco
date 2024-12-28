@@ -2,9 +2,11 @@
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { getMyRentals } from "../services/rentals";
 import { CardRental } from "../components/cardRental";
+import { useCallback } from "react";
 
 export function AllRentals() {
-    const { data, error, isLoading } = useApiRequest(getMyRentals);
+    const fetchRentals = useCallback(() => getMyRentals({options: {page_size: 5}}), []);
+    const { data, error, isLoading } = useApiRequest(fetchRentals);
 
     if (error) {
         return <div>Error al obtener los datos</div>;

@@ -3,9 +3,8 @@ import { Section } from "@/components/sections/layout/section";
 import ServicesCard from "@/features/services/components/ServicesCard";
 import { SectionReview } from "@/features/services/section/services/reviews/secitonReview";
 
-export default async function Event({ params }: { params: { id: string } }) {
-    const { id } = await params; // Asegúrate de esperar la promesa
-    const servicesId = parseInt(id, 10); // Convertir a número si es necesario
+export default  function Event({ params }: { params: { id: string } }) {
+    const servicesId = parseInt(params.id, 10);
 
     return (
         <Container>

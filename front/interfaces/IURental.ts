@@ -4,8 +4,24 @@ import { StatusRental } from "@/types/statusRental";
 export interface IURental {
   id: number;
   photos: string[];
-  owner_rating?: number;
-  costumer_rating?: number;
+  owner_rating?: {
+    id: number;
+    object_id: number;
+    rating_score: number;
+    rating_comment: string;
+    created_at: string;
+    owner: number;
+    content_type: number;
+  };
+  costumer_rating?: {
+    id: number;
+    object_id: number;
+    rating_score: number;
+    rating_comment: string;
+    created_at: string;
+    owner: number;
+    content_type: number;
+  };
   current_status: {
     id: number;
     status: StatusRental;
