@@ -146,18 +146,21 @@ class EventRental(models.Model):
     def generate_confirmation_code(self):
         self.confirmation_code = generate_confirmation_code()
         self.save(update_fields=["confirmation_code"])
-
+        
+    def clean_event_rental_date(self):
+        if self.event_rental_date < datetime.date.today():
+            raise errors.EventRentalDateCannotBeLessThanTodayError()
+        if self.event_rental_date < datetime.date.today() + datetime.timedelta(days=3):
+            raise errors.EventRentalDateMustBeAtLeastThreeDaysInAdvanceError()
+    
+    
+    
     def clean(self):
         if self.event_rental_min_attendees > self.event_rental_max_attendees:
             raise errors.InvalidMinAttendeesError()
         if self.event_rental_cancelled_value_in_advance < 0:
             raise errors.ValueCancellationInAdvanceMustBeGreaterThanZeroError()
-        if self.event_rental_date < self.event.event_start_date:
-            raise errors.EventRentalDateCannotBeLessThanTodayError()
-        if self.event_rental_date < self.event.event_start_date - datetime.timedelta(
-            days=3
-        ):
-            raise errors.EventRentalDateMustBeAtLeastThreeDaysInAdvanceError()
+
 
     def save(self, *args, **kwargs):
         is_new = self.pk is None
