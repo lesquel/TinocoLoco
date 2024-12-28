@@ -31,6 +31,9 @@ export function RentalSection({ id }: { id: number }) {
   if (!data) {
     return <div>No se encontraron datos de la renta</div>;
   }
+  if (data.errors){
+    return <div>No se encontraron datos de la renta</div>;
+  }
 
   return (
     <div>

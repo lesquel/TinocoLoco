@@ -36,7 +36,6 @@ export const getEvents = async (options?: any) => {
   const url = endPoints.events.get + (options ? construcUrl({ options }) : "");
   console.log("url:", url);
   const response = await api.get<IUEvents>({ url });
-  console.log("response: images", response);
   return response;
 };
 
@@ -44,7 +43,6 @@ export const getEvent = async (id: number) => {
   const url = endPoints.events.get + id + "/";
   console.log("url:", url);
   const response = await api.get<IUEvent>({ url });
-  console.log("response: images", response);
   return response;
 };
 
@@ -108,7 +106,7 @@ export const createCategory = async (data: IUCategory) => {
   formData.append("event_category_name", data.event_category_name);
   formData.append(
     "event_category_description",
-    data.event_category_description,
+    data.event_category_description
   );
   formData.append("is_active", data.is_active.toString()); // Convertir booleano a string
   formData.append("event_category_image", data.event_category_image[0]); // Agregar archivo

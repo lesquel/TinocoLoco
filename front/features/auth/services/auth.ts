@@ -68,7 +68,7 @@ export const sendVerificationEmail = async () => {
 export const verificationCodeEmail = async (data: IUcodeEmail) => {
   const response = await api.post({
     url: endPoints.user.verificationEmail,
-    data: JSON.stringify(data),
+    body: JSON.stringify(data),
     options: {
       headers: {
         Authorization: `token ${getTokenFromCookie()?.token}`,
