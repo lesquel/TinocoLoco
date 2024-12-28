@@ -1,8 +1,8 @@
 "use client";
 import { useState, useCallback } from "react";
 import { Section } from "@/components/sections/layout/section";
-import { ReviewForm } from "@/components/utils/coments/ReviewForm";
-import { ReviewList } from "@/components/utils/coments/ReviewList";
+import { ReviewForm } from "@/components/utils/reviews/ReviewForm";
+import { ReviewList } from "@/components/utils/reviews/ReviewList";
 import { addReview, getReviews } from "@/features/services/services/services";
 
 export const SectionReview = ({ serviceId }: { serviceId: number }) => {

@@ -2,7 +2,7 @@
 import { useCallback, useState } from "react";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { PaginationComponent } from "@/components/utils/pagination";
-import { CardLoagin } from "@/components/utils/loagins/cardLoagin";
+import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 import { Spacer } from "@nextui-org/react";
 
 interface ListComponentProps<T> {

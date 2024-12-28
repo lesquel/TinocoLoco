@@ -19,6 +19,7 @@ import { ChipCategory } from "./chipCategoy";
 import { ImageCarousel } from "@/components/utils/carucelImg";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { ConditionalRentalButton } from "./buttonAlquiler";
+import { CardInfoLoadin } from "@/components/utils/loagins/cardInfoLoading";
 
 export default function EventCard({ id }: { id: number }) {
   const fetchEvent = useCallback(() => getEvent(id), [id]);
@@ -32,8 +33,8 @@ export default function EventCard({ id }: { id: number }) {
   if (error) {
     return <div>Error al obtener los datos</div>;
   }
-  if (!data || isLoading) {
-    return <div>Cargando...</div>;
+  if (isLoading) {
+    return <CardInfoLoadin />;
   }
 
   const event = data;
@@ -41,8 +42,8 @@ export default function EventCard({ id }: { id: number }) {
   return (
     <Card className="w-full mx-auto">
       <CardBody className="w-full">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-20">
-          <div className="relative p-4 max-h-[200px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 ">
+          <div className="relative p-4 ">
             <Chip
               className="absolute top-2 left-2 z-40"
               color="primary"

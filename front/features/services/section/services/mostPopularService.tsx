@@ -5,7 +5,7 @@ import { IUMostServicePopular, IUService } from "@/interfaces/IUservices";
 import { getMostPopularServices } from "../../services/services";
 import { CardBasic } from "@/components/utils/cardBasic";
 import NoFountServices from "@/public/images/no_fount_events.jpg";
-import { CardLoagin } from "@/components/utils/loagins/cardLoagin";
+import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 import { useCallback } from "react";
 export function MostPopularServices() {
   const fetchServices = useCallback(() => getMostPopularServices({ size: 6 }), []);
