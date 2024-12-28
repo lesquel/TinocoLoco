@@ -66,7 +66,7 @@ class EmailService:
         }
 
         html_message = render_to_string(
-            "users/event_rental_status_change.html", context
+            "users/email_event_rental_status_change.html", context
         )
         plain_message = f"Hola {event_rental.owner}, tu reserva para el evento {event_rental.event} ha sido actualizada."
         recipient_list = [event_rental.owner.email]
@@ -97,7 +97,7 @@ class EmailService:
             "year": datetime.datetime.now().year,
             "business_configuration": get_business_configuration(),
         }
-        html_message = render_to_string("users/email_reset_code.html", context)
+        html_message = render_to_string("users/email_reset_password_code.html", context)
         plain_message = (
             f"Hola {user.username},\n\n"
             f"Parece que has solicitado restablecer tu contraseña.\n\n"

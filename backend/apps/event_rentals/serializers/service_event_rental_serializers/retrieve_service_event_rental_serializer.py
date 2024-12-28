@@ -3,8 +3,7 @@ from ...models import ServicesEventRental
 
 
 class RetrieveServiceEventRentalSerializer(serializers.ModelSerializer):
-    price = serializers.SerializerMethodField()
-    event_rental_service = serializers.SerializerMethodField()
+    price = serializers.DecimalField(max_digits=10, decimal_places=2)
     class Meta:
         model = ServicesEventRental
         fields = "__all__"

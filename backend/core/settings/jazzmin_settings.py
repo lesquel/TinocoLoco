@@ -5,14 +5,7 @@ JAZZMIN_SETTINGS = {
     "order_with_respect_to": [
         "users",
     ],
-    # "usermenu_links": [
-    #     {
-    #         "name": "Support",
-    #         "url": "https://github.com/farridav/django-jazzmin/issues",
-    #         "new_window": True,
-    #     },
-    #     {"model": "auth.user"},
-    # ],
+
     "show_sidebar": True,
     "navigation_expanded": True,
     "hide_apps": ["auth", "rest_framework"],

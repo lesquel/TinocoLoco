@@ -60,8 +60,6 @@ class ServicesEventRental(models.Model):
             raise errors.ValidationError(
                 ERROR_MESSAGES["AMOUNT_MUST_BE_GREATER_THAN_ZERO"]
             )
-        if self.date_to_deliver < self.event_rental.event_rental_date:
-            raise errors.ValidationError(ERROR_MESSAGES["INVALID_DELIVERY_DATE"])
         if ServicesEventRental.objects.filter(
             event_rental=self.event_rental, service=self.service
         ).exists():

@@ -108,6 +108,7 @@ class EventRentalViewSet(
             status=status.HTTP_201_CREATED,
         )
 
+    @action(detail=True, methods=["post"], url_path="add-review")
     def add_review(self, request, pk=None):
         event_rental = self.get_object()
         serializer = self.get_serializer(

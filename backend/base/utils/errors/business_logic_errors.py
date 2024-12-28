@@ -3,7 +3,6 @@ from rest_framework import status
 from .baseError import BaseError
 
 NOT_FOUND = _("No se encontró el recurso solicitado.")
-PENDING_EVENT_RENTAL = _("No puedes eliminar servicios de un alquiler de evento que no esté pendiente.")
 SERVICE_ID_REQUIRED = _("service_id es obligatorio.")
 SERVICE_NOT_ASSOCIATED = _("Este servicio no está asociado con este alquiler de evento.")
 MUST_PROVIDE_IMAGE = _("Debe proporcionar al menos una imagen.")
@@ -16,9 +15,7 @@ class MustProvidePhotoError(BaseError):
     def __init__(self, message=MUST_PROVIDE_IMAGE, identifier="photos"):
         super().__init__(message=message, code=status.HTTP_400_BAD_REQUEST, identifier=identifier)
 
-class CannotDeletePendingEventRentalError(BaseError):
-    def __init__(self, message=PENDING_EVENT_RENTAL, identifier="cannot_delete_pending_event_rental"):
-        super().__init__(message=message, code=status.HTTP_400_BAD_REQUEST, identifier=identifier)
+
 
 class ServiceIdRequiredError(BaseError):
     def __init__(self, message=SERVICE_ID_REQUIRED, identifier="service_id_required"):

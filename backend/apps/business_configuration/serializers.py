@@ -7,10 +7,10 @@ from .models import BusinessConfiguration
 
 class UpdateBusinessConfigurationSerializer(serializers.ModelSerializer):
     business_logo = serializers.ImageField()
+
     class Meta:
         model = BusinessConfiguration
-        fields =  "__all__"
-
+        fields = "__all__"
 
 
 class RetrieveBusinessConfigurationSerializer(serializers.ModelSerializer):
@@ -21,4 +21,4 @@ class RetrieveBusinessConfigurationSerializer(serializers.ModelSerializer):
         fields = [field.name for field in model._meta.fields] + ["business_logo_url"]
 
     def get_business_logo_url(self, obj):
-        return ImageUtils.get_image_url(obj.business_logo) 
+        return ImageUtils.get_image_url(obj.business_logo)

@@ -7,12 +7,7 @@ environ.Env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Internationalization
 LANGUAGE_CODE = env("LANGUAGE_CODE")
-
-
-# En caso de que de errores: instalar lo siguiente desde mingw-64: pacman -S mingw-w64-x86_64-gettext
-# O tambien, agregar la siguiente ruta a variable de entorno: C:\msys64\usr\bin
 
 LANGUAGES = eval(env("LANGUAGES"))
 
