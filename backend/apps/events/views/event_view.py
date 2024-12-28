@@ -1,6 +1,4 @@
-from rest_framework import viewsets, status
-from rest_framework.response import Response
-from rest_framework.decorators import action
+from rest_framework import viewsets
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 from base.system_services import EventService
@@ -11,7 +9,6 @@ from base.mixins import (
     RetrieveReviewsMixin,
     MetricsAnaliticsMixin,
 )
-
 from apps.reviews.serializers import RetrieveReviewSerializer, CreateReviewSerializer
 from apps.photos.serializers import CreatePhotoSerializer
 from apps.users.permissions import IsAdminOrReadOnly
@@ -42,7 +39,6 @@ class EventView(
             "upload_images": CreatePhotoSerializer,
         }
         return action_serializers.get(self.action, EventSerializer)
-
 
     def get_object(self):
         obj = EventService.get_by_id(self.kwargs.get("pk"))
