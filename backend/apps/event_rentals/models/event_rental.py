@@ -4,12 +4,12 @@ from decimal import Decimal
 import datetime
 
 from base.utils import generate_confirmation_code
+from base.utils import errors
 from apps.users.models.user import CustomUser
 from apps.events.models import Event
 from apps.reviews.models import Review
 from apps.promotions.models import Promotion
 from apps.photos.models import Photo
-from base.utils import errors
 from ..messages import VARIABLE_NAMES_EVENT_RENTAL
 from .rental_status_history import RentalStatusHistory
 from ..choices import PaymentMethod, EventRentalStatus

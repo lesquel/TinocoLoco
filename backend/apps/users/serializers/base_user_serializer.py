@@ -9,8 +9,6 @@ class BaseUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
 
-
-
     def validate_email(self, email):
         if self.instance and self.instance.email == email:
             return email
@@ -19,9 +17,14 @@ class BaseUserSerializer(serializers.ModelSerializer):
         return email
 
     def validate_username(self, username):
+
         if self.instance and self.instance.username == username:
             return username
+
+        if (len(username) < 5) or (len(username) > 30):
+            raise errors.InvalidUsernameLengthError()
+        
+
         if CustomUser.objects.filter(username=username).exists():
             raise errors.UsernameAlreadyExistsError()
         return username
-    

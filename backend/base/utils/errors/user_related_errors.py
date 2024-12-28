@@ -4,9 +4,18 @@ from django.utils.translation import gettext_lazy as _
 
 # Translated error messages
 INVALID_ROLE = _("Rol inválido")
+INVALID_USERNAME_LENGTH = _("El nombre de usuario debe tener entre 5 y 30 caracteres")
 MUST_PROVIDE_BOTH_EMAIL_AND_PASSWORD = _("Por favor, ingresar su usuario y contraseña")
 INVALID_CREDENTIALS = _("Credenciales inválidas")
-INDALID_IDENTITY_CARD = _("Cédula inválida")
+INVALID_IDENTITY_CARD = _("Cédula inválida")
+IDENTITY_CARD_CANNOT_CONTAIN_LETTERS = _("La cédula no puede contener letras")
+IDENTITY_CARD_TOO_LONG = _("La cédula no puede tener más de 10 dígitos")
+
+FIRST_NAME_TOO_LONG = _("El nombre no puede tener más de 30 caracteres")
+LAST_NAME_TOO_LONG = _("El apellido no puede tener más de 30 caracteres")
+FIRST_NAME_CANNOT_CONTAIN_NUMBERS = _("El nombre no puede contener números")
+LAST_NAME_CANNOT_CONTAIN_NUMBERS = _("El apellido no puede contener números")
+
 DONT_HAVE_PERMISSIONS = _("No tiene permisos para realizar esta acción")
 HAVENT_LOGGED_IN = _("No ha iniciado sesión")
 USER_NOT_FOUND = _("Usuario no encontrado")
@@ -26,6 +35,15 @@ class InvalidRoleError(BaseError):
     def __init__(self):
         super().__init__(
             message=INVALID_ROLE, code=status.HTTP_400_BAD_REQUEST, identifier="role"
+        )
+
+
+class InvalidUsernameLengthError(BaseError):
+    def __init__(self):
+        super().__init__(
+            message=INVALID_USERNAME_LENGTH,
+            code=status.HTTP_400_BAD_REQUEST,
+            identifier="username",
         )
 
 
@@ -101,10 +119,62 @@ class IdentityCardAlreadyExistsError(BaseError):
         )
 
 
+class FirstNameTooLongError(BaseError):
+    def __init__(self):
+        super().__init__(
+            message=FIRST_NAME_TOO_LONG,
+            code=status.HTTP_400_BAD_REQUEST,
+            identifier="first_name",
+        )
+
+
+class LastNameTooLongError(BaseError):
+    def __init__(self):
+        super().__init__(
+            message=LAST_NAME_TOO_LONG,
+            code=status.HTTP_400_BAD_REQUEST,
+            identifier="last_name",
+        )
+
+
+class FirstNameCannotContainNumbersError(BaseError):
+    def __init__(self):
+        super().__init__(
+            message=FIRST_NAME_CANNOT_CONTAIN_NUMBERS,
+            code=status.HTTP_400_BAD_REQUEST,
+            identifier="first_name",
+        )
+    
+class LastNameCannotContainNumbersError(BaseError):
+    def __init__(self):
+        super().__init__(
+            message=LAST_NAME_CANNOT_CONTAIN_NUMBERS,
+            code=status.HTTP_400_BAD_REQUEST,
+            identifier="last_name",
+        )
+
 class InvalidIdentityCardError(BaseError):
     def __init__(self):
         super().__init__(
-            message=INDALID_IDENTITY_CARD,
+            message=INVALID_IDENTITY_CARD,
+            code=status.HTTP_400_BAD_REQUEST,
+            identifier="identity_card",
+        )
+
+
+class IdentityCardCannotContainLettersError(BaseError):
+    def __init__(self):
+        super().__init__(
+            message=IDENTITY_CARD_CANNOT_CONTAIN_LETTERS,
+            code=status.HTTP_400_BAD_REQUEST,
+            identifier="identity_card",
+        )
+
+
+class IdentityCardTooLongError(BaseError):
+    def __init__(self):
+        super().__init__(
+            message=IDENTITY_CARD_TOO_LONG,
             code=status.HTTP_400_BAD_REQUEST,
             identifier="identity_card",
         )

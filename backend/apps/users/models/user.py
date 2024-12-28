@@ -32,7 +32,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = VARIABLE_NAMES_USER["META_VERBOSE_NAME_PLURAL"]
 
     identity_card = models.CharField(
-        max_length=10,
         unique=True,
         blank=True,
         null=True,
@@ -56,7 +55,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name=VARIABLE_NAMES_USER["USERNAME"],
     )
     nationality = models.CharField(
-        max_length=20,
         blank=True,
         null=True,
         verbose_name=VARIABLE_NAMES_USER["NACIONALITY"],
@@ -70,30 +68,25 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name=VARIABLE_NAMES_USER["EMAIL_VERIFIED"],
     )
     email_verification_code = models.CharField(
-        max_length=6,
         blank=True,
         null=True,
         verbose_name=VARIABLE_NAMES_USER["EMAIL_VERIFICATION_CODE"],
     )
     password = models.CharField(
-        max_length=128,
         verbose_name=VARIABLE_NAMES_USER["PASSWORD"],
     )
     sex = models.CharField(
-        max_length=1,
         blank=True,
         null=True,
         choices=SexChoices.choices,
         verbose_name=VARIABLE_NAMES_USER["SEX"],
     )
     preferred_language = models.CharField(
-        max_length=2,
         choices=LanguageChoices.choices,
         default=LanguageChoices.ENGLISH.value,
         verbose_name=VARIABLE_NAMES_USER["PREFERRED_LANGUAGE"],
     )
     role = models.CharField(
-        max_length=20,
         choices=RoleChoices.choices,
         default=RoleChoices.COSTUMER.value,
         verbose_name=VARIABLE_NAMES_USER["ROLE"],

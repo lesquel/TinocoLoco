@@ -44,10 +44,6 @@ class ServicesEventRental(models.Model):
         default=EventRentalServiceStatus.PENDING.value,
         verbose_name=VARIABLE_NAMES_EVENT_RENTAL_SERVICES["STATUS"],
     )
-
-    date_to_deliver = models.DateField(
-        verbose_name=VARIABLE_NAMES_EVENT_RENTAL_SERVICES["DATE_TO_DELIVER"],
-    )
     description = models.TextField(
         blank=True,
         null=True,

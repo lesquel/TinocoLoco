@@ -22,7 +22,6 @@ class Event(Product):
         verbose_name=VARIABLE_NAMES_EVENT["EVENT_DESCRIPTION"],
     )
     event_reference_value = models.DecimalField(
-        max_digits=10,
         decimal_places=2,
         verbose_name=VARIABLE_NAMES_EVENT["EVENT_REFERENCE_VALUE"],
     )
@@ -30,7 +29,6 @@ class Event(Product):
         verbose_name=VARIABLE_NAMES_EVENT["EVENT_ALLOWED_HOURS"],
     )
     event_extra_hour_rate = models.DecimalField(
-        max_digits=10,
         decimal_places=2,
         verbose_name=VARIABLE_NAMES_EVENT["EVENT_EXTRA_HOUR_RATE"],
     )
