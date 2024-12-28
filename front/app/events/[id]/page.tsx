@@ -8,10 +8,9 @@ export default function Event({ params }: { params: { id: string } }) {
 
   return (
     <Container>
-
-        <Section>
-          <EventCard id={eventId} />
-        </Section>
+      <Section>
+        <EventCard id={eventId} />
+      </Section>
 
       <SectionReview eventId={eventId} />
     </Container>

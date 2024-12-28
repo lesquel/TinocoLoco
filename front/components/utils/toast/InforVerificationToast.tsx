@@ -26,9 +26,7 @@ const CustomToast: React.FC<CustomToastProps> = ({
     <Card className="flex items-center justify-between max-w-96 gap-3">
       <CardBody className="flex flex-row items-center">
         <IoMdClose className="h-10 w-10 text-red-500" />
-        <p className="mt-1 text-sm text-gray-500">
-          {text}
-        </p>
+        <p className="mt-1 text-sm text-gray-500">{text}</p>
         <Button
           as={Link}
           color="primary"
@@ -67,7 +65,7 @@ export function InforVerificationToast() {
         {
           duration: 5000,
           position: "bottom-right",
-        }
+        },
       );
     }
 
@@ -83,10 +81,9 @@ export function InforVerificationToast() {
         {
           duration: 5000,
           position: "bottom-right",
-        }
+        },
       );
     }
-
   }, [mounted]);
 
   // No renderiza nada en el DOM directamente.

@@ -1,4 +1,3 @@
-
 export interface IUBusiness {
   id: number;
   business_logo_url?: string;

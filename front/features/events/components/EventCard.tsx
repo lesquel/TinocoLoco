@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Card,
@@ -9,7 +9,7 @@ import {
   Accordion,
   AccordionItem,
   user,
-} from "@nextui-org/react"
+} from "@nextui-org/react";
 import { IUEvent, IUOneEvent } from "@/interfaces/IUevents";
 import { CiHeart } from "react-icons/ci";
 import { useCallback } from "react";
@@ -26,8 +26,8 @@ export default function EventCard({ id }: { id: number }) {
 
   const userInfo = getTokenFromCookie();
 
-  userInfo?.user.email_verified
-  userInfo?.user.has_completed_profile
+  userInfo?.user.email_verified;
+  userInfo?.user.has_completed_profile;
 
   if (error) {
     return <div>Error al obtener los datos</div>;
@@ -37,7 +37,6 @@ export default function EventCard({ id }: { id: number }) {
   }
 
   const event = data;
-
 
   return (
     <Card className="w-full mx-auto">
@@ -67,12 +66,14 @@ export default function EventCard({ id }: { id: number }) {
               </div>
             </div>
 
-
             <div>
               <p className="text-sm text-default-500">Detalles de eventos:</p>
               <div className="flex flex-wrap items-center gap-2 mt-1">
                 <Chip size="sm">
-                  {event.event_allowed_hours} {event.event_allowed_hours === 1 ? 'hora extra permitida' : 'horas extras permitidas'}
+                  {event.event_allowed_hours}{" "}
+                  {event.event_allowed_hours === 1
+                    ? "hora extra permitida"
+                    : "horas extras permitidas"}
                 </Chip>
                 <Chip size="sm">
                   ${event.event_extra_hour_rate} extra por hora
@@ -81,15 +82,31 @@ export default function EventCard({ id }: { id: number }) {
             </div>
 
             <Accordion>
-              <AccordionItem key="2" aria-label="Descripción" title="Descripción">
+              <AccordionItem
+                key="2"
+                aria-label="Descripción"
+                title="Descripción"
+              >
                 <p>{event.event_description}</p>
               </AccordionItem>
-              <AccordionItem key="1" aria-label="Detalles del evento" title="Detalles del evento">
+              <AccordionItem
+                key="1"
+                aria-label="Detalles del evento"
+                title="Detalles del evento"
+              >
                 <div className="space-y-2">
                   <ChipCategory idCategory={event.event_category} />
                   <p>Precio del evento: ${event.event_reference_value}</p>
-                  <p>Fecha de creación: {new Date(event.creation_date).toLocaleDateString()}</p>
-                  <p>Fecha de actualización: {new Date(event.last_actualization_date).toLocaleDateString()}</p>
+                  <p>
+                    Fecha de creación:{" "}
+                    {new Date(event.creation_date).toLocaleDateString()}
+                  </p>
+                  <p>
+                    Fecha de actualización:{" "}
+                    {new Date(
+                      event.last_actualization_date,
+                    ).toLocaleDateString()}
+                  </p>
                 </div>
               </AccordionItem>
             </Accordion>
@@ -108,6 +125,5 @@ export default function EventCard({ id }: { id: number }) {
         </div>
       </CardBody>
     </Card>
-  )
+  );
 }
-

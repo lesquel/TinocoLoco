@@ -2,7 +2,6 @@ import { Input } from "@nextui-org/react";
 import { Control, Controller } from "react-hook-form";
 import { FieldConfig } from "@/interfaces/IUform";
 
-
 export const TextForm = ({
   config,
   name,

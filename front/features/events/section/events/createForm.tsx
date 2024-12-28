@@ -8,19 +8,22 @@ import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { createEvent, uploadPhoto } from "@/features/events/services/events";
 import { FormConfig } from "@/interfaces/IUform";
 
-const updateEventPhotos = ()=>{
-}
+const updateEventPhotos = () => {};
 
 export function CreateForm() {
   const [formConfig, setFormConfig] = useState<null | FormConfig>(null);
   const { error, execute, loading } = useAsyncAction(createEvent);
-  const { error: uploadError, execute: uploadExecute, loading: uploadLoading } = useAsyncAction(uploadPhoto);
+  const {
+    error: uploadError,
+    execute: uploadExecute,
+    loading: uploadLoading,
+  } = useAsyncAction(uploadPhoto);
 
   EventFormConfig({ setFormConfig });
 
   const handleSubmit = (data: IUEvent, photos: File[]) => {
     execute(data, (response) => {
-      uploadExecute({data: photos, idEvent: response.id}, (response)=>{
+      uploadExecute({ data: photos, idEvent: response.id }, (response) => {
         console.log("response image:", response);
       });
     });

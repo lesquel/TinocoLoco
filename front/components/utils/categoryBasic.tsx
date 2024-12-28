@@ -20,11 +20,17 @@ export function CategoryCardBasic({
   linkUrl,
   width = 160,
   height = 160,
-  className = ""
+  className = "",
 }: ICardProps) {
   return (
-    <Link href={linkUrl} className={`flex flex-col items-center gap-2 min-w-40 hover:scale-105 transition-all ${className}`}>
-      <Card isPressable className="w-40 h-40 rounded-full overflow-hidden bg-[#f5f5f5]">
+    <Link
+      href={linkUrl}
+      className={`flex flex-col items-center gap-2 min-w-40 hover:scale-105 transition-all ${className}`}
+    >
+      <Card
+        isPressable
+        className="w-40 h-40 rounded-full overflow-hidden bg-[#f5f5f5]"
+      >
         <div className="w-full h-full">
           <Image
             width={width}

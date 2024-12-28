@@ -61,30 +61,32 @@ export const getCategory = async (id: number) => {
   return response;
 };
 
-
-export const uploadPhoto = async ({ data, idEvent }: { data: File[]; idEvent: number }) => {
-
+export const uploadPhoto = async ({
+  data,
+  idEvent,
+}: {
+  data: File[];
+  idEvent: number;
+}) => {
   const formData = new FormData();
 
   data.forEach((file) => {
     formData.append("images", file); // Agregar archivo
   });
 
-    // Realizar la solicitud POST
-    const response = await api.post<IUUploadPhoto>({
-      url: endPoints.events.get + idEvent + endPoints.events.image.post,
-      body: formData, // Pasar directamente el FormData
-      options: {
-        headers: {
-          Authorization: `token ${getTokenFromCookie()?.token}`, // Incluir solo el token
-        },
+  // Realizar la solicitud POST
+  const response = await api.post<IUUploadPhoto>({
+    url: endPoints.events.get + idEvent + endPoints.events.image.post,
+    body: formData, // Pasar directamente el FormData
+    options: {
+      headers: {
+        Authorization: `token ${getTokenFromCookie()?.token}`, // Incluir solo el token
       },
-    });
+    },
+  });
 
-    return response;
-
+  return response;
 };
-
 
 export const createEvent = async (data: IUEvent) => {
   const response = await api.post<IUEvent>({
@@ -100,17 +102,13 @@ export const createEvent = async (data: IUEvent) => {
   return response;
 };
 
-
-
-export const createCategory = async (
-  data: IUCategory,
-) => {
+export const createCategory = async (data: IUCategory) => {
   const formData = new FormData();
   console.log("data:", data);
   formData.append("event_category_name", data.event_category_name);
   formData.append(
     "event_category_description",
-    data.event_category_description
+    data.event_category_description,
   );
   formData.append("is_active", data.is_active.toString()); // Convertir booleano a string
   formData.append("event_category_image", data.event_category_image[0]); // Agregar archivo
@@ -127,9 +125,6 @@ export const createCategory = async (
   });
   return response;
 };
-
-
-
 
 export const getReviews = async (id: number) => {
   const response = await api.get<IUReviews>({
@@ -151,4 +146,3 @@ export const addReview = async (data: IUReview, id: number) => {
   });
   return response;
 };
-

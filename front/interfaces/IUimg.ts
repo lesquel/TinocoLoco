@@ -1,4 +1,3 @@
-
 export interface IUImg {
   id: number;
   content_type: number;

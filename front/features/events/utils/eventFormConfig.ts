@@ -90,7 +90,7 @@ export const EventFormConfig = ({ setFormConfig }: { setFormConfig: any }) => {
         is_active: {
           type: "checkbox",
           label: "Evento Activo",
-          required: false
+          required: false,
         },
       };
 

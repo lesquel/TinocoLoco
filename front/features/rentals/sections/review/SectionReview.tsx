@@ -14,9 +14,12 @@ export const SectionReview = ({ rentalId }: { rentalId: number }) => {
   return (
     <div className="flex flex-col w-full gap-4 max-w-xl mx-auto">
       <Section>
-        <ReviewForm id={rentalId} fetchData={addReview} onReviewAdded={handleReviewAdded} />
+        <ReviewForm
+          id={rentalId}
+          fetchData={addReview}
+          onReviewAdded={handleReviewAdded}
+        />
       </Section>
     </div>
   );
 };
-

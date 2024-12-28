@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { getBusiness } from "@/features/business/services/businessServices";
@@ -10,7 +10,9 @@ export function FooterClientContent() {
   const business = data;
 
   if (error) {
-    return <div className="text-danger">Error loading business information</div>;
+    return (
+      <div className="text-danger">Error loading business information</div>
+    );
   }
 
   if (isLoading || !business) {
@@ -24,7 +26,8 @@ export function FooterClientContent() {
       <div className="mt-16 border-t border-divider pt-8 col-span-full">
         <div className="w-full text-center">
           <p className="text-sm text-foreground-500">
-            &copy; {new Date().getFullYear()} {business.business_name}. Todos los derechos reservados.
+            &copy; {new Date().getFullYear()} {business.business_name}. Todos
+            los derechos reservados.
           </p>
         </div>
       </div>

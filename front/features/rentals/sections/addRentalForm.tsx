@@ -28,7 +28,7 @@ export function AddRentalForm({ idEvent }: AddRentalFormProps) {
   const router = useRouter();
   const [formConfig, setFormConfig] = useState<FormConfig | null>(null);
   const [externalErrors, setExternalErrors] = useState<Record<string, string>>(
-    {}
+    {},
   );
   const {
     data: promotionsData,
@@ -41,7 +41,7 @@ export function AddRentalForm({ idEvent }: AddRentalFormProps) {
     loading: addServiceToRentalLoading,
   } = useAsyncAction(addServiceToRentalService);
   const [addedServices, setAddedServices] = useState<IUServiceToRentalAdd[]>(
-    []
+    [],
   );
   const [showAddServices, setShowAddServices] = useState(false);
 
@@ -60,9 +60,12 @@ export function AddRentalForm({ idEvent }: AddRentalFormProps) {
         useErrorsForm({ response, setExternalErrors });
         return;
       }
-      addServiceToRentalExecute({data: addedServices, rentalId: response.id}, (response)=>{
-        router.push(`${siteConfig.navMenuItems.rentals.href}/${response.id}`);
-      });
+      addServiceToRentalExecute(
+        { data: addedServices, rentalId: response.id },
+        (response) => {
+          router.push(`${siteConfig.navMenuItems.rentals.href}/${response.id}`);
+        },
+      );
     });
   };
 
@@ -112,7 +115,8 @@ export function AddRentalForm({ idEvent }: AddRentalFormProps) {
                     className="flex justify-between items-center bg-gray-100 p-2 rounded"
                   >
                     <span>
-                      Servicio con el id {service.service_id} - Cantidad: {service.service_quantity}
+                      Servicio con el id {service.service_id} - Cantidad:{" "}
+                      {service.service_quantity}
                     </span>
                     <Button
                       isIconOnly

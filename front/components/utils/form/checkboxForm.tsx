@@ -4,7 +4,6 @@ interface CustomCheckboxProps {
   children: React.ReactNode;
 }
 
-
 export const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
   checked,
   onChange,

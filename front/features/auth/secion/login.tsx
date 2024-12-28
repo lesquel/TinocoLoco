@@ -31,7 +31,7 @@ export const Login = () => {
   } = useForm<IURegister>();
   const { loading, error, handleRegister, generalError } = useAuth(
     setError,
-    loginService
+    loginService,
   );
 
   useEffect(() => {

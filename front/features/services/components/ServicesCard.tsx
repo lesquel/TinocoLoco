@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import {
   Card,
@@ -8,7 +8,7 @@ import {
   Chip,
   Accordion,
   AccordionItem,
-} from "@nextui-org/react"
+} from "@nextui-org/react";
 import { CiHeart } from "react-icons/ci";
 import { useCallback } from "react";
 import { useApiRequest } from "@/hooks/useApiRequest";
@@ -27,7 +27,6 @@ export default function ServicesCard({ id }: { id: number }) {
   if (!data || isLoading) {
     return <div>Cargando...</div>;
   }
-
 
   return (
     <Card className="w-full mx-auto">
@@ -57,17 +56,34 @@ export default function ServicesCard({ id }: { id: number }) {
               </div>
             </div>
 
-
             <Accordion>
-              <AccordionItem key="2" aria-label="Descripción" title="Descripción">
-              <p className="text-justify leading-relaxed whitespace-pre-line">{data.service_description}</p>
+              <AccordionItem
+                key="2"
+                aria-label="Descripción"
+                title="Descripción"
+              >
+                <p className="text-justify leading-relaxed whitespace-pre-line">
+                  {data.service_description}
+                </p>
               </AccordionItem>
-              <AccordionItem key="1" aria-label="Detalles de servicio" title="Detalles de servicio">
-              <div className="space-y-2">
-                <ChipCategory idCategory={data.service_category} />
-                <p>Fecha de creacion: {new Date(data.creation_date).toLocaleDateString()}</p>
-                <p>Fecha de actualización: {new Date(data.last_actualization_date).toLocaleDateString()}</p>
-              </div>
+              <AccordionItem
+                key="1"
+                aria-label="Detalles de servicio"
+                title="Detalles de servicio"
+              >
+                <div className="space-y-2">
+                  <ChipCategory idCategory={data.service_category} />
+                  <p>
+                    Fecha de creacion:{" "}
+                    {new Date(data.creation_date).toLocaleDateString()}
+                  </p>
+                  <p>
+                    Fecha de actualización:{" "}
+                    {new Date(
+                      data.last_actualization_date,
+                    ).toLocaleDateString()}
+                  </p>
+                </div>
               </AccordionItem>
             </Accordion>
 
@@ -84,6 +100,5 @@ export default function ServicesCard({ id }: { id: number }) {
         </div>
       </CardBody>
     </Card>
-  )
+  );
 }
-

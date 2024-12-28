@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { CardBasic } from "@/components/utils/cardBasic";
 import { endPoints } from "@/config/endPoints";
 import NoFountEvent from "@/public/images/no_fount_events.jpg";
-import {  getEvents } from "@/features/events/services/events";
+import { getEvents } from "@/features/events/services/events";
 import { IUEvent } from "@/interfaces/IUevents";
 import { SearchableListSection } from "@/components/sections/listComponent/searchListSection";
 
@@ -28,7 +28,7 @@ export function AllEvents({
           titleKey="event_name"
           defaultImage={NoFountEvent.src}
           idKey="id"
-          />
+        />
       )}
       pageSize={size}
       noDataMessage="No hay eventos"

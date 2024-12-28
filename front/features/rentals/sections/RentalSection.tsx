@@ -110,7 +110,7 @@ export function RentalSection({ id }: { id: number }) {
         </div>
       </div>
 
-    {!data.costumer_rating ? <SectionReview rentalId={id} /> : null}
+      {!data.costumer_rating ? <SectionReview rentalId={id} /> : null}
     </div>
   );
 }

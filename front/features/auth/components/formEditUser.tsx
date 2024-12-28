@@ -11,10 +11,16 @@ import { useErrorsForm } from "@/services/utils/useErrosForm";
 
 export default function FormEditUser() {
   const userInfo = getTokenFromCookie();
-  const [externalErrors, setExternalErrors] = useState<Record<string, string>>({});
+  const [externalErrors, setExternalErrors] = useState<Record<string, string>>(
+    {},
+  );
   const fetchUser = useCallback(() => getUser(userInfo?.user?.id), []);
   const { data, error, isLoading } = useApiRequest(fetchUser);
-  const { error: updateError, execute: updateExecute, loading: updateLoading } = useAsyncAction(editUser);
+  const {
+    error: updateError,
+    execute: updateExecute,
+    loading: updateLoading,
+  } = useAsyncAction(editUser);
 
   const onSubmit = (formData: any) => {
     updateExecute({ ...formData, id: userInfo?.user?.id }, (response) => {
@@ -26,8 +32,8 @@ export default function FormEditUser() {
       //   token: userInfo?.token,
       //   user: response,
       // });
-      console.log("User updated successfully", response)
-      console.log(getTokenFromCookie())
+      console.log("User updated successfully", response);
+      console.log(getTokenFromCookie());
       // window.location.href = "/accounts";
     });
   };

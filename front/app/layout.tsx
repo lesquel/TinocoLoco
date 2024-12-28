@@ -38,7 +38,7 @@ export default function RootLayout({
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
         )}
       >
         <Toaster />
@@ -57,4 +57,3 @@ export default function RootLayout({
     </html>
   );
 }
-

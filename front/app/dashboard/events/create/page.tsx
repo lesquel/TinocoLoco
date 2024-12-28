@@ -5,7 +5,6 @@ import { CreateForm } from "@/features/events/section/events/createForm";
 const EventPage = () => {
   return (
     <Container>
-
       <Section>
         <CreateForm />
       </Section>

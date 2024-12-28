@@ -27,16 +27,20 @@ const RentalEvent = ({ idEvent }: { idEvent: number }) => {
 
 export function CardRental({ rental }: { rental: IURental }) {
   return (
-    <Card as={Link} href={`/rentals/${rental.id}`} className="w-full max-w-[520px]">
+    <Card
+      as={Link}
+      href={`/rentals/${rental.id}`}
+      className="w-full max-w-[520px]"
+    >
       <CardBody className="flex flex-col flex-wrap p-0 sm:flex-nowrap">
-          <Image
-            removeWrapper
-            alt="Acme Creators"
-            className="h-auto w-full flex-none object-cover object-top md:w-48"
-            src={rental.photos[0] || NoFountRental.src}
-            width={160}
-            height={160}
-          />
+        <Image
+          removeWrapper
+          alt="Acme Creators"
+          className="h-auto w-full flex-none object-cover object-top md:w-48"
+          src={rental.photos[0] || NoFountRental.src}
+          width={160}
+          height={160}
+        />
         <div className="px-4 py-5">
           <RentalEvent idEvent={rental.event} />
           <div className="flex flex-col gap-3 pt-2 text-small text-default-400">

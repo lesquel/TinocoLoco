@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import { FaStar } from "react-icons/fa6";
 
 interface StarRatingProps {
@@ -8,7 +8,10 @@ interface StarRatingProps {
   onRatingChange: (rating: number) => void;
 }
 
-export const StarRating: React.FC<StarRatingProps> = ({ rating, onRatingChange }) => {
+export const StarRating: React.FC<StarRatingProps> = ({
+  rating,
+  onRatingChange,
+}) => {
   return (
     <div>
       <p className="mb-2">Calificación:</p>
@@ -23,7 +26,7 @@ export const StarRating: React.FC<StarRatingProps> = ({ rating, onRatingChange }
               size={24}
               onClick={() => onRatingChange(ratingValue)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
+                if (e.key === "Enter" || e.key === " ") {
                   onRatingChange(ratingValue);
                 }
               }}
@@ -38,4 +41,3 @@ export const StarRating: React.FC<StarRatingProps> = ({ rating, onRatingChange }
     </div>
   );
 };
-

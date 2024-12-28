@@ -1,5 +1,11 @@
 "use client";
-import { Card, CardHeader, CardBody, CardFooter, user } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  user,
+} from "@nextui-org/react";
 import { Avatar } from "@nextui-org/react";
 import { useCallback } from "react";
 import { useApiRequest } from "@/hooks/useApiRequest";
@@ -18,14 +24,16 @@ const UserComponent = ({ idUser }: { idUser: number }) => {
     return <div>Cargando...</div>;
   }
   return (
-    <h3 className="text-lg font-semibold">Usuario {userData?.username || userData?.first_name}</h3>
+    <h3 className="text-lg font-semibold">
+      Usuario {userData?.username || userData?.first_name}
+    </h3>
   );
 };
 
 export function ReviewList({ fetchReviews, id }: ReviewListProps) {
   const fetchEventReviews = useCallback(
     () => fetchReviews(id),
-    [fetchReviews, id]
+    [fetchReviews, id],
   );
   const { data: reviewsData, isLoading } = useApiRequest(fetchEventReviews);
 

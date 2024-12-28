@@ -29,7 +29,9 @@ export const getMostViewedServices = async (): Promise<IUMostServiceViewed> => {
 };
 
 export const getServices = async (options?: any) => {
-  console.log("-------------------------------------------------------------------------------------------")
+  console.log(
+    "-------------------------------------------------------------------------------------------",
+  );
   const response = await api.get<IUServices>({
     url: endPoints.services.get + (options ? construcUrl({ options }) : ""),
   });
@@ -55,7 +57,6 @@ export const getServiceCategorys = async (options?: any) => {
   const response = await api.get<IUCategorys>({ url });
   return response;
 };
-
 
 export const uploadPhoto = async ({
   data,
@@ -106,7 +107,7 @@ export const createCategory = async (data: IUCategory) => {
   formData.append("service_category_name", data.event_category_name);
   formData.append(
     "service_category_description",
-    data.event_category_description
+    data.event_category_description,
   );
   formData.append("is_active", data.is_active.toString()); // Convertir booleano a string
   formData.append("service_category_image", data.event_category_image[0]); // Agregar archivo
@@ -123,7 +124,6 @@ export const createCategory = async (data: IUCategory) => {
   });
   return response;
 };
-
 
 export const getReviews = async (id: number) => {
   const response = await api.get<IUReview>({

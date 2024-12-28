@@ -6,10 +6,10 @@ import FormEditUser from "@/features/auth/components/formEditUser";
 export default function EditAccountPage() {
   return (
     <Container>
-     <Section>
-     <TitleSection title="Mi Cuenta" description="Editar Datos" />
-     <FormEditUser />
-      </Section> 
+      <Section>
+        <TitleSection title="Mi Cuenta" description="Editar Datos" />
+        <FormEditUser />
+      </Section>
     </Container>
   );
 }

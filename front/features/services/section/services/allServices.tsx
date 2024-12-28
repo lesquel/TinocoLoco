@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { IUService } from "@/interfaces/IUservices";
 import { getServices } from "../../services/services";
 import { CardBasic } from "@/components/utils/cardBasic";
@@ -37,5 +37,3 @@ export function AllServices({
     />
   );
 }
-
-

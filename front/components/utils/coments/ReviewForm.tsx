@@ -28,20 +28,23 @@ export const ReviewForm = ({
   const { control, handleSubmit, setValue, reset } = useForm<ReviewFormData>();
   const { error, loading, execute } = useAsyncAction(fetchData);
 
-  const handleFormSubmit = useCallback((data: ReviewFormData) => {
-    const reviewData: IUReview = {
-      ...data,
-      rating_score: rating,
-      id: id,
-    };
+  const handleFormSubmit = useCallback(
+    (data: ReviewFormData) => {
+      const reviewData: IUReview = {
+        ...data,
+        rating_score: rating,
+        id: id,
+      };
 
-    execute(reviewData, (response) => {
-      console.log(response);
-      onReviewAdded();
-      reset();
-      setRating(0);
-    });
-  }, [execute, id, rating, onReviewAdded, reset]);
+      execute(reviewData, (response) => {
+        console.log(response);
+        onReviewAdded();
+        reset();
+        setRating(0);
+      });
+    },
+    [execute, id, rating, onReviewAdded, reset],
+  );
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
@@ -93,10 +96,14 @@ export const ReviewForm = ({
           Error al enviar el comentario. Por favor, inténtalo nuevamente.
         </p>
       )}
-      <Button type="submit" color="primary" isLoading={loading} disabled={loading}>
+      <Button
+        type="submit"
+        color="primary"
+        isLoading={loading}
+        disabled={loading}
+      >
         Enviar comentario
       </Button>
     </form>
   );
 };
-

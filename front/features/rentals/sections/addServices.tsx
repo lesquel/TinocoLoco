@@ -15,7 +15,9 @@ interface AddServicesProps {
 }
 
 export function AddServices({ onAddService }: AddServicesProps) {
-  const [serviceFormConfig, setServiceFormConfig] = useState<FormConfig | null>(null);
+  const [serviceFormConfig, setServiceFormConfig] = useState<FormConfig | null>(
+    null,
+  );
   const { data: servicesData, error, isLoading } = useApiRequest(getServices);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export function AddServices({ onAddService }: AddServicesProps) {
           required: true,
           validation: {
             required: "El servicio es obligatorio",
-          }
+          },
         },
         service_quantity: {
           type: "number",
@@ -62,7 +64,11 @@ export function AddServices({ onAddService }: AddServicesProps) {
   }
 
   if (error) {
-    return <div className="text-red-500">Error al cargar servicios: {error.message}</div>;
+    return (
+      <div className="text-red-500">
+        Error al cargar servicios: {error.message}
+      </div>
+    );
   }
 
   if (!serviceFormConfig) {
@@ -83,4 +89,3 @@ export function AddServices({ onAddService }: AddServicesProps) {
     </div>
   );
 }
-
