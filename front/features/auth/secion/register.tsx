@@ -30,7 +30,7 @@ export const Register = () => {
   } = useForm<IURegister>();
   const { handleRegister, generalError, loading } = useAuth(
     setError,
-    registerService
+    registerService,
   );
 
   useEffect(() => {

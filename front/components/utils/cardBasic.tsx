@@ -1,6 +1,6 @@
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import { redirect } from "next/navigation";
-import NofounService from "@/public/images/no_fount_events.jpg"
+import NofounService from "@/public/images/no_fount_events.jpg";
 import { IUImg } from "@/interfaces/IUimg";
 import Link from "next/link";
 interface ReusableCardProps<T> {
@@ -19,7 +19,7 @@ export function CardBasic<T>({
   titleKey,
   idKey,
 }: ReusableCardProps<T>) {
-  const defaultImage =  NofounService.src;
+  const defaultImage = NofounService.src;
   const imageSrc = (item[imageKey] as IUImg[])[0]?.image_url || defaultImage;
   const title = (item[titleKey] as string) || "Sin título";
   const id = item[idKey];

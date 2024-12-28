@@ -19,7 +19,7 @@ export const NavInfo = ({ urls }: NavInfoProps) => {
 
   return (
     <div className="w-full flex justify-center">
-      <Tabs 
+      <Tabs
         aria-label="Navigation"
         radius="full"
         variant="solid"
@@ -29,14 +29,11 @@ export const NavInfo = ({ urls }: NavInfoProps) => {
           tabList: "bg-zinc-900 p-0.5",
           tab: "text-zinc-400 data-[selected=true]:text-white",
           cursor: "bg-blue-600",
-          panel: "pt-2"
+          panel: "pt-2",
         }}
       >
         {urls.map((url) => (
-          <Tab 
-            key={url.url} 
-            title={url.label}
-          />
+          <Tab key={url.url} title={url.label} />
         ))}
       </Tabs>
     </div>

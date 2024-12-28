@@ -1,6 +1,6 @@
 import { FormConfig } from "@/interfaces/IUform";
 
-export const businessFormConfig : FormConfig = {
+export const businessFormConfig: FormConfig = {
   business_name: {
     type: "text",
     label: "Nombre de la Empresa",

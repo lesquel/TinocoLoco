@@ -22,7 +22,11 @@ import debounce from "lodash.debounce";
 interface SearchableTableSectionProps<T> {
   title: string;
   description: string;
-  fetchData: (params: { page: number; page_size: number; [key: string]: any }) => Promise<{ count: number; results: T[] }>;
+  fetchData: (params: {
+    page: number;
+    page_size: number;
+    [key: string]: any;
+  }) => Promise<{ count: number; results: T[] }>;
   columns: { name: string; uid: string }[];
   pageSize?: number;
   noDataMessage?: string;
@@ -42,7 +46,10 @@ export const SearchableTableSection = <T extends Record<string, any>>({
 }: SearchableTableSectionProps<T>) => {
   const [filterValue, setFilterValue] = useState("");
   const [page, setPage] = useState(1);
-  const [data, setData] = useState<{ count: number; results: T[] }>({ count: 0, results: [] });
+  const [data, setData] = useState<{ count: number; results: T[] }>({
+    count: 0,
+    results: [],
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -65,7 +72,7 @@ export const SearchableTableSection = <T extends Record<string, any>>({
         setIsLoading(false);
       }
     },
-    [fetchData, pageSize, errorMessage]
+    [fetchData, pageSize, errorMessage],
   );
 
   // Debounced search handler
@@ -75,29 +82,26 @@ export const SearchableTableSection = <T extends Record<string, any>>({
         setPage(1); // Reset to the first page on search
         loadData(value, 1);
       }, 300),
-    [loadData]
+    [loadData],
   );
 
   useEffect(() => {
     loadData(filterValue, page);
   }, [loadData, filterValue, page]);
 
-  const renderCell = useCallback(
-    (item: T, columnKey: string) => {
-      const value = item[columnKey];
-      if (columnKey === "photos" && Array.isArray(value) && value.length > 0) {
-        return (
-          <Image
-            src={value[0].image_url || No_fount_events.src}
-            alt="Item"
-            className="w-16 h-16 object-cover rounded"
-          />
-        );
-      }
-      return value ?? "-";
-    },
-    []
-  );
+  const renderCell = useCallback((item: T, columnKey: string) => {
+    const value = item[columnKey];
+    if (columnKey === "photos" && Array.isArray(value) && value.length > 0) {
+      return (
+        <Image
+          src={value[0].image_url || No_fount_events.src}
+          alt="Item"
+          className="w-16 h-16 object-cover rounded"
+        />
+      );
+    }
+    return value ?? "-";
+  }, []);
 
   const topContent = useMemo(
     () => (
@@ -123,7 +127,7 @@ export const SearchableTableSection = <T extends Record<string, any>>({
         </div>
       </div>
     ),
-    [title, description, filterValue, handleSearchChange]
+    [title, description, filterValue, handleSearchChange],
   );
 
   const bottomContent = useMemo(
@@ -142,7 +146,7 @@ export const SearchableTableSection = <T extends Record<string, any>>({
         />
       </div>
     ),
-    [data.count, page, pages]
+    [data.count, page, pages],
   );
 
   if (error) {
@@ -170,7 +174,9 @@ export const SearchableTableSection = <T extends Record<string, any>>({
       <TableBody emptyContent={noDataMessage} items={data.results}>
         {(item) => (
           <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+            {(columnKey) => (
+              <TableCell>{renderCell(item, columnKey)}</TableCell>
+            )}
           </TableRow>
         )}
       </TableBody>

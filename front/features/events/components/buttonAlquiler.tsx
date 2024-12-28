@@ -1,7 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Button, Tooltip, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react";
+import {
+  Button,
+  Tooltip,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "@nextui-org/react";
 import { redirect, useRouter } from "next/navigation";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { siteConfig } from "@/config/site";
@@ -14,10 +22,12 @@ interface UserInfo {
   };
 }
 
-
 export const ConditionalRentalButton = ({ id }: { id: number }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalContent, setModalContent] = useState<{ title: string; message: string }>({ title: "", message: "" });
+  const [modalContent, setModalContent] = useState<{
+    title: string;
+    message: string;
+  }>({ title: "", message: "" });
 
   const userInfo = getTokenFromCookie();
 
@@ -46,7 +56,6 @@ export const ConditionalRentalButton = ({ id }: { id: number }) => {
     }
 
     redirect(siteConfig.navMenuItems.rentals.add.href + `/${id}`);
-    
   };
 
   const closeModal = () => {
@@ -54,19 +63,16 @@ export const ConditionalRentalButton = ({ id }: { id: number }) => {
   };
 
   const buttonContent = (
-    <Button
-      className="flex-1"
-      color="primary"
-      size="lg"
-      onClick={handleClick}
-    >
+    <Button className="flex-1" color="primary" size="lg" onClick={handleClick}>
       Alquilar ahora
     </Button>
   );
 
   return (
     <>
-      {userInfo && (!userInfo.user.email_verified || !userInfo.user.has_completed_profile) ? (
+      {userInfo &&
+      (!userInfo.user.email_verified ||
+        !userInfo.user.has_completed_profile) ? (
         <Tooltip
           content={
             !userInfo.user.email_verified
@@ -90,7 +96,12 @@ export const ConditionalRentalButton = ({ id }: { id: number }) => {
             <Button color="danger" variant="flat" onPress={closeModal}>
               Close
             </Button>
-            <Button as={Link} href={siteConfig.navMenuItems.account.href} color="primary" onPress={closeModal}>
+            <Button
+              as={Link}
+              href={siteConfig.navMenuItems.account.href}
+              color="primary"
+              onPress={closeModal}
+            >
               Resolver
             </Button>
           </ModalFooter>
@@ -99,4 +110,3 @@ export const ConditionalRentalButton = ({ id }: { id: number }) => {
     </>
   );
 };
-

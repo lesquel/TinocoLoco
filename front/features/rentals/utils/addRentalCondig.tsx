@@ -1,11 +1,11 @@
-import { FormConfig } from "@/interfaces/IUform"
-import { PaymentMethod } from "@/types/paymentMethod"
+import { FormConfig } from "@/interfaces/IUform";
+import { PaymentMethod } from "@/types/paymentMethod";
 
 export const createRentalConfig = (promotions: any[]): FormConfig => {
   const promotionOptions = promotions.map((item: any) => ({
     label: item.promotion_name,
     value: item.id,
-  }))
+  }));
 
   return {
     event_rental_date: {
@@ -77,6 +77,5 @@ export const createRentalConfig = (promotions: any[]): FormConfig => {
       options: promotionOptions,
       required: false,
     },
-  }
-}
-
+  };
+};

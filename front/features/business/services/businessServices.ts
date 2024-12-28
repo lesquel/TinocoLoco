@@ -25,21 +25,21 @@ export const updateBusiness = async (data: IUBusiness) => {
   formData.append("business_x_url", data.business_x_url || "");
   formData.append(
     "business_bank_account_number_1",
-    data.business_bank_account_number_1 || ""
+    data.business_bank_account_number_1 || "",
   );
   formData.append("business_bank_name_1", data.business_bank_name_1 || "");
   formData.append(
     "business_bank_account_type_1",
-    data.business_bank_account_type_1 || ""
+    data.business_bank_account_type_1 || "",
   );
   formData.append(
     "business_bank_account_number_2",
-    data.business_bank_account_number_2 || ""
+    data.business_bank_account_number_2 || "",
   );
   formData.append("business_bank_name_2", data.business_bank_name_2 || "");
   formData.append(
     "business_bank_account_type_2",
-    data.business_bank_account_type_2 || ""
+    data.business_bank_account_type_2 || "",
   );
 
   let business: IUBusiness = await api.put<IUBusiness>({

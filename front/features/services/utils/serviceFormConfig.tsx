@@ -3,7 +3,11 @@ import { getServiceCategorys } from "../services/services";
 import { useEffect } from "react";
 import { FormConfig } from "@/interfaces/IUform";
 
-export const ServiceFormConfig = ({ setFormConfig }: { setFormConfig: any }) => {
+export const ServiceFormConfig = ({
+  setFormConfig,
+}: {
+  setFormConfig: any;
+}) => {
   const { data, error, isLoading } = useApiRequest(getServiceCategorys);
 
   useEffect(() => {
@@ -68,7 +72,7 @@ export const ServiceFormConfig = ({ setFormConfig }: { setFormConfig: any }) => 
         is_active: {
           type: "checkbox",
           label: "Servicio Activo",
-          required: false
+          required: false,
         },
       };
 

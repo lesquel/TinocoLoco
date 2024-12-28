@@ -17,18 +17,32 @@ const ContactLink: React.FC<LinkProps> = ({ name, value, icon }) => (
   </Link>
 );
 
-export const ContactInfo: React.FC<{ business: ConfigurationBusiness }> = ({ business }) => (
+export const ContactInfo: React.FC<{ business: ConfigurationBusiness }> = ({
+  business,
+}) => (
   <div>
     <h2 className="text-lg font-medium text-foreground">Contacto</h2>
     <ul className="mt-4 space-y-2 text-foreground-700">
       {business.business_email && (
-        <ContactLink name="Email" value={`mailto:${business.business_email}`} icon={<MdAlternateEmail className="h-6 w-6" />} />
+        <ContactLink
+          name="Email"
+          value={`mailto:${business.business_email}`}
+          icon={<MdAlternateEmail className="h-6 w-6" />}
+        />
       )}
       {business.business_phone_number && (
-        <ContactLink name="Teléfono" value={`tel:${business.business_phone_number}`} icon={<CiPhone className="h-6 w-6" />} />
+        <ContactLink
+          name="Teléfono"
+          value={`tel:${business.business_phone_number}`}
+          icon={<CiPhone className="h-6 w-6" />}
+        />
       )}
       {business.business_website_url && (
-        <ContactLink name="Sitio web" value={business.business_website_url} icon={<TbWorld className="h-6 w-6" />} />
+        <ContactLink
+          name="Sitio web"
+          value={business.business_website_url}
+          icon={<TbWorld className="h-6 w-6" />}
+        />
       )}
     </ul>
   </div>

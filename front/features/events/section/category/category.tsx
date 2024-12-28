@@ -19,9 +19,15 @@ export function GetEventsByCategory({
   infoComponent: { title: string; description: string };
 }) {
   // Fetch the category data
-  const fetchCategory = useCallback(() => getCategory(idcategory), [idcategory]);
-  const { data: categoryData, error: categoryError, isLoading: isCategoryLoading } =
-    useApiRequest<IUCategory>(fetchCategory);
+  const fetchCategory = useCallback(
+    () => getCategory(idcategory),
+    [idcategory],
+  );
+  const {
+    data: categoryData,
+    error: categoryError,
+    isLoading: isCategoryLoading,
+  } = useApiRequest<IUCategory>(fetchCategory);
 
   // Memoize the fetchServices function to ensure stable references
   const fetchEvents = useMemo(() => {
@@ -32,7 +38,8 @@ export function GetEventsByCategory({
   }, [categoryData]);
 
   // Handle loading, error, or no data for category
-  if (categoryError) return <div>Error al obtener los datos de la categoría</div>;
+  if (categoryError)
+    return <div>Error al obtener los datos de la categoría</div>;
   if (isCategoryLoading) return <div>Cargando categoría...</div>;
   if (!categoryData) return <div>No se encontró la categoría</div>;
 

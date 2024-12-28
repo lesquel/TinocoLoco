@@ -7,7 +7,11 @@ import { ListComponent } from "@/components/sections/listComponent/listComponent
 interface SearchableListSectionProps<T> {
   title: string;
   description: string;
-  fetchData: (params: { page: number; page_size: number; [key: string]: any }) => Promise<{ count: number; results: T[] }>;
+  fetchData: (params: {
+    page: number;
+    page_size: number;
+    [key: string]: any;
+  }) => Promise<{ count: number; results: T[] }>;
   renderCard: (item: T) => JSX.Element;
   endpoint: string;
   pageSize?: number;

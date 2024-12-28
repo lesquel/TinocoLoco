@@ -4,7 +4,6 @@ import { CreateForm } from "@/features/services/section/services/createForm";
 const EventPage = () => {
   return (
     <Container>
-
       <Section>
         <CreateForm />
       </Section>

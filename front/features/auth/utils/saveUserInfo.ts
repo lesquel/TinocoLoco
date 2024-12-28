@@ -1,4 +1,3 @@
-
 import { IUUser } from "@/interfaces/IUser";
 import Cookies from "js-cookie";
 export const saveToken = (userInfo: IUUser) => {

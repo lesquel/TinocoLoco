@@ -27,7 +27,7 @@ export default function Page() {
   const { data, error, isLoading } = useApiRequest(fetchUser);
   console.log(
     "dataefojbwedfguofówefówowfe´wogeifgweofgewgfówgwfeo´jwefgwogweu:",
-    infoUsuerToke
+    infoUsuerToke,
   );
   if (error) {
     return <div>Error al obtener la información del usuario</div>;

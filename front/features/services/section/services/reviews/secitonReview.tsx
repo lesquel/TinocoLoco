@@ -15,7 +15,11 @@ export const SectionReview = ({ serviceId }: { serviceId: number }) => {
   return (
     <div className="flex flex-col w-full gap-4 max-w-xl mx-auto">
       <Section>
-        <ReviewForm id={serviceId} fetchData={addReview} onReviewAdded={handleReviewAdded} />
+        <ReviewForm
+          id={serviceId}
+          fetchData={addReview}
+          onReviewAdded={handleReviewAdded}
+        />
       </Section>
       <Section>
         <h2 className="text-2xl font-bold mb-4">Reviews</h2>
@@ -24,4 +28,3 @@ export const SectionReview = ({ serviceId }: { serviceId: number }) => {
     </div>
   );
 };
-

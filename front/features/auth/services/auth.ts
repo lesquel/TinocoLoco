@@ -24,7 +24,6 @@ export const login = async (data: IULogin) => {
   return response;
 };
 
-
 export const editUser = async (data: IUUser, id: number) => {
   const response = await api.put({
     url: endPoints.user.edit + getTokenFromCookie()?.user?.id + "/",
@@ -42,7 +41,7 @@ export const editUser = async (data: IUUser, id: number) => {
 export const getUser = async (id: number) => {
   const response = await api.get<IUGetUser>({
     url: endPoints.user.get + id + "/",
-    options : {
+    options: {
       headers: {
         Authorization: `token ${getTokenFromCookie()?.token}`,
         "Content-Type": "application/json",
@@ -52,10 +51,8 @@ export const getUser = async (id: number) => {
   return response;
 };
 
-
-
 export const sendVerificationEmail = async () => {
-  console.log(getTokenFromCookie() , "getTokenFromCookie()");
+  console.log(getTokenFromCookie(), "getTokenFromCookie()");
   const response = await api.post({
     url: endPoints.user.sendVerificationEmail,
     options: {
@@ -68,11 +65,10 @@ export const sendVerificationEmail = async () => {
   return response;
 };
 
-
 export const verificationCodeEmail = async (data: IUcodeEmail) => {
   const response = await api.post({
     url: endPoints.user.verificationEmail,
-    data: JSON.stringify(data), 
+    body: JSON.stringify(data),
     options: {
       headers: {
         Authorization: `token ${getTokenFromCookie()?.token}`,
@@ -82,7 +78,6 @@ export const verificationCodeEmail = async (data: IUcodeEmail) => {
   });
   return response;
 };
-
 
 const addReview = async (data: IUReview) => {
   const response = await api.post({

@@ -7,15 +7,20 @@ import { CategoryCardBasic } from "@/components/utils/categoryBasic";
 
 export function CategoryHome() {
   const fetchCategorys = useCallback(() => getCategorys({ size: 5 }), []);
-  const { data, error } = useApiRequest<IUCategorys>(fetchCategorys);
+  const { data, error, isLoading } = useApiRequest<IUCategorys>(fetchCategorys);
 
   if (error) {
     return <div>Error al obtener los datos</div>;
   }
 
-  if (!data) {
+  if (isLoading) {
     return <div>Cargando...</div>;
   }
+
+  if (!data?.results){
+    return <div>No hay categorías</div>;
+  }
+
 
   return (
     <div>
