@@ -1,12 +1,13 @@
 "use client";
+
+import React, { useCallback } from "react";
+import { Button, Card, Image, CardBody } from "@nextui-org/react";
+import Link from "next/link";
 import { IURental } from "@/interfaces/IURental";
-import { Button, Card, CardBody, Image } from "@nextui-org/react";
-import NoFountRental from "@/public/images/no_fount_events.jpg";
 import { getEvent } from "@/features/events/services/events";
-import { useCallback } from "react";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { IUEvent } from "@/interfaces/IUevents";
-import Link from "next/link";
+import NoFountRental from "@/public/images/no_fount_events.jpg";
 
 const RentalEvent = ({ idEvent }: { idEvent: number }) => {
   const fetchEvent = useCallback(() => getEvent(idEvent), [idEvent]);
@@ -27,28 +28,28 @@ const RentalEvent = ({ idEvent }: { idEvent: number }) => {
 
 export function CardRental({ rental }: { rental: IURental }) {
   return (
-    <Card
-      as={Link}
-      href={`/rentals/${rental.id}`}
-      className="w-full max-w-[520px]"
-    >
-      <CardBody className="flex flex-col flex-wrap p-0 sm:flex-nowrap">
-        <Image
-          removeWrapper
-          alt="Acme Creators"
-          className="h-auto w-full flex-none object-cover object-top md:w-48"
-          src={rental.photos[0] || NoFountRental.src}
-          width={160}
-          height={160}
-        />
-        <div className="px-4 py-5">
+    <Card as={Link} href={`/rentals/${rental.id}`} className="w-full max-w-[420px]">
+      <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap justify-center items-center">
+        <div className="flex flex-col gap-2">
+          <Image
+            removeWrapper
+            alt="Rental Image"
+            className=" object-cover object-center w-40"
+            src={rental.photos[0] || NoFountRental.src}
+          />
+        </div>
+        <div className="p-4 flex flex-col gap-2">
           <RentalEvent idEvent={rental.event} />
           <div className="flex flex-col gap-3 pt-2 text-small text-default-400">
             <p>
               <span className="font-medium">Fecha de creación:</span>{" "}
               {rental.event_rental_creation_date}
+            </p>
+            <p>
               <span className="font-medium">Fecha de inicio:</span>{" "}
               {rental.event_rental_start_time}
+            </p>
+            <p>
               <span className="font-medium">Hora de finalización:</span>{" "}
               {rental.event_rental_planified_end_time}
             </p>

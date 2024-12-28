@@ -1,36 +1,39 @@
+'use client'
+
 import { Pagination, Button } from "@nextui-org/react";
 
 interface PaginationComponentProps {
-  pages: number;
+  totalPages: number;
   currentPage: number;
   onPageChange: (page: number) => void;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
 }
-
 export function PaginationComponent({
-  pages,
+  totalPages,
   currentPage,
   onPageChange,
+  hasNextPage,
+  hasPreviousPage,
 }: PaginationComponentProps) {
   return (
     <div className="flex flex-col gap-5 items-center mt-4">
       <p className="text-small text-default-500">
-        Página: {currentPage} de {pages}
+        Página: {currentPage} de {totalPages}
       </p>
       <Pagination
         color="secondary"
         page={currentPage}
-        total={pages}
-        onChange={onPageChange}
+        total={totalPages}
+        onChange={onPageChange} // Asegura la correcta actualización del estado
       />
       <div className="flex gap-2">
         <Button
           color="secondary"
           size="sm"
           variant="flat"
-          onPress={() =>
-            onPageChange(currentPage > 1 ? currentPage - 1 : currentPage)
-          }
-          disabled={currentPage === 1}
+          onPress={() => onPageChange(currentPage - 1)}
+          disabled={!hasPreviousPage}
         >
           Anterior
         </Button>
@@ -38,10 +41,8 @@ export function PaginationComponent({
           color="secondary"
           size="sm"
           variant="flat"
-          onPress={() =>
-            onPageChange(currentPage < pages ? currentPage + 1 : currentPage)
-          }
-          disabled={currentPage === pages}
+          onPress={() => onPageChange(currentPage + 1)}
+          disabled={!hasNextPage}
         >
           Siguiente
         </Button>

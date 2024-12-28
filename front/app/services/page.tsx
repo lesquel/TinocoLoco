@@ -8,7 +8,7 @@ export default function Events() {
       <Container>
         <Section>
           <AllServices
-            size={10}
+            size={5}
             infoComponent={{
               title: "Servicios",
               description: "Nuestros servicios",

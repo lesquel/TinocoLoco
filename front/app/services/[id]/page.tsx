@@ -8,11 +8,9 @@ export default function Event({ params }: { params: { id: string } }) {
 
   return (
     <Container>
-      <div className="flex max-w-6xl mx-auto">
-        <Section>
-          <ServicesCard id={servicesId} />
-        </Section>
-      </div>
+      <Section>
+        <ServicesCard id={servicesId} />
+      </Section>
       <SectionReview serviceId={servicesId} />
     </Container>
   );

@@ -26,9 +26,7 @@ export default function ServicesCard({ id }: { id: number }) {
     return <div>Error al obtener los datos</div>;
   }
   if (isLoading) {
-    return <div className="flex items-center justify-center p-4 w-full">
-      <CardInfoLoadin />
-    </div>;
+    return <CardInfoLoadin />;
   }
 
   if (!data) {

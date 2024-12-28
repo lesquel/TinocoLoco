@@ -1,16 +1,27 @@
-"use client";
+'use client'
+
 import { useCallback, useState } from "react";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { PaginationComponent } from "@/components/utils/pagination";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 import { Spacer } from "@nextui-org/react";
 
+interface PaginationResponse<T> {
+  amount_of_pages: number;
+  count: number;
+  current_page: number;
+  next: string | null;
+  previous: string | null;
+  page_size: number;
+  results: T[];
+}
+
 interface ListComponentProps<T> {
   fetchData: (params: {
     page: number;
     page_size: number;
     [key: string]: any;
-  }) => Promise<{ count: number; results: T[] }>;
+  }) => Promise<PaginationResponse<T>>;
   renderCard: (item: T) => JSX.Element;
   searchParams?: { [key: string]: any };
   pageSize?: number;
@@ -18,7 +29,6 @@ interface ListComponentProps<T> {
   errorMessage?: string;
   loadingMessage?: string;
 }
-
 export function ListComponent<T>({
   fetchData,
   renderCard,
@@ -33,17 +43,18 @@ export function ListComponent<T>({
   const fetchItems = useCallback(
     () =>
       fetchData({ page: currentPage, page_size: pageSize, ...searchParams }),
-    [currentPage, pageSize, searchParams, fetchData],
+    [currentPage, pageSize, searchParams, fetchData]
   );
 
-  const { data, error, isLoading, refetch } = useApiRequest<{
-    count: number;
-    results: T[];
-  }>(fetchItems, [currentPage, pageSize, searchParams]);
+  const { data, error, isLoading } = useApiRequest<PaginationResponse<T>>(
+    fetchItems,
+    [currentPage, pageSize, searchParams]
+  );
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    refetch();
+    if (page >= 1 && data && page <= data.amount_of_pages) {
+      setCurrentPage(page);
+    }
   };
 
   if (error) {
@@ -51,27 +62,33 @@ export function ListComponent<T>({
   }
 
   if (isLoading) {
-    return <div>
-      <CardLoagin />
-      <Spacer y={4} />
-      <CardLoagin />
-    </div>;
+    return (
+      <div>
+        <CardLoagin />
+        <Spacer y={4} />
+        <CardLoagin />
+      </div>
+    );
   }
 
-  if (data?.count === 0) {
+  if (!data?.results?.length) {
     return <div>{noDataMessage}</div>;
   }
 
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-        {data?.results.map((item) => renderCard(item))}
+        {data.results.map((item, index) => (
+          <div key={index}>{renderCard(item)}</div>
+        ))}
       </div>
       {data && (
         <PaginationComponent
-          pages={Math.ceil(data.count / pageSize)}
+          totalPages={data.amount_of_pages}
           currentPage={currentPage}
           onPageChange={handlePageChange}
+          hasNextPage={data.next !== null}
+          hasPreviousPage={data.previous !== null}
         />
       )}
     </>
