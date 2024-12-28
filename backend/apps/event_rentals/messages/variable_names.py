@@ -5,7 +5,6 @@ VARIABLE_NAMES_EVENT_RENTAL_SERVICES = {
     "SERVICE": _("Servicio"),
     "SERVICE_QUANTITY": _("Cantidad del servicio"),
     "STATUS": _("Estado"),
-    "DATE_TO_DELIVER": _("Fecha de entrega"),
     "DESCRIPTION": _("Descripción"),
     "SERVICE_OBSERVATION": _("Observación del servicio"),
     "META_VERBOSE_NAME": _("Servicio de alquiler de evento"),

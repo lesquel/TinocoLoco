@@ -18,5 +18,4 @@ class SendEventRentalConfirmationCodeSerializer(serializers.Serializer):
         code = event_rental.generate_confirmation_code()
 
         EventRentalService.send_confirmation_mail(event_rental)
-        print("code", code)
         return event_rental
