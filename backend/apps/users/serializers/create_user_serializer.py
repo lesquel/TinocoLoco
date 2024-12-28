@@ -1,9 +1,10 @@
 from rest_framework import serializers
-from ..models.user import CustomUser
-from .base_user_serializer import BaseUserSerializer
 from base.system_services import UserService
 
 from ..messages import ERROR_MESSAGES
+from ..models.user import CustomUser
+from .base_user_serializer import BaseUserSerializer
+
 
 
 class CreateUserSerializer(BaseUserSerializer):

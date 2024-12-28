@@ -1,6 +1,4 @@
 from rest_framework import serializers
-from django.utils.timezone import now
-from datetime import timedelta
 from base.utils import errors
 
 from base.system_services import UserService
