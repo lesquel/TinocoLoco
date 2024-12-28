@@ -121,7 +121,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         self.save()
         return self.email_verification_code
 
-    
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}" if self.first_name else ""
 
     
     @property
