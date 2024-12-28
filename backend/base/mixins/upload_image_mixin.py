@@ -5,7 +5,6 @@ from rest_framework.response import Response
 from base.utils import errors
 from apps.photos.serializers import CreatePhotoSerializer, RetrievePhotoSerializer
 
-
 class UploadImagesViewMixin:
 
     @action(detail=True, methods=["post"], url_path="upload-images")
@@ -20,7 +19,6 @@ class UploadImagesViewMixin:
             data=[{"image": img} for img in images],
             context={"related_instance": related_instance},
         )
-
         serializer.is_valid(raise_exception=True)
 
         photos = serializer.save()

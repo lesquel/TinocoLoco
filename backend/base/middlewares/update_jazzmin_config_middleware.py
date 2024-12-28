@@ -1,4 +1,4 @@
-from base.utils import update_logo_in_jazzmin
+from base.utils import update_jazzmin_config
 
 
 class UpdateJazzminConfigMiddleware:
@@ -6,6 +6,6 @@ class UpdateJazzminConfigMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        update_logo_in_jazzmin()
+        update_jazzmin_config()
         response = self.get_response(request)
         return response
