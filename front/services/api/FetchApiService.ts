@@ -1,7 +1,7 @@
 import { ApiService } from "@/interfaces/IUApiservices";
 import { TypeMethod } from "@/types/typeMethod";
 
-const host = process.env.BACKEND_HOST || "http://localhost:8000/";
+const host = process.env.NEXT_PUBLIC_BACKEND_HOST || "http://localhost:8000/";
 // const host = process.env.BACKEND_HOST || "https://tinocoloco.onrender.com/";
 
 export class FetchApiService implements ApiService {

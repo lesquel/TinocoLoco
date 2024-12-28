@@ -2,6 +2,8 @@
 import { useCallback, useState } from "react";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { PaginationComponent } from "@/components/utils/pagination";
+import { CardLoagin } from "@/components/utils/loagins/cardLoagin";
+import { Spacer } from "@nextui-org/react";
 
 interface ListComponentProps<T> {
   fetchData: (params: {
@@ -49,7 +51,11 @@ export function ListComponent<T>({
   }
 
   if (isLoading) {
-    return <div>{loadingMessage}</div>;
+    return <div>
+      <CardLoagin />
+      <Spacer y={4} />
+      <CardLoagin />
+    </div>;
   }
 
   if (data?.count === 0) {
@@ -58,7 +64,7 @@ export function ListComponent<T>({
 
   return (
     <>
-      <div className="flex flex-wrap gap-4 mt-4 justify-evenly">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
         {data?.results.map((item) => renderCard(item))}
       </div>
       {data && (

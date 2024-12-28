@@ -14,16 +14,16 @@ import { IUReview } from "@/interfaces/IUReview";
 const api = new FetchApiService();
 
 export const getMostPopularServices =
-  async (): Promise<IUMostServicePopular> => {
+  async ({ size }: { size?: number }): Promise<IUMostServicePopular> => {
     const response = await api.get<IUMostServicePopular>({
-      url: endPoints.services.service.mostPopular.get,
+      url: endPoints.services.service.mostPopular.get + (size ? `?page_size=${size}` : ""),
     });
     return response;
   };
 
-export const getMostViewedServices = async (): Promise<IUMostServiceViewed> => {
+export const getMostViewedServices = async ({ size }: { size?: number }): Promise<IUMostServiceViewed> => {
   const response = await api.get<IUMostServiceViewed>({
-    url: endPoints.services.service.mostViewed.get,
+    url: endPoints.services.service.mostViewed.get + (size ? `?page_size=${size}` : ""),
   });
   return response;
 };
