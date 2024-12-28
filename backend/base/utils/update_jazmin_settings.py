@@ -26,10 +26,8 @@ def download_logo_from_cloudinary(logo_url):
     return os.path.join("/logo", logo_filename)
 
 
-def update_logo_in_jazzmin():
-
+def update_jazzmin_config():
     from apps.business_configuration.models import BusinessConfiguration
-
     configuration, created = BusinessConfiguration.objects.get_or_create(id=1)
 
     if configuration.business_logo:
