@@ -40,3 +40,10 @@ export interface IURentals {
   page_size: number;
   results: IURental[];
 }
+
+export interface IUServiceToRentalAdd {
+  service_id: number;
+  service_quantity: number;
+  description: string;
+  service_observation: string;
+}

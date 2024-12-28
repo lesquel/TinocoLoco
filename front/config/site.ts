@@ -30,6 +30,7 @@ export const siteConfig = {
   navMenuItems: {
     rentals: {
       label: "Rentals",
+      href: "/rentals",
       add: {
         href: "/rentals/add",
       },

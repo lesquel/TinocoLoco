@@ -75,6 +75,7 @@ export const endPoints = {
         },
         services : {
             get : "/services/",
+            post: "/add-services/",
         },
         images: {
             post: "/upload-images/",

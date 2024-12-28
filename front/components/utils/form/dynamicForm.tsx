@@ -73,11 +73,15 @@ const DynamicForm = <T extends Record<string, any>>({
       case "select":
         return (
           <Select key={fieldName} {...commonProps}>
-            {config.options?.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
-                {option.label}
-              </SelectItem>
-            ))}
+            {config.options ? (
+              config.options?.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))
+            ) : (
+              <SelectItem key={"a"}>No hay opciones disponibles</SelectItem> // Mensaje si no hay opciones
+            )}
           </Select>
         );
       case "file":
@@ -123,7 +127,9 @@ const DynamicForm = <T extends Record<string, any>>({
       {Object.entries(formConfig).map(([fieldName, config]) => (
         <div key={fieldName}>
           {renderField(fieldName, config)}
-          <div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+          <div className="text-red-500 text-sm">
+            {errors[fieldName]?.message}
+          </div>
         </div>
       ))}
       <Button type="submit" variant="flat" className="mt-4">

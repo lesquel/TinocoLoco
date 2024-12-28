@@ -29,9 +29,11 @@ export const getMostViewedServices = async (): Promise<IUMostServiceViewed> => {
 };
 
 export const getServices = async (options?: any) => {
+  console.log("-------------------------------------------------------------------------------------------")
   const response = await api.get<IUServices>({
-    url: endPoints.services.get + construcUrl({ options }),
+    url: endPoints.services.get + (options ? construcUrl({ options }) : ""),
   });
+  console.log("responseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:", response);
   return response;
 };
 
