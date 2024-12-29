@@ -2,7 +2,7 @@
 import { LuPartyPopper } from "react-icons/lu";
 import { Suspense } from "react";
 import { FooterClientContent } from "./FooterClientContent";
-import { QuickLinks } from "./QuickLinks ";
+import { QuickLinks } from "./QuickLinks";
 
 import { getBusiness } from "@/features/business/services/businessServices";
 
