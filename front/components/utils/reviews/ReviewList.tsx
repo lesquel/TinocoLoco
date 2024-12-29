@@ -23,7 +23,7 @@ const UserComponent = ({ idUser }: { idUser: number }) => {
   }
 
   return (
-    <h3 className="text-lg font-semibold">
+    <h3 className={`text-lg font-semibold ${!userData?.username ? "italic line-through" : ""}`}>
       {userData?.username || "Usuario eliminado"}
     </h3>
   );
