@@ -10,6 +10,3 @@ class RetrieveServiceEventRentalSerializer(serializers.ModelSerializer):
         model = ServicesEventRental
         fields = "__all__"
         read_only_fields = [field.name for field in model._meta.fields]
-
-
-
