@@ -13,6 +13,9 @@ export interface IUPromotionCategory {
   id: number;
   promotion_category_name: string;
   promotion_category_description: string;
+  creation_date: string;
+  is_active:  boolean;
+  view_count: number;
 }
 
 export interface IUPromotions {
