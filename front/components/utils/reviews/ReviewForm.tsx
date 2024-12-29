@@ -30,14 +30,17 @@ export const ReviewForm = ({
 
   const handleFormSubmit = useCallback(
     (data: ReviewFormData) => {
+      console.log("data", data);
       const reviewData: IUReview = {
         ...data,
         rating_score: rating,
         id: id,
       };
-
+      console.log("reviewData", reviewData);
       execute(reviewData, (response) => {
+        console.log("response eeeeeeeeeeeeeeeeeeeeeeeeee", response);
         onReviewAdded();
+
         reset();
         setRating(0);
       });
@@ -93,7 +96,7 @@ export const ReviewForm = ({
 
       {error && (
         <p className="text-red-500 text-sm">
-          Error al enviar el comentario. Por favor, inténtalo nuevamente.
+          No se pudo enviar el comentario. Por favor, inténtalo nuevamente.
         </p>
       )}
       <Button

@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { IUServiceToRentalAdd } from "@/interfaces/IURental";
 import DynamicForm from "@/components/utils/form/dynamicForm";
@@ -15,65 +14,48 @@ interface AddServicesProps {
 }
 
 export function AddServices({ onAddService }: AddServicesProps) {
-  const [serviceFormConfig, setServiceFormConfig] = useState<FormConfig | null>(
-    null,
-  );
   const { data: servicesData, error, isLoading } = useApiRequest(getServices);
 
-  useEffect(() => {
-    if (!isLoading && !error && servicesData) {
-      const config: FormConfig = {
-        service_id: {
-          type: "select",
-          label: "Servicio",
-          options: (servicesData.results || []).map((service: IUService) => ({
-            value: service.id,
-            label: service.service_name,
-          })),
-          required: true,
-          validation: {
-            required: "El servicio es obligatorio",
-          },
-        },
-        service_quantity: {
-          type: "number",
-          label: "Cantidad",
-          required: true,
-          validation: {
-            required: "La cantidad es obligatoria",
-            min: 1,
-          },
-        },
-      };
+  const serviceFormConfig = useMemo(() => {
+    if (!servicesData?.results) return null;
 
-      setServiceFormConfig(config);
+    return {
+      service_id: {
+        type: "select",
+        label: "Servicio",
+        options: servicesData.results.map((service: IUService) => ({
+          value: service.id,
+          label: service.service_name,
+        })),
+        required: true,
+        validation: {
+          required: "El servicio es obligatorio",
+        },
+      },
+      service_quantity: {
+        type: "number",
+        label: "Cantidad",
+        required: true,
+        validation: {
+          required: "La cantidad es obligatoria",
+          min: 1,
+        },
+      },
+    } as FormConfig;
+  }, [servicesData]);
+
+  const onSubmitService = useCallback((data: IUServiceToRentalAdd) => {
+    if (data) {
+      onAddService(data);
     }
-  }, [isLoading, error, servicesData]);
-
-  const onSubmitService = useCallback(
-    (data: IUServiceToRentalAdd) => {
-      if (data) {
-        const newService = {
-          ...data,
-        };
-
-        console.log("newService", newService);
-        onAddService(newService);
-      }
-    },
-    [onAddService],
-  );
+  }, [onAddService]);
 
   if (isLoading) {
     return <FormLoading inputCount={2} />;
   }
 
   if (error) {
-    return (
-      <div className="text-red-500">
-        Error al cargar servicios: {error.message}
-      </div>
-    );
+    return <div className="text-red-500">Error al cargar servicios: {error}</div>;
   }
 
   if (!serviceFormConfig) {

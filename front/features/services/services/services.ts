@@ -42,15 +42,9 @@ export const getMostViewedServices = async ({
 };
 
 export const getServices = async (options?: any) => {
-  console.log(
-    "-------------------------------------------------------------------------------------------",
-  );
   const response = await api.get<IUServices>({
     url: endPoints.services.get + (options ? construcUrl({ options }) : ""),
   });
-
-  console.log("responseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:", response);
-
   return response;
 };
 

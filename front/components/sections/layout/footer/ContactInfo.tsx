@@ -21,7 +21,7 @@ const ContactLink: React.FC<LinkProps> = ({ name, value, icon }) => (
 export const ContactInfo: React.FC<{ business: ConfigurationBusiness }> = ({
   business,
 }) => (
-  <div>
+  <div className="flex flex-col gap-4 items-center">
     <h2 className="text-lg font-medium text-foreground">Contacto</h2>
     <ul className="mt-4 space-y-2 text-foreground-700">
       {business.business_email && (

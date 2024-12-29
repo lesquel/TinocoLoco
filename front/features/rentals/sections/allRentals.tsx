@@ -29,6 +29,12 @@ export function AllRentals() {
     );
   }
 
+  if (!data?.results || data.results.length === 0) {
+    return <div className="text-danger">No hay rentals</div>;
+  }
+
+  console.log("data", data);
+
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

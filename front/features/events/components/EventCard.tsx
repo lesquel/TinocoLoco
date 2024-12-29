@@ -44,7 +44,7 @@ export default function EventCard({ id }: { id: number }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-20 ">
           <div className="relative p-4 ">
             <Chip
-              className="absolute top-2 left-2 z-40"
+              className="absolute top-2 left-2 z-20"
               color="primary"
               variant="solid"
             >

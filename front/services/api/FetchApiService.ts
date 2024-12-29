@@ -1,5 +1,6 @@
 import { ApiService } from "@/interfaces/IUApiservices";
 import { TypeMethod } from "@/types/typeMethod";
+import toast from "react-hot-toast";
 
 // const host = process.env.NEXT_PUBLIC_BACKEND_HOST || "http://localhost:8000/";
 const host = process.env.BACKEND_HOST || "https://tinocoloco.onrender.com/";
@@ -86,6 +87,18 @@ export class FetchApiService implements ApiService {
       const response = await fetch(`${host}${url}`, defaultOptions);
 
       console.log("response:", response.status);
+      if (response.status !== 200) {
+        toast.error("Error al enviar la petición", {
+          style: {
+            background: "#000000",
+            color: "#FFEBE9",
+          },
+          iconTheme: {
+            primary: "#FFEBE9",
+            secondary: "#000000",
+          },
+        });
+      }
       console.log("url:", `${host}${url}`);
 
       return response.json();

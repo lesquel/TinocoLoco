@@ -69,7 +69,7 @@ export const endPoints = {
       get: "event-rentals/event-rental/my-rentals/",
     },
     confirmRental: {
-      post: "event-rentals/event-rental/confirm-rental/",
+      post: "/send-confirmation-email/",
     },
     services: {
       get: "/services/",

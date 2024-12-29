@@ -5,6 +5,10 @@ import NoFountEvent from "@/public/images/no_fount_events.jpg";
 import { getEvents } from "@/features/events/services/events";
 import { IUEvent } from "@/interfaces/IUevents";
 import { SearchableListSection } from "@/components/sections/listComponent/searchListSection";
+import { searchFieldsEvent } from "../../utils/searchFielEvent";
+
+
+
 
 export function AllEvents({
   size,
@@ -22,6 +26,7 @@ export function AllEvents({
       loadingMessage="Cargando eventos..."
       noDataMessage="No hay eventos"
       pageSize={size}
+      searchFields={searchFieldsEvent}
       renderCard={(event) => (
         <CardBasic
           key={event.id}

@@ -10,7 +10,7 @@ export interface IUGetUser {
   first_name?: string;
   last_name?: string;
   full_name?: string;
-  role?: Role;
+  role: Role;
   sex?: string;
   email_verified: boolean;
   identity_card: string;

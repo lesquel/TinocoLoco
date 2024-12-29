@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { Button, Card, CardBody } from "@nextui-org/react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 
@@ -9,10 +8,8 @@ import {
   createRental,
   addServiceToRental as addServiceToRentalService,
 } from "../services/rentals";
-import { SimpleService } from "../components/simpleService";
-
-import { AddServices } from "./addServices";
-
+import { SimpleService } from "@/features/rentals/components/simpleService";
+import { AddServices } from "@/features/rentals/sections/addServices";
 import DynamicForm from "@/components/utils/form/dynamicForm";
 import { createRentalConfig } from "@/features/rentals/utils/addRentalCondig";
 import { FormConfig } from "@/interfaces/IUform";
@@ -22,7 +19,6 @@ import { IURental, IUServiceToRentalAdd } from "@/interfaces/IURental";
 import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { TitleSection } from "@/components/utils/titleSection";
 import { useErrorsForm } from "@/services/utils/useErrosForm";
-import { siteConfig } from "@/config/site";
 import { FormLoading } from "@/components/utils/loagins/formLoading";
 
 interface AddRentalFormProps {
@@ -30,10 +26,8 @@ interface AddRentalFormProps {
 }
 
 export function AddRentalForm({ idEvent }: AddRentalFormProps) {
-  const router = useRouter();
-  const [formConfig, setFormConfig] = useState<FormConfig | null>(null);
   const [externalErrors, setExternalErrors] = useState<Record<string, string>>(
-    {},
+    {}
   );
   const {
     data: promotionsData,
@@ -46,41 +40,42 @@ export function AddRentalForm({ idEvent }: AddRentalFormProps) {
     loading: addServiceToRentalLoading,
   } = useAsyncAction(addServiceToRentalService);
   const [addedServices, setAddedServices] = useState<IUServiceToRentalAdd[]>(
-    [],
+    []
   );
   const [showAddServices, setShowAddServices] = useState(false);
 
-  useEffect(() => {
-    if (!isLoading && !error && promotionsData) {
-      const config = createRentalConfig(promotionsData.results || []);
+  const formConfig = useMemo(() => {
+    if (!promotionsData?.results) return null;
+    return createRentalConfig(promotionsData.results);
+  }, [promotionsData]);
 
-      setFormConfig(config);
-    }
-  }, [isLoading, error, promotionsData]);
+  const onSubmit = useCallback(
+    async (data: IURental) => {
+      const formData = { ...data, event: idEvent };
 
-  const onSubmit = async (data: IURental) => {
-    const formData = { ...data, event: idEvent };
-
-    execute(formData, (response) => {
-      if (response.errors) {
-        useErrorsForm({ response, setExternalErrors });
-
-        return;
-      }
-
-      if (addedServices.length === 0) {
-        router.push(`${siteConfig.navMenuItems.rentals.href}/${response.id}`);
-
-        return;
-      }
-      addServiceToRentalExecute(
-        { data: addedServices, rentalId: response.id },
-        (response) => {
-          router.push(`${siteConfig.navMenuItems.rentals.href}/${response.id}`);
-        },
-      );
-    });
-  };
+      execute(formData, (response) => {
+        if (response.errors) {
+          useErrorsForm({ response, setExternalErrors });
+          return;
+        }
+        console.log("response rental", response);
+        const rentaId = response.id;
+        if (addedServices.length === 0) {
+          window.location.href = `/rentals/${rentaId}`;
+          return;
+        }
+        console.log("addedServicesssssssssssssssssssssssssssssssssssssssss", addedServices);
+        addServiceToRentalExecute(
+          { data: addedServices, rentalId: rentaId },
+          (response) => {
+            console.log("response addServiceToRentalExecute", response);
+            window.location.href = `/rentals/${rentaId}`;
+          }
+        );
+      });
+    },
+    [execute, addServiceToRentalExecute, addedServices, idEvent]
+  );
 
   const handleAddService = useCallback((service: IUServiceToRentalAdd) => {
     setAddedServices((prev) => [...prev, service]);
@@ -123,7 +118,7 @@ export function AddRentalForm({ idEvent }: AddRentalFormProps) {
               onSubmit={onSubmit}
             />
             {addedServices.length > 0 && (
-              <div className="mt-4">
+              <div className="mt-4 w-full">
                 <h3 className="text-xl font-semibold mb-2">
                   Servicios agregados:
                 </h3>
@@ -133,6 +128,7 @@ export function AddRentalForm({ idEvent }: AddRentalFormProps) {
                       key={index}
                       idService={service.service_id}
                       serviceQuantity={service.service_quantity}
+                      onRemove={() => handleRemoveService(index)}
                     />
                   ))}
                 </ul>

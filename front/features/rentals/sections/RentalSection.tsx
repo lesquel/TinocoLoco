@@ -25,7 +25,7 @@ import { useApiRequest } from "@/hooks/useApiRequest";
 import { IURental } from "@/interfaces/IURental";
 import { InforShorts } from "@/features/events/components/inforShorts";
 import { TitleSection } from "@/components/utils/titleSection";
-import { InfoShortsServices } from "@/features/services/utils/infoShortsServices";
+import { AllInfoShortsServices } from "@/features/services/utils/infoShortsServices";
 import { TableLoading } from "@/components/utils/loagins/tableLoading";
 import { RentalCardLoading } from "@/components/utils/loagins/rentalsCardLoding";
 import { ReviewsLoading } from "@/components/utils/loagins/reviewsLoading";
@@ -37,13 +37,12 @@ export function RentalSection({ id }: { id: number }) {
   const [addedReviews, setAddedReviews] = useState(0);
   const router = useRouter();
 
-  const fetchRental = useCallback(() => getRental(id), [id]);
+  const fetchRental = useCallback(() => getRental(id), [id, addedReviews]);
   const { data, error, isLoading } = useApiRequest<IURental>(fetchRental);
 
   const handleReviewAdded = useCallback(() => {
     setAddedReviews((prev) => prev + 1);
-    router.push(`/rentals/${id}`);
-  }, [id, router]);
+  }, []);
 
   if (error) {
     return (
@@ -57,7 +56,8 @@ export function RentalSection({ id }: { id: number }) {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center p-4 w-full flex-wrap flex-col">
+      <Card className="flex items-center justify-center p-4 w-full flex-wrap flex-col">
+        <TitleSection description=" la Reserva" title="Información de" />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
           <div>
             <RentalCardLoading />
@@ -69,11 +69,11 @@ export function RentalSection({ id }: { id: number }) {
         <div className="max-w-xl mx-auto mt-4">
           <ReviewsLoading />
         </div>
-      </div>
+      </Card>
     );
   }
 
-  if (!data || data.errors) {
+  if (!data) {
     return (
       <Card className="p-6">
         <CardBody>
@@ -86,8 +86,16 @@ export function RentalSection({ id }: { id: number }) {
   return (
     <div className="space-y-8">
       <Card className="p-6">
-        <CardHeader>
+        <CardHeader className="flex justify-between items-center flex-col">
           <TitleSection description=" la Reserva" title="Información de" />
+          {data.current_status.status === "pending" && (
+                    <div className="mb-4 flex justify-center items-center gap-2">
+                      <p className="mb-2">
+                        Para realizar la reserva, por favor, confirma la Reserva.
+                      </p>
+                      <Button color="danger" >Confirmar</Button>
+                    </div>
+                  )}
         </CardHeader>
         <CardBody>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -107,13 +115,7 @@ export function RentalSection({ id }: { id: number }) {
                   <h3 className="text-xl font-semibold">Servicios</h3>
                 </CardHeader>
                 <CardBody>
-                  {data.event_rental_services.length > 0 ? (
-                    data.event_rental_services.map((service) => (
-                      <InfoShortsServices key={service} idService={service} />
-                    ))
-                  ) : (
-                    <p>No hay servicios asociados a esta renta</p>
-                  )}
+                  <AllInfoShortsServices idRental={data.id} />
                 </CardBody>
               </Card>
             </div>
@@ -122,9 +124,7 @@ export function RentalSection({ id }: { id: number }) {
             <div>
               <Card className="p-4">
                 <CardHeader className="flex justify-between items-center">
-                  <h3 className="text-xl font-semibold">
-                    Detalles de la Reserva
-                  </h3>
+                  <h3 className="text-xl font-semibold">Detalles de la Reserva</h3>
                   {data.current_status.status === "pending" ? (
                     <Chip color="warning" size="sm" variant="dot">
                       Pendiente
@@ -136,18 +136,8 @@ export function RentalSection({ id }: { id: number }) {
                   )}
                 </CardHeader>
                 <CardBody>
-                  {data.current_status.status === "pending" && (
-                    <div className="mb-4">
-                      <p className="mb-2">
-                        Por favor, confirma la Reserva para poder realizarla.
-                      </p>
-                      <Button color="primary">Confirmar</Button>
-                    </div>
-                  )}
-                  <Table
-                    aria-label="Información de la Reserva"
-                    className="mt-4"
-                  >
+                  
+                  <Table aria-label="Información de la Reserva" className="mt-4">
                     <TableHeader>
                       <TableColumn>Propiedad</TableColumn>
                       <TableColumn>Valor</TableColumn>
@@ -171,9 +161,7 @@ export function RentalSection({ id }: { id: number }) {
                       </TableRow>
                       <TableRow key="end_time">
                         <TableCell>Hora de finalización planificada</TableCell>
-                        <TableCell>
-                          {data.event_rental_planified_end_time}
-                        </TableCell>
+                        <TableCell>{data.event_rental_planified_end_time}</TableCell>
                       </TableRow>
                       <TableRow key="cost">
                         <TableCell>Costo</TableCell>
@@ -181,9 +169,7 @@ export function RentalSection({ id }: { id: number }) {
                       </TableRow>
                       <TableRow key="payment_method">
                         <TableCell>Método de pago</TableCell>
-                        <TableCell>
-                          {data.event_rental_payment_method}
-                        </TableCell>
+                        <TableCell>{data.event_rental_payment_method}</TableCell>
                       </TableRow>
                       <TableRow key="attendees">
                         <TableCell>Asistentes (min-max)</TableCell>

@@ -8,6 +8,7 @@ import { CategoryHome } from "@/features/events/section/category/categoryHome";
 import { MostPopularServices } from "@/features/services/section/services/mostPopularService";
 import { MostViewedSServices } from "@/features/services/section/services/mostViewedService";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
+import { CategoryHomeServices } from "@/features/services/section/categoty/categoryHome";
 
 export default function Home() {
   const user = getTokenFromCookie();
@@ -32,12 +33,18 @@ export default function Home() {
           </Section>
 
           <Section>
-            <MostPopularServices />
+            <CategoryHomeServices />
           </Section>
 
           <Section>
             <MostViewedSServices />
           </Section>
+
+
+          <Section>
+            <MostViewedSServices />
+          </Section>
+
         </Container>
       </div>
     </>

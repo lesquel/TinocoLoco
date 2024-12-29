@@ -6,13 +6,13 @@ import { SearchableListSection } from "@/components/sections/listComponent/searc
 import { IUService } from "@/interfaces/IUservices";
 import { endPoints } from "@/config/endPoints";
 import NoFountEvent from "@/public/images/no_fount_events.jpg";
-import { getCategory, getEvents } from "@/features/events/services/events";
+import { getServiceCategory, getServices } from "@/features/services/services/services";
 import { useApiRequest } from "@/hooks/useApiRequest";
-import { IUCategory } from "@/interfaces/IUevents";
+import { IUCategory } from "@/interfaces/IUservices";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
-import { searchFieldsEventCategory } from "../../utils/searchFielEvent";
+import { searchFieldsServices } from "../../utils/searchFielServices";
 
-export function GetEventsByCategory({
+export function GetServicesByCategory({
   idcategory,
   size,
   infoComponent,
@@ -23,7 +23,7 @@ export function GetEventsByCategory({
 }) {
   // Fetch the category data
   const fetchCategory = useCallback(
-    () => getCategory(idcategory),
+    () => getServiceCategory(idcategory),
     [idcategory],
   );
   const {
@@ -35,7 +35,7 @@ export function GetEventsByCategory({
   // Memoize the fetchServices function to ensure stable references
   const fetchEvents = useMemo(() => {
     if (categoryData) {
-      return () => getEvents({ category: categoryData.event_category_name });
+      return () => getServices({ category: categoryData.service_category_name });
     }
 
     return () => Promise.resolve([]); // Fallback for when categoryData is not available
@@ -49,13 +49,13 @@ export function GetEventsByCategory({
 
   return (
     <SearchableListSection<IUService>
-      searchFields={searchFieldsEventCategory}
-      description={`${infoComponent.description}  (${categoryData.event_category_name})`}
+      searchFields={searchFieldsServices}
+      description={`${infoComponent.description}  (${categoryData.service_category_name})`}
       endpoint={endPoints.events.get}
-      errorMessage="Error al obtener los evento de la categoría"
+      errorMessage="Error al obtener los servicios de la categoría"
       fetchData={fetchEvents}
-      loadingMessage="Cargando evento..."
-      noDataMessage="No hay evento en esta categoría"
+      loadingMessage="Cargando servicios..."
+      noDataMessage="No hay servicios en esta categoría"
       pageSize={size}
       renderCard={(service) => (
         <CardBasic
@@ -65,7 +65,7 @@ export function GetEventsByCategory({
           imageKey="photos"
           item={service}
           titleKey="service_name"
-          url={"/events/"}
+          url={"/services/"}
         />
       )}
       title={infoComponent.title}

@@ -11,12 +11,24 @@ import {
   SelectItem,
 } from "@nextui-org/react";
 import { FaSearch } from "react-icons/fa";
+
 interface FormData {
   searchValue: string;
   searchField: string;
 }
 
-export function SearchForm({ setSearch }: { setSearch: any }) {
+interface SearchField {
+  key: string;
+  value: string;
+  label: string;
+}
+
+interface SearchFormProps {
+  setSearch: (searchData: any) => void;
+  searchFields: SearchField[];
+}
+
+export function SearchForm({ setSearch, searchFields }: SearchFormProps) {
   const { control, handleSubmit } = useForm<FormData>();
 
   const onSubmit = (data: FormData) => {
@@ -43,7 +55,7 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
             render={({ field }) => (
               <Input
                 {...field}
-                className="flex-1 "
+                className="flex-1"
                 label="Buscar"
                 placeholder="Ingrese el valor a buscar"
               />
@@ -51,46 +63,21 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
           />
           <Controller
             control={control}
-            defaultValue="name"
+            defaultValue={searchFields[0]?.value || ""}
             name="searchField"
             render={({ field }) => (
               <Select
                 {...field}
                 className="w-52"
-                defaultSelectedKeys={["name"]}
+                defaultSelectedKeys={[searchFields[0]?.value || ""]}
                 label="Campos de Búsqueda"
-                placeholder="Select field"
+                placeholder="Seleccione un campo"
               >
-                <SelectItem key="name" value="name">
-                  Nombre
-                </SelectItem>
-                <SelectItem key="description" value="description">
-                  Descripcion
-                </SelectItem>
-                <SelectItem key="category" value="category">
-                  Categoria
-                </SelectItem>
-                <SelectItem
-                  key="min_reference_value"
-                  value="min_reference_value"
-                >
-                  Valor de Referencia Mínimo
-                </SelectItem>
-                <SelectItem
-                  key="max_reference_value"
-                  value="max_reference_value"
-                >
-                  Valor de Referencia Máximo
-                </SelectItem>
-                <SelectItem key="min_allowed_hours" value="min_allowed_hours">
-                  Horas Permitidas Mínimas
-                </SelectItem>
-                <SelectItem key="max_allowed_hours" value="max_allowed_hours">
-                  Horas Permitidas Máximas
-                </SelectItem>
-                <SelectItem key="extra_hour_rate" value="extra_hour_rate">
-                  Tarifa de Hora Extra
-                </SelectItem>
+                {searchFields.map(({ key, value, label }) => (
+                  <SelectItem key={key} value={value}>
+                    {label}
+                  </SelectItem>
+                ))}
               </Select>
             )}
           />

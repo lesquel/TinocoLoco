@@ -5,6 +5,11 @@ import { TitleSection } from "@/components/utils/titleSection";
 import { SearchForm } from "@/components/utils/SearchForm";
 import { ListComponent } from "@/components/sections/listComponent/listComponent";
 
+interface SearchField {
+  key: string;
+  value: string;
+  label: string;
+}
 interface SearchableListSectionProps<T> {
   title: string;
   description: string;
@@ -19,7 +24,9 @@ interface SearchableListSectionProps<T> {
   noDataMessage?: string;
   errorMessage?: string;
   loadingMessage?: string;
+  searchFields: SearchField[];
 }
+
 
 export function SearchableListSection<T>({
   title,
@@ -30,6 +37,7 @@ export function SearchableListSection<T>({
   noDataMessage = "No hay datos",
   errorMessage = "Error al obtener los datos",
   loadingMessage = "Cargando...",
+  searchFields,
 }: SearchableListSectionProps<T>) {
   const [search, setSearch] = useState<any>({});
 
@@ -37,7 +45,7 @@ export function SearchableListSection<T>({
     <div>
       <div className="flex flex-col md:flex-row justify-center items-center ">
         <TitleSection description={description} title={title} />
-        <SearchForm setSearch={setSearch} />
+        <SearchForm setSearch={setSearch} searchFields={searchFields} />
       </div>
       <ListComponent<T>
         errorMessage={errorMessage}

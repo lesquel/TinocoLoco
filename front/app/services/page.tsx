@@ -12,7 +12,7 @@ export default function Events() {
               title: "Servicios",
               description: "Nuestros servicios",
             }}
-            size={5}
+            size={8}
           />
         </Section>
       </Container>

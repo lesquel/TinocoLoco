@@ -1,5 +1,6 @@
 import { PaymentMethod } from "@/types/paymentMethod";
 import { StatusRental } from "@/types/statusRental";
+import { IUService } from "./IUservices";
 
 export interface IURental {
   id: number;
@@ -63,4 +64,15 @@ export interface IUServiceToRentalAdd {
   service_quantity: number;
   description: string;
   service_observation: string;
+}
+
+export interface IUServicesToRental {
+  id: number;
+  price: string;
+  service_quantity: number;
+  status: string;
+  description: string;
+  service_observation: string;
+  event_rental: number;
+  service: IUService;
 }

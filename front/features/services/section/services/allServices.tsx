@@ -6,6 +6,7 @@ import { CardBasic } from "@/components/utils/cardBasic";
 import { endPoints } from "@/config/endPoints";
 import NoFountEvent from "@/public/images/no_fount_events.jpg";
 import { SearchableListSection } from "@/components/sections/listComponent/searchListSection";
+import { searchFieldsServices } from "../../utils/searchFielServices";
 
 export function AllServices({
   size,
@@ -16,6 +17,7 @@ export function AllServices({
 }) {
   return (
     <SearchableListSection<IUService>
+      searchFields={searchFieldsServices}
       description={infoComponent.description}
       endpoint={endPoints.services.get}
       errorMessage="Error al obtener los servicios"

@@ -19,7 +19,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ name, value, icon }) => (
 export const SocialMedia: React.FC<{ business: ConfigurationBusiness }> = ({
   business,
 }) => (
-  <div>
+  <div className="flex flex-col gap-4 items-center">
     <h2 className="text-lg font-medium text-foreground">Síguenos</h2>
     <div className="mt-4 flex space-x-4">
       {business.business_facebook_url && (
