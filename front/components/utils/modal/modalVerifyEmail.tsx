@@ -48,9 +48,18 @@ export function ModalVerifyEmail() {
             secondary: "#000000",
           },
         });
-
         return;
       }
+      toast.success("Se ha enviado el correo de confirmación", {
+        style: {
+          background: "#000000",
+          color: "#FFEBE9",
+        },
+        iconTheme: {
+          primary: "#FFEBE9",
+          secondary: "#000000",
+        },
+      });
     });
   };
 
@@ -71,7 +80,6 @@ export function ModalVerifyEmail() {
       console.log("response:", response);
       if (response.errors) {
         useErrorsForm({ response, setExternalErrors });
-
         return;
       }
       window.location.reload();
