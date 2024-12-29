@@ -1,5 +1,6 @@
 export interface IUPromotion {
   id: number;
+  promotion_image_url?: string;
   promotion_name: string;
   promotion_description: string;
   promotion_category: number;
