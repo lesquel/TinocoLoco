@@ -68,7 +68,7 @@ class Review(models.Model):
 
     @classmethod
     def avg_rating_for_object(cls, content_object):
-        reviews = cls.objects.filter(content_object=content_object)
+        reviews = content_object.reviews.all()
         avg_rating = reviews.aggregate(Avg('rating_score'))['rating_score__avg']
         return avg_rating if avg_rating is not None else 0.0
 

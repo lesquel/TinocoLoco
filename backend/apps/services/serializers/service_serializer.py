@@ -10,7 +10,7 @@ class ServiceSerializer(serializers.ModelSerializer):
         model = Service
         fields = "__all__" 
         
-        read_only_fields = ["id", "creation_date", "photos", "view_count"]
+        read_only_fields = ["id", "creation_date", "photos", "view_count", "avg_rating"]
 
     def get_avg_rating(self, obj):
         return Review.avg_rating_for_object(obj)

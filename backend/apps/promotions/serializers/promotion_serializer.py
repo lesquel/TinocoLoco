@@ -32,7 +32,8 @@ class RetrievePromotionSerializer(serializers.ModelSerializer):
     avg_rating = serializers.SerializerMethodField()
     class Meta:
         model = Promotion
-        fields = [field.name for field in model._meta.fields] + ["promotion_image_url"]
+        fields = "__all__"
+        
 
     def get_promotion_image_url(self, obj):
         return ImageUtils.get_image_url(obj.promotion_image)
