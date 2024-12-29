@@ -1,4 +1,4 @@
-"use client";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Card,
@@ -9,16 +9,13 @@ import {
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
 import { FaEyeSlash, FaEye, FaLock } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
 
 import { IURegister } from "@/interfaces/IUauth";
-import { useAuth } from "@/features/auth/hooks/useAuth";
 import { validationRules } from "@/features/auth/utils/validations";
-import { login as loginService } from "@/features/auth/services/auth";
 import { TitleSection } from "@/components/utils/titleSection";
-import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
+
 export const Login = () => {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
@@ -28,25 +25,20 @@ export const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-  } = useForm<IURegister>();
-  const { loading, error, handleRegister, generalError } = useAuth(
-    setError,
-    loginService,
-  );
+  } = useForm<IURegister>({
+    mode: "onChange", // Detecta errores reactivamente
+  });
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const onSubmit = async (data: IURegister) => {
-    handleRegister(data, (response: any) => {
-      console.log("token:", getTokenFromCookie());
-      window.location.href = "/";
-    });
-  };
-
   const toggleVisibility = () => setIsVisible(!isVisible);
+
+  const onSubmit = async (data: IURegister) => {
+    console.log("Form Data: ", data);
+    // Lógica para manejar el envío del formulario
+  };
 
   if (!isClient) {
     return null;
@@ -56,66 +48,93 @@ export const Login = () => {
     <Card className="w-full max-w-md">
       <CardHeader className="flex flex-col gap-1 items-center">
         <TitleSection description=" Sesión" title="Iniciar " />
-        <p className="text-sm text-default-500">Please sign in to continue</p>
+        <p className="text-sm text-default-500">Por favor, iniciar sesión para continuar</p>
       </CardHeader>
       <CardBody>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-          {generalError && (
-            <div className="text-danger text-sm">{generalError}</div>
+          {/* Mensaje de error general */}
+          {errors && errors.general && (
+            <div className="text-danger text-sm">{errors.general.message}</div>
           )}
 
-          <Input
-            label="Username"
-            startContent={
-              <IoIosMail className="text-default-400 pointer-events-none flex-shrink-0" />
-            }
-            variant="bordered"
-            {...register("username", validationRules.username)}
-            errorMessage={errors.username?.message}
-          />
+          {/* Input para el usuario */}
+          <div className="flex flex-col">
+            <Input
+              label="Username"
+              startContent={
+                <IoIosMail className="text-default-400 pointer-events-none flex-shrink-0" />
+              }
+              variant="bordered"
+              {...register("username", validationRules.username)}
+              isInvalid={!!errors.username}
+            />
+            {errors.username && (
+              <span className="text-danger text-sm">
+                {errors.username.message}
+              </span>
+            )}
+          </div>
 
-          <Input
-            endContent={
-              <button type="button" onClick={toggleVisibility}>
-                {isVisible ? (
-                  <FaEyeSlash className="text-default-400 pointer-events-none" />
-                ) : (
-                  <FaEye className="text-default-400 pointer-events-none" />
-                )}
-              </button>
-            }
-            label="Password"
-            startContent={
-              <FaLock className="text-default-400 pointer-events-none flex-shrink-0" />
-            }
-            type={isVisible ? "text" : "password"}
-            variant="bordered"
-            {...register("password", validationRules.password)}
-            errorMessage={errors.password?.message}
-          />
+          {/* Input para la contraseña */}
+          <div className="flex flex-col">
+            <Input
+              endContent={
+                <button type="button" onClick={toggleVisibility}>
+                  {isVisible ? (
+                    <FaEyeSlash className="text-default-400 pointer-events-none" />
+                  ) : (
+                    <FaEye className="text-default-400 pointer-events-none" />
+                  )}
+                </button>
+              }
+              label="Password"
+              startContent={
+                <FaLock className="text-default-400 pointer-events-none flex-shrink-0" />
+              }
+              type={isVisible ? "text" : "password"}
+              variant="bordered"
+              {...register("password", validationRules.password)}
+              isInvalid={!!errors.password}
+            />
+            {errors.password && (
+              <span className="text-danger text-sm">
+                {errors.password.message}
+              </span>
+            )}
+          </div>
 
+          {/* Recordarme y enlace */}
           <div className="flex justify-between items-center">
-            Recuerdame{" "}
-            <input className="mr-2" id="remember-me" type="checkbox" />
-            <Link href="#" size="sm" className="text-[#F43F5E]">
+            <label htmlFor="remember-me" className="flex items-center">
+              <input
+                id="remember-me"
+                type="checkbox"
+                className="mr-2"
+                {...register("rememberMe")}
+              />
+              Recuérdame
+            </label>
+            <Link href="#" size="sm" className="text-[#F43F5E] hover:underline">
               ¿Olvidó su contraseña?
             </Link>
           </div>
 
+          {/* Botón para enviar */}
           <Button
             className="mt-2"
             color="danger"
-            isLoading={loading}
             type="submit"
             variant="shadow"
           >
-            {loading ? "Signing in..." : "Sign In"}
+            Iniciar Sesión
           </Button>
         </form>
+
+        {/* Enlace para registrar */}
         <div className="text-center mt-4">
           <span className="text-default-500">¿No tienes una cuenta? </span>
           <Link href="/accounts/register" size="sm" className="text-[#F43F5E]">
-            Crear cuents
+            Crear cuenta
           </Link>
         </div>
       </CardBody>

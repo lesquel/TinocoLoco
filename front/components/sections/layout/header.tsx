@@ -62,7 +62,7 @@ export default function Header() {
         {navItems.map(([key, item]) => (
           <NavbarItem key={key} isActive={pathname === item.href}>
             <Link
-              className={`text-foreground hover:text-primary transition-colors ${
+              className={`text-foreground hover:text-[#F43F5E] transition-colors ${
                 pathname === item.href ? "font-semibold" : ""
               }`}
               href={item.href}
@@ -79,7 +79,7 @@ export default function Header() {
             <NavbarItem className="hidden sm:flex">
               <Button
                 as={Link}
-                color="primary"
+                color="danger"
                 href={siteConfig.navMenuItems.login.href}
                 variant="flat"
               >
@@ -89,7 +89,7 @@ export default function Header() {
             <NavbarItem>
               <Button
                 as={Link}
-                color="primary"
+                color="danger"
                 href={siteConfig.navMenuItems.register.href}
                 variant="solid"
               >
