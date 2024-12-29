@@ -1,4 +1,5 @@
 export interface IUPromotion {
+  id: number;
   promotion_name: string;
   promotion_description: string;
   promotion_category: number;
@@ -7,6 +8,13 @@ export interface IUPromotion {
   valid_until: string;
   promotion_image?: string;
 }
+
+export interface IUPromotionCategory {
+  id: number;
+  promotion_category_name: string;
+  promotion_category_description: string;
+}
+
 export interface IUPromotions {
   count: number;
   next?: string;
