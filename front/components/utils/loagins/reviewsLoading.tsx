@@ -1,5 +1,11 @@
-import { Card, CardHeader, CardBody, CardFooter, Avatar, Skeleton, Spacer } from "@nextui-org/react";
-import { FaStar } from "react-icons/fa";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Skeleton,
+  Spacer,
+} from "@nextui-org/react";
 
 export default function ReviewCardSkeleton() {
   return (
@@ -29,9 +35,9 @@ export default function ReviewCardSkeleton() {
 export function ReviewsLoading({ count = 5 }) {
   return (
     <div className="space-y-4">
-        <ReviewCardSkeleton />
-        <Spacer y={4} />
-        <ReviewCardSkeleton />
+      <ReviewCardSkeleton />
+      <Spacer y={4} />
+      <ReviewCardSkeleton />
     </div>
   );
 }

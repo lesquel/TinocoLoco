@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import {
   Avatar,
   Card,
@@ -8,15 +8,18 @@ import {
   CardHeader,
 } from "@nextui-org/react";
 import { FaStar } from "react-icons/fa6";
+
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { getUser } from "@/features/auth/services/auth";
 
 const UserComponent = ({ idUser }: { idUser: number }) => {
   const fetchUser = useCallback(() => getUser(idUser), []);
   const { data: userData, isLoading } = useApiRequest(fetchUser);
+
   if (isLoading) {
     return <div>Cargando...</div>;
   }
+
   return (
     <h3 className="text-lg font-semibold">
       Usuario {userData?.username || userData?.first_name}
@@ -25,11 +28,10 @@ const UserComponent = ({ idUser }: { idUser: number }) => {
 };
 
 export const SectionReview = ({ item }: { item: any }) => {
-
   return (
     <Card>
       <CardHeader className="flex flex-row items-center gap-4">
-        <Avatar></Avatar>
+        <Avatar />
         <div>
           <UserComponent idUser={item.owner} />
           <div className="flex items-center">

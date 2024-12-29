@@ -21,16 +21,16 @@ export const NavInfo = ({ urls }: NavInfoProps) => {
     <div className="w-full flex justify-center">
       <Tabs
         aria-label="Navigation"
-        radius="full"
-        variant="solid"
-        selectedKey={pathname}
-        onSelectionChange={(key) => handleTabChange(key as string)}
         classNames={{
           tabList: "bg-zinc-900 p-0.5",
           tab: "text-zinc-400 data-[selected=true]:text-white",
           cursor: "bg-blue-600",
           panel: "pt-2",
         }}
+        radius="full"
+        selectedKey={pathname}
+        variant="solid"
+        onSelectionChange={(key) => handleTabChange(key as string)}
       >
         {urls.map((url) => (
           <Tab key={url.url} title={url.label} />

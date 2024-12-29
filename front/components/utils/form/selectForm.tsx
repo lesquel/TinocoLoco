@@ -1,6 +1,7 @@
-import { FieldConfig } from "@/interfaces/IUform";
 import { Select, SelectItem } from "@nextui-org/react";
 import { Control, Controller } from "react-hook-form";
+
+import { FieldConfig } from "@/interfaces/IUform";
 
 export const SelectForm = ({
   config,
@@ -13,16 +14,15 @@ export const SelectForm = ({
 }) => {
   return (
     <Controller
-      name={name as any}
       control={control}
-      rules={config.validation}
+      name={name as any}
       render={({ field }) => (
         <Select
           {...field} // Propaga todos los valores de field (onChange, onBlur, ref, etc.)
-          label={config.label}
-          value={field.value || ""} // Asigna el valor de field
-          placeholder={config.placeholder || `Select ${config.label}`}
           className="max-w-xs"
+          label={config.label}
+          placeholder={config.placeholder || `Select ${config.label}`}
+          value={field.value || ""} // Asigna el valor de field
         >
           {config.options && config.options.length > 0 ? (
             config.options.map((option) => (
@@ -35,6 +35,7 @@ export const SelectForm = ({
           )}
         </Select>
       )}
+      rules={config.validation}
     />
   );
 };

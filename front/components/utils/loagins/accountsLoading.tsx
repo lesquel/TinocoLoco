@@ -8,6 +8,7 @@ import {
   Skeleton,
   Divider,
 } from "@nextui-org/react";
+
 import { Container } from "@/components/sections/layout/container";
 import { Section } from "@/components/sections/layout/section";
 import { TitleSection } from "@/components/utils/titleSection";
@@ -27,7 +28,7 @@ export function AccountPageLoading() {
   return (
     <Container>
       <Section>
-        <TitleSection title="Mi Cuenta" description="Información Personal" />
+        <TitleSection description="Información Personal" title="Mi Cuenta" />
 
         <div className="grid gap-6 md:grid-cols-3">
           <Card className="col-span-3 md:col-span-1 pb-4">

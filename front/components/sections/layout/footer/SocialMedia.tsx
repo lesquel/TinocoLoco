@@ -1,6 +1,7 @@
 import { Link } from "@nextui-org/react";
 import { CiFacebook, CiInstagram } from "react-icons/ci";
 import { FaXTwitter } from "react-icons/fa6";
+
 import { ConfigurationBusiness } from "@/interfaces/IUBusiness";
 
 interface SocialLinkProps {
@@ -10,7 +11,7 @@ interface SocialLinkProps {
 }
 
 const SocialLink: React.FC<SocialLinkProps> = ({ name, value, icon }) => (
-  <Link href={value} className="hover:text-primary" aria-label={name}>
+  <Link aria-label={name} className="hover:text-primary" href={value}>
     {icon}
   </Link>
 );
@@ -23,23 +24,23 @@ export const SocialMedia: React.FC<{ business: ConfigurationBusiness }> = ({
     <div className="mt-4 flex space-x-4">
       {business.business_facebook_url && (
         <SocialLink
+          icon={<CiFacebook className="h-6 w-6" />}
           name="Facebook"
           value={business.business_facebook_url}
-          icon={<CiFacebook className="h-6 w-6" />}
         />
       )}
       {business.business_instagram_url && (
         <SocialLink
+          icon={<CiInstagram className="h-6 w-6" />}
           name="Instagram"
           value={business.business_instagram_url}
-          icon={<CiInstagram className="h-6 w-6" />}
         />
       )}
       {business.business_x_url && (
         <SocialLink
+          icon={<FaXTwitter className="h-6 w-6" />}
           name="Twitter"
           value={business.business_x_url}
-          icon={<FaXTwitter className="h-6 w-6" />}
         />
       )}
     </div>

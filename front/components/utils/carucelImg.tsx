@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Card, CardBody, Button, Image } from "@nextui-org/react";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+
 import No_Found_Event from "@/public/images/no_fount_events.jpg";
 import { IUImg } from "@/interfaces/IUimg";
 
@@ -13,12 +14,14 @@ export function ImageCarousel({ images }: { images: IUImg[] }) {
   const goToPrevious = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1;
+
     setCurrentIndex(newIndex);
   };
 
   const goToNext = () => {
     const isLastSlide = currentIndex === images.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
+
     setCurrentIndex(newIndex);
   };
 
@@ -26,29 +29,29 @@ export function ImageCarousel({ images }: { images: IUImg[] }) {
     <Card className="w-full max-w-lg mx-auto h-[400px]">
       <CardBody className="p-0 relative h-full flex items-center justify-center overflow-hidden">
         <Image
+          alt={`Carousel image ${currentIndex + 1}`}
+          className="w-full h-full object-cover object-center"
           src={
             images.length > 0
               ? images[currentIndex].image_url
               : placeholderImage
           }
-          alt={`Carousel image ${currentIndex + 1}`}
-          className="w-full h-full object-cover object-center"
         />
         {images.length > 1 && (
           <>
             <Button
               isIconOnly
+              aria-label="Previous image"
               className="z-40 absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white hover:bg-black/70"
               onClick={goToPrevious}
-              aria-label="Previous image"
             >
               <FaAngleLeft className="h-6 w-6" />
             </Button>
             <Button
               isIconOnly
+              aria-label="Next image"
               className="z-40 absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 text-white hover:bg-black/70"
               onClick={goToNext}
-              aria-label="Next image"
             >
               <FaAngleRight className="h-6 w-6" />
             </Button>

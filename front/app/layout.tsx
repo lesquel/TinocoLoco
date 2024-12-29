@@ -1,12 +1,14 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
+import { Toaster } from "react-hot-toast";
+
 import { Providers } from "./providers";
+
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Footer } from "@/components/sections/layout/footer/footer";
 import Header from "@/components/sections/layout/header";
-import { Toaster } from "react-hot-toast";
 import { InforVerificationToast } from "@/components/utils/toast/InforVerificationToast";
 
 export const metadata: Metadata = {

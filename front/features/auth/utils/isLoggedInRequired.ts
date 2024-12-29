@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 
 export const isLoggedInRequired = () => {

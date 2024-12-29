@@ -1,9 +1,10 @@
-import { FetchApiService } from "@/services/api/FetchApiService";
 import type { IURegister, IULogin } from "@/interfaces/IUauth";
+
+import { getTokenFromCookie } from "../utils/getUserInfo";
+
+import { FetchApiService } from "@/services/api/FetchApiService";
 import { endPoints } from "@/config/endPoints";
 import { IUcodeEmail, IUGetUser, IUUser } from "@/interfaces/IUser";
-import { getTokenFromCookie } from "../utils/getUserInfo";
-import { get } from "http";
 
 const api = new FetchApiService();
 
@@ -12,7 +13,9 @@ export const register = async (data: IURegister) => {
     url: endPoints.user.register,
     body: JSON.stringify(data),
   });
+
   console.log("response:bwfevgbkweofwegg", response);
+
   return response;
 };
 
@@ -21,6 +24,7 @@ export const login = async (data: IULogin) => {
     url: endPoints.user.login,
     body: JSON.stringify(data),
   });
+
   return response;
 };
 
@@ -35,6 +39,7 @@ export const editUser = async (data: IUUser, id: number) => {
       },
     },
   });
+
   return response;
 };
 
@@ -48,6 +53,7 @@ export const getUser = async (id: number) => {
       },
     },
   });
+
   return response;
 };
 
@@ -62,6 +68,7 @@ export const sendVerificationEmail = async () => {
       },
     },
   });
+
   return response;
 };
 
@@ -76,6 +83,7 @@ export const verificationCodeEmail = async (data: IUcodeEmail) => {
       },
     },
   });
+
   return response;
 };
 
@@ -90,5 +98,6 @@ const addReview = async (data: IUReview) => {
       },
     },
   });
+
   return response;
 };

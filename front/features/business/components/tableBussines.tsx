@@ -1,5 +1,4 @@
 "use client";
-import { useApiRequest } from "@/hooks/useApiRequest";
 import {
   Image,
   Table,
@@ -9,7 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
+
 import { getBusiness } from "../services/businessServices";
+
+import { useApiRequest } from "@/hooks/useApiRequest";
 interface Data {
   key: string;
   value: string;
@@ -46,9 +48,9 @@ export const TableBusiness = () => {
               {item.key === "business_logo_url" ? (
                 item.value != "null" ? (
                   <Image
-                    src={item.value}
                     alt="Logo de la empresa"
                     className="max-w-full h-auto"
+                    src={item.value}
                   />
                 ) : (
                   <div>No se ha cargado el logo</div>

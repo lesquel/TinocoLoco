@@ -1,6 +1,7 @@
-import { FieldConfig } from "@/interfaces/IUform";
 import { Control, Controller } from "react-hook-form";
 import { Textarea } from "@nextui-org/react";
+
+import { FieldConfig } from "@/interfaces/IUform";
 
 export const TextareaForm = ({
   config,
@@ -13,9 +14,8 @@ export const TextareaForm = ({
 }) => {
   return (
     <Controller
-      name={name as any}
       control={control}
-      rules={config.validation}
+      name={name as any}
       render={({ field }) => (
         <Textarea
           {...field} // Propaga todos los valores de field (onChange, onBlur, ref, etc.)
@@ -25,6 +25,7 @@ export const TextareaForm = ({
           onChange={(e) => field.onChange(e.target.value)} // Pasa el valor al controlador
         />
       )}
+      rules={config.validation}
     />
   );
 };

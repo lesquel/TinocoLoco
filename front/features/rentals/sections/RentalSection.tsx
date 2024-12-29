@@ -13,14 +13,17 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Image,
   Divider,
 } from "@nextui-org/react";
+import { useRouter } from "next/navigation";
+
 import { getRental, addReview } from "../services/rentals";
+
+import { SectionReview } from "./review/SectionReview";
+
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { IURental } from "@/interfaces/IURental";
 import { InforShorts } from "@/features/events/components/inforShorts";
-import { SectionReview } from "./review/SectionReview";
 import { TitleSection } from "@/components/utils/titleSection";
 import { InfoShortsServices } from "@/features/services/utils/infoShortsServices";
 import { TableLoading } from "@/components/utils/loagins/tableLoading";
@@ -29,7 +32,6 @@ import { ReviewsLoading } from "@/components/utils/loagins/reviewsLoading";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { Role } from "@/interfaces/IUser";
 import { ReviewForm } from "@/components/utils/reviews/ReviewForm";
-import { useRouter } from "next/navigation";
 
 export function RentalSection({ id }: { id: number }) {
   const [addedReviews, setAddedReviews] = useState(0);
@@ -85,7 +87,7 @@ export function RentalSection({ id }: { id: number }) {
     <div className="space-y-8">
       <Card className="p-6">
         <CardHeader>
-          <TitleSection title="Información de" description=" la Reserva" />
+          <TitleSection description=" la Reserva" title="Información de" />
         </CardHeader>
         <CardBody>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -120,21 +122,32 @@ export function RentalSection({ id }: { id: number }) {
             <div>
               <Card className="p-4">
                 <CardHeader className="flex justify-between items-center">
-                  <h3 className="text-xl font-semibold">Detalles de la Reserva</h3>
+                  <h3 className="text-xl font-semibold">
+                    Detalles de la Reserva
+                  </h3>
                   {data.current_status.status === "pending" ? (
-                    <Chip size="sm" color="warning" variant="dot">Pendiente</Chip>
+                    <Chip color="warning" size="sm" variant="dot">
+                      Pendiente
+                    </Chip>
                   ) : (
-                    <Chip size="sm" color="success" variant="dot">{data.current_status.status}</Chip>
+                    <Chip color="success" size="sm" variant="dot">
+                      {data.current_status.status}
+                    </Chip>
                   )}
                 </CardHeader>
                 <CardBody>
                   {data.current_status.status === "pending" && (
                     <div className="mb-4">
-                      <p className="mb-2">Por favor, confirma la Reserva para poder realizarla.</p>
+                      <p className="mb-2">
+                        Por favor, confirma la Reserva para poder realizarla.
+                      </p>
                       <Button color="primary">Confirmar</Button>
                     </div>
                   )}
-                  <Table aria-label="Información de la Reserva" className="mt-4">
+                  <Table
+                    aria-label="Información de la Reserva"
+                    className="mt-4"
+                  >
                     <TableHeader>
                       <TableColumn>Propiedad</TableColumn>
                       <TableColumn>Valor</TableColumn>
@@ -158,7 +171,9 @@ export function RentalSection({ id }: { id: number }) {
                       </TableRow>
                       <TableRow key="end_time">
                         <TableCell>Hora de finalización planificada</TableCell>
-                        <TableCell>{data.event_rental_planified_end_time}</TableCell>
+                        <TableCell>
+                          {data.event_rental_planified_end_time}
+                        </TableCell>
                       </TableRow>
                       <TableRow key="cost">
                         <TableCell>Costo</TableCell>
@@ -166,7 +181,9 @@ export function RentalSection({ id }: { id: number }) {
                       </TableRow>
                       <TableRow key="payment_method">
                         <TableCell>Método de pago</TableCell>
-                        <TableCell>{data.event_rental_payment_method}</TableCell>
+                        <TableCell>
+                          {data.event_rental_payment_method}
+                        </TableCell>
                       </TableRow>
                       <TableRow key="attendees">
                         <TableCell>Asistentes (min-max)</TableCell>
@@ -186,22 +203,26 @@ export function RentalSection({ id }: { id: number }) {
           <h2 className="text-2xl font-bold">Reseñas de la Reserva</h2>
         </CardHeader>
         <CardBody>
-          {data.costumer_rating && <SectionReview item={data.costumer_rating} />}
+          {data.costumer_rating && (
+            <SectionReview item={data.costumer_rating} />
+          )}
           {data.owner_rating && <SectionReview item={data.owner_rating} />}
-          {!data.owner_rating && getTokenFromCookie()?.user.role === Role.ADMIN && (
-            <ReviewForm
-              id={id}
-              fetchData={addReview}
-              onReviewAdded={handleReviewAdded}
-            />
-          )}
-          {!data.costumer_rating && getTokenFromCookie()?.user.role !== Role.ADMIN && (
-            <ReviewForm
-              id={id}
-              fetchData={addReview}
-              onReviewAdded={handleReviewAdded}
-            />
-          )}
+          {!data.owner_rating &&
+            getTokenFromCookie()?.user.role === Role.ADMIN && (
+              <ReviewForm
+                fetchData={addReview}
+                id={id}
+                onReviewAdded={handleReviewAdded}
+              />
+            )}
+          {!data.costumer_rating &&
+            getTokenFromCookie()?.user.role !== Role.ADMIN && (
+              <ReviewForm
+                fetchData={addReview}
+                id={id}
+                onReviewAdded={handleReviewAdded}
+              />
+            )}
         </CardBody>
       </Card>
     </div>

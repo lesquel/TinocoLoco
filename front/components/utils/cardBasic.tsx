@@ -1,8 +1,8 @@
 import { Button, Card, CardFooter, Image } from "@nextui-org/react";
-import { redirect } from "next/navigation";
+import Link from "next/link";
+
 import NofounService from "@/public/images/no_fount_events.jpg";
 import { IUImg } from "@/interfaces/IUimg";
-import Link from "next/link";
 
 interface ReusableCardProps<T> {
   item: T;
@@ -42,8 +42,8 @@ export function CardBasic<T>({
           {/* Remove Link here to avoid nested anchor tags */}
           <Button
             as={Link}
-            href={`${url}/${id}`}
             className="text-tiny text-white bg-black/20"
+            href={`${url}/${id}`}
           >
             Ver
           </Button>

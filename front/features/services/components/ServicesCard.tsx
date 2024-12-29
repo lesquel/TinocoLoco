@@ -3,18 +3,18 @@
 import {
   Card,
   CardBody,
-  Image,
-  Button,
   Chip,
   Accordion,
   AccordionItem,
 } from "@nextui-org/react";
-import { CiHeart } from "react-icons/ci";
 import { useCallback } from "react";
-import { useApiRequest } from "@/hooks/useApiRequest";
-import { ChipCategory } from "./chipCategoy";
-import { ImageCarousel } from "@/components/utils/carucelImg";
+
 import { getService } from "../services/services";
+
+import { ChipCategory } from "./chipCategoy";
+
+import { useApiRequest } from "@/hooks/useApiRequest";
+import { ImageCarousel } from "@/components/utils/carucelImg";
 import { IUService } from "@/interfaces/IUservices";
 import { CardInfoLoadin } from "@/components/utils/loagins/cardInfoLoading";
 

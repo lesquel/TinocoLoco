@@ -6,15 +6,11 @@ import {
   IUEvent,
   IUMostEventPopular,
   IUMostEventViewed,
-  IUOneEvent,
   IUCategory,
 } from "@/interfaces/IUevents";
-import { IUConstrucUrl } from "@/interfaces/IUConstrucUrl";
 import { construcUrl } from "@/services/utils/construcUrl";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
-import { IUImg, IUUploadPhoto } from "@/interfaces/IUimg";
-import { image } from "@nextui-org/react";
-import { collectSegmentData } from "next/dist/server/app-render/collect-segment-data";
+import { IUUploadPhoto } from "@/interfaces/IUimg";
 import { IUReview, IUReviews } from "@/interfaces/IUReview";
 const api = new FetchApiService();
 
@@ -22,6 +18,7 @@ export const getMostPopularEvents = async (): Promise<IUMostEventPopular> => {
   const response = await api.get<IUMostEventPopular>({
     url: endPoints.events.event.mostPopular.get + "?page_size=" + 4,
   });
+
   return response;
 };
 
@@ -29,20 +26,25 @@ export const getMostViewedEvents = async (): Promise<IUMostEventViewed> => {
   const response = await api.get<IUMostEventViewed>({
     url: endPoints.events.event.mostViewed.get + "?page_size=" + 4,
   });
+
   return response;
 };
 
 export const getEvents = async (options?: any) => {
   const url = endPoints.events.get + (options ? construcUrl({ options }) : "");
+
   console.log("url:", url);
   const response = await api.get<IUEvents>({ url });
+
   return response;
 };
 
 export const getEvent = async (id: number) => {
   const url = endPoints.events.get + id + "/";
+
   console.log("url:", url);
   const response = await api.get<IUEvent>({ url });
+
   return response;
 };
 
@@ -50,12 +52,14 @@ export const getCategorys = async (options?: any) => {
   const url =
     endPoints.events.category.get + (options ? construcUrl({ options }) : "");
   const response = await api.get<IUCategorys>({ url });
+
   return response;
 };
 
 export const getCategory = async (id: number) => {
   const url = endPoints.events.category.get + id + "/";
   const response = await api.get<IUCategory>({ url });
+
   return response;
 };
 
@@ -97,16 +101,18 @@ export const createEvent = async (data: IUEvent) => {
       },
     },
   });
+
   return response;
 };
 
 export const createCategory = async (data: IUCategory) => {
   const formData = new FormData();
+
   console.log("data:", data);
   formData.append("event_category_name", data.event_category_name);
   formData.append(
     "event_category_description",
-    data.event_category_description
+    data.event_category_description,
   );
   formData.append("is_active", data.is_active.toString()); // Convertir booleano a string
   formData.append("event_category_image", data.event_category_image[0]); // Agregar archivo
@@ -121,6 +127,7 @@ export const createCategory = async (data: IUCategory) => {
       },
     },
   });
+
   return response;
 };
 
@@ -128,6 +135,7 @@ export const getReviews = async (id: number) => {
   const response = await api.get<IUReviews>({
     url: endPoints.events.get + id + endPoints.events.reviews.get,
   });
+
   return response;
 };
 
@@ -142,5 +150,6 @@ export const addReview = async (data: IUReview, id: number) => {
       },
     },
   });
+
   return response;
 };

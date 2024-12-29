@@ -1,42 +1,60 @@
-import { useApiRequest } from "@/hooks/useApiRequest";
-import { getEvent } from "../services/events";
+"use client";
+
 import { useCallback } from "react";
-import NoFountEvent from "@/public/images/no_fount_events.jpg";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+
+import { getEvent } from "../services/events";
+
+import { useApiRequest } from "@/hooks/useApiRequest";
+import NoFountEvent from "@/public/images/no_fount_events.jpg";
+import { CardLoadingBasic } from "@/components/utils/loagins/cardLoading";
 
 export function InforShorts({ idEvent }: { idEvent: number }) {
   const fetchEvent = useCallback(() => getEvent(idEvent), [idEvent]);
   const { data, error, isLoading } = useApiRequest(fetchEvent);
 
   if (error) {
-    return <div className="text-danger">Error al obtener los datos del evento</div>;
+    return (
+      <div className="text-danger">Error al obtener los datos del evento</div>
+    );
   }
 
   if (isLoading) {
-    return <div className="text-default-500">Cargando evento...</div>;
+    return (
+      <div>
+        <CardLoadingBasic />
+      </div>
+    );
   }
 
   if (!data) {
-    return <div className="text-default-500">No se encontraron datos del evento</div>;
+    return (
+      <div className="text-default-500">No se encontraron datos del evento</div>
+    );
   }
 
   return (
     <Card className="max-w-sm">
       <CardHeader className="flex-col items-start">
         <h4 className="font-bold text-large">{data.event_name}</h4>
-        <p className="text-small text-default-500">Costo: ${data.event_reference_value}</p>
+        <p className="text-small text-default-500">
+          Costo: ${data.event_reference_value}
+        </p>
       </CardHeader>
-      <CardBody className="overflow-visible py-2">
+      <CardBody className="overflow-visible py-2 flex justify-center items-center">
         <Image
           alt={`Imagen de ${data.event_name}`}
           className="object-cover rounded-xl"
-          src={data.photos.length ? data.photos[0].image_url : NoFountEvent.src}
-          width={300}
           height={200}
+          src={
+            data.photos && data.photos.length > 0
+              ? data.photos[0].image_url
+              : NoFountEvent.src
+          }
+          width={300}
         />
         <p className="text-small mt-2">{data.event_description}</p>
       </CardBody>
     </Card>
   );
 }
-

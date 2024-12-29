@@ -1,12 +1,5 @@
 import {
-  sendVerificationEmail,
-  verificationCodeEmail,
-} from "@/features/auth/services/auth";
-import { useApiRequest } from "@/hooks/useApiRequest";
-import { useAsyncAction } from "@/hooks/useAsyncAction";
-import {
   Button,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
@@ -15,19 +8,25 @@ import {
   useDisclosure,
   Chip,
 } from "@nextui-org/react";
-import { TbMailBitcoin } from "react-icons/tb";
+import { useState } from "react";
+import toast from "react-hot-toast";
+
 import DynamicForm from "../form/dynamicForm";
+
+import {
+  sendVerificationEmail,
+  verificationCodeEmail,
+} from "@/features/auth/services/auth";
+import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { FormConfig } from "@/interfaces/IUform";
 import { IUcodeEmail } from "@/interfaces/IUser";
-import { useState } from "react";
 import { useErrorsForm } from "@/services/utils/useErrosForm";
-import toast from "react-hot-toast";
 
 export function ModalVerifyEmail() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { error, execute, loading } = useAsyncAction(sendVerificationEmail);
   const [externalErrors, setExternalErrors] = useState<Record<string, string>>(
-    {}
+    {},
   );
 
   const {
@@ -38,7 +37,7 @@ export function ModalVerifyEmail() {
 
   const sendVerificationEmailAction = (data: any) => {
     execute({}, (response) => {
-      if (response.errors){
+      if (response.errors) {
         toast.error("Error al enviar el código de verificación", {
           style: {
             background: "#000000",
@@ -47,11 +46,11 @@ export function ModalVerifyEmail() {
           iconTheme: {
             primary: "#FFEBE9",
             secondary: "#000000",
-          }
+          },
         });
+
         return;
       }
-
     });
   };
 
@@ -72,6 +71,7 @@ export function ModalVerifyEmail() {
       console.log("response:", response);
       if (response.errors) {
         useErrorsForm({ response, setExternalErrors });
+
         return;
       }
       window.location.reload();
@@ -80,10 +80,10 @@ export function ModalVerifyEmail() {
 
   return (
     <>
-      <Chip size="sm" color="danger" variant="flat">
+      <Chip color="danger" size="sm" variant="flat">
         Email no verificado
       </Chip>
-      <Button onPress={onOpen} color="primary">
+      <Button color="primary" onPress={onOpen}>
         Resolver
       </Button>
       <Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}>
@@ -95,9 +95,9 @@ export function ModalVerifyEmail() {
               </ModalHeader>
               <ModalBody className="flex flex-col gap-2 justify-center items-center">
                 <DynamicForm
+                  externalErrors={externalErrors}
                   formConfig={verificationCodeEmailConfig}
                   onSubmit={onsubmit}
-                  externalErrors={externalErrors}
                 />
               </ModalBody>
               <ModalFooter>

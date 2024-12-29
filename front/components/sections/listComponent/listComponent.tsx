@@ -1,10 +1,11 @@
-'use client'
+"use client";
 
 import { useCallback, useState } from "react";
+import { Spacer } from "@nextui-org/react";
+
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { PaginationComponent } from "@/components/utils/pagination";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
-import { Spacer } from "@nextui-org/react";
 
 interface PaginationResponse<T> {
   amount_of_pages: number;
@@ -43,12 +44,12 @@ export function ListComponent<T>({
   const fetchItems = useCallback(
     () =>
       fetchData({ page: currentPage, page_size: pageSize, ...searchParams }),
-    [currentPage, pageSize, searchParams, fetchData]
+    [currentPage, pageSize, searchParams, fetchData],
   );
 
   const { data, error, isLoading } = useApiRequest<PaginationResponse<T>>(
     fetchItems,
-    [currentPage, pageSize, searchParams]
+    [currentPage, pageSize, searchParams],
   );
 
   const handlePageChange = (page: number) => {
@@ -84,11 +85,11 @@ export function ListComponent<T>({
       </div>
       {data && (
         <PaginationComponent
-          totalPages={data.amount_of_pages}
           currentPage={currentPage}
-          onPageChange={handlePageChange}
           hasNextPage={data.next !== null}
           hasPreviousPage={data.previous !== null}
+          totalPages={data.amount_of_pages}
+          onPageChange={handlePageChange}
         />
       )}
     </>

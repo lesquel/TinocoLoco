@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Card, Button, Tooltip } from "@nextui-org/react";
-
 import { FaHome, FaSearch } from "react-icons/fa";
 import { GiPartyFlags } from "react-icons/gi";
 import { MdBusinessCenter, MdRoomService } from "react-icons/md";
@@ -27,11 +26,13 @@ export const SidebarDashboard = () => {
       {menuItems.map((item) => (
         <Tooltip
           key={item.key}
+          className="capitalize"
           content={item.key.charAt(0).toUpperCase() + item.key.slice(1)}
           placement="right"
-          className="capitalize"
         >
           <Button
+            isIconOnly
+            aria-label={item.key}
             className={`w-12 h-12 min-w-0 p-0 bg-transparent hover:bg-zinc-800 ${
               selected === item.key ? "bg-zinc-800" : ""
             }`}
@@ -39,8 +40,6 @@ export const SidebarDashboard = () => {
               setSelected(item.key);
               redirect(item.href);
             }}
-            isIconOnly
-            aria-label={item.key}
           >
             <div
               className={`text-white ${

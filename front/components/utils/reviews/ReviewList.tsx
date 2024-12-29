@@ -1,17 +1,13 @@
 "use client";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  user,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/react";
 import { Avatar } from "@nextui-org/react";
 import { useCallback } from "react";
-import { useApiRequest } from "@/hooks/useApiRequest";
 import { FaStar } from "react-icons/fa6";
-import { getUser } from "@/features/auth/services/auth";
+
 import { ReviewsLoading } from "../loagins/reviewsLoading";
+
+import { useApiRequest } from "@/hooks/useApiRequest";
+import { getUser } from "@/features/auth/services/auth";
 
 interface ReviewListProps {
   fetchReviews: (id: number) => Promise<any>;
@@ -21,9 +17,11 @@ interface ReviewListProps {
 const UserComponent = ({ idUser }: { idUser: number }) => {
   const fetchUser = useCallback(() => getUser(idUser), []);
   const { data: userData, isLoading } = useApiRequest(fetchUser);
+
   if (isLoading) {
     return <div>Cargando...</div>;
   }
+
   return (
     <h3 className="text-lg font-semibold">
       Usuario {userData?.username || userData?.first_name}
@@ -34,7 +32,7 @@ const UserComponent = ({ idUser }: { idUser: number }) => {
 export function ReviewList({ fetchReviews, id }: ReviewListProps) {
   const fetchEventReviews = useCallback(
     () => fetchReviews(id),
-    [fetchReviews, id]
+    [fetchReviews, id],
   );
   const { data: reviewsData, isLoading } = useApiRequest(fetchEventReviews);
 
@@ -46,12 +44,13 @@ export function ReviewList({ fetchReviews, id }: ReviewListProps) {
     return <div>No hay reseñas disponibles.</div>;
   }
   const reviews = reviewsData?.results;
+
   return (
     <div className="space-y-4">
       {reviews.map((review) => (
         <Card key={review.id}>
           <CardHeader className="flex flex-row items-center gap-4">
-            <Avatar></Avatar>
+            <Avatar />
             <div>
               <UserComponent idUser={review.owner} />
               <div className="flex items-center">

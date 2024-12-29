@@ -8,8 +8,8 @@ export default function Events() {
       <Container>
         <Section>
           <AllEvents
-            size={10}
             infoComponent={{ title: "Todos", description: "Los Eventos" }}
+            size={10}
           />
         </Section>
       </Container>

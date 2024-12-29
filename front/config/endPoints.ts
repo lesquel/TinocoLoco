@@ -1,8 +1,3 @@
-import { login } from "@/features/auth/services/auth";
-import { image } from "@nextui-org/react";
-import { m } from "framer-motion";
-import { serialize } from "v8";
-
 export const endPoints = {
   business: {
     get: "business-configuration/configuration/",

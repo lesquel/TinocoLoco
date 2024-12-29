@@ -1,10 +1,11 @@
 "use client";
+import { categoryFormConfig } from "../../utils/categoryFormConfig";
+import { createCategory } from "../../services/events";
+
 import DynamicForm from "@/components/utils/form/dynamicForm";
 import { TitleSection } from "@/components/utils/titleSection";
 import { IUCategory } from "@/interfaces/IUevents";
-import { categoryFormConfig } from "../../utils/categoryFormConfig";
 import { useAsyncAction } from "@/hooks/useAsyncAction";
-import { createCategory } from "../../services/events";
 
 export function CreateFormCategory() {
   const { error, execute, loading } = useAsyncAction(createCategory);
@@ -13,9 +14,10 @@ export function CreateFormCategory() {
       console.log("response:", response);
     });
   };
+
   return (
     <div className="flex flex-col justify-center items-center">
-      <TitleSection title="Crear Categoría" description="de Evento" />
+      <TitleSection description="de Evento" title="Crear Categoría" />
       <DynamicForm<IUCategory>
         formConfig={categoryFormConfig}
         onSubmit={handleSubmit}

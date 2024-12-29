@@ -1,11 +1,11 @@
 "use client";
 
-import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { Button, Textarea } from "@nextui-org/react";
 import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FaStar } from "react-icons/fa6";
-import { addReview } from "@/features/events/services/events";
+
+import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { IUReview } from "@/interfaces/IUReview";
 
 interface ReviewFormData {
@@ -46,12 +46,13 @@ export const ReviewForm = ({
   );
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit(handleFormSubmit)}>
       <div>
         <p className="mb-2">Calificación:</p>
         <div className="flex">
           {[...Array(5)].map((_, index) => {
             const ratingValue = index + 1;
+
             return (
               <FaStar
                 key={index}
@@ -69,17 +70,16 @@ export const ReviewForm = ({
       </div>
 
       <Controller
-        name="rating_comment"
         control={control}
         defaultValue=""
-        rules={{ required: "El comentario es obligatorio." }}
+        name="rating_comment"
         render={({ field, fieldState }) => (
           <>
             <Textarea
               {...field}
+              className="w-full"
               label="Comentario"
               placeholder="Escribe tu comentario aquí"
-              className="w-full"
             />
             {fieldState.error && (
               <p className="text-red-500 text-sm mt-1">
@@ -88,6 +88,7 @@ export const ReviewForm = ({
             )}
           </>
         )}
+        rules={{ required: "El comentario es obligatorio." }}
       />
 
       {error && (
@@ -96,10 +97,10 @@ export const ReviewForm = ({
         </p>
       )}
       <Button
-        type="submit"
         color="primary"
-        isLoading={loading}
         disabled={loading}
+        isLoading={loading}
+        type="submit"
       >
         Enviar comentario
       </Button>

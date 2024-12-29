@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoMdClose } from "react-icons/io";
 import Link from "next/link";
-import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { Button, Card, CardBody } from "@nextui-org/react";
+
+import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { siteConfig } from "@/config/site";
 
 interface CustomToastProps {
@@ -29,9 +30,9 @@ const CustomToast: React.FC<CustomToastProps> = ({
         <p className="mt-1 text-sm text-gray-500">{text}</p>
         <Button
           as={Link}
+          className="text-sm py-1 px-2"
           color="primary"
           href={verificationLink}
-          className="text-sm py-1 px-2"
         >
           Verificar
         </Button>
@@ -51,6 +52,7 @@ export function InforVerificationToast() {
     if (!mounted) return;
 
     const userInfo = getTokenFromCookie();
+
     if (!userInfo) return;
 
     if (!userInfo?.user?.email_verified) {

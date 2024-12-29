@@ -9,6 +9,7 @@ export const useAsyncAction = <T>(action: (data: T) => Promise<any>) => {
     setError(null);
     try {
       const response = await action(data);
+
       onSuccess?.(response);
     } catch (err) {
       setError(err);

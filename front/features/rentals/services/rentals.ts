@@ -5,7 +5,7 @@ import {
   IURentals,
   IUServiceToRentalAdd,
 } from "@/interfaces/IURental";
-import { IUReview, IUReviews } from "@/interfaces/IUReview";
+import { IUReview } from "@/interfaces/IUReview";
 import { FetchApiService } from "@/services/api/FetchApiService";
 import { construcUrl } from "@/services/utils/construcUrl";
 
@@ -20,6 +20,7 @@ export const getRentals = async () => {
       },
     },
   });
+
   return response;
 };
 
@@ -32,6 +33,7 @@ export const getRental = async (id: number) => {
       },
     },
   });
+
   return response;
 };
 
@@ -46,6 +48,7 @@ export const getMyRentals = async ({ options }: { options?: any }) => {
       },
     },
   });
+
   return response;
 };
 
@@ -60,6 +63,7 @@ export const confirmRental = async (data: any) => {
       },
     },
   });
+
   return response;
 };
 
@@ -74,6 +78,7 @@ export const createRental = async (data: any) => {
       },
     },
   });
+
   return response;
 };
 
@@ -88,6 +93,7 @@ export const updateRental = async (data: any) => {
       },
     },
   });
+
   return response;
 };
 
@@ -101,6 +107,7 @@ export const removeServiceFromRental = async (data: any) => {
       },
     },
   });
+
   return response;
 };
 
@@ -121,6 +128,7 @@ export const addServiceToRental = async ({
       },
     },
   });
+
   return response;
 };
 
@@ -135,5 +143,6 @@ export const addReview = async (data: IUReview, id: number) => {
       },
     },
   });
+
   return response;
 };

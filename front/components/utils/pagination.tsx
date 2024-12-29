@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { Pagination, Button } from "@nextui-org/react";
 
@@ -30,19 +30,19 @@ export function PaginationComponent({
       <div className="flex gap-2">
         <Button
           className="bg-rose-500"
+          disabled={!hasPreviousPage}
           size="sm"
           variant="flat"
           onPress={() => onPageChange(currentPage - 1)}
-          disabled={!hasPreviousPage}
         >
           Anterior
         </Button>
         <Button
           className="bg-rose-500"
+          disabled={!hasNextPage}
           size="sm"
           variant="flat"
           onPress={() => onPageChange(currentPage + 1)}
-          disabled={!hasNextPage}
         >
           Siguiente
         </Button>

@@ -1,6 +1,7 @@
-import { FieldConfig } from "@/interfaces/IUform";
 import { Input } from "@nextui-org/react";
 import { Control, Controller } from "react-hook-form";
+
+import { FieldConfig } from "@/interfaces/IUform";
 
 export const FileForm = ({
   config,
@@ -13,23 +14,24 @@ export const FileForm = ({
 }) => {
   return (
     <Controller
-      name={name as any}
       control={control}
-      rules={config.validation}
+      name={name as any}
       render={({ field }) => (
         <Input
           {...field} // Propaga los demás valores de field (onChange, onBlur, ref, etc.)
-          type="file"
+          multiple // Permite cargar varios archivos
           label={config.label}
+          type="file"
           onChange={(e) => {
             const files = Array.from(
               (e.target as HTMLInputElement).files || [],
             );
+
             field.onChange(files); // Pasa los archivos a react-hook-form
           }}
-          multiple // Permite cargar varios archivos
         />
       )}
+      rules={config.validation}
     />
   );
 };

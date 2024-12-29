@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import { Button, Skeleton } from "@nextui-org/react"
+import { Skeleton } from "@nextui-org/react";
 
 interface SkeletonFormProps {
-  inputCount: number
+  inputCount: number;
 }
 
-export default function SkeletonForm({ inputCount }: SkeletonFormProps) {
+export function FormLoading({ inputCount }: SkeletonFormProps) {
   return (
     <div className="w-full max-w-md mx-auto space-y-4 p-4">
       <Skeleton className="h-8 w-3/4 mb-6" /> {/* Form title */}
@@ -18,6 +18,5 @@ export default function SkeletonForm({ inputCount }: SkeletonFormProps) {
       ))}
       <Skeleton className="h-10 w-full mt-6" /> {/* Submit button */}
     </div>
-  )
+  );
 }
-

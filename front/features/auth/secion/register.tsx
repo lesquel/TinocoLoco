@@ -8,14 +8,14 @@ import {
   Link,
 } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
+import { FaEyeSlash, FaEye, FaLock, FaUser } from "react-icons/fa";
+import { IoIosMail } from "react-icons/io";
+
 import { IURegister } from "@/interfaces/IUauth";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 import { validationRules } from "@/features/auth/utils/validations";
-import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
 import { register as registerService } from "@/features/auth/services/auth";
-import { FaEyeSlash, FaEye, FaLock, FaUser } from "react-icons/fa";
-import { IoIosMail } from "react-icons/io";
 import { TitleSection } from "@/components/utils/titleSection";
 
 export const Register = () => {
@@ -67,23 +67,23 @@ export const Register = () => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="flex flex-col gap-1 items-center">
-        <TitleSection title="Crear " description=" Cuenta" />
+        <TitleSection description=" Cuenta" title="Crear " />
         <p className="text-sm text-default-500">
           Por favor, complete el formulario para registrarse.
         </p>
       </CardHeader>
       <CardBody>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
           {generalError && (
             <div className="text-danger text-sm">{generalError}</div>
           )}
 
           <Input
             label="Email"
-            variant="bordered"
             startContent={
               <IoIosMail className="text-default-400 pointer-events-none flex-shrink-0" />
             }
+            variant="bordered"
             {...register("email", validationRules.email)}
             errorMessage={errors.email?.message}
             isInvalid={!!errors.email}
@@ -91,26 +91,21 @@ export const Register = () => {
 
           <Input
             label="Username"
-            variant="bordered"
             startContent={
               <FaUser className="text-default-400 pointer-events-none flex-shrink-0" />
             }
+            variant="bordered"
             {...register("username", validationRules.username)}
             errorMessage={errors.username?.message}
             isInvalid={!!errors.username}
           />
 
           <Input
-            label="Password"
-            variant="bordered"
-            startContent={
-              <FaLock className="text-default-400 pointer-events-none flex-shrink-0" />
-            }
             endContent={
               <button
+                className="bg-transparent border-none"
                 type="button"
                 onClick={toggleVisibility}
-                className="bg-transparent border-none"
               >
                 {isVisible ? (
                   <FaEyeSlash className="text-default-400 pointer-events-none" />
@@ -119,19 +114,24 @@ export const Register = () => {
                 )}
               </button>
             }
+            label="Password"
+            startContent={
+              <FaLock className="text-default-400 pointer-events-none flex-shrink-0" />
+            }
             type={isVisible ? "text" : "password"}
+            variant="bordered"
             {...register("password", validationRules.password)}
             errorMessage={errors.password?.message}
             isInvalid={!!errors.password}
           />
 
           <Button
-            type="submit"
-            color="primary"
-            variant="shadow"
-            isLoading={loading}
-            disabled={loading}
             className="mt-2"
+            color="primary"
+            disabled={loading}
+            isLoading={loading}
+            type="submit"
+            variant="shadow"
           >
             {loading ? "Registrando..." : "Registrar"}
           </Button>

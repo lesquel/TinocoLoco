@@ -30,7 +30,7 @@ export interface IURental {
     rental: number;
     changed_by: string;
   };
-  event_rental_services : number[]
+  event_rental_services: number[];
   event_rental_date: string;
   event_rental_start_time: string;
   event_rental_planified_end_time: string;

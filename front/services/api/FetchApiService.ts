@@ -13,6 +13,7 @@ export class FetchApiService implements ApiService {
     options?: RequestInit;
   }): Promise<T> {
     console.log("url:", url);
+
     return this.fetchData<T>({ url, method: "GET", options });
   }
 
@@ -29,7 +30,9 @@ export class FetchApiService implements ApiService {
       ...options,
       body: body,
     };
+
     console.log("newOptions:", newOptions);
+
     return this.fetchData<T>({ url, method: "POST", options: newOptions });
   }
 
@@ -46,6 +49,7 @@ export class FetchApiService implements ApiService {
       ...options,
       body: body,
     };
+
     return this.fetchData<T>({ url, method: "PUT", options: newOptions });
   }
 
@@ -76,11 +80,14 @@ export class FetchApiService implements ApiService {
       },
       ...options,
     };
+
     console.log("defaultOptions:", defaultOptions);
     try {
       const response = await fetch(`${host}${url}`, defaultOptions);
+
       console.log("response:", response.status);
       console.log("url:", `${host}${url}`);
+
       return response.json();
     } catch (error) {
       console.error("Error en la petición:", error);

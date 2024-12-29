@@ -1,5 +1,3 @@
-import { FieldValues, UseFormSetError } from "react-hook-form";
-
 export const useErrorsForm = ({
   response,
   setExternalErrors,
@@ -14,6 +12,7 @@ export const useErrorsForm = ({
         Array.isArray(messages) ? messages.join(", ") : messages,
       ]),
     );
+
     setExternalErrors(formattedErrors);
   }
 };

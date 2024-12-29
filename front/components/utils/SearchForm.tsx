@@ -24,6 +24,7 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
     const makeUrl = {
       [searchField]: searchValue,
     };
+
     console.log("search makeUrl", makeUrl);
     setSearch(makeUrl);
   };
@@ -32,33 +33,33 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
     <Card className="w-full mx-auto flex-1">
       <CardBody>
         <form
-          onSubmit={handleSubmit(onSubmit)}
           className="flex flex-wrap gap-4 justify-center items-center"
+          onSubmit={handleSubmit(onSubmit)}
         >
           <Controller
-            name="searchValue"
             control={control}
             defaultValue=""
+            name="searchValue"
             render={({ field }) => (
               <Input
                 {...field}
+                className="flex-1 "
                 label="Buscar"
                 placeholder="Ingrese el valor a buscar"
-                className="flex-1 "
               />
             )}
           />
           <Controller
-            name="searchField"
             control={control}
             defaultValue="name"
+            name="searchField"
             render={({ field }) => (
               <Select
                 {...field}
-                label="Campos de Búsqueda"
-                placeholder="Select field"
                 className="w-52"
                 defaultSelectedKeys={["name"]}
+                label="Campos de Búsqueda"
+                placeholder="Select field"
               >
                 <SelectItem key="name" value="name">
                   Nombre
@@ -94,7 +95,7 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
             )}
           />
 
-          <Button color="primary" type="submit" className="">
+          <Button className="" color="primary" type="submit">
             <FaSearch className="w-5 h-5" />
           </Button>
         </form>
