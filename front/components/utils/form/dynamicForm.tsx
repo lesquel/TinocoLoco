@@ -20,6 +20,7 @@ const DynamicForm = <T extends Record<string, any>>({
   externalErrors = {},
 }: DynamicFormProps<T>) => {
   const [photos, setPhotos] = useState<File[]>([]);
+  const [generalErrors, setGeneralErrors] = useState<string[]>([]); // Para errores generales
 
   const {
     register,
@@ -33,10 +34,21 @@ const DynamicForm = <T extends Record<string, any>>({
 
   // Actualizar errores externos
   useEffect(() => {
+    const fieldErrors: Record<string, string> = {};
+    const generalErrorsList: string[] = [];
+
     Object.entries(externalErrors).forEach(([fieldName, errorMessage]) => {
-      setError(fieldName as keyof T, { type: "manual", message: errorMessage });
+      if (formConfig[fieldName]) {
+        // Si el campo existe en el formulario, se configura como un error específico
+        setError(fieldName as keyof T, { type: "manual", message: errorMessage });
+      } else {
+        // Si el campo no existe, se trata como un error general
+        generalErrorsList.push(errorMessage);
+      }
     });
-  }, [externalErrors, setError]);
+
+    setGeneralErrors(generalErrorsList); // Actualizar errores generales
+  }, [externalErrors, setError, formConfig]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -124,6 +136,18 @@ const DynamicForm = <T extends Record<string, any>>({
       onSubmit={handleSubmit(handleFormSubmit)}
       className="w-full max-w-xs flex flex-col gap-4"
     >
+      {/* Sección de errores generales */}
+      {generalErrors.length > 0 && (
+        <div className="bg-red-100 text-red-700 p-3 rounded-md">
+          <ul className="list-disc pl-5">
+            {generalErrors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Renderizar campos del formulario */}
       {Object.entries(formConfig).map(([fieldName, config]) => (
         <div key={fieldName}>
           {renderField(fieldName, config)}
@@ -132,6 +156,7 @@ const DynamicForm = <T extends Record<string, any>>({
           </div>
         </div>
       ))}
+
       <Button type="submit" variant="flat" className="mt-4">
         Guardar
       </Button>

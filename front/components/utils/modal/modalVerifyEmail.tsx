@@ -51,7 +51,7 @@ export function ModalVerifyEmail() {
         });
         return;
       }
-      console.log("response:", response);
+
     });
   };
 
@@ -68,15 +68,13 @@ export function ModalVerifyEmail() {
   };
 
   const onsubmit = (data: any) => {
-    console.log("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:", data);
     executeVerificationCode(data, (response) => {
       console.log("response:", response);
       if (response.errors) {
         useErrorsForm({ response, setExternalErrors });
         return;
       }
-      console.log("responseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:", response);
-      // window.location.reload();
+      window.location.reload();
     });
   };
 

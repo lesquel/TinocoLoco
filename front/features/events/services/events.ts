@@ -20,14 +20,14 @@ const api = new FetchApiService();
 
 export const getMostPopularEvents = async (): Promise<IUMostEventPopular> => {
   const response = await api.get<IUMostEventPopular>({
-    url: endPoints.events.event.mostPopular.get + "?page_size=" + 6,
+    url: endPoints.events.event.mostPopular.get + "?page_size=" + 4,
   });
   return response;
 };
 
 export const getMostViewedEvents = async (): Promise<IUMostEventViewed> => {
   const response = await api.get<IUMostEventViewed>({
-    url: endPoints.events.event.mostViewed.get + "?page_size=" + 6,
+    url: endPoints.events.event.mostViewed.get + "?page_size=" + 4,
   });
   return response;
 };

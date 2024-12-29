@@ -1,8 +1,9 @@
-import { Card, CardFooter, Image, Button } from "@nextui-org/react";
+import { Button, Card, CardFooter, Image } from "@nextui-org/react";
 import { redirect } from "next/navigation";
 import NofounService from "@/public/images/no_fount_events.jpg";
 import { IUImg } from "@/interfaces/IUimg";
 import Link from "next/link";
+
 interface ReusableCardProps<T> {
   item: T;
   url: string;
@@ -25,24 +26,27 @@ export function CardBasic<T>({
   const id = item[idKey];
 
   return (
-    <div className="h-52 w-52 mx-auto">
-      <Card isFooterBlurred className="border-none" radius="lg">
-        <Image
-          alt={title}
-          className="object-cover"
-          height={208}
-          src={imageSrc}
-          width={208}
-        />
-        <CardFooter className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+    <div className="h-52 w-52 mx-auto hover:scale-105 transition-all">
+      <Card as="div" className="border-none" radius="lg">
+        <Link href={`${url}/${id}`}>
+          <Image
+            alt={title}
+            className="object-cover"
+            height={208}
+            src={imageSrc}
+            width={208}
+          />
+        </Link>
+        <CardFooter className="backdrop-blur-lg  justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
           <p className="text-tiny text-white/80">{title}</p>
-          <Link
+          {/* Remove Link here to avoid nested anchor tags */}
+          <Button
+            as={Link}
             href={`${url}/${id}`}
             className="text-tiny text-white bg-black/20"
-            color="default"
           >
             Ver
-          </Link>
+          </Button>
         </CardFooter>
       </Card>
     </div>

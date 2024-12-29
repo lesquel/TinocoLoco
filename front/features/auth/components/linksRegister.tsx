@@ -60,7 +60,7 @@ export const LinksRegister = () => {
                   size="sm"
                   src={User.src}
                 />
-                <span>{userInfo?.user?.first_name ?? "Usuario"}</span>
+                <span>{userInfo?.user?.username ?? "Usuario"}</span>
               </div>
             </DropdownTrigger>
           </NavbarItem>

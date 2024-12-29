@@ -1,21 +1,15 @@
-"use client";
-import { LuPartyPopper } from "react-icons/lu";
-import { Suspense } from "react";
+"use client"
 import { FooterClientContent } from "./FooterClientContent";
 import { QuickLinks } from "./QuickLinks";
 
-import { getBusiness } from "@/features/business/services/businessServices";
-
 export function Footer() {
   return (
-    <footer className="bg-background-100">
+    <footer className="bg-background-100 min-h-[300px]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        {/* Usando Tailwind para la grilla */}
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+        {/* Grilla con espacio para crecer */}
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 min-h-[600px]">
           <QuickLinks />
-          <Suspense fallback={<div>Loading contact info...</div>}>
-            <FooterClientContent />
-          </Suspense>
+          <FooterClientContent />
         </div>
       </div>
     </footer>

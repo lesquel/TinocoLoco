@@ -60,6 +60,12 @@ export function AddRentalForm({ idEvent }: AddRentalFormProps) {
         useErrorsForm({ response, setExternalErrors });
         return;
       }
+
+      if (addedServices.length === 0) {
+        
+        router.push(`${siteConfig.navMenuItems.rentals.href}/${response.id}`);
+        return;
+      }
       addServiceToRentalExecute(
         { data: addedServices, rentalId: response.id },
         (response) => {

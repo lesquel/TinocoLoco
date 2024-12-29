@@ -28,9 +28,9 @@ export const Logo = () => {
       <Image
         src={data.business_logo_url}
         alt={`${data.business_name} logo`}
-        width={150}
+        width={70}
         height={50}
-        className="object-contain w-auto h-full"
+        className="object-contain max-w-[150px] max-h-[50px] w-auto h-full"
       />
     </div>
   );

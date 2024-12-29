@@ -28,13 +28,7 @@ export default function FormEditUser() {
         useErrorsForm({ response, setExternalErrors });
         return;
       }
-      // saveToken({
-      //   token: userInfo?.token,
-      //   user: response,
-      // });
-      console.log("User updated successfully", response);
-      console.log(getTokenFromCookie());
-      // window.location.href = "/accounts";
+      window.location.href = "/accounts";
     });
   };
 

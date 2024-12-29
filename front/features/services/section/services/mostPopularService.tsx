@@ -8,7 +8,7 @@ import NoFountServices from "@/public/images/no_fount_events.jpg";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 import { useCallback } from "react";
 export function MostPopularServices() {
-  const fetchServices = useCallback(() => getMostPopularServices({ size: 6 }), []);
+  const fetchServices = useCallback(() => getMostPopularServices({ size: 4 }), []);
   const { data, error, isLoading } = useApiRequest<IUMostServicePopular>(
     fetchServices,
   );

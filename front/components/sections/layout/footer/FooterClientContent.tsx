@@ -15,7 +15,11 @@ export function FooterClientContent() {
     );
   }
 
-  if (isLoading || !business) {
+  if (isLoading) {
+    return <div className="text-foreground-600">Loading business data...</div>;
+  }
+
+  if (!business) {
     return <div className="text-foreground-600">Loading business data...</div>;
   }
 
