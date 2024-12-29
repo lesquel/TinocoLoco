@@ -18,9 +18,9 @@ export const getPromotions = async () => {
   return response;
 };
 
-export const getMostPopularPromotions = async () => {
+export const getMostPopularPromotions = async ({size}: {size?:number}) => {
   const response = await api.get<IUPromotions>({
-    url: endPoints.promotions.mostPopular.get,
+    url: endPoints.promotions.mostPopular.get + (size ? `?page_size=${size}` : ""),
   });
   return response;
 };
