@@ -18,7 +18,7 @@ class EventRentalFilter(filters.FilterSet):
     payment_method = filters.CharFilter(
         field_name="event_rental_payment_method", lookup_expr="exact"
     )
-    promotion = filters.CharFilter(field_name="promotions__promotion_name", lookup_expr="icontains")
+    promotion = filters.CharFilter(field_name="promotion__promotion_name", lookup_expr="icontains")
     service = filters.CharFilter(
         field_name="event_rental_services__service_name", lookup_expr="icontains"
     )

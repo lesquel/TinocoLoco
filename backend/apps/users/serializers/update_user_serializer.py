@@ -28,7 +28,7 @@ class UpdateUserSerializer(BaseUserSerializer):
 
         if not identity_card.isdigit():
             raise errors.IdentityCardCannotContainLettersError()
-        if len(identity_card) > 10:
+        if len(identity_card) != 10:
             raise errors.IdentityCardTooLongError()
 
         request_user = self.context.get("user")
@@ -45,18 +45,18 @@ class UpdateUserSerializer(BaseUserSerializer):
         if value not in RoleChoices.values:
             raise errors.InvalidRoleError()
         return value
-
+    
     def validate_first_name(self, first_name):
         if len(first_name) > 30:
             raise errors.FirstNameTooLongError()
-        if first_name.isdigit():
+        if any(char.isdigit() for char in first_name):
             raise errors.FirstNameCannotContainNumbersError()
         return first_name
 
     def validate_last_name(self, last_name):
         if len(last_name) > 30:
             raise errors.LastNameTooLongError()
-        if last_name.isdigit():
+        if any(char.isdigit() for char in last_name):
             raise errors.LastNameCannotContainNumbersError()
         return last_name
 

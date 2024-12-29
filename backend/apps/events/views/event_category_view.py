@@ -14,7 +14,6 @@ class EventCategoryView(viewsets.ModelViewSet):
     filterset_class = EventCategoryFilter
     parser_classes = [MultiPartParser, FormParser, JSONParser]
 
-
     def get_serializer_class(self):
         if self.action in ["list", "retrieve"]:
             return RetrieveEventCategorySerializer

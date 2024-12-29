@@ -1,6 +1,3 @@
-from rest_framework import serializers
-
-
 from ..models import EventRental
 
 from .base_event_rental_serializer import BaseEventRentalSerializer
