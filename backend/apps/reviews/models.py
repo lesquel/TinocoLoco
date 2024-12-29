@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import gettext_lazy as _
+from django.db.models import Avg
 from django.db import models
 from apps.users.models.user import CustomUser
 
@@ -64,6 +65,12 @@ class Review(models.Model):
     )
 
     objects = ReviewManager()
+
+    @classmethod
+    def avg_rating_for_object(cls, content_object):
+        reviews = content_object.reviews.all()
+        avg_rating = reviews.aggregate(Avg('rating_score'))['rating_score__avg']
+        return avg_rating if avg_rating is not None else 0.0
 
     @property
     def content_type_name(self):

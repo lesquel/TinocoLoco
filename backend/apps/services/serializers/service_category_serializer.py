@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from base.utils import ImageUtils
 
-
 from ..models import ServiceCategory
 
 
@@ -28,3 +27,4 @@ class RetrieveServiceCategorySerializer(serializers.ModelSerializer):
 
     def get_service_category_image_url(self, obj):
         return ImageUtils.get_image_url(obj.service_category_image)
+

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from apps.events.models import Event
+from apps.reviews.models import Review
 
 from base.utils import errors
 
@@ -8,7 +9,8 @@ from apps.photos.serializers import RetrievePhotoSerializer
 
 class EventSerializer(serializers.ModelSerializer):
     photos = RetrievePhotoSerializer(many=True, read_only=True)
-
+    avg_rating = serializers.SerializerMethodField()
+    
     class Meta:
         model = Event
         fields = "__all__"
@@ -18,6 +20,7 @@ class EventSerializer(serializers.ModelSerializer):
             "creation_date",
             "last_actualization_date",
             "photos",
+            "avg_rating",
             "view_count",
         )
 
@@ -35,3 +38,6 @@ class EventSerializer(serializers.ModelSerializer):
         if value < 0:
             raise errors.EventExtraHourRateError()
         return value
+    
+    def get_avg_rating(self, obj):
+        return Review.avg_rating_for_object(obj)

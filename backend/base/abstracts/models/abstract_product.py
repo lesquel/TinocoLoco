@@ -26,3 +26,4 @@ class Product(models.Model):
     def increase_view_count(self):
         self.view_count += 1
         self.save()
+
