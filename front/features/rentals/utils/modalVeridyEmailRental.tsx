@@ -13,13 +13,16 @@ import toast from "react-hot-toast";
 
 import DynamicForm from "@/components/utils/form/dynamicForm";
 
-import { sendConfirmationEmail, confirmRental } from "@/features/rentals/services/rentals";
+import {
+  sendConfirmationEmail,
+  confirmRental,
+} from "@/features/rentals/services/rentals";
 import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { FormConfig } from "@/interfaces/IUform";
 import { IUcodeEmail } from "@/interfaces/IUser";
 import { useErrorsForm } from "@/services/utils/useErrosForm";
 
-export function ModalVerifyEmailRental() {
+export function ModalVerifyEmailRental({ rentalId }: { rentalId: number }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { error, execute, loading } = useAsyncAction(sendConfirmationEmail);
   const [externalErrors, setExternalErrors] = useState<Record<string, string>>(
@@ -33,7 +36,7 @@ export function ModalVerifyEmailRental() {
   } = useAsyncAction<any>(confirmRental);
 
   const sendVerificationEmailAction = (data: any) => {
-    execute({}, (response) => {
+    execute({idRental : rentalId}, (response) => {
       if (response.errors) {
         toast.error("Error al enviar el código de verificación", {
           style: {
@@ -48,11 +51,21 @@ export function ModalVerifyEmailRental() {
 
         return;
       }
+      toast.success("Se ha enviado el correo de confirmación", {
+        style: {
+          background: "#000000",
+          color: "#FFEBE9",
+        },
+        iconTheme: {
+          primary: "#FFEBE9",
+          secondary: "#000000",
+        },
+      });
     });
   };
 
   const verificationCodeEmailConfig: FormConfig = {
-    code: {
+    confirmation_code: {
       type: "text",
       label: "Codigo de verificación",
       required: true,
@@ -64,11 +77,10 @@ export function ModalVerifyEmailRental() {
   };
 
   const onsubmit = (data: any) => {
-    executeVerificationCode(data, (response) => {
+    executeVerificationCode({data}, (response) => {
       console.log("response:", response);
       if (response.errors) {
         useErrorsForm({ response, setExternalErrors });
-
         return;
       }
       window.location.reload();
@@ -77,12 +89,14 @@ export function ModalVerifyEmailRental() {
 
   return (
     <>
-      <Chip color="danger" size="sm" variant="flat">
-        Renta no confirmada
-      </Chip>
-      <Button color="primary" onPress={onOpen}>
-        Resolver
-      </Button>
+      <div className="flex justify-center items-center gap-6">
+        <Chip color="danger" size="sm" variant="flat">
+          Renta no confirmada
+        </Chip>
+        <Button color="danger" onPress={onOpen}>
+          Resolver
+        </Button>
+      </div>
       <Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (

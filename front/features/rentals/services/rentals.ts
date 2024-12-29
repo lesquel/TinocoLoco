@@ -53,9 +53,9 @@ export const getMyRentals = async ({ options }: { options?: any }) => {
   return response;
 };
 
-export const confirmRental = async ({data, idRental}: {data: any, idRental: number}) => {
+export const confirmRental = async ({data}: {data: any}) => {
   const response = await api.post<IURentals>({
-    url: endPoints.rentals.get + idRental + endPoints.rentals.confirmRental.post,
+    url: endPoints.rentals.confirmRentalEmail.post,
     body: JSON.stringify(data),
     options: {
       headers: {

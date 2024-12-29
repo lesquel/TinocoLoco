@@ -15,7 +15,7 @@ import {
   CardHeader,
   Divider,
 } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 
 import { getRental, addReview } from "../services/rentals";
 
@@ -32,6 +32,8 @@ import { ReviewsLoading } from "@/components/utils/loagins/reviewsLoading";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { Role } from "@/interfaces/IUser";
 import { ReviewForm } from "@/components/utils/reviews/ReviewForm";
+import { ModalVerifyEmailRental } from "../utils/modalVeridyEmailRental";
+import NotFound from "@/app/404";
 
 export function RentalSection({ id }: { id: number }) {
   const [addedReviews, setAddedReviews] = useState(0);
@@ -44,15 +46,8 @@ export function RentalSection({ id }: { id: number }) {
     setAddedReviews((prev) => prev + 1);
   }, []);
 
-  if (error) {
-    return (
-      <Card className="p-6">
-        <CardBody>
-          <p className="text-center text-danger">Error al obtener la renta</p>
-        </CardBody>
-      </Card>
-    );
-  }
+  if (error) notFound()
+    if (!data)  notFound()
 
   if (isLoading) {
     return (
@@ -73,15 +68,6 @@ export function RentalSection({ id }: { id: number }) {
     );
   }
 
-  if (!data) {
-    return (
-      <Card className="p-6">
-        <CardBody>
-          <p className="text-center">No se encontraron datos de la renta</p>
-        </CardBody>
-      </Card>
-    );
-  }
 
   return (
     <div className="space-y-8">
@@ -89,11 +75,11 @@ export function RentalSection({ id }: { id: number }) {
         <CardHeader className="flex justify-between items-center flex-col">
           <TitleSection description=" la Reserva" title="Información de" />
           {data.current_status.status === "pending" && (
-                    <div className="mb-4 flex justify-center items-center gap-2">
+                    <div className="mb-4 flex flex-col justify-center items-center gap-2">
                       <p className="mb-2">
                         Para realizar la reserva, por favor, confirma la Reserva.
                       </p>
-                      <Button color="danger" >Confirmar</Button>
+                      <ModalVerifyEmailRental rentalId={id} />
                     </div>
                   )}
         </CardHeader>

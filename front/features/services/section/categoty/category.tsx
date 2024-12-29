@@ -11,6 +11,7 @@ import { useApiRequest } from "@/hooks/useApiRequest";
 import { IUCategory } from "@/interfaces/IUservices";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 import { searchFieldsServices } from "../../utils/searchFielServices";
+import { notFound } from "next/navigation";
 
 export function GetServicesByCategory({
   idcategory,
@@ -42,10 +43,9 @@ export function GetServicesByCategory({
   }, [categoryData]);
 
   // Handle loading, error, or no data for category
-  if (categoryError)
-    return <div>Error al obtener los datos de la categoría</div>;
+  if (categoryError) notFound()
+  if (!categoryData) notFound()
   if (isCategoryLoading) return <CardLoagin description="Cargando categoría" />;
-  if (!categoryData) return <div>No se encontró la categoría</div>;
 
   return (
     <SearchableListSection<IUService>

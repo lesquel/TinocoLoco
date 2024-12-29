@@ -9,16 +9,14 @@ import { useApiRequest } from "@/hooks/useApiRequest";
 import NoFountEvent from "@/public/images/no_fount_events.jpg";
 import { CardLoadingBasic } from "@/components/utils/loagins/cardLoading";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export function InforShorts({ idEvent }: { idEvent: number }) {
   const fetchEvent = useCallback(() => getEvent(idEvent), [idEvent]);
   const { data, error, isLoading } = useApiRequest(fetchEvent);
 
-  if (error) {
-    return (
-      <div className="text-danger">Error al obtener los datos del evento</div>
-    );
-  }
+  if (error) notFound()
+  if (!data) notFound()
 
   if (isLoading) {
     return (
@@ -28,11 +26,6 @@ export function InforShorts({ idEvent }: { idEvent: number }) {
     );
   }
 
-  if (!data) {
-    return (
-      <div className="text-default-500">No se encontraron datos del evento</div>
-    );
-  }
 
   return (
     <Card className="max-w-sm mx-auto">

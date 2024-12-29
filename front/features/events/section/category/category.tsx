@@ -11,6 +11,7 @@ import { useApiRequest } from "@/hooks/useApiRequest";
 import { IUCategory } from "@/interfaces/IUevents";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 import { searchFieldsEventCategory } from "../../utils/searchFielEvent";
+import { notFound } from "next/navigation";
 
 export function GetEventsByCategory({
   idcategory,
@@ -37,15 +38,13 @@ export function GetEventsByCategory({
     if (categoryData) {
       return () => getEvents({ category: categoryData.event_category_name });
     }
-
     return () => Promise.resolve([]); // Fallback for when categoryData is not available
   }, [categoryData]);
 
   // Handle loading, error, or no data for category
-  if (categoryError)
-    return <div>Error al obtener los datos de la categoría</div>;
+  if (categoryError) notFound();
+  if (!categoryData) notFound();
   if (isCategoryLoading) return <CardLoagin description="Cargando categoría" />;
-  if (!categoryData) return <div>No se encontró la categoría</div>;
 
   return (
     <SearchableListSection<IUService>

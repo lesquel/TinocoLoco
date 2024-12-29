@@ -71,6 +71,9 @@ export const endPoints = {
     confirmRental: {
       post: "/send-confirmation-email/",
     },
+    confirmRentalEmail : {
+      post: "event-rentals/event-rental/confirm-rental/",
+    },
     services: {
       get: "/services/",
       post: "/add-services/",

@@ -17,21 +17,18 @@ import { useApiRequest } from "@/hooks/useApiRequest";
 import { ImageCarousel } from "@/components/utils/carucelImg";
 import { IUService } from "@/interfaces/IUservices";
 import { CardInfoLoadin } from "@/components/utils/loagins/cardInfoLoading";
+import { notFound } from "next/navigation";
 
 export default function ServicesCard({ id }: { id: number }) {
   const fetchEvent = useCallback(() => getService(id), []);
   const { data, error, isLoading } = useApiRequest<IUService>(fetchEvent);
 
-  if (error) {
-    return <div>Error al obtener los datos</div>;
-  }
+  if (error) notFound()
+  if (!data) notFound()
   if (isLoading) {
     return <CardInfoLoadin />;
   }
 
-  if (!data) {
-    return <div>No se encontró el servicio solicitado.</div>;
-  }
 
   return (
     <Card className="w-full mx-auto">

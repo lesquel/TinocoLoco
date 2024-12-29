@@ -1,5 +1,6 @@
 "use client";
 
+import { Card } from "@nextui-org/react";
 import { useEffect } from "react";
 
 export default function Error({
@@ -10,22 +11,16 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
-    /* eslint-disable no-console */
+  
     console.error(error);
   }, [error]);
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
-    </div>
+    <Card className="w-full max-w-md mx-auto">
+      <h1 className="text-2xl font-bold mb-2">Error</h1>
+      <p className="text-default-500">
+        Se ha producido un error. Por favor, inténtelo nuevamente.
+      </p>
+    </Card>
   );
 }

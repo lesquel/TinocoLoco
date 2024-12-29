@@ -1,5 +1,6 @@
 import { ApiService } from "@/interfaces/IUApiservices";
 import { TypeMethod } from "@/types/typeMethod";
+import { notFound } from "next/navigation";
 import toast from "react-hot-toast";
 
 // const host = process.env.NEXT_PUBLIC_BACKEND_HOST || "http://localhost:8000/";
@@ -87,7 +88,13 @@ export class FetchApiService implements ApiService {
       const response = await fetch(`${host}${url}`, defaultOptions);
 
       console.log("response:", response.status);
-      if (response.status !== 200) {
+
+      if (response.status === 404) {
+        throw new Error("No se encontró la información solicitada", {
+          cause: "noFound",
+        });
+        // notFound()
+      } else if (response.status !== 200) {
         toast.error("Error al enviar la petición", {
           style: {
             background: "#000000",

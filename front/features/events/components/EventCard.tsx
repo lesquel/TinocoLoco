@@ -19,6 +19,7 @@ import { ImageCarousel } from "@/components/utils/carucelImg";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { IUEvent } from "@/interfaces/IUevents";
 import { CardInfoLoadin } from "@/components/utils/loagins/cardInfoLoading";
+import { notFound } from "next/navigation";
 
 export default function EventCard({ id }: { id: number }) {
   const fetchEvent = useCallback(() => getEvent(id), [id]);
@@ -29,12 +30,12 @@ export default function EventCard({ id }: { id: number }) {
   userInfo?.user.email_verified;
   userInfo?.user.has_completed_profile;
 
-  if (error) {
-    return <div>Error al obtener los datos</div>;
-  }
+  if (error)  notFound()
+  if (!data) notFound()
   if (isLoading) {
     return <CardInfoLoadin />;
   }
+
 
   const event = data;
 
