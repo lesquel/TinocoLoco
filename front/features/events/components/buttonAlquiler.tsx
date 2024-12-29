@@ -10,10 +10,11 @@ import {
   ModalBody,
   ModalFooter,
 } from "@nextui-org/react";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { siteConfig } from "@/config/site";
-import Link from "next/link";
 
 interface UserInfo {
   user: {
@@ -34,6 +35,7 @@ export const ConditionalRentalButton = ({ id }: { id: number }) => {
   const handleClick = () => {
     if (!userInfo) {
       redirect(siteConfig.navMenuItems.login.href);
+
       return;
     }
 
@@ -43,6 +45,7 @@ export const ConditionalRentalButton = ({ id }: { id: number }) => {
         message: "Por favor, verifica tu correo electrónico antes de alquilar.",
       });
       setIsModalOpen(true);
+
       return;
     }
 
@@ -52,6 +55,7 @@ export const ConditionalRentalButton = ({ id }: { id: number }) => {
         message: "Por favor, completa tu perfil antes de alquilar.",
       });
       setIsModalOpen(true);
+
       return;
     }
 
@@ -98,8 +102,8 @@ export const ConditionalRentalButton = ({ id }: { id: number }) => {
             </Button>
             <Button
               as={Link}
-              href={siteConfig.navMenuItems.account.href}
               color="primary"
+              href={siteConfig.navMenuItems.account.href}
               onPress={closeModal}
             >
               Resolver

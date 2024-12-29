@@ -1,5 +1,3 @@
-import { register } from "@/features/auth/services/auth";
-
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {

@@ -6,8 +6,8 @@ export default function UpdateBusiness() {
     <div className="flex flex-col items-center justify-center  relative">
       <div className="max-w-[700px] w-full mx-auto px-4 mt-4">
         <TitleSection
-          title="Actualizar "
           description="Información de la empresa"
+          title="Actualizar "
         />
         <FormBusiness />
       </div>

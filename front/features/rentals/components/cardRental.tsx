@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useCallback } from "react";
-import { Button, Card, Image, CardBody } from "@nextui-org/react";
+import { Card, Image, CardBody } from "@nextui-org/react";
 import Link from "next/link";
+
 import { IURental } from "@/interfaces/IURental";
 import { getEvent } from "@/features/events/services/events";
 import { useApiRequest } from "@/hooks/useApiRequest";
@@ -19,6 +20,7 @@ const RentalEvent = ({ idEvent }: { idEvent: number }) => {
   if (!data || isLoading) {
     return <div>Cargando...</div>;
   }
+
   return (
     <h3 className="text-large font-medium">
       Renta de servicio {data.event_name}
@@ -28,7 +30,7 @@ const RentalEvent = ({ idEvent }: { idEvent: number }) => {
 
 export function CardRental({ rental }: { rental: IURental }) {
   return (
-    <Card as={Link} href={`/rentals/${rental.id}`} className="w-full">
+    <Card as={Link} className="w-full" href={`/rentals/${rental.id}`}>
       <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap justify-center items-center">
         <div className="flex flex-col gap-2">
           <Image

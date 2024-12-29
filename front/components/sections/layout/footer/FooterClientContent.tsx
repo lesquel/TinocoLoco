@@ -1,9 +1,10 @@
 "use client";
 
-import { useApiRequest } from "@/hooks/useApiRequest";
-import { getBusiness } from "@/features/business/services/businessServices";
 import { ContactInfo } from "./ContactInfo";
 import { SocialMedia } from "./SocialMedia";
+
+import { useApiRequest } from "@/hooks/useApiRequest";
+import { getBusiness } from "@/features/business/services/businessServices";
 
 export function FooterClientContent() {
   const { data, error, isLoading } = useApiRequest(getBusiness);

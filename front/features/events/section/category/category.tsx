@@ -1,4 +1,6 @@
 "use client";
+import { useCallback, useMemo } from "react";
+
 import { CardBasic } from "@/components/utils/cardBasic";
 import { SearchableListSection } from "@/components/sections/listComponent/searchListSection";
 import { IUService } from "@/interfaces/IUservices";
@@ -7,7 +9,6 @@ import NoFountEvent from "@/public/images/no_fount_events.jpg";
 import { getCategory, getEvents } from "@/features/events/services/events";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { IUCategory } from "@/interfaces/IUevents";
-import { useCallback, useMemo } from "react";
 
 export function GetEventsByCategory({
   idcategory,
@@ -34,6 +35,7 @@ export function GetEventsByCategory({
     if (categoryData) {
       return () => getEvents({ category: categoryData.event_category_name });
     }
+
     return () => Promise.resolve([]); // Fallback for when categoryData is not available
   }, [categoryData]);
 
@@ -45,25 +47,25 @@ export function GetEventsByCategory({
 
   return (
     <SearchableListSection<IUService>
-      endpoint={endPoints.events.get}
-      title={infoComponent.title}
       description={`${infoComponent.description}  (${categoryData.event_category_name})`}
+      endpoint={endPoints.events.get}
+      errorMessage="Error al obtener los servicios de la categoría"
       fetchData={fetchEvents}
+      loadingMessage="Cargando servicios..."
+      noDataMessage="No hay servicios en esta categoría"
+      pageSize={size}
       renderCard={(service) => (
         <CardBasic
           key={service.id}
-          item={service}
-          url={"/events/"}
-          imageKey="photos"
-          titleKey="service_name"
           defaultImage={NoFountEvent.src}
           idKey="id"
+          imageKey="photos"
+          item={service}
+          titleKey="service_name"
+          url={"/events/"}
         />
       )}
-      pageSize={size}
-      noDataMessage="No hay servicios en esta categoría"
-      errorMessage="Error al obtener los servicios de la categoría"
-      loadingMessage="Cargando servicios..."
+      title={infoComponent.title}
     />
   );
 }

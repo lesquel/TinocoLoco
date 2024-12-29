@@ -1,5 +1,6 @@
 import { Input } from "@nextui-org/react";
 import { Control, Controller } from "react-hook-form";
+
 import { FieldConfig } from "@/interfaces/IUform";
 
 export const TextForm = ({
@@ -13,18 +14,18 @@ export const TextForm = ({
 }) => {
   return (
     <Controller
-      name={name}
       control={control}
-      rules={config.validation}
+      name={name}
       render={({ field: { onChange, value, ...fieldRest } }) => (
         <Input
           {...fieldRest}
-          type="text"
           label={config.label}
+          type="text"
           value={value || ""}
           onChange={(e) => onChange(e.target.value)}
         />
       )}
+      rules={config.validation}
     />
   );
 };

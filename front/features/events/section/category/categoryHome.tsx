@@ -1,8 +1,10 @@
+import { useCallback } from "react";
+
+import { getCategorys } from "../../services/events";
+
 import { IUCategory, IUCategorys } from "@/interfaces/IUevents";
 import { useApiRequest } from "@/hooks/useApiRequest";
-import { getCategorys } from "../../services/events";
 import { TitleSection } from "@/components/utils/titleSection";
-import { useCallback } from "react";
 import { CategoryCardBasic } from "@/components/utils/categoryBasic";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 
@@ -15,25 +17,24 @@ export function CategoryHome() {
   }
 
   if (isLoading) {
-    return <CardLoagin title="Categorías" description="Eventos" />;
+    return <CardLoagin description="Eventos" title="Categorías" />;
   }
 
-  if (!data?.results){
+  if (!data?.results) {
     return <div>No hay categorías</div>;
   }
 
-
   return (
     <div>
-      <TitleSection title="Categorías" description="Eventos" />
+      <TitleSection description="Eventos" title="Categorías" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
         {data.results.map((category: IUCategory) => (
           <CategoryCardBasic
             key={category.id}
-            imageUrl={category.event_category_image_url}
             altText={category.event_category_image}
-            title={category.event_category_name}
+            imageUrl={category.event_category_image_url}
             linkUrl={`/events/category/${category.id}`}
+            title={category.event_category_name}
           />
         ))}
       </div>

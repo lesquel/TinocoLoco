@@ -1,6 +1,7 @@
 "use client";
-import { IUService } from "@/interfaces/IUservices";
 import { getServices } from "../../services/services";
+
+import { IUService } from "@/interfaces/IUservices";
 import { CardBasic } from "@/components/utils/cardBasic";
 import { endPoints } from "@/config/endPoints";
 import NoFountEvent from "@/public/images/no_fount_events.jpg";
@@ -15,25 +16,25 @@ export function AllServices({
 }) {
   return (
     <SearchableListSection<IUService>
-      endpoint={endPoints.services.get}
-      title={infoComponent.title}
       description={infoComponent.description}
+      endpoint={endPoints.services.get}
+      errorMessage="Error al obtener los servicios"
       fetchData={getServices}
+      loadingMessage="Cargando servicios..."
+      noDataMessage="No hay servicios"
+      pageSize={size}
       renderCard={(service) => (
         <CardBasic
           key={service.id}
-          item={service}
-          url={"/services/"}
-          imageKey="photos"
-          titleKey="service_name"
           defaultImage={NoFountEvent.src}
           idKey="id"
+          imageKey="photos"
+          item={service}
+          titleKey="service_name"
+          url={"/services/"}
         />
       )}
-      pageSize={size}
-      noDataMessage="No hay servicios"
-      errorMessage="Error al obtener los servicios"
-      loadingMessage="Cargando servicios..."
+      title={infoComponent.title}
     />
   );
 }

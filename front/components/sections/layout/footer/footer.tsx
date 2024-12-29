@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FooterClientContent } from "./FooterClientContent";
 import { QuickLinks } from "./QuickLinks";
 

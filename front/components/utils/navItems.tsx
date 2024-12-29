@@ -21,11 +21,11 @@ export function NavItems({ items }: NavItemsProps) {
       {Object.entries(items).map(([key, item]) => (
         <NavbarItem key={key} isActive={pathname === item.href}>
           <Link
-            href={item.href}
             aria-current={pathname === item.href ? "page" : undefined}
             className={`text-foreground hover:text-primary transition-colors ${
               pathname === item.href ? "font-semibold" : ""
             }`}
+            href={item.href}
           >
             {item.label}
           </Link>

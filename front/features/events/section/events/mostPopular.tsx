@@ -15,25 +15,26 @@ export function MostPopularEvents() {
     return <div>Error al obtener los datos</div>;
   }
   if (isLoading) {
-    return <CardLoagin title="Eventos" description="más populares" />;
+    return <CardLoagin description="más populares" title="Eventos" />;
   }
   if (!data?.results) {
     return <div>No hay eventos</div>;
   }
+
   return (
     <div>
-      <TitleSection title="Eventos" description="más populares" />
+      <TitleSection description="más populares" title="Eventos" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
         {data.results.map((event: IUEvent) => {
           return (
             <CardBasic<IUEvent>
               key={event.id}
-              item={event}
-              url="/events"
-              imageKey="photos"
-              titleKey="event_name"
               defaultImage={NoFountServices.src}
               idKey="id"
+              imageKey="photos"
+              item={event}
+              titleKey="event_name"
+              url="/events"
             />
           );
         })}

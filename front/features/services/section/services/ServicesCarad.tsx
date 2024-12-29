@@ -3,18 +3,19 @@
 import {
   Card,
   CardBody,
-  Image,
   Button,
   Chip,
   Accordion,
   AccordionItem,
 } from "@nextui-org/react";
-import { IUEvent, IUOneEvent } from "@/interfaces/IUevents";
-import { CiHeart } from "react-icons/ci";
 import { useCallback } from "react";
+
 import { getEvent } from "../services/events";
-import { useApiRequest } from "@/hooks/useApiRequest";
+
 import { ChipCategory } from "./chipCategoy";
+
+import { useApiRequest } from "@/hooks/useApiRequest";
+import { IUEvent } from "@/interfaces/IUevents";
 import { ImageCarousel } from "@/components/utils/carucelImg";
 
 export default function EventCard({ id }: { id: number }) {

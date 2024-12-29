@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@nextui-org/react";
+
 import EventosBanner from "@/public/images/e.jpg";
 
 export const Banner = () => {
@@ -11,7 +12,7 @@ export const Banner = () => {
         backgroundImage: "url( " + EventosBanner.src + ")",
       }}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/90 to-black/0"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/90 to-black/0" />
 
       <div className="relative z-10 flex flex-col items-center justify-center h-screen px-4 text-center sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-white sm:text-5xl">

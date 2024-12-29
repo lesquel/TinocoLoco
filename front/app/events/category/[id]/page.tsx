@@ -15,8 +15,8 @@ export default async function CategotyEvent({
       <Section>
         <GetEventsByCategory
           idcategory={idcategory}
-          size={10}
           infoComponent={{ title: "Todos", description: "Los Eventos" }}
+          size={10}
         />
       </Section>
     </Container>

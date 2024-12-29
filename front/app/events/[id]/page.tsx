@@ -5,7 +5,9 @@ import EventCard from "@/features/events/components/EventCard";
 
 export default function Event({ params }: { params: { id: string } }) {
   const eventId = parseInt(params.id, 10);
+
   console.log("eventId", eventId);
+
   return (
     <Container>
       <Section>

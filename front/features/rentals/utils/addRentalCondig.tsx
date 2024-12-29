@@ -1,5 +1,4 @@
 import { FormConfig } from "@/interfaces/IUform";
-import { PaymentMethod } from "@/types/paymentMethod";
 
 export const createRentalConfig = (promotions: any[]): FormConfig => {
   const promotionOptions = promotions.map((item: any) => ({

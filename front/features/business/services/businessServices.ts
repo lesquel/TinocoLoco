@@ -9,11 +9,13 @@ export const getBusiness = async () => {
   let business: IUBusiness = await api.get<IUBusiness>({
     url: endPoints.business.get,
   });
+
   return business;
 };
 
 export const updateBusiness = async (data: IUBusiness) => {
   const formData = new FormData();
+
   formData.append("business_name", data.business_name);
   console.log("data: logooooooooooo", data.business_logo);
   formData.append("business_logo", data.business_logo);
@@ -51,5 +53,6 @@ export const updateBusiness = async (data: IUBusiness) => {
       },
     },
   });
+
   return business;
 };

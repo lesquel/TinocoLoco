@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+
 import { TitleSection } from "@/components/utils/titleSection";
 import { SearchForm } from "@/components/utils/SearchForm";
 import { ListComponent } from "@/components/sections/listComponent/listComponent";
@@ -35,17 +36,17 @@ export function SearchableListSection<T>({
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-center items-center ">
-        <TitleSection title={title} description={description} />
+        <TitleSection description={description} title={title} />
         <SearchForm setSearch={setSearch} />
       </div>
       <ListComponent<T>
+        errorMessage={errorMessage}
         fetchData={fetchData}
+        loadingMessage={loadingMessage}
+        noDataMessage={noDataMessage}
+        pageSize={pageSize}
         renderCard={renderCard}
         searchParams={search}
-        pageSize={pageSize}
-        noDataMessage={noDataMessage}
-        errorMessage={errorMessage}
-        loadingMessage={loadingMessage}
       />
     </div>
   );

@@ -1,9 +1,10 @@
 "use client";
+import { useState } from "react";
+
 import DynamicForm from "@/components/utils/form/dynamicForm";
 import { TitleSection } from "@/components/utils/titleSection";
 import { IUService } from "@/interfaces/IUservices";
 import { ServiceFormConfig } from "@/features/services/utils/serviceFormConfig";
-import { useState } from "react";
 import { useAsyncAction } from "@/hooks/useAsyncAction";
 import {
   createService,
@@ -35,9 +36,10 @@ export function CreateForm() {
   if (!formConfig) {
     return <div>Cargando...</div>;
   }
+
   return (
     <div className="flex flex-col justify-center items-center">
-      <TitleSection title="Crear" description="Evento" />
+      <TitleSection description="Evento" title="Crear" />
       <DynamicForm<IUService> formConfig={formConfig} onSubmit={handleSubmit} />
     </div>
   );

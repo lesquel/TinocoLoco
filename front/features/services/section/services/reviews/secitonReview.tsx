@@ -1,5 +1,6 @@
 "use client";
 import { useState, useCallback } from "react";
+
 import { Section } from "@/components/sections/layout/section";
 import { ReviewForm } from "@/components/utils/reviews/ReviewForm";
 import { ReviewList } from "@/components/utils/reviews/ReviewList";
@@ -16,8 +17,8 @@ export const SectionReview = ({ serviceId }: { serviceId: number }) => {
     <div className="flex flex-col w-full gap-4 max-w-xl mx-auto">
       <Section>
         <ReviewForm
-          id={serviceId}
           fetchData={addReview}
+          id={serviceId}
           onReviewAdded={handleReviewAdded}
         />
       </Section>

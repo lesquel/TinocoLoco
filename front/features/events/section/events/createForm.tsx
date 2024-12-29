@@ -1,9 +1,10 @@
 "use client";
+import { useState } from "react";
+
 import DynamicForm from "@/components/utils/form/dynamicForm";
 import { TitleSection } from "@/components/utils/titleSection";
 import { IUEvent } from "@/interfaces/IUevents";
 import { EventFormConfig } from "@/features/events/utils/eventFormConfig";
-import { useCallback, useState } from "react";
 import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { createEvent, uploadPhoto } from "@/features/events/services/events";
 import { FormConfig } from "@/interfaces/IUform";
@@ -32,9 +33,10 @@ export function CreateForm() {
   if (!formConfig) {
     return <div>Loading...</div>;
   }
+
   return (
     <div className="flex flex-col justify-center items-center">
-      <TitleSection title="Crear" description="Evento" />
+      <TitleSection description="Evento" title="Crear" />
       <DynamicForm<IUEvent> formConfig={formConfig} onSubmit={handleSubmit} />
     </div>
   );

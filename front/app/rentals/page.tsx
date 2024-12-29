@@ -4,7 +4,7 @@ import { AllRentals } from "@/features/rentals/sections/allRentals";
 export default function Rentals() {
   return (
     <div className="flex flex-col items-center justify-center  relative w-full">
-      <TitleSection title="Mis Rentas" description="Eventos" />
+      <TitleSection description="Eventos" title="Mis Rentas" />
       <AllRentals />
     </div>
   );

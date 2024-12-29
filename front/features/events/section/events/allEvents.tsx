@@ -15,25 +15,25 @@ export function AllEvents({
 }) {
   return (
     <SearchableListSection<IUEvent>
-      endpoint={endPoints.events.get}
-      title={infoComponent.title}
       description={infoComponent.description}
+      endpoint={endPoints.events.get}
+      errorMessage="Error al obtener los eventos"
       fetchData={getEvents}
+      loadingMessage="Cargando eventos..."
+      noDataMessage="No hay eventos"
+      pageSize={size}
       renderCard={(event) => (
         <CardBasic
           key={event.id}
-          item={event}
-          url={"/events/"}
-          imageKey="photos"
-          titleKey="event_name"
           defaultImage={NoFountEvent.src}
           idKey="id"
+          imageKey="photos"
+          item={event}
+          titleKey="event_name"
+          url={"/events/"}
         />
       )}
-      pageSize={size}
-      noDataMessage="No hay eventos"
-      errorMessage="Error al obtener los eventos"
-      loadingMessage="Cargando eventos..."
+      title={infoComponent.title}
     />
   );
 }

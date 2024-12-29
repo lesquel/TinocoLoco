@@ -3,22 +3,21 @@
 import {
   Card,
   CardBody,
-  Image,
-  Button,
   Chip,
   Accordion,
   AccordionItem,
-  user,
 } from "@nextui-org/react";
-import { IUEvent, IUOneEvent } from "@/interfaces/IUevents";
-import { CiHeart } from "react-icons/ci";
 import { useCallback } from "react";
+
 import { getEvent } from "../services/events";
-import { useApiRequest } from "@/hooks/useApiRequest";
+
 import { ChipCategory } from "./chipCategoy";
+import { ConditionalRentalButton } from "./buttonAlquiler";
+
+import { useApiRequest } from "@/hooks/useApiRequest";
 import { ImageCarousel } from "@/components/utils/carucelImg";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
-import { ConditionalRentalButton } from "./buttonAlquiler";
+import { IUEvent } from "@/interfaces/IUevents";
 import { CardInfoLoadin } from "@/components/utils/loagins/cardInfoLoading";
 
 export default function EventCard({ id }: { id: number }) {

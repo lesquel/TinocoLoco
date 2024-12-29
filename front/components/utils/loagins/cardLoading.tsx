@@ -1,7 +1,8 @@
 import { Spacer, Card } from "@nextui-org/react";
+
 import { TitleSection } from "../titleSection";
 
-export const CustomCard = () => (
+export const CardLoadingBasic = () => (
   <Card className="w-[200px] space-y-5 p-4 rounded-xl">
     <div className="h-24 rounded-lg bg-default-300" />
     <div className="space-y-3">
@@ -21,15 +22,17 @@ export function CardLoagin({
 }) {
   return (
     <div>
-      {title && description && <TitleSection title={title} description={description} />}
+      {title && description && (
+        <TitleSection description={description} title={title} />
+      )}
       <div className="flex justify-between w-full">
-        <CustomCard />
+        <CardLoadingBasic />
         <Spacer x={4} />
-        <CustomCard />
+        <CardLoadingBasic />
         <Spacer x={4} />
-        <CustomCard />
+        <CardLoadingBasic />
         <Spacer x={4} />
-        <CustomCard />
+        <CardLoadingBasic />
       </div>
     </div>
   );

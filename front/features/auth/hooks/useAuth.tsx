@@ -1,7 +1,9 @@
+import { useState } from "react";
+
+import { useAsyncAction } from "../../../hooks/useAsyncAction";
+
 import { IURegister } from "@/interfaces/IUauth";
 import { saveToken } from "@/features/auth/utils/saveUserInfo";
-import { useState } from "react";
-import { useAsyncAction } from "../../../hooks/useAsyncAction";
 
 export const useAuth = (setError: any, api: any) => {
   const [generalError, setGeneralError] = useState("");

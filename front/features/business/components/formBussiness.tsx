@@ -1,8 +1,9 @@
 "use client";
+import { getBusiness, updateBusiness } from "../services/businessServices";
+
 import DynamicForm from "@/components/utils/form/dynamicForm";
 import { businessFormConfig } from "@/features/business/utils/businessFormConfig";
 import { useApiRequest } from "@/hooks/useApiRequest";
-import { getBusiness, updateBusiness } from "../services/businessServices";
 import { useAsyncAction } from "@/hooks/useAsyncAction";
 export const FormBusiness = () => {
   const { error: errorGetBusiness, execute: executeGetBusiness } =
@@ -23,12 +24,13 @@ export const FormBusiness = () => {
       console.log("response bussiness:", response);
     });
   };
+
   return (
     <div>
       <DynamicForm
         formConfig={businessFormConfig}
-        onSubmit={handleSubmit}
         initialData={data}
+        onSubmit={handleSubmit}
       />
     </div>
   );

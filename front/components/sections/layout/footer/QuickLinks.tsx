@@ -1,4 +1,5 @@
 import { Link } from "@nextui-org/react";
+
 import { siteConfig } from "@/config/site";
 
 export const QuickLinks = () => (
@@ -7,7 +8,7 @@ export const QuickLinks = () => (
     <div className="mt-4 space-y-2 text-foreground-700 flex justify-center flex-col">
       {Object.entries(siteConfig.navItems).map(([key, item]) => (
         <div key={key}>
-          <Link href={item.href} className="hover:underline">
+          <Link className="hover:underline" href={item.href}>
             {item.label}
           </Link>
         </div>

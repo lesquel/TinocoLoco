@@ -9,15 +9,15 @@ import {
   TableRow,
   TableCell,
   Input,
-  Button,
   Pagination,
   Image,
   Card,
   CardHeader,
 } from "@nextui-org/react";
 import { FaSearch } from "react-icons/fa";
-import No_fount_events from "@/public/images/no_fount_events.jpg";
 import debounce from "lodash.debounce";
+
+import No_fount_events from "@/public/images/no_fount_events.jpg";
 
 interface SearchableTableSectionProps<T> {
   title: string;
@@ -65,6 +65,7 @@ export const SearchableTableSection = <T extends Record<string, any>>({
           page_size: pageSize,
           search: searchValue,
         });
+
         setData(result);
       } catch (err) {
         setError(errorMessage);
@@ -91,15 +92,17 @@ export const SearchableTableSection = <T extends Record<string, any>>({
 
   const renderCell = useCallback((item: T, columnKey: string) => {
     const value = item[columnKey];
+
     if (columnKey === "photos" && Array.isArray(value) && value.length > 0) {
       return (
         <Image
-          src={value[0].image_url || No_fount_events.src}
           alt="Item"
           className="w-16 h-16 object-cover rounded"
+          src={value[0].image_url || No_fount_events.src}
         />
       );
     }
+
     return value ?? "-";
   }, []);
 
@@ -162,11 +165,11 @@ export const SearchableTableSection = <T extends Record<string, any>>({
       aria-label="Data table"
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
-      topContent={topContent}
-      topContentPlacement="outside"
       classNames={{
         wrapper: "min-h-[222px]",
       }}
+      topContent={topContent}
+      topContentPlacement="outside"
     >
       <TableHeader columns={columns}>
         {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}

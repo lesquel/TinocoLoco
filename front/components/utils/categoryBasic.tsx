@@ -1,6 +1,7 @@
 import { Card, Image } from "@nextui-org/react";
-import No_Found_Event from "@/public/images/no_fount_events.jpg";
 import Link from "next/link";
+
+import No_Found_Event from "@/public/images/no_fount_events.jpg";
 
 // Define the reusable Card component props interface
 interface ICardProps {
@@ -24,8 +25,8 @@ export function CategoryCardBasic({
 }: ICardProps) {
   return (
     <Link
-      href={linkUrl}
       className={`flex flex-col items-center gap-2 min-w-40 hover:scale-105 transition-all ${className}`}
+      href={linkUrl}
     >
       <Card
         isPressable
@@ -33,11 +34,11 @@ export function CategoryCardBasic({
       >
         <div className="w-full h-full">
           <Image
-            width={width}
-            height={height}
-            src={imageUrl || No_Found_Event.src}
             alt={altText}
             className="w-full h-full object-cover"
+            height={height}
+            src={imageUrl || No_Found_Event.src}
+            width={width}
           />
         </div>
       </Card>

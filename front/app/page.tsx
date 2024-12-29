@@ -11,7 +11,9 @@ import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 
 export default function Home() {
   const user = getTokenFromCookie();
+
   console.log("user Homeeeeeee:", user);
+
   return (
     <>
       <Banner />

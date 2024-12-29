@@ -12,7 +12,6 @@
 //     );
 // }
 "use client";
-import { endPoints } from "@/config/endPoints";
 import { SearchableTableSection } from "@/features/dashboard/section/allEvents";
 import { getEvents } from "@/features/events/services/events";
 import { IUEvent } from "@/interfaces/IUevents";
@@ -20,8 +19,9 @@ import { IUEvent } from "@/interfaces/IUevents";
 export default function DashboardEvents() {
   return (
     <SearchableTableSection<IUEvent>
-      title="Todos"
       description="Los Eventos"
+      pageSize={10}
+      title="Todos"
       fetchData={getEvents}
       // endpoint={endPoints.events.get}
       columns={[
@@ -33,7 +33,6 @@ export default function DashboardEvents() {
         { name: "Status", uid: "is_active" },
         { name: "Actions", uid: "actions" },
       ]}
-      pageSize={10}
     />
   );
 }

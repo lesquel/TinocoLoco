@@ -1,6 +1,8 @@
-import { useApiRequest } from "@/hooks/useApiRequest";
-import { getCategorys } from "../services/events";
 import { useEffect } from "react";
+
+import { getCategorys } from "../services/events";
+
+import { useApiRequest } from "@/hooks/useApiRequest";
 import { FormConfig } from "@/interfaces/IUform";
 
 export const EventFormConfig = ({ setFormConfig }: { setFormConfig: any }) => {

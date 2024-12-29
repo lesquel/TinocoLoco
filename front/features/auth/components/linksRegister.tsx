@@ -11,8 +11,9 @@ import {
   Button,
 } from "@nextui-org/react";
 import Link from "next/link";
-import { siteConfig } from "@/config/site";
 import { useEffect, useState } from "react";
+
+import { siteConfig } from "@/config/site";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { IUUser, Role } from "@/interfaces/IUser";
 import User from "@/public/images/user.png";
@@ -21,6 +22,7 @@ export const LinksRegister = () => {
 
   useEffect(() => {
     const token = getTokenFromCookie();
+
     setUserInfo(token);
   }, []);
 
@@ -31,8 +33,8 @@ export const LinksRegister = () => {
           <NavbarItem>
             <Button
               as={Link}
-              href={siteConfig.navMenuItems.login.href}
               className="text-foreground hover:text-primary transition-colors"
+              href={siteConfig.navMenuItems.login.href}
             >
               {siteConfig.navMenuItems.login.label}
             </Button>

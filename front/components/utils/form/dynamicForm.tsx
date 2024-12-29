@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { Button, Input, Textarea, Select, SelectItem } from "@nextui-org/react";
 import { useForm, Controller } from "react-hook-form";
-import { FieldConfig, FormConfig } from "@/interfaces/IUform";
+
 import { CustomCheckbox } from "./checkboxForm";
+
+import { FieldConfig, FormConfig } from "@/interfaces/IUform";
 
 interface DynamicFormProps<T> {
   formConfig: FormConfig;
@@ -40,7 +42,10 @@ const DynamicForm = <T extends Record<string, any>>({
     Object.entries(externalErrors).forEach(([fieldName, errorMessage]) => {
       if (formConfig[fieldName]) {
         // Si el campo existe en el formulario, se configura como un error específico
-        setError(fieldName as keyof T, { type: "manual", message: errorMessage });
+        setError(fieldName as keyof T, {
+          type: "manual",
+          message: errorMessage,
+        });
       } else {
         // Si el campo no existe, se trata como un error general
         generalErrorsList.push(errorMessage);
@@ -53,6 +58,7 @@ const DynamicForm = <T extends Record<string, any>>({
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const fileArray = Array.from(e.target.files);
+
       setPhotos(fileArray);
     }
   };
@@ -68,6 +74,7 @@ const DynamicForm = <T extends Record<string, any>>({
         validate: config.validation?.pattern
           ? (value: string) => {
               const regex = new RegExp(config.validation!.pattern!.value);
+
               return regex.test(value) || config.validation!.pattern!.message;
             }
           : undefined,
@@ -101,8 +108,8 @@ const DynamicForm = <T extends Record<string, any>>({
           <Input
             key={fieldName}
             {...commonProps}
-            type="file"
             multiple
+            type="file"
             onChange={handleImageChange}
           />
         );
@@ -133,8 +140,8 @@ const DynamicForm = <T extends Record<string, any>>({
 
   return (
     <form
-      onSubmit={handleSubmit(handleFormSubmit)}
       className="w-full max-w-xs flex flex-col gap-4"
+      onSubmit={handleSubmit(handleFormSubmit)}
     >
       {/* Sección de errores generales */}
       {generalErrors.length > 0 && (
@@ -157,7 +164,7 @@ const DynamicForm = <T extends Record<string, any>>({
         </div>
       ))}
 
-      <Button type="submit" variant="flat" className="mt-4">
+      <Button className="mt-4" type="submit" variant="flat">
         Guardar
       </Button>
     </form>

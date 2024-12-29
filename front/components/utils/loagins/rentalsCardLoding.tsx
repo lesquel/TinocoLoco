@@ -4,9 +4,7 @@ import React from "react";
 import { Card, CardBody, Skeleton } from "@nextui-org/react";
 
 const RentalEvent = () => {
-  return (
-      <Skeleton className="w-3/4 h-6 rounded-lg" />
-  );
+  return <Skeleton className="w-3/4 h-6 rounded-lg" />;
 };
 
 export function RentalCardLoading() {
@@ -28,4 +26,3 @@ export function RentalCardLoading() {
     </Card>
   );
 }
-

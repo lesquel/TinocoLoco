@@ -2,6 +2,7 @@ import { Link } from "@nextui-org/react";
 import { MdAlternateEmail } from "react-icons/md";
 import { CiPhone } from "react-icons/ci";
 import { TbWorld } from "react-icons/tb";
+
 import { ConfigurationBusiness } from "@/interfaces/IUBusiness";
 
 interface LinkProps {
@@ -11,7 +12,7 @@ interface LinkProps {
 }
 
 const ContactLink: React.FC<LinkProps> = ({ name, value, icon }) => (
-  <Link href={value} className="flex items-center space-x-2 hover:underline">
+  <Link className="flex items-center space-x-2 hover:underline" href={value}>
     {icon}
     <span>{name}</span>
   </Link>
@@ -25,23 +26,23 @@ export const ContactInfo: React.FC<{ business: ConfigurationBusiness }> = ({
     <ul className="mt-4 space-y-2 text-foreground-700">
       {business.business_email && (
         <ContactLink
+          icon={<MdAlternateEmail className="h-6 w-6" />}
           name="Email"
           value={`mailto:${business.business_email}`}
-          icon={<MdAlternateEmail className="h-6 w-6" />}
         />
       )}
       {business.business_phone_number && (
         <ContactLink
+          icon={<CiPhone className="h-6 w-6" />}
           name="Teléfono"
           value={`tel:${business.business_phone_number}`}
-          icon={<CiPhone className="h-6 w-6" />}
         />
       )}
       {business.business_website_url && (
         <ContactLink
+          icon={<TbWorld className="h-6 w-6" />}
           name="Sitio web"
           value={business.business_website_url}
-          icon={<TbWorld className="h-6 w-6" />}
         />
       )}
     </ul>
