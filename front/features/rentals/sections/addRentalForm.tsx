@@ -14,7 +14,7 @@ import DynamicForm from "@/components/utils/form/dynamicForm";
 import { createRentalConfig } from "@/features/rentals/utils/addRentalCondig";
 import { FormConfig } from "@/interfaces/IUform";
 import { useApiRequest } from "@/hooks/useApiRequest";
-import { getPromotions } from "@/features/Promotions/services/promotions";
+import { getPromotions } from "@/features/promotions/services/promotions";
 import { IURental, IUServiceToRentalAdd } from "@/interfaces/IURental";
 import { useAsyncAction } from "@/hooks/useAsyncAction";
 import { TitleSection } from "@/components/utils/titleSection";
