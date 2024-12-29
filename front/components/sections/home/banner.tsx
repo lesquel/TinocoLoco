@@ -29,13 +29,13 @@ export const Banner = () => {
             className="bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 text-white font-medium"
             size="lg"
           >
-            Get Started
+            Alquilar un evento
           </Button>
           <Button
             className="border-rose-600 text-rose-600 hover:text-rose-700 hover:border-rose-700 focus:ring-rose-500"
             size="lg"
           >
-            Learn More
+            Ver nuestros servicios
           </Button>
         </div>
       </div>
