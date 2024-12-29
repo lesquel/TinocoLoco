@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Button,
   Card,
@@ -18,7 +19,6 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { validationRules } from "@/features/auth/utils/validations";
 import { login as loginService } from "@/features/auth/services/auth";
 import { TitleSection } from "@/components/utils/titleSection";
-import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 
 export const Login = () => {
   const router = useRouter();
@@ -28,13 +28,14 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     setError,
+    trigger,
   } = useForm<IURegister>({
-    mode: "onChange", // Esto hace que los errores se validen en tiempo real
+    mode: "onChange", // Validación en tiempo real
   });
 
-  const { loading, error, handleRegister, generalError } = useAuth(
+  const { loading, handleRegister, generalError } = useAuth(
     setError,
     loginService
   );
@@ -44,10 +45,22 @@ export const Login = () => {
   }, []);
 
   const onSubmit = async (data: IURegister) => {
-    handleRegister(data, (response: any) => {
-      console.log("token:", getTokenFromCookie());
-      window.location.href = "/";
-    });
+    try {
+      await handleRegister(data, (response: any) => {
+        if (response.errors) {
+          Object.keys(response.errors).forEach((field) => {
+            setError(field as keyof IURegister, {
+              type: "server",
+              message: response.errors[field].join(", "),
+            });
+          });
+        } else {
+          window.location.href = "/";
+        }
+      });
+    } catch (error) {
+      console.error("Login error:", error);
+    }
   };
 
   const toggleVisibility = () => setIsVisible(!isVisible);
@@ -59,8 +72,10 @@ export const Login = () => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader className="flex flex-col gap-1 items-center">
-        <TitleSection description=" Sesión" title="Iniciar " />
-        <p className="text-sm text-default-500">Please sign in to continue</p>
+        <TitleSection description="Sesión" title="Iniciar " />
+        <p className="text-sm text-default-500">
+          Por favor, inicie sesión para continuar.
+        </p>
       </CardHeader>
       <CardBody>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
@@ -75,12 +90,17 @@ export const Login = () => {
             }
             variant="bordered"
             {...register("username", validationRules.username)}
-            errorMessage={errors.username?.message} // Mensaje de error reactivo
+            errorMessage={errors.username?.message}
+            isInvalid={!!errors.username}
           />
 
           <Input
             endContent={
-              <button type="button" onClick={toggleVisibility}>
+              <button
+                className="bg-transparent border-none"
+                type="button"
+                onClick={toggleVisibility}
+              >
                 {isVisible ? (
                   <FaEyeSlash className="text-default-400 pointer-events-none" />
                 ) : (
@@ -95,7 +115,8 @@ export const Login = () => {
             type={isVisible ? "text" : "password"}
             variant="bordered"
             {...register("password", validationRules.password)}
-            errorMessage={errors.password?.message} // Mensaje de error reactivo
+            errorMessage={errors.password?.message}
+            isInvalid={!!errors.password}
           />
 
           <div className="flex justify-between items-center">
@@ -109,11 +130,12 @@ export const Login = () => {
           <Button
             className="mt-2"
             color="danger"
+            disabled={!isValid || loading}
             isLoading={loading}
             type="submit"
             variant="shadow"
           >
-            {loading ? "Signing in..." : "Sign In"}
+            {loading ? "Iniciando sesión..." : "Iniciar sesión"}
           </Button>
         </form>
         <div className="text-center mt-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@nextui-org/react";
+import { Button, Link } from "@nextui-org/react";
 
 import EventosBanner from "@/public/images/e.jpg";
 
@@ -25,18 +25,23 @@ export const Banner = () => {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-4 justify-center">
-          <Button
-            className="bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 text-white font-medium"
-            size="lg"
-          >
-            Get Started
-          </Button>
+          <Link href="/events">
+            <Button
+              
+              className="bg-rose-600 hover:bg-rose-700 focus:ring-rose-500 text-white font-medium"
+              size="lg"
+            >
+              Alquilar un evento
+            </Button>
+          </Link>
+          <Link href="/services">
           <Button
             className="border-rose-600 text-rose-600 hover:text-rose-700 hover:border-rose-700 focus:ring-rose-500"
             size="lg"
-          >
-            Learn More
+            >
+            Ver nuestros servicios
           </Button>
+            </Link>
         </div>
       </div>
     </section>
