@@ -164,7 +164,7 @@ const DynamicForm = <T extends Record<string, any>>({
         </div>
       ))}
 
-      <Button className="mt-4" type="submit" variant="flat">
+      <Button className="mt-4" type="submit" variant="solid" color="danger">
         Guardar
       </Button>
     </form>
