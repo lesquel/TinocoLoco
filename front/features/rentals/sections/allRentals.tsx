@@ -9,7 +9,7 @@ import { RentalCardLoading } from "@/components/utils/loagins/rentalsCardLoding"
 
 export function AllRentals() {
   const fetchRentals = useCallback(
-    () => getMyRentals({ options: { page_size: 5 } }),
+    () => getMyRentals({ options: { page_size: 5, page: 1 } }),
     [],
   );
   const { data, error, isLoading } = useApiRequest(fetchRentals);
