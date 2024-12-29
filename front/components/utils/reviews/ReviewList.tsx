@@ -26,7 +26,7 @@ const UserComponent = ({ idUser }: { idUser: number }) => {
   }
   return (
     <h3 className="text-lg font-semibold">
-      Usuario {userData?.username || userData?.first_name}
+      {userData?.username || userData?.first_name}
     </h3>
   );
 };
