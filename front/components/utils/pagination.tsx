@@ -25,7 +25,7 @@ export function PaginationComponent({
         color="danger"
         page={currentPage}
         total={totalPages}
-        onChange={onPageChange} // Asegura la correcta actualización del estado
+        onChange={onPageChange} 
       />
       <div className="flex gap-2">
         <Button
