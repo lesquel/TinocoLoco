@@ -1,3 +1,5 @@
+import { fontDisplay } from "@/config/fonts";
+
 export const TitleSection = ({
   title,
   description,
@@ -6,7 +8,7 @@ export const TitleSection = ({
   description: string;
 }) => {
   return (
-    <h2 className="text-2xl font-extrabold text-white sm:text-4xl pb-5 flex-1">
+    <h2 className={fontDisplay.className + " text-2xl font-extrabold text-white sm:text-4xl pb-5 flex-1"}>
       {title} <span className="text-rose-500">{description}</span>
     </h2>
   );

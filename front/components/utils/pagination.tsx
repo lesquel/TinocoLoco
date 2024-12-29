@@ -22,14 +22,14 @@ export function PaginationComponent({
         Página: {currentPage} de {totalPages}
       </p>
       <Pagination
-        color="secondary"
+        color="danger"
         page={currentPage}
         total={totalPages}
         onChange={onPageChange} // Asegura la correcta actualización del estado
       />
       <div className="flex gap-2">
         <Button
-          color="secondary"
+          className="bg-rose-500"
           size="sm"
           variant="flat"
           onPress={() => onPageChange(currentPage - 1)}
@@ -38,7 +38,7 @@ export function PaginationComponent({
           Anterior
         </Button>
         <Button
-          color="secondary"
+          className="bg-rose-500"
           size="sm"
           variant="flat"
           onPress={() => onPageChange(currentPage + 1)}

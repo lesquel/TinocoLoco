@@ -28,7 +28,7 @@ const RentalEvent = ({ idEvent }: { idEvent: number }) => {
 
 export function CardRental({ rental }: { rental: IURental }) {
   return (
-    <Card as={Link} href={`/rentals/${rental.id}`} className="w-full max-w-[420px]">
+    <Card as={Link} href={`/rentals/${rental.id}`} className="w-full">
       <CardBody className="flex flex-row flex-wrap p-0 sm:flex-nowrap justify-center items-center">
         <div className="flex flex-col gap-2">
           <Image

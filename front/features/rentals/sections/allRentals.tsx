@@ -3,7 +3,7 @@ import { useApiRequest } from "@/hooks/useApiRequest";
 import { getMyRentals } from "../services/rentals";
 import { CardRental } from "../components/cardRental";
 import { useCallback } from "react";
-import { RentalCardLoding } from "@/components/utils/loagins/rentalsCardLoding";
+import { RentalCardLoading } from "@/components/utils/loagins/rentalsCardLoding";
 import { TitleSection } from "@/components/utils/titleSection";
 
 export function AllRentals() {
@@ -18,7 +18,12 @@ export function AllRentals() {
   }
 
   if (isLoading) {
-    return <RentalCardLoding />;
+    return <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+      <RentalCardLoading />
+      <RentalCardLoading />
+      <RentalCardLoading />
+      <RentalCardLoading />
+    </div>;
   }
   return (
     <div>

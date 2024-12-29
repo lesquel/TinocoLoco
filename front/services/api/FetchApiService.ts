@@ -79,6 +79,7 @@ export class FetchApiService implements ApiService {
     console.log("defaultOptions:", defaultOptions);
     try {
       const response = await fetch(`${host}${url}`, defaultOptions);
+      console.log("response:", response.status);
       console.log("url:", `${host}${url}`);
       return response.json();
     } catch (error) {

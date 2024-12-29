@@ -7,7 +7,7 @@ import { CategoryCardBasic } from "@/components/utils/categoryBasic";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 
 export function CategoryHome() {
-  const fetchCategorys = useCallback(() => getCategorys({ size: 5 }), []);
+  const fetchCategorys = useCallback(() => getCategorys({ size: 4 }), []);
   const { data, error, isLoading } = useApiRequest<IUCategorys>(fetchCategorys);
 
   if (error) {

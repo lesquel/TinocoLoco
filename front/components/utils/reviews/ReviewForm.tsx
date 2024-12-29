@@ -37,7 +37,6 @@ export const ReviewForm = ({
       };
 
       execute(reviewData, (response) => {
-        console.log(response);
         onReviewAdded();
         reset();
         setRating(0);

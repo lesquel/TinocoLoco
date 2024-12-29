@@ -1,25 +1,57 @@
 "use client";
 import { useState, useCallback } from "react";
-import { Section } from "@/components/sections/layout/section";
-import { ReviewForm } from "@/components/utils/reviews/ReviewForm";
-import { addReview } from "@/features/rentals/services/rentals";
+import {
+  Avatar,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+} from "@nextui-org/react";
+import { FaStar } from "react-icons/fa6";
+import { useApiRequest } from "@/hooks/useApiRequest";
+import { getUser } from "@/features/auth/services/auth";
 
-export const SectionReview = ({ rentalId }: { rentalId: number }) => {
-  const [reviewsKey, setReviewsKey] = useState(0);
+const UserComponent = ({ idUser }: { idUser: number }) => {
+  const fetchUser = useCallback(() => getUser(idUser), []);
+  const { data: userData, isLoading } = useApiRequest(fetchUser);
+  if (isLoading) {
+    return <div>Cargando...</div>;
+  }
+  return (
+    <h3 className="text-lg font-semibold">
+      Usuario {userData?.username || userData?.first_name}
+    </h3>
+  );
+};
 
-  const handleReviewAdded = useCallback(() => {
-    setReviewsKey((prevKey) => prevKey + 1);
-  }, []);
+export const SectionReview = ({ item }: { item: any }) => {
 
   return (
-    <div className="flex flex-col w-full gap-4 max-w-xl mx-auto">
-      <Section>
-        <ReviewForm
-          id={rentalId}
-          fetchData={addReview}
-          onReviewAdded={handleReviewAdded}
-        />
-      </Section>
-    </div>
+    <Card>
+      <CardHeader className="flex flex-row items-center gap-4">
+        <Avatar></Avatar>
+        <div>
+          <UserComponent idUser={item.owner} />
+          <div className="flex items-center">
+            {[...Array(5)].map((_, index) => (
+              <FaStar
+                key={index}
+                className={`h-5 w-5 ${
+                  index < item.rating_score
+                    ? "text-yellow-400"
+                    : "text-gray-300"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </CardHeader>
+      <CardBody>
+        <p>{item.rating_comment} </p>
+      </CardBody>
+      <CardFooter className="text-sm text-gray-500">
+        {new Date(item.created_at).toLocaleDateString()}
+      </CardFooter>
+    </Card>
   );
 };
