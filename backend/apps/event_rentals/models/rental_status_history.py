@@ -41,4 +41,4 @@ class RentalStatusHistory(models.Model):
     )
 
     def __str__(self):
-        return {self.status}
+        return self.status

@@ -112,7 +112,7 @@ export default function EventCard({ id }: { id: number }) {
             </Accordion>
 
             <div className="mt-4 flex gap-2">
-              <ConditionalRentalButton id={event.id} />
+              <ConditionalRentalButton id={event.id}  />
               {/* <Button
                 isIconOnly
                 variant="flat"

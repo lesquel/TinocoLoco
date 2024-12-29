@@ -13,7 +13,7 @@ export function FooterClientContent() {
 
   if (error) {
     return (
-      <div className="text-danger">Error loading business information</div>
+      <div className="text-danger">Error cargando la informacion del neogio</div>
     );
   }
 
@@ -47,7 +47,7 @@ export function FooterClientContent() {
   }
 
   if (!business) {
-    return <div className="text-foreground-600">Loading business data...</div>;
+    return <div className="text-foreground-600">No se encontró información del negocio...</div>;
   }
 
   return (

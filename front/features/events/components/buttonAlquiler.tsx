@@ -67,7 +67,7 @@ export const ConditionalRentalButton = ({ id }: { id: number }) => {
   };
 
   const buttonContent = (
-    <Button className="flex-1" color="primary" size="lg" onClick={handleClick}>
+    <Button className="flex-1" color="danger" size="lg" onClick={handleClick}>
       Alquilar ahora
     </Button>
   );

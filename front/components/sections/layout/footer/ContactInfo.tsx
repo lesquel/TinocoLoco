@@ -12,9 +12,9 @@ interface LinkProps {
 }
 
 const ContactLink: React.FC<LinkProps> = ({ name, value, icon }) => (
-  <Link className="flex items-center space-x-2 hover:underline" href={value}>
-    {icon}
-    <span>{name}</span>
+  <Link href={value} className="group flex items-center space-x-2 text-white hover:text-[#F43F5E]">
+    <span className="group-hover:text-[#F43F5E]">{icon}</span>
+    <span className="group-hover:text-[#F43F5E]">{name}</span>
   </Link>
 );
 
@@ -26,21 +26,21 @@ export const ContactInfo: React.FC<{ business: ConfigurationBusiness }> = ({
     <ul className="mt-4 space-y-2 text-foreground-700">
       {business.business_email && (
         <ContactLink
-          icon={<MdAlternateEmail className="h-6 w-6" />}
+          icon={<MdAlternateEmail className="h-6 w-6 group-hover:text-[#F43F5E]" />}
           name="Email"
           value={`mailto:${business.business_email}`}
         />
       )}
       {business.business_phone_number && (
         <ContactLink
-          icon={<CiPhone className="h-6 w-6" />}
+          icon={<CiPhone className="h-6 w-6 group-hover:text-[#F43F5E]" />}
           name="Teléfono"
           value={`tel:${business.business_phone_number}`}
         />
       )}
       {business.business_website_url && (
         <ContactLink
-          icon={<TbWorld className="h-6 w-6" />}
+          icon={<TbWorld className="h-6 w-6 group-hover:text-[#F43F5E]" />}
           name="Sitio web"
           value={business.business_website_url}
         />

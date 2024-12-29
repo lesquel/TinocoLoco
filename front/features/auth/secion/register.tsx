@@ -1,12 +1,4 @@
-"use client";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Input,
-  Link,
-} from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Input, Link } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import { FaEyeSlash, FaEye, FaLock, FaUser } from "react-icons/fa";
@@ -25,12 +17,17 @@ export const Register = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid }, // Get isValid from the formState
     setError,
-  } = useForm<IURegister>();
+    watch, // Watch function to get form values
+    trigger, // Trigger validation manually
+  } = useForm<IURegister>({
+    mode: "onChange", // Automatically trigger validation on change
+  });
+  
   const { handleRegister, generalError, loading } = useAuth(
     setError,
-    registerService,
+    registerService
   );
 
   useEffect(() => {
@@ -54,7 +51,6 @@ export const Register = () => {
       });
     } catch (error) {
       console.error("Registration error:", error);
-    } finally {
     }
   };
 
@@ -125,10 +121,43 @@ export const Register = () => {
             isInvalid={!!errors.password}
           />
 
+          <Input
+            endContent={
+              <button
+                className="bg-transparent border-none"
+                type="button"
+                onClick={toggleVisibility}
+              >
+                {isVisible ? (
+                  <FaEyeSlash className="text-default-400 pointer-events-none" />
+                ) : (
+                  <FaEye className="text-default-400 pointer-events-none" />
+                )}
+              </button>
+            }
+            label="Confirmar Password"
+            startContent={
+              <FaLock className="text-default-400 pointer-events-none flex-shrink-0" />
+            }
+            type={isVisible ? "text" : "password"}
+            variant="bordered"
+            {...register("confirmPassword", {
+              validate: (value) =>
+                value === watch("password") || "Las contraseñas no coinciden",
+            })}
+            errorMessage={errors.confirmPassword?.message}
+            isInvalid={!!errors.confirmPassword}
+          />
+
+          <div className="flex justify-between items-center">
+            Términos y condiciones{" "}
+            <input className="mr-2" id="remember-me" type="checkbox" required />
+          </div>
+
           <Button
             className="mt-2"
-            color="primary"
-            disabled={loading}
+            color="danger"
+            disabled={!isValid || loading} // Disable button if form is not valid or loading
             isLoading={loading}
             type="submit"
             variant="shadow"
@@ -136,9 +165,10 @@ export const Register = () => {
             {loading ? "Registrando..." : "Registrar"}
           </Button>
         </form>
+
         <div className="mt-4 text-center">
           <span className="text-default-500">¿Ya tienes una cuenta? </span>
-          <Link href="/accounts/login" size="sm">
+          <Link href="/accounts/login" size="sm" className="text-[#F43F5E]">
             Iniciar sesión
           </Link>
         </div>
