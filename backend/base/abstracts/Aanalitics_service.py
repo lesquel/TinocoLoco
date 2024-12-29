@@ -1,12 +1,15 @@
-from django.db.models import Count
+from django.db.models import Avg, FloatField
+from django.db.models.functions import Coalesce
 from .Aservice import AService
 
 class AAnaliticService(AService):
-    
     @classmethod
-    def get_most_populars(cls, params="event_rentals"):
+    def get_most_populars(cls):
         queryset = cls.get_all()
-        return queryset.annotate(rental_count=Count(params)).order_by("-rental_count")
+        return queryset.annotate(
+            avg_rating=Coalesce(Avg("reviews__rating_score", output_field=FloatField()), 0.0)
+        ).order_by("-avg_rating")
+
 
     @classmethod
     def get_most_viewed(cls):
