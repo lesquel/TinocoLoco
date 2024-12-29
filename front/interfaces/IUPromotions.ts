@@ -1,5 +1,6 @@
 export interface IUPromotion {
   id: number;
+  promotion_image_url?: string;
   promotion_name: string;
   promotion_description: string;
   promotion_category: number;
@@ -13,6 +14,9 @@ export interface IUPromotionCategory {
   id: number;
   promotion_category_name: string;
   promotion_category_description: string;
+  creation_date: string;
+  is_active:  boolean;
+  view_count: number;
 }
 
 export interface IUPromotions {
@@ -24,3 +28,4 @@ export interface IUPromotions {
   page_size: number;
   results: IUPromotion[];
 }
+

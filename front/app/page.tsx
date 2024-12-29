@@ -9,6 +9,7 @@ import { MostPopularServices } from "@/features/services/section/services/mostPo
 import { MostViewedSServices } from "@/features/services/section/services/mostViewedService";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { CategoryHomeServices } from "@/features/services/section/categoty/categoryHome";
+import { MostViewedPromotions } from "@/features/Promotions/section/promotions/mostViewPromtions";
 
 export default function Home() {
   const user = getTokenFromCookie();
@@ -43,6 +44,10 @@ export default function Home() {
 
           <Section>
             <MostViewedSServices />
+          </Section>
+
+          <Section>
+            <MostViewedPromotions />
           </Section>
 
         </Container>
