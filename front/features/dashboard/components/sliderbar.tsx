@@ -10,7 +10,6 @@ export const SidebarDashboard = () => {
   const [selected, setSelected] = React.useState("home");
 
   const menuItems = [
-    { key: "search", icon: <FaSearch />, href: "/dashboard/search" },
     { key: "home", icon: <FaHome />, href: "/dashboard" },
     { key: "events", icon: <GiPartyFlags />, href: "/dashboard/events" },
     { key: "services", icon: <MdRoomService />, href: "/dashboard/services" },

@@ -16,3 +16,4 @@ export interface IUPromotions {
   page_size: number;
   results: IUPromotion[];
 }
+

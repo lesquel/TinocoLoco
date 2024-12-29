@@ -85,5 +85,20 @@ export const endPoints = {
   promotions: {
     get: "promotions/promotion/",
     post: "promotions/promotion/",
+    mostPopular: {
+      get: "promotions/promotion/most-popular/",
+    },
+    mostViewed: {
+      get: "promotions/promotion/most-viewed/",
+    },
+    categoty: {
+      get: "promotions/category/",
+      post: "promotions/category/",
+    },
+    review: {
+      get: "/review/",
+      post: "/add-review/",
+    }
   },
+
 };
