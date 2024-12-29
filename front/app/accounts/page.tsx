@@ -187,19 +187,25 @@ export default function AccountPage() {
   );
 }
 
+
 function UserInfoItem({ icon, label, value }) {
   return (
-    <Tooltip content={value}>
-      <User
-        avatarProps={{
-          icon: icon,
-        }}
-        description={value}
-        name={label}
-      />
-    </Tooltip>
+    <div className="flex items-center gap-2">
+      {/* Icono con Tooltip */}
+      <Tooltip content={value || "No disponible"}>
+        <div>{icon}</div>
+      </Tooltip>
+      
+      {/* Información */}
+      <div className="flex-1">
+        <p className="font-bold">{label}</p>
+        <p className="text-default-500">{value || "No disponible"}</p>
+      </div>
+    </div>
   );
 }
+
+
 
 function calculateProfileCompleteness(user) {
   const fields = [

@@ -83,7 +83,7 @@ export function ModalVerifyEmail() {
       <Chip color="danger" size="sm" variant="flat">
         Email no verificado
       </Chip>
-      <Button color="primary" onPress={onOpen}>
+      <Button color="danger" onPress={onOpen}>
         Resolver
       </Button>
       <Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}>
@@ -104,7 +104,7 @@ export function ModalVerifyEmail() {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={sendVerificationEmailAction}>
+                <Button color="danger" variant="flat" onPress={sendVerificationEmailAction}>
                   Volver a enviar
                 </Button>
               </ModalFooter>
