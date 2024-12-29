@@ -22,7 +22,7 @@ export function NavItems({ items }: NavItemsProps) {
         <NavbarItem key={key} isActive={pathname === item.href}>
           <Link
             aria-current={pathname === item.href ? "page" : undefined}
-            className={`text-foreground hover:text-primary transition-colors ${
+            className={`text-foreground hover:text-[#F43F5E] transition-colors ${
               pathname === item.href ? "font-semibold" : ""
             }`}
             href={item.href}

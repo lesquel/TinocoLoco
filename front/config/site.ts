@@ -37,7 +37,7 @@ export const siteConfig = {
       },
     },
     myRentals: {
-      label: "Mis Rentales",
+      label: "Mis reservas",
       href: "/rentals",
     },
     account: {

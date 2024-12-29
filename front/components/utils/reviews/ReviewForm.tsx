@@ -98,7 +98,7 @@ export const ReviewForm = ({
         </p>
       )}
       <Button
-        color="primary"
+        color="danger"
         disabled={loading}
         isLoading={loading}
         type="submit"

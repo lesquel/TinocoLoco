@@ -95,7 +95,7 @@ export function SearchForm({ setSearch }: { setSearch: any }) {
             )}
           />
 
-          <Button className="" color="primary" type="submit">
+          <Button className="" color="danger" type="submit">
             <FaSearch className="w-5 h-5" />
           </Button>
         </form>

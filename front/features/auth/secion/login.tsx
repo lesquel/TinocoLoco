@@ -97,14 +97,14 @@ export const Login = () => {
           <div className="flex justify-between items-center">
             Recuerdame{" "}
             <input className="mr-2" id="remember-me" type="checkbox" />
-            <Link href="#" size="sm">
-              Forgot password?
+            <Link href="#" size="sm" className="text-[#F43F5E]">
+              ¿Olvidó su contraseña?
             </Link>
           </div>
 
           <Button
             className="mt-2"
-            color="primary"
+            color="danger"
             isLoading={loading}
             type="submit"
             variant="shadow"
@@ -113,9 +113,9 @@ export const Login = () => {
           </Button>
         </form>
         <div className="text-center mt-4">
-          <span className="text-default-500">Don't have an account? </span>
-          <Link href="/accounts/register" size="sm">
-            Register
+          <span className="text-default-500">¿No tienes una cuenta? </span>
+          <Link href="/accounts/register" size="sm" className="text-[#F43F5E]">
+            Crear cuents
           </Link>
         </div>
       </CardBody>

@@ -11,7 +11,7 @@ interface SocialLinkProps {
 }
 
 const SocialLink: React.FC<SocialLinkProps> = ({ name, value, icon }) => (
-  <Link aria-label={name} className="hover:text-primary" href={value}>
+  <Link aria-label={name} className="text-white hover:text-[#F43F5E]" href={value}>
     {icon}
   </Link>
 );
@@ -20,25 +20,25 @@ export const SocialMedia: React.FC<{ business: ConfigurationBusiness }> = ({
   business,
 }) => (
   <div>
-    <h2 className="text-lg font-medium text-foreground">Síguenos</h2>
+    <h2 className="text-2xl font-bold text-foreground ">Síguenos</h2>
     <div className="mt-4 flex space-x-4">
       {business.business_facebook_url && (
         <SocialLink
-          icon={<CiFacebook className="h-6 w-6" />}
+          icon={<CiFacebook className="h-8 w-8" />}
           name="Facebook"
           value={business.business_facebook_url}
         />
       )}
       {business.business_instagram_url && (
         <SocialLink
-          icon={<CiInstagram className="h-6 w-6" />}
+          icon={<CiInstagram className="h-8 w-8" />}
           name="Instagram"
           value={business.business_instagram_url}
         />
       )}
       {business.business_x_url && (
         <SocialLink
-          icon={<FaXTwitter className="h-6 w-6" />}
+          icon={<FaXTwitter className="h-8 w-8" />}
           name="Twitter"
           value={business.business_x_url}
         />

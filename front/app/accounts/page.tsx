@@ -98,7 +98,7 @@ export default function AccountPage() {
                   <Progress
                     aria-label="Profile completeness"
                     className="max-w-md mt-2"
-                    color="primary"
+                    color="danger"
                     size="sm"
                     value={profileCompleteness}
                   />
@@ -108,7 +108,7 @@ export default function AccountPage() {
                 </div>
                 <Button
                   fullWidth
-                  color="primary"
+                  color="danger"
                   endContent={<CiEdit />}
                   onClick={toggleEditMode}
                 >

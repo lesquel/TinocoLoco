@@ -45,7 +45,7 @@ export default function EventCard({ id }: { id: number }) {
           <div className="relative p-4 ">
             <Chip
               className="absolute top-2 left-2 z-40"
-              color="primary"
+              color="danger"
               variant="solid"
             >
               Popular
@@ -112,7 +112,7 @@ export default function EventCard({ id }: { id: number }) {
             </Accordion>
 
             <div className="mt-4 flex gap-2">
-              <ConditionalRentalButton id={event.id} />
+              <ConditionalRentalButton id={event.id}  />
               {/* <Button
                 isIconOnly
                 variant="flat"
