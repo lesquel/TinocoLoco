@@ -1,4 +1,6 @@
 "use client";
+import { TitleSection } from "@/components/utils/titleSection";
+
 import { Banner } from "@/components/sections/home/banner";
 import { MostPopularEvents } from "@/features/events/section/events/mostPopular";
 import { MostViewedEvents } from "@/features/events/section/events/mostViewed";
@@ -22,6 +24,19 @@ export default function Home() {
       <Banner />
       <div className="flex max-w-6xl mx-auto">
         <Container>
+
+          <div className="p-8 rounded-lg shadow-lg">
+            <TitleSection
+              description="nuestros eventos"
+              title="Conoce más de"
+            />
+            <p className="text-lg text-white text-center mb-6">
+              En nuestra empresa, nos especializamos en crear experiencias únicas a través de eventos bien organizados y de alta calidad. Ya sea que estés buscando un evento corporativo, una conferencia, una fiesta privada o una exposición, tenemos la solución perfecta para ti.
+            </p>
+
+          </div>
+
+
           <Section>
             <CategoryHome />
           </Section>
@@ -33,6 +48,20 @@ export default function Home() {
           <Section>
             <MostViewedEvents />
           </Section>
+
+
+
+          <div className="p-8 rounded-lg shadow-lg">
+            <TitleSection
+              classnames="text-center"
+              description="nuestros servicios"
+              title="Conoce más de"
+            />
+            <p className="text-lg text-white text-center mb-6">
+              Nos enorgullece ofrecer servicios excepcionales y personalizados para cada tipo de cliente. Ya sea que necesites servicios para un evento corporativo, una fiesta privada o soluciones para tu empresa, tenemos lo que necesitas. Descubre cómo podemos ayudarte a hacer realidad tus ideas.
+            </p>
+          </div>
+
 
           <Section>
             <CategoryHomeServices />
@@ -51,7 +80,7 @@ export default function Home() {
             <MostViewedPromotions />
           </Section>
           <Section>
-            <MostPopularPromotions/>
+            <MostPopularPromotions />
           </Section>
 
         </Container>
