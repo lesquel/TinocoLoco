@@ -50,3 +50,6 @@ class EventView(
 
     def get_most_popular_queryset(self):
         return EventService.get_most_populars()
+
+    def get_better_rated_queryset(self):
+        return EventService.get_better_rated()

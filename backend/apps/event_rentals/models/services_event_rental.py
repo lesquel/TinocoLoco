@@ -62,7 +62,7 @@ class ServicesEventRental(models.Model):
             )
         if ServicesEventRental.objects.filter(
             event_rental=self.event_rental, service=self.service
-        ).exists():
+        ).exclude(id=self.id).exists():
             raise errors.ValidationError(
                 ERROR_MESSAGES["EVENT_RENTAL_ALREADY_HAS_SERVICE"]
             )
