@@ -11,6 +11,8 @@ export const endPoints = {
     sendVerificationEmail: "users/send-email-validation-code/",
     verificationEmail: "users/validate-email/",
     sendPasswordResetCode: "users/send-password-reset-code/",
+    usersSendPasswordresetCode : "users/send-password-reset-code/",
+    topUsers: "users/top_users/",
   },
   events: {
     get: "events/event/",
@@ -53,7 +55,7 @@ export const endPoints = {
         get: "services/service/most-viewed/",
       },
       betterRated: {
-        get: "services/service/most-ranking/",
+        get: "services/service/better-rated/",
       },
     },
     reviews: {

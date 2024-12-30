@@ -1,10 +1,10 @@
-import type { IURegister, IULogin, IUGetUsers } from "@/interfaces/IUauth";
+import type { IURegister, IULogin, IUGetUsers, IUSendPasswordResetCode } from "@/interfaces/IUauth";
 
 import { getTokenFromCookie } from "../utils/getUserInfo";
 
 import { FetchApiService } from "@/services/api/FetchApiService";
 import { endPoints } from "@/config/endPoints";
-import { IUcodeEmail, IUGetUser, IUUser } from "@/interfaces/IUser";
+import { IUcodeEmail, IUGetUser, IUUser, IUUserMostRentals } from "@/interfaces/IUser";
 import { construcUrl } from "@/services/utils/construcUrl";
 
 const api = new FetchApiService();
@@ -104,4 +104,44 @@ export const getUsers = async (options?: any) => {
 
 
 
+export const sendPasswordResetCode = async (
+  data: any
+) => {
+  const response = await api.post({
+    url: endPoints.user.usersSendPasswordresetCode,
+    body: JSON.stringify(data),
+    options: {
+      headers: {
+        Authorization: `token ${getTokenFromCookie()?.token}`,
+      },
+    },
+  });
+  return response;
+};
 
+export const resetPassword = async ({data}: {data: IUSendPasswordResetCode}) => {
+  const response = await api.post<IUSendPasswordResetCode>({
+    url: endPoints.user.usersSendPasswordresetCode,
+    body: JSON.stringify(data),
+    options: {
+      headers: {
+        Authorization: `token ${getTokenFromCookie()?.token}`,
+      },
+    },
+  });
+  return response;
+};
+
+
+export const getUsersMostRentals = async (options?: any) => {
+  const response = await api.get<IUUserMostRentals>({
+    url: endPoints.user.topUsers + (options ? construcUrl({ options }) : ""),
+    options: {
+      headers: {
+        Authorization: `token ${getTokenFromCookie()?.token}`,
+      },
+    },
+  });
+  return response;
+};
+  

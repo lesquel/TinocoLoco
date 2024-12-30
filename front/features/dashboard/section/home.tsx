@@ -10,10 +10,11 @@ import { EventsMostPopularGraphic } from "../components/graphics/events/eventMos
 import { EventsMostViewGraphic } from "../components/graphics/events/eventMostView";
 import { EventsMostRantingGraphic } from "../components/graphics/events/eventMostRanting";
 import { ServiceMostRantingGraphic } from "../components/graphics/services/serviceMostRanting";
+import { UserMostRentaslGraphic } from "../components/graphics/user/UserMostRentasl";
 
 export default function HomeDashboard() {
   return (
-    <div className="flex w-full flex-col m-9">
+    <div className="flex w-full flex-col m-9 max-w-6xl mx-auto">
       <Tabs aria-label="Options">
         <Tab key="users" title="Usuarios">
           <Card>
@@ -23,6 +24,7 @@ export default function HomeDashboard() {
                 <UserActiveGraphic />
                 <UserEmailVerificate />
                 <UserSexGraphic />
+                <UserMostRentaslGraphic />
               </div>
             </CardBody>
           </Card>

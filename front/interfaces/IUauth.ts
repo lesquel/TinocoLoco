@@ -19,3 +19,8 @@ export interface IUGetUsers {
   page_size: number;
   results: IUUser[];
 }
+
+export interface IUSendPasswordResetCode {
+  code: string;
+  new_password: string;
+}
