@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
 
-from ..messages import VARIABLE_NAMES_EVENT
 from base.abstracts import Product
 from apps.reviews.models import Review
 from apps.photos.models import Photo
+
+from ..messages import VARIABLE_NAMES_EVENT
 from .event_category import EventCategory
 
 
@@ -42,6 +43,8 @@ class Event(Product):
 
     reviews = GenericRelation(Review, related_query_name='events', verbose_name=VARIABLE_NAMES_EVENT["REVIEWS"])
     photos = GenericRelation(Photo, related_query_name='events',verbose_name=VARIABLE_NAMES_EVENT["PHOTOS"])
+
+    
 
     def __str__(self):
         return self.event_name

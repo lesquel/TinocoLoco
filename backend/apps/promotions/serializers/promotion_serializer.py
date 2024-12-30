@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from base.utils import ImageUtils
-
+from base.system_services import EventRentalService
 from apps.reviews.models import Review
+
 from ..models import Promotion
 
 
@@ -30,6 +31,7 @@ class CreatePromotionSerializer(serializers.ModelSerializer):
 class RetrievePromotionSerializer(serializers.ModelSerializer):
     promotion_image_url = serializers.SerializerMethodField()
     avg_rating = serializers.SerializerMethodField()
+    reservation_count = serializers.SerializerMethodField()
     class Meta:
         model = Promotion
         fields = "__all__"
@@ -40,3 +42,6 @@ class RetrievePromotionSerializer(serializers.ModelSerializer):
     
     def get_avg_rating(self, obj):
         return Review.avg_rating_for_object(obj)
+
+    def get_reservation_count(self, obj):
+        return EventRentalService.get_reservation_count("promotion", obj)        
