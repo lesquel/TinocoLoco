@@ -53,3 +53,6 @@ class ServiceView(
 
     def get_most_popular_queryset(self):
         return ServiceService.get_most_populars()
+
+    def get_better_rated_queryset(self):
+        return ServiceService.get_better_rated()

@@ -4,7 +4,12 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
-from base.mixins import PaginationMixin, UploadImagesViewMixin, MetricsAnaliticsMixin
+from base.mixins import (
+    PaginationMixin,
+    UploadImagesViewMixin,
+    MostViewedMixin,
+    RetrieveMixin,
+)
 from base.utils import errors
 from base.system_services import (
     EventRentalService,
@@ -31,7 +36,11 @@ from ..serializers import (
 
 
 class EventRentalViewSet(
-    PaginationMixin, UploadImagesViewMixin, MetricsAnaliticsMixin, viewsets.ModelViewSet
+    PaginationMixin,
+    UploadImagesViewMixin,
+    MostViewedMixin,
+    RetrieveMixin,
+    viewsets.ModelViewSet,
 ):
 
     http_method_names = ["get", "post", "put", "delete"]
@@ -94,9 +103,6 @@ class EventRentalViewSet(
     def get_most_viewed_queryset(self):
         return EventRentalService.get_most_viewed()
 
-    def get_most_popular_queryset(self):
-        pass
-
     def create(self, request):
         serializer = self.get_serializer(
             data=request.data, context={"user": request.user}
@@ -131,7 +137,8 @@ class EventRentalViewSet(
     @action(detail=True, methods=["post"], url_path="send-confirmation-email")
     def send_confirmation_email(self, request, pk=None):
         event_rental = self.get_object()
-        serializer = self.get_serializer(data={},
+        serializer = self.get_serializer(
+            data={},
             context={"event_rental": event_rental},
         )
         serializer.is_valid(raise_exception=True)

@@ -4,3 +4,7 @@ from .upload_image_mixin import UploadImagesViewMixin
 from .add_review_mixin import AddReviewMixin
 from .retrieve_reviews_mixin import RetrieveReviewsMixin
 from .metrics_analitics_mixin import MetricsAnaliticsMixin
+from .most_popular_mixin import MostPopularMixin
+from .most_viewed_mixin import MostViewedMixin
+from .better_rated_mixin import BetterRatedMixin
+from .retrieve_mixin import RetrieveMixin
