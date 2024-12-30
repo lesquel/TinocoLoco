@@ -1,3 +1,4 @@
+"use client";
 import { IUPromotion } from "@/interfaces/IUPromotions";
 import { Card, CardHeader, CardBody, Image, Link } from "@nextui-org/react";
 import NoFountPromotion from "@/public/images/no_fount_events.jpg";
@@ -8,7 +9,7 @@ export function CardPromotions({
   promotion: IUPromotion;
 }) {
   return (
-    <Link href={'/promotions/' + promotion.id} >
+    <Link href={'/promotions'} >
       <Card
         className="py-4 max-w-[208px] mx-auto rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 ease-in-out"
       >

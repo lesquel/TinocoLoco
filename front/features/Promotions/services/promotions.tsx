@@ -5,12 +5,13 @@ import { IUCategorys } from "@/interfaces/IUevents";
 import exp from "constants";
 import { IUReview } from "@/interfaces/IUReview";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
+import { construcUrl } from "@/services/utils/construcUrl";
 
 const api = new FetchApiService();
 
-export const getPromotions = async () => {
+export const getPromotions = async (options?: any) => {
   const response = await api.get<IUPromotions>({
-    url: endPoints.promotions.get,
+    url: endPoints.promotions.get + (options ? construcUrl({ options }) : ""),
   });
 
   console.log("response: images", response);
