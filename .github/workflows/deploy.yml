@@ -37,8 +37,8 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "tinocoloco"
+          project: "soquel-tinocoloco-52"
           entrypoint: "jsr:@deno/nextjs-start"
-          root: "front"
+          root: "/front/"
           include: .next, public
           
