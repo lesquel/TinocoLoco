@@ -70,7 +70,7 @@ export const SearchableTableSection = <T extends Record<string, any>>({
     if (columnKey === "photos"  && Array.isArray(value) && value.length > 0) {
       return <Image alt="Item" className="w-16 h-16 object-cover rounded" src={value[0].image_url || No_fount_events.src} />;
     }
-    if (columnKey === "event_category_image_url" ) {
+    if (columnKey === "event_category_image_url" || columnKey === "service_category_image_url") {
       return <Image alt="Item" className="w-16 h-16 object-cover rounded" src={item[columnKey] || No_fount_events.src} />;
     }
     return value ?? "-";

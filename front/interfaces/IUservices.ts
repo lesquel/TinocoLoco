@@ -10,7 +10,6 @@ export interface IUService {
   service_name: string;
   service_description: string;
   service_unitary_cost: number;
-  service_creation_date: Date;
   service_category: number;
 }
 
