@@ -26,6 +26,9 @@ export const endPoints = {
       mostViewed: {
         get: "events/event/most-viewed/",
       },
+      betterRated: {
+        get: "events/event/better-rated/",
+      },
     },
     reviews: {
       get: "/reviews/",
@@ -48,6 +51,9 @@ export const endPoints = {
       },
       mostViewed: {
         get: "services/service/most-viewed/",
+      },
+      betterRated: {
+        get: "services/service/most-ranking/",
       },
     },
     reviews: {

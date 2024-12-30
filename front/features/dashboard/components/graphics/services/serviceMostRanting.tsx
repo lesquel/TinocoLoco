@@ -1,15 +1,16 @@
 "use client";
 import { GraphicLoading } from "@/components/utils/loagins/graphicLoading";
 import { TitleSection } from "@/components/utils/titleSection";
-import { getMostViewedServices } from "@/features/services/services/services";
+import { getMostRankingServices } from "@/features/services/services/services";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import ReactECharts from "echarts-for-react";
+import { get } from "http";
 import { useCallback } from "react";
 
-export function ServiceMostViewGraphic() {
+export function ServiceMostRantingGraphic() {
   const fetchMostPopularServices = useCallback(
     () =>
-      getMostViewedServices({
+      getMostRankingServices({
         size: 5,
       }),
     []
@@ -25,12 +26,15 @@ export function ServiceMostViewGraphic() {
   }
 
   if (!data?.results) {
-    return <div>No hay servicios</div>;
+    return <div>
+      <TitleSection title="Servicios" description="Más Vistos" />
+      No hay servicios
+    </div>;
   }
 
   const dataServices = data.results.map((service) => ({
     name: service.service_name,
-    value: service.view_count,
+    value: service.avg_rating,
   }));
 
   const option = {

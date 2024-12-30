@@ -20,7 +20,10 @@ export  function ServiciosMostPopularGraphic() {
   }
 
   if (!data?.results) {
-    return <div>No hay servicios</div>;
+    return <div>
+      <TitleSection title="Servicios" description="Más Vistos" />
+      No hay servicios
+    </div>;
   }
 
   const dataServices = data.results.map((service) => ({

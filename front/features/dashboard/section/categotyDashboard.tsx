@@ -1,5 +1,5 @@
 "use client";
-import { getCategorys } from "../../services/events";
+import { getCategorys } from "../../events/services/events";
 
 import { SearchableListSection } from "@/components/sections/listComponent/searchListSection";
 import { endPoints } from "@/config/endPoints";

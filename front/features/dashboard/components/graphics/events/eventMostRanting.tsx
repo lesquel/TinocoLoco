@@ -1,20 +1,20 @@
 "use client";
 import { GraphicLoading } from "@/components/utils/loagins/graphicLoading";
 import { TitleSection } from "@/components/utils/titleSection";
-import { getMostViewedServices } from "@/features/services/services/services";
+import { getBetterRatedEvents } from "@/features/events/services/events";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import ReactECharts from "echarts-for-react";
 import { useCallback } from "react";
 
-export function ServiceMostViewGraphic() {
-  const fetchMostPopularServices = useCallback(
+export function EventsMostRantingGraphic() {
+  const fetchMostPopularEvents = useCallback(
     () =>
-      getMostViewedServices({
+      getBetterRatedEvents({
         size: 5,
       }),
     []
   );
-  const { data, error, isLoading } = useApiRequest(fetchMostPopularServices);
+  const { data, error, isLoading } = useApiRequest(fetchMostPopularEvents);
 
   if (error) {
     return <div>Error al obtener los datos</div>;
@@ -25,12 +25,15 @@ export function ServiceMostViewGraphic() {
   }
 
   if (!data?.results) {
-    return <div>No hay servicios</div>;
+    return <div>
+      <TitleSection title="Eventos" description="Más Vistos" />
+      No hay eventos
+    </div>;
   }
 
-  const dataServices = data.results.map((service) => ({
-    name: service.service_name,
-    value: service.view_count,
+  const dataEvents = data.results.map((event) => ({
+    name: event.event_name,
+    value: event.avg_rating,
   }));
 
   const option = {
@@ -43,7 +46,7 @@ export function ServiceMostViewGraphic() {
     },
     xAxis: {
       type: "category",
-      data: dataServices.map((service) => service.name),
+      data: dataEvents.map((event) => event.name),
       axisLabel: {
         rotate: 30, // Rota las etiquetas si son largas
         fontSize: 12,
@@ -73,7 +76,7 @@ export function ServiceMostViewGraphic() {
       {
         name: "Vistas",
         type: "bar",
-        data: dataServices.map((service) => service.value),
+        data: dataEvents.map((event) => event.value),
         barWidth: "50%",
         itemStyle: {
           color: "#6B5B95", // Color personalizado para las barras
@@ -101,7 +104,7 @@ export function ServiceMostViewGraphic() {
 
   return (
     <div className="flex flex-col items-center justify-center max-w-[600px] mx-auto">
-      <TitleSection title="Servicios" description="Más Vistos" />
+      <TitleSection title="Eventos" description="Más Vistos" />
       <ReactECharts option={option} className="w-full h-[400px]" />
     </div>
   );

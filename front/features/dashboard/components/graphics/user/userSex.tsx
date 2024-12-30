@@ -28,7 +28,10 @@ export function UserSexGraphic() {
     return <GraphicLoading />;
   }
   if (!userMale?.results || !userFemale?.results) {
-    return <div>No hay usuarios</div>;
+    return <div>
+      <TitleSection title="Usuarios" description="Sexo"  />
+      No hay datos de usuarios
+    </div>;
   }
   const option = {
     xAxis: {

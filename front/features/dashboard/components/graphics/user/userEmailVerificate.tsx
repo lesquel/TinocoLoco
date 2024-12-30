@@ -29,7 +29,10 @@ export function UserEmailVerificate() {
     return <GraphicLoading />;
   }
   if (!userVerified?.results || !userInactive?.results) {
-    return <div>No hay usuarios</div>;
+    return <div>
+      <TitleSection title="Usuarios " description="verificados"  />
+      No hay datos de usuarios
+      </div>;
   }
   const option = {
     tooltip: {

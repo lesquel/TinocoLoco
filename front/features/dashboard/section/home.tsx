@@ -8,6 +8,8 @@ import { ServiciosMostPopularGraphic } from "../components/graphics/services/ser
 import { ServiceMostViewGraphic } from "../components/graphics/services/serviceMostView";
 import { EventsMostPopularGraphic } from "../components/graphics/events/eventMostPopular";
 import { EventsMostViewGraphic } from "../components/graphics/events/eventMostView";
+import { EventsMostRantingGraphic } from "../components/graphics/events/eventMostRanting";
+import { ServiceMostRantingGraphic } from "../components/graphics/services/serviceMostRanting";
 
 export default function HomeDashboard() {
   return (
@@ -32,6 +34,7 @@ export default function HomeDashboard() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
                 <ServiciosMostPopularGraphic />
                 <ServiceMostViewGraphic />
+                <ServiceMostRantingGraphic />
               </div>
             </CardBody>
           </Card>
@@ -45,6 +48,7 @@ export default function HomeDashboard() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
                 <EventsMostPopularGraphic />
                 <EventsMostViewGraphic />
+                <EventsMostRantingGraphic />
               </div>
             </CardBody>
 
