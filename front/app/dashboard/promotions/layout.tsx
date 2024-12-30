@@ -18,7 +18,10 @@ export default function DashboardServicesLayout({
           },
         ]}
       />
+      <div>
+
       {children}
+      </div>
     </>
   );
 }

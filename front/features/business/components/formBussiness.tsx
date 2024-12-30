@@ -5,6 +5,9 @@ import DynamicForm from "@/components/utils/form/dynamicForm";
 import { businessFormConfig } from "@/features/business/utils/businessFormConfig";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import { useAsyncAction } from "@/hooks/useAsyncAction";
+import { useErrorsForm } from "@/services/utils/useErrosForm";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 export const FormBusiness = () => {
   const { error: errorGetBusiness, execute: executeGetBusiness } =
     useAsyncAction(updateBusiness);
@@ -19,9 +22,13 @@ export const FormBusiness = () => {
   }
   const handleSubmit = (data: any, photos: File[]) => {
     data = { ...data, business_logo: photos[0] };
-    console.log("data:aaaaawfwefwefweweaaaa", data);
+    const [externalErrorss, setExternalErrors] = useState<Record<string, string>>();
     executeGetBusiness(data, (response: any) => {
-      console.log("response bussiness:", response);
+      if (response.errors) {
+        useErrorsForm({ response, setExternalErrors });
+        return;
+      }
+      redirect("/dashboard/business");
     });
   };
 
@@ -31,6 +38,7 @@ export const FormBusiness = () => {
         formConfig={businessFormConfig}
         initialData={data}
         onSubmit={handleSubmit}
+        externalErrors={externalErrorss}
       />
     </div>
   );

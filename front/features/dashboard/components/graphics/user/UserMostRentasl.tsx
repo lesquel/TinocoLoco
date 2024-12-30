@@ -19,7 +19,7 @@ export function UserMostRentalsGraphic() {
   const { data, error, isLoading } = useApiRequest(fetchUsers);
 
   if (error) {
-    return <div>Error al obtener los datos</div>;
+    return <div className="text-red-600">Error al obtener los datos</div>;
   }
 
   if (isLoading) {
@@ -29,63 +29,49 @@ export function UserMostRentalsGraphic() {
   if (!data || !data.results || data.results.length === 0) {
     return (
       <div>
-        <TitleSection title="Usuarios" description="Sexo" />
-        <p>No hay datos de usuarios</p>
+        <TitleSection title="Usuarios" description="Con más rentas" />
+        <p>No hay datos disponibles</p>
       </div>
     );
   }
 
-  // Procesar datos para contar usuarios por sexo
-  const userCounts = data.results.reduce(
-    (acc, user) => {
-      if (user.sex === "M") acc.male++;
-      if (user.sex === "F") acc.female++;
-      return acc;
-    },
-    { male: 0, female: 0 }
-  );
+  // Extraer nombres y número de rentas
+  const userData = data.results.map((user) => ({
+    name: user.username || "Desconocido",
+    value: user.identity_card || 0, // Cambiar "date_joined" por el campo correcto
+  }));
 
-  // Configuración del gráfico
+  // Configuración del gráfico tipo "pie"
   const option = {
-    xAxis: {
-      type: "category",
-      data: ["Masculino", "Femenino"],
+    tooltip: {
+      trigger: "item",
+      formatter: "{b}: {c} rentas ({d}%)",
     },
-    yAxis: {
-      type: "value",
+    legend: {
+      orient: "vertical",
+      left: "left",
     },
     series: [
       {
-        type: "bar",
-        data: [
-          {
-            value: userCounts.male,
-            itemStyle: {
-              color: "#5470c6",
-            },
+        name: "Rentas",
+        type: "pie",
+        radius: "50%",
+        data: userData,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)",
           },
-          {
-            value: userCounts.female,
-            itemStyle: {
-              color: "#91cc75",
-            },
-          },
-        ],
-        itemStyle: {
-          barBorderRadius: [5, 5, 0, 0],
         },
       },
     ],
-    tooltip: {
-      trigger: "item",
-      formatter: "{b}: {c}",
-    },
   };
 
   return (
-    <div className="flex flex-col items-center justify-center max-w-[400px] mx-auto">
-      <TitleSection title="Sexo" description="de los usuarios" />
-      <ReactECharts option={option} className="w-full h-full" />
+    <div className="flex flex-col items-center justify-center max-w-[600px] mx-auto">
+      <TitleSection title="Usuarios" description="Con más rentas" />
+      <ReactECharts option={option} className="w-full h-96" />
     </div>
   );
 }
