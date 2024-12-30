@@ -1,4 +1,5 @@
 "use client";
+
 import { GraphicLoading } from "@/components/utils/loagins/graphicLoading";
 import { TitleSection } from "@/components/utils/titleSection";
 import { getUsersMostRentals } from "@/features/auth/services/auth";
@@ -6,7 +7,7 @@ import { useApiRequest } from "@/hooks/useApiRequest";
 import ReactECharts from "echarts-for-react";
 import { useCallback } from "react";
 
-export function UserMostRentaslGraphic() {
+export function UserMostRentalsGraphic() {
   const fetchUsers = useCallback(
     () =>
       getUsersMostRentals({
@@ -14,6 +15,7 @@ export function UserMostRentaslGraphic() {
       }),
     []
   );
+
   const { data, error, isLoading } = useApiRequest(fetchUsers);
 
   if (error) {
@@ -24,11 +26,11 @@ export function UserMostRentaslGraphic() {
     return <GraphicLoading />;
   }
 
-  if (!data || data.results.length === 0) {
+  if (!data || !data.results || data.results.length === 0) {
     return (
       <div>
         <TitleSection title="Usuarios" description="Sexo" />
-        No hay datos de usuarios
+        <p>No hay datos de usuarios</p>
       </div>
     );
   }
