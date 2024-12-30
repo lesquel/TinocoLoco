@@ -65,7 +65,6 @@ class UserService(AService):
         user.preferred_language = language
         user.save()
 
-    
     @classmethod
     def send_verification_code(cls, user):
 

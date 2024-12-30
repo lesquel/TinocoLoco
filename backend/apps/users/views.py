@@ -1,10 +1,12 @@
 from rest_framework import viewsets, status
+from django.db.models import Count
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 
 
 from base.system_services import UserService
+from base.mixins import PaginationMixin
 
 from .permissions import IsAdminOrSelf, HasVerifiedEmail
 from .serializers import (
@@ -22,7 +24,7 @@ from .filters import UserFilter
 from .messages import SUCCESS_MESSAGES
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UserViewSet(PaginationMixin,viewsets.ModelViewSet):
 
     queryset = UserService.get_all().order_by("id")
     filterset_class = UserFilter
@@ -220,3 +222,10 @@ class UserViewSet(viewsets.ModelViewSet):
             {"detail": SUCCESS_MESSAGES["PASSWORD_RESET_SUCCESS"]},
             status=status.HTTP_200_OK,
         )
+
+
+    @action(detail=False, methods=["get"], url_path="top_users", permission_classes=[IsAdminUser])
+    def top_users(self, request):
+        users = UserService.get_all().annotate(reservation_count=Count("eventrental")).order_by('-reservation_count')
+        
+        return self.paginate_and_respond(users,)
