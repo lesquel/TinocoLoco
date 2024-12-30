@@ -9,7 +9,7 @@ import { CategoryCardBasic } from "@/components/utils/categoryBasic";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
 
 export function CategoryHomeServices() {
-  const fetchCategorys = useCallback(() => getServiceCategorys({ size: 4 }), []);
+  const fetchCategorys = useCallback(() => getServiceCategorys({ page_size: 4 }), []);
   const { data, error, isLoading } = useApiRequest<any>(fetchCategorys);
 
   if (error) {

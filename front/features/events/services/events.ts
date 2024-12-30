@@ -14,9 +14,9 @@ import { IUUploadPhoto } from "@/interfaces/IUimg";
 import { IUReview, IUReviews } from "@/interfaces/IUReview";
 const api = new FetchApiService();
 
-export const getMostPopularEvents = async (): Promise<IUMostEventPopular> => {
+export const getMostPopularEvents = async ({size = 4}: {size?: number}) => {
   const response = await api.get<IUMostEventPopular>({
-    url: endPoints.events.event.mostPopular.get + "?page_size=" + 4,
+    url: endPoints.events.event.mostPopular.get + (size ? `?page_size=${size}` : ""),
   });
 
   return response;

@@ -23,7 +23,7 @@ export  function EventsMostViewGraphic() {
   }
 
   const dataServices = data.results.map((service) => ({
-    name: service.service_name,
+    name: service.event_name,
     value: service.view_count,
   }));
 

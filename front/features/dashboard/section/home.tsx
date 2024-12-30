@@ -6,6 +6,8 @@ import { UserSexGraphic } from "../components/graphics/user/userSex";
 import { Card, CardBody, Tab, Tabs } from "@nextui-org/react";
 import { ServiciosMostPopularGraphic } from "../components/graphics/services/serviciosMostPopular";
 import { ServiceMostViewGraphic } from "../components/graphics/services/serviceMostView";
+import { EventsMostPopularGraphic } from "../components/graphics/events/eventMostPopular";
+import { EventsMostViewGraphic } from "../components/graphics/events/eventMostView";
 
 export default function HomeDashboard() {
   return (
@@ -36,7 +38,17 @@ export default function HomeDashboard() {
         </Tab>
         <Tab key="Events" title="Events">
           <Card>
-            <CardBody></CardBody>
+            <CardBody>
+
+            <CardBody>
+              <TitleSection title="Graficos" description="Eventos" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                <EventsMostPopularGraphic />
+                <EventsMostViewGraphic />
+              </div>
+            </CardBody>
+
+            </CardBody>
           </Card>
         </Tab>
       </Tabs>

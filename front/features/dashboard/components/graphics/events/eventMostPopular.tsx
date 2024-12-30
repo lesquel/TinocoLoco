@@ -1,13 +1,13 @@
 "use client";
 import { GraphicLoading } from "@/components/utils/loagins/graphicLoading";
 import { TitleSection } from "@/components/utils/titleSection";
-import { getMostPopularServices } from "@/features/services/services/services";
+import { getMostPopularEvents } from "@/features/events/services/events";
 import { useApiRequest } from "@/hooks/useApiRequest";
 import ReactECharts from "echarts-for-react";
 import { color } from "framer-motion";
 import { useCallback } from "react";
 export  function EventsMostPopularGraphic() {
-  const fetchMosdtPopularServices = useCallback(() => getMostPopularServices({
+  const fetchMosdtPopularServices = useCallback(() => getMostPopularEvents({
     size: 5,
   }), []);
   const {data, error, isLoading} = useApiRequest(fetchMosdtPopularServices);
@@ -24,7 +24,7 @@ export  function EventsMostPopularGraphic() {
   }
 
   const dataServices = data.results.map((service) => ({
-    name: service.service_name,
+    name: service.event_name,
     value: service.view_count,
   }));
 

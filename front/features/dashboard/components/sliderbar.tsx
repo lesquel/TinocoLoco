@@ -5,6 +5,7 @@ import { FaHome, FaSearch } from "react-icons/fa";
 import { GiPartyFlags } from "react-icons/gi";
 import { MdBusinessCenter, MdRoomService } from "react-icons/md";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export const SidebarDashboard = () => {
   const [selected, setSelected] = React.useState("home");
@@ -32,12 +33,13 @@ export const SidebarDashboard = () => {
           <Button
             isIconOnly
             aria-label={item.key}
+            as={Link}
+            href={item.href}
             className={`w-12 h-12 min-w-0 p-0 bg-transparent hover:bg-zinc-800 ${
               selected === item.key ? "bg-zinc-800" : ""
             }`}
             onClick={() => {
               setSelected(item.key);
-              redirect(item.href);
             }}
           >
             <div
