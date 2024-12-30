@@ -24,14 +24,19 @@ from .filters import UserFilter
 from .messages import SUCCESS_MESSAGES
 
 
-class UserViewSet(PaginationMixin,viewsets.ModelViewSet):
+class UserViewSet(PaginationMixin, viewsets.ModelViewSet):
 
     queryset = UserService.get_all().order_by("id")
     filterset_class = UserFilter
     http_method_names = ["get", "post", "put", "delete"]
 
     def get_permissions(self):
-        if self.action in ["create", "login"]:
+        if self.action in [
+            "create",
+            "login",
+            "send_password_reset_code",
+            "reset_password",
+        ]:
             permission_classes = [AllowAny]
         elif self.action in [
             "update",
@@ -44,8 +49,6 @@ class UserViewSet(PaginationMixin,viewsets.ModelViewSet):
             "change_language",
             "validate_email",
             "send_email_validation_code",
-            "send_password_reset_code",
-            "reset_password",
         ]:
             permission_classes = [IsAuthenticated]
         else:
@@ -99,7 +102,7 @@ class UserViewSet(PaginationMixin,viewsets.ModelViewSet):
             context={"user": request.user},
         )
         serializer.is_valid(raise_exception=True)
-        
+
         serializer.save()
         return Response(
             RetrieveUserSerializer(instance=serializer.instance).data,
@@ -199,9 +202,7 @@ class UserViewSet(PaginationMixin,viewsets.ModelViewSet):
     )
     def send_password_reset_code(self, request):
 
-        serializer = self.get_serializer(
-            data=request.data, context={"email": request.user.email}
-        )
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(
@@ -223,9 +224,19 @@ class UserViewSet(PaginationMixin,viewsets.ModelViewSet):
             status=status.HTTP_200_OK,
         )
 
-
-    @action(detail=False, methods=["get"], url_path="top_users", permission_classes=[IsAdminUser])
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="top_users",
+        permission_classes=[IsAdminUser],
+    )
     def top_users(self, request):
-        users = UserService.get_all().annotate(reservation_count=Count("eventrental")).order_by('-reservation_count')
-        
-        return self.paginate_and_respond(users,)
+        users = (
+            UserService.get_all()
+            .annotate(reservation_count=Count("eventrental"))
+            .order_by("-reservation_count")
+        )
+
+        return self.paginate_and_respond(
+            users,
+        )
