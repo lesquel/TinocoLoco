@@ -26,7 +26,7 @@ export function EventsMostRantingGraphic() {
 
   if (!data?.results) {
     return <div>
-      <TitleSection title="Eventos" description="Más Vistos" />
+      <TitleSection title="Eventos" description="Mejores Calificados" />
       No hay eventos
     </div>;
   }
@@ -104,7 +104,7 @@ export function EventsMostRantingGraphic() {
 
   return (
     <div className="flex flex-col items-center justify-center max-w-[600px] mx-auto">
-      <TitleSection title="Eventos" description="Más Vistos" />
+      <TitleSection title="Eventos" description="Mejores Calificados" />
       <ReactECharts option={option} className="w-full h-[400px]" />
     </div>
   );

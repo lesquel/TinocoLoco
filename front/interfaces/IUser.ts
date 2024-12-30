@@ -21,6 +21,15 @@ export interface IUGetUser {
   has_completed_profile: boolean;
 }
 
+export interface IUUserMostRentals {
+  count: number;
+  next?: string;
+  previous?: string;
+  current_page: number;
+  page_size: number;
+  results: IUGetUser[];
+}
+
 export interface IUUser {
   token: string;
   user: IUGetUser;

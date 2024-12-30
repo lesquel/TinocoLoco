@@ -27,7 +27,7 @@ export function ServiceMostRantingGraphic() {
 
   if (!data?.results) {
     return <div>
-      <TitleSection title="Servicios" description="Más Vistos" />
+      <TitleSection title="Servicios" description="Mejores Calificados" />
       No hay servicios
     </div>;
   }
@@ -105,7 +105,7 @@ export function ServiceMostRantingGraphic() {
 
   return (
     <div className="flex flex-col items-center justify-center max-w-[600px] mx-auto">
-      <TitleSection title="Servicios" description="Más Vistos" />
+      <TitleSection title="Servicios" description="Mejores Calificados" />
       <ReactECharts option={option} className="w-full h-[400px]" />
     </div>
   );
