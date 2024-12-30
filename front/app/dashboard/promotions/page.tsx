@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
 import { SearchableTableSection } from "@/features/dashboard/section/SearchableTableSection";
-import { getServices } from "@/features/services/services/services";
-import { IUService } from "@/interfaces/IUservices";
+import { getPromotions } from "@/features/promotions/services/promotions";
+import { IUPromotion } from "@/interfaces/IUPromotions";
 import { SearchForm } from "@/components/utils/SearchForm";
-import { searchFieldsServices } from "@/features/services/utils/searchFielServices";
+import { searchFieldsPromotions } from "@/features/promotions/utils/seacrFieldsPromotions";
 
 export default function DashboardEvents() {
   const [searchParams, setSearchParams] = useState<any>({}); 
@@ -15,11 +15,11 @@ export default function DashboardEvents() {
 
   return (
     <div>
-      <SearchForm setSearch={handleSearch} searchFields={searchFieldsServices} />
-      <SearchableTableSection<IUService>
+      <SearchForm setSearch={handleSearch} searchFields={searchFieldsPromotions} />
+      <SearchableTableSection<IUPromotion>
         pageSize={10}
-        title="Todos servicios"
-        fetchData={getServices}
+        title="Todas las promociones"
+        fetchData={getPromotions}
         searchParams={searchParams} 
         columns={[
           { name: "ID", uid: "id" },

@@ -4,6 +4,7 @@ import { Card, Button, Tooltip } from "@nextui-org/react";
 import { FaHome, FaSearch } from "react-icons/fa";
 import { GiPartyFlags } from "react-icons/gi";
 import { MdBusinessCenter, MdRoomService } from "react-icons/md";
+import { RiDiscountPercentFill } from "react-icons/ri";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
@@ -14,6 +15,7 @@ export const SidebarDashboard = () => {
     { key: "home", icon: <FaHome />, href: "/dashboard" },
     { key: "eventos", icon: <GiPartyFlags />, href: "/dashboard/events" },
     { key: "servicios", icon: <MdRoomService />, href: "/dashboard/services" },
+    { key: "promociones", icon: <RiDiscountPercentFill  />, href: "/dashboard/promotions" },
     {
       key: "business",
       icon: <MdBusinessCenter />,
