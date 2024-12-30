@@ -105,29 +105,21 @@ export const getUsers = async (options?: any) => {
 
 
 export const sendPasswordResetCode = async (
-  data: any
+  data: {
+    email: string
+  }
 ) => {
   const response = await api.post({
     url: endPoints.user.usersSendPasswordresetCode,
     body: JSON.stringify(data),
-    options: {
-      headers: {
-        Authorization: `token ${getTokenFromCookie()?.token}`,
-      },
-    },
   });
   return response;
 };
 
 export const resetPassword = async ({data}: {data: IUSendPasswordResetCode}) => {
   const response = await api.post<IUSendPasswordResetCode>({
-    url: endPoints.user.usersSendPasswordresetCode,
+    url: endPoints.user.resetPassword,
     body: JSON.stringify(data),
-    options: {
-      headers: {
-        Authorization: `token ${getTokenFromCookie()?.token}`,
-      },
-    },
   });
   return response;
 };

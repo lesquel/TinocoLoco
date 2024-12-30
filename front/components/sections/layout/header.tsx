@@ -48,20 +48,24 @@ export default function Header() {
   ];
 
   return (
-    <Navbar 
-      as="header" 
-      maxWidth="xl" 
-      className="bg-background/70 backdrop-blur-md" 
+    <Navbar
+      as="header"
+      maxWidth="xl"
+      className="bg-background/70 backdrop-blur-md"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        />
       </NavbarContent>
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <Logo />
+          <Link href="/">
+            <Logo />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
@@ -69,18 +73,7 @@ export default function Header() {
         <NavbarBrand>
           <Logo />
         </NavbarBrand>
-        {navItems.map(([key, item]) => (
-          <NavbarItem key={key} isActive={pathname === item.href}>
-            <Link
-              className={`text-foreground hover:text-[#F43F5E] transition-colors ${
-                pathname === item.href ? "font-semibold" : ""
-              }`}
-              href={item.href}
-            >
-              {item.label}
-            </Link>
-          </NavbarItem>
-        ))}
+        
         <Dropdown>
           <NavbarItem>
             <DropdownTrigger>
@@ -95,6 +88,7 @@ export default function Header() {
               </Button>
             </DropdownTrigger>
           </NavbarItem>
+
           <DropdownMenu aria-label="Eventos" variant="flat">
             {events.map((item) => (
               <DropdownItem key={item.key} href={item.href}>
@@ -103,6 +97,8 @@ export default function Header() {
             ))}
           </DropdownMenu>
         </Dropdown>
+
+       
         <Dropdown>
           <NavbarItem>
             <DropdownTrigger>
@@ -125,6 +121,18 @@ export default function Header() {
             ))}
           </DropdownMenu>
         </Dropdown>
+        {navItems.map(([key, item]) => (
+          <NavbarItem key={key} isActive={pathname === item.href}>
+            <Link
+              className={`text-foreground hover:text-[#F43F5E] transition-colors ${
+                pathname === item.href ? "font-semibold" : ""
+              }`}
+              href={item.href}
+            >
+              {item.label}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
 
       <NavbarContent justify="end">
@@ -175,24 +183,41 @@ export default function Header() {
               </DropdownTrigger>
             </NavbarItem>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile" className="h-14 gap-2" textValue="Conectado como">
+              <DropdownItem
+                key="profile"
+                className="h-14 gap-2"
+                textValue="Conectado como"
+              >
                 <p className="font-semibold">Conectado como</p>
                 <p className="font-semibold">{userInfo?.user?.email}</p>
               </DropdownItem>
-              <DropdownItem key="settings" href={siteConfig.navMenuItems.account.href}>
+              <DropdownItem
+                key="settings"
+                href={siteConfig.navMenuItems.account.href}
+              >
                 {siteConfig.navMenuItems.account.label}
               </DropdownItem>
               {userInfo.user.role === Role.ADMIN && (
-                <DropdownItem key="dashboard" href={siteConfig.navMenuItems.dashboard.href}>
+                <DropdownItem
+                  key="dashboard"
+                  href={siteConfig.navMenuItems.dashboard.href}
+                >
                   {siteConfig.navMenuItems.dashboard.label}
                 </DropdownItem>
               )}
               {userInfo.user && userInfo.user.role !== Role.ADMIN && (
-                <DropdownItem key="myRentals" href={siteConfig.navMenuItems.myRentals.href}>
+                <DropdownItem
+                  key="myRentals"
+                  href={siteConfig.navMenuItems.myRentals.href}
+                >
                   {siteConfig.navMenuItems.myRentals.label}
                 </DropdownItem>
               )}
-              <DropdownItem key="logout" color="danger" href={siteConfig.navMenuItems.logout.href}>
+              <DropdownItem
+                key="logout"
+                color="danger"
+                href={siteConfig.navMenuItems.logout.href}
+              >
                 {siteConfig.navMenuItems.logout.label}
               </DropdownItem>
             </DropdownMenu>
@@ -240,4 +265,3 @@ export default function Header() {
     </Navbar>
   );
 }
-

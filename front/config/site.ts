@@ -26,13 +26,10 @@ export const siteConfig = {
     },
   },
   navItemsHeader: {
-    home: {
-      label: "Home",
-      href: "/",
-    },
+  
     blog: {
-      label: "Blog",
-      href: "/blog",
+      label: "Promociones",
+      href: "/promotions",
     },
     about: {
       label: "About",

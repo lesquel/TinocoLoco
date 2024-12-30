@@ -19,6 +19,7 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 import { validationRules } from "@/features/auth/utils/validations";
 import { login as loginService } from "@/features/auth/services/auth";
 import { TitleSection } from "@/components/utils/titleSection";
+import { RestauerasePasswordModal } from "../components/modalResectPassword";
 
 export const Login = () => {
   const router = useRouter();
@@ -122,9 +123,7 @@ export const Login = () => {
           <div className="flex justify-between items-center">
             Recuerdame{" "}
             <input className="mr-2" id="remember-me" type="checkbox" />
-            <Link href="#" size="sm" className="text-[#F43F5E]">
-              ¿Olvidó su contraseña?
-            </Link>
+            <RestauerasePasswordModal />
           </div>
 
           <Button

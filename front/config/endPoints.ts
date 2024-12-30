@@ -1,3 +1,4 @@
+
 export const endPoints = {
   business: {
     get: "business-configuration/configuration/",
@@ -11,7 +12,7 @@ export const endPoints = {
     sendVerificationEmail: "users/send-email-validation-code/",
     verificationEmail: "users/validate-email/",
     sendPasswordResetCode: "users/send-password-reset-code/",
-    usersSendPasswordresetCode : "users/send-password-reset-code/",
+    resetPassword : "users/reset-password/",
     topUsers: "users/top_users/",
   },
   events: {
