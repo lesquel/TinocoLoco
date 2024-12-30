@@ -5,6 +5,7 @@ import { FaEdit, FaTrash } from "react-icons/fa"; // Importa los iconos
 // import debounce from "lodash.debounce";
 
 import No_fount_events from "@/public/images/no_fount_events.jpg";
+import { TableLoading } from "@/components/utils/loagins/tableLoading";
 
 interface SearchableTableSectionProps<T> {
   title: string;
@@ -106,7 +107,9 @@ export const SearchableTableSection = <T extends Record<string, any>>({
   }
 
   if (isLoading) {
-    return <div className="text-default-500">{loadingMessage}</div>;
+    return <div className="text-default-500 w-full">
+      <TableLoading  columns={5} rows={10} />
+    </div>;
   }
 
   return (
