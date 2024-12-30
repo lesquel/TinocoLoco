@@ -13,6 +13,7 @@ export interface IUEvent {
   event_allowed_hours: number;
   event_extra_hour_rate: string;
   event_category: number;
+  reservation_count: number;
 }
 
 export interface IUOneEvent {

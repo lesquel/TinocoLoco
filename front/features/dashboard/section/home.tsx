@@ -10,7 +10,8 @@ import { EventsMostPopularGraphic } from "../components/graphics/events/eventMos
 import { EventsMostViewGraphic } from "../components/graphics/events/eventMostView";
 import { EventsMostRantingGraphic } from "../components/graphics/events/eventMostRanting";
 import { ServiceMostRantingGraphic } from "../components/graphics/services/serviceMostRanting";
-import { UserMostRentalsGraphic } from "../components/graphics/user/UserMostRentasl";
+import { UserRentalsDistribution } from "../components/graphics/user/UserRentalsDistribution";
+import { UserMostRentalsGraphic } from "../components/graphics/user/UserMostRentals";
 
 export default function HomeDashboard() {
   return (
@@ -24,6 +25,7 @@ export default function HomeDashboard() {
                 <UserActiveGraphic />
                 <UserEmailVerificate />
                 <UserSexGraphic />
+                <UserRentalsDistribution />
                 <UserMostRentalsGraphic />
               </div>
             </CardBody>

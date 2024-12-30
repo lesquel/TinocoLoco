@@ -43,7 +43,7 @@ export function ServiceMostRantingGraphic() {
       axisPointer: {
         type: "shadow",
       },
-      formatter: "{b}: {c} vistas",
+      formatter: "{b}: {c} estrellas",
     },
     xAxis: {
       type: "category",

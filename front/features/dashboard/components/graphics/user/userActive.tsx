@@ -19,6 +19,8 @@ export  function UserActiveGraphic() {
   }), []);
   const { data: userInactive, error: errorInactive, isLoading: isLoadingInactive } = useApiRequest(fetchUsersInactive);
 
+  console.log("userInactive", userInactive);
+  console.log("userActive", userActive);
 
 
   if (errorActive || errorInactive) {

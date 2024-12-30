@@ -20,6 +20,7 @@ export default function DashboardEvents() {
         pageSize={10}
         title="Todos servicios"
         fetchData={getServices}
+        added_url="services/service/"
         searchParams={searchParams} 
         columns={[
           { name: "ID", uid: "id" },

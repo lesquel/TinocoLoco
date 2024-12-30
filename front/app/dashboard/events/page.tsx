@@ -19,6 +19,8 @@ export default function DashboardEvents() {
       <SearchableTableSection<IUEvent>
         pageSize={10}
         title="Todos Los Eventos"
+        added_url="events/event/"
+
         fetchData={getEvents}
         searchParams={searchParams} // Pass the search params here
         columns={[
@@ -30,7 +32,7 @@ export default function DashboardEvents() {
           { name: "Estado", uid: "is_active" },
           { name: "Acciones", uid: "actions" },
         ]}
-        onEdit={(item) => console.log("Editar evento", item)}
+        onEdit={(item) => window.open(`${URL_BACKEND}${added_url}add/`, "_blank")}
         onDelete={(item) => console.log("Eliminar evento", item)}
       />
     </div>

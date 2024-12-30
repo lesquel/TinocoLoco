@@ -7,6 +7,7 @@ export interface IUService {
   is_active: boolean;
   creation_date: Date;
   last_actualization_date: Date;
+  reservation_count: number;
   service_name: string;
   service_description: string;
   service_unitary_cost: number;

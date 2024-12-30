@@ -20,6 +20,8 @@ export default function DashboardEvents() {
         pageSize={10}
         title="Todos las categorias de eventos"
         fetchData={getCategorys}
+        added_url="events/eventcategory/"
+
         searchParams={searchParams} // Pass the search params here
         columns={[
           { name: "ID", uid: "id" },

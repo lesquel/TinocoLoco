@@ -27,8 +27,8 @@ export  function EventsMostPopularGraphic() {
   }
 
   const dataServices = data.results.map((service) => ({
-    name: service.event_name,
-    value: service.view_count,
+    name: `${service.event_name} (${service.reservation_count} reservas)`,
+    value: service.reservation_count,
   }));
 
   const option = {
