@@ -1,9 +1,10 @@
 from rest_framework import serializers
+from base.system_services import EventRentalService
 from ..models.user import CustomUser
 
 
 class RetrieveUserSerializer(serializers.ModelSerializer):
-    full_name = serializers.CharField(read_only=True)
+    reservation_count = serializers.SerializerMethodField()
 
     class Meta:
         model = CustomUser
@@ -23,6 +24,9 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
             "sex",
             "role",
             "has_completed_profile",
+            "reservation_count",
         ]
         read_only_fields = fields
 
+    def get_reservation_count(self, obj):
+        return EventRentalService.get_reservation_count("owner", obj)
