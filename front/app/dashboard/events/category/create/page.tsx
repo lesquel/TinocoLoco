@@ -1,12 +1,12 @@
 import { Container } from "@/components/sections/layout/container";
 import { Section } from "@/components/sections/layout/section";
-import { CategoryDashboard } from "@/features/events/section/category/categotyDashboard";
+import { CreateFormCategory } from "@/features/events/section/category/createFormCategoty";
 
-export default function CategotyEvent() {
+export default function CreateCategoryEvent() {
   return (
     <Container>
       <Section>
-        <CategoryDashboard />
+        <CreateFormCategory />
       </Section>
     </Container>
   );

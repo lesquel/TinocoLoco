@@ -41,6 +41,14 @@ export const getMostViewedServices = async ({
   return response;
 };
 
+export const getMostRankingServices = async ({size = 4}: {size?: number}) => {
+  const response = await api.get<IUMostServiceViewed>({
+    url: endPoints.services.service.betterRated.get + (size ? `?page_size=${size}` : ""),
+  });
+
+  return response;
+};
+
 export const getServices = async (options?: any) => {
   const response = await api.get<IUServices>({
     url: endPoints.services.get + (options ? construcUrl({ options }) : ""),

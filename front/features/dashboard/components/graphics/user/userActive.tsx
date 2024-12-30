@@ -29,7 +29,10 @@ export  function UserActiveGraphic() {
     return <GraphicLoading />;
   }
   if (!userActive?.results || !userInactive?.results) {
-    return <div>No hay usuarios</div>;
+    return <div>
+      <TitleSection title="Usuarios" description="Activos" />
+      No hay datos de usuarios
+    </div>;
   }
   const option = {
     tooltip: {

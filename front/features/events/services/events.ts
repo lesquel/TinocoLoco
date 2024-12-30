@@ -30,6 +30,15 @@ export const getMostViewedEvents = async ({size = 4}: {size?: number}) => {
   return response;
 };
 
+
+export const getBetterRatedEvents = async ({size = 4}: {size?: number}) => {
+  const response = await api.get<IUMostEventViewed>({
+    url: endPoints.events.event.betterRated.get + (size ? `?page_size=${size}` : ""),
+  });
+
+  return response;
+};
+
 export const getEvents = async (options?: any) => {
   const url = endPoints.events.get + (options ? construcUrl({ options }) : "");
 
