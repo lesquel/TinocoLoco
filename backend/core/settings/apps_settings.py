@@ -12,6 +12,7 @@ DEFAULT_DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
+    "import_export",
     "cloudinary",
     "cloudinary_storage",
     "corsheaders",
