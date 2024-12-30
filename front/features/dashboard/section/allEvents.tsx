@@ -88,7 +88,7 @@ export const SearchableTableSection = <T extends Record<string, any>>({
 
   useEffect(() => {
     loadData(filterValue, page);
-  }, [loadData, filterValue, page]);
+  }, [loadData, filterValue, page]); // Make sure loadData is called on page change
 
   const renderCell = useCallback((item: T, columnKey: string) => {
     const value = item[columnKey];
@@ -145,7 +145,7 @@ export const SearchableTableSection = <T extends Record<string, any>>({
           color="primary"
           page={page}
           total={pages}
-          onChange={(pageNumber) => setPage(pageNumber)}
+          onChange={(pageNumber) => setPage(pageNumber)} // Update page state when pagination changes
         />
       </div>
     ),

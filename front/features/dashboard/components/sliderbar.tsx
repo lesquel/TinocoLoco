@@ -12,8 +12,8 @@ export const SidebarDashboard = () => {
 
   const menuItems = [
     { key: "home", icon: <FaHome />, href: "/dashboard" },
-    { key: "events", icon: <GiPartyFlags />, href: "/dashboard/events" },
-    { key: "services", icon: <MdRoomService />, href: "/dashboard/services" },
+    { key: "eventos", icon: <GiPartyFlags />, href: "/dashboard/events" },
+    { key: "servicios", icon: <MdRoomService />, href: "/dashboard/services" },
     {
       key: "business",
       icon: <MdBusinessCenter />,

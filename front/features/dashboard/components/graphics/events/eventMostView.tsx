@@ -19,7 +19,7 @@ export  function EventsMostViewGraphic() {
   }
 
   if (!data?.results) {
-    return <div>No hay servicios</div>;
+    return <div>No hay eventos</div>;
   }
 
   const dataServices = data.results.map((service) => ({
@@ -64,7 +64,7 @@ export  function EventsMostViewGraphic() {
   };
 
   return <div className="flex flex-col items-center justify-center max-w-[400px] mx-auto">
-    <TitleSection title="Servicios" description="Más Vistos"  />
+    <TitleSection title="Eventos" description="Más Vistos"  />
     <ReactECharts option={option} className="w-full h-full" />
   </div>;
 }

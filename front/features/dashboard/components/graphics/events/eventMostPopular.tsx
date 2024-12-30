@@ -20,7 +20,7 @@ export  function EventsMostPopularGraphic() {
   }
 
   if (!data?.results) {
-    return <div>No hay servicios</div>;
+    return <div>No hay eventos</div>;
   }
 
   const dataServices = data.results.map((service) => ({
@@ -43,7 +43,7 @@ export  function EventsMostPopularGraphic() {
   };
 
   return <div className="flex flex-col items-center justify-center max-w-[400px] mx-auto">
-    <TitleSection title="Servicios" description="Más populares"  />
+    <TitleSection title="Eventos" description="Más populares"  />
     <ReactECharts option={option} className="w-full h-full" />
   </div>;
 }

@@ -6,19 +6,19 @@ import { IUEvent } from "@/interfaces/IUevents";
 export default function DashboardEvents() {
   return (
     <SearchableTableSection<IUEvent>
-      description="Los Eventos"
+      description=""
       pageSize={10}
-      title="Todos"
+      title="Todos Los Eventos"
       fetchData={getEvents}
       // endpoint={endPoints.events.get}
       columns={[
-        { name: "Event ID", uid: "id" },
-        { name: "Photos", uid: "photos" },
-        { name: "Event Name", uid: "event_name" },
-        { name: "Date", uid: "creation_date" },
-        { name: "Description", uid: "event_description" },
-        { name: "Status", uid: "is_active" },
-        { name: "Actions", uid: "actions" },
+        { name: "ID", uid: "id" },
+        { name: "Foto", uid: "photos" },
+        { name: "Nombre del evento", uid: "event_name" },
+        { name: "Fecha del evento", uid: "creation_date" },
+        { name: "Descripcion", uid: "event_description" },
+        { name: "Estado", uid: "is_active" },
+        { name: "Acciones", uid: "actions" },
       ]}
     />
   );
