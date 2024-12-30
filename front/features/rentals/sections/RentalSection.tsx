@@ -47,7 +47,6 @@ export function RentalSection({ id }: { id: number }) {
   }, []);
 
   if (error) notFound()
-    if (!data)  notFound()
 
   if (isLoading) {
     return (

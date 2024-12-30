@@ -31,7 +31,6 @@ export default function EventCard({ id }: { id: number }) {
   userInfo?.user.has_completed_profile;
 
   if (error)  notFound()
-  if (!data) notFound()
   if (isLoading) {
     return <CardInfoLoadin />;
   }

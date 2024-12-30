@@ -24,7 +24,6 @@ export default function ServicesCard({ id }: { id: number }) {
   const { data, error, isLoading } = useApiRequest<IUService>(fetchEvent);
 
   if (error) notFound()
-  if (!data) notFound()
   if (isLoading) {
     return <CardInfoLoadin />;
   }

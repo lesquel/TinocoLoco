@@ -43,7 +43,6 @@ export function GetEventsByCategory({
 
   // Handle loading, error, or no data for category
   if (categoryError) notFound();
-  if (!categoryData) notFound();
   if (isCategoryLoading) return <CardLoagin description="Cargando categoría" />;
 
   return (
