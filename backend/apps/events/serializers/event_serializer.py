@@ -1,15 +1,17 @@
 from rest_framework import serializers
 from apps.events.models import Event
 from apps.reviews.models import Review
+from apps.photos.serializers import RetrievePhotoSerializer
 
+from base.system_services import EventRentalService
 from base.utils import errors
 
-from apps.photos.serializers import RetrievePhotoSerializer
 
 
 class EventSerializer(serializers.ModelSerializer):
     photos = RetrievePhotoSerializer(many=True, read_only=True)
     avg_rating = serializers.SerializerMethodField()
+    reservation_count = serializers.SerializerMethodField()
     
     class Meta:
         model = Event
@@ -41,3 +43,6 @@ class EventSerializer(serializers.ModelSerializer):
     
     def get_avg_rating(self, obj):
         return Review.avg_rating_for_object(obj)
+
+    def get_reservation_count(self, obj):
+        return EventRentalService.get_reservation_count("event", obj)

@@ -128,7 +128,6 @@ class EventRental(models.Model):
             )
             total -= total * discount
         return total
-
     def increase_view_count(self):
         self.view_count += 1
         self.save(update_fields=["view_count"])

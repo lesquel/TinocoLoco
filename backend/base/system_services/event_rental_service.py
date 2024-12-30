@@ -19,11 +19,15 @@ class EventRentalService(AService):
         return event_rental
     
     @classmethod
+    def get_reservation_count(cls,filter_field, instance):
+        return cls.get_all().filter(**{filter_field: instance}).count()
+    
+    @classmethod
     def get_by_confirmation_code(cls, confirmation_code):
         try:
             return cls.get_all().get(confirmation_code=confirmation_code)
         except cls.model.DoesNotExist:
-            raise errors.NotFoundError("Código de confirmación inválido")
+            raise errors.NotFoundError()
 
     @classmethod
     def send_confirmation_mail(cls,event_rental):
