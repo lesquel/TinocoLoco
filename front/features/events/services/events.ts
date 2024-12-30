@@ -22,9 +22,9 @@ export const getMostPopularEvents = async (): Promise<IUMostEventPopular> => {
   return response;
 };
 
-export const getMostViewedEvents = async (): Promise<IUMostEventViewed> => {
+export const getMostViewedEvents = async ({size = 4}: {size?: number}) => {
   const response = await api.get<IUMostEventViewed>({
-    url: endPoints.events.event.mostViewed.get + "?page_size=" + 4,
+    url: endPoints.events.event.mostViewed.get + (size ? `?page_size=${size}` : ""),
   });
 
   return response;

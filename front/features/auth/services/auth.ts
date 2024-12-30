@@ -1,10 +1,11 @@
-import type { IURegister, IULogin } from "@/interfaces/IUauth";
+import type { IURegister, IULogin, IUGetUsers } from "@/interfaces/IUauth";
 
 import { getTokenFromCookie } from "../utils/getUserInfo";
 
 import { FetchApiService } from "@/services/api/FetchApiService";
 import { endPoints } from "@/config/endPoints";
 import { IUcodeEmail, IUGetUser, IUUser } from "@/interfaces/IUser";
+import { construcUrl } from "@/services/utils/construcUrl";
 
 const api = new FetchApiService();
 
@@ -87,17 +88,16 @@ export const verificationCodeEmail = async (data: IUcodeEmail) => {
   return response;
 };
 
-const addReview = async (data: IUReview) => {
-  const response = await api.post({
-    url: endPoints.reviews.post,
-    body: JSON.stringify(data),
+
+
+export const getUsers = async (options?: any) => {
+  const response = await api.get<IUGetUsers>({
+    url: endPoints.user.get + (options ? construcUrl({ options }) : ""),
     options: {
       headers: {
         Authorization: `token ${getTokenFromCookie()?.token}`,
-        "Content-Type": "application/json",
       },
     },
   });
-
   return response;
 };

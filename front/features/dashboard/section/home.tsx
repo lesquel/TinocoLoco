@@ -1,9 +1,11 @@
 "use client";
 import { TitleSection } from "@/components/utils/titleSection";
-import { UserActiveGraphic } from "../components/graphics/userActive";
-import { UserEmailVerificate } from "../components/graphics/userEmailVerificate";
-import { UserSexGraphic } from "../components/graphics/userSex";
+import { UserActiveGraphic } from "../components/graphics/user/userActive";
+import { UserEmailVerificate } from "../components/graphics/user/userEmailVerificate";
+import { UserSexGraphic } from "../components/graphics/user/userSex";
 import { Card, CardBody, Tab, Tabs } from "@nextui-org/react";
+import { ServiciosMostPopularGraphic } from "../components/graphics/services/serviciosMostPopular";
+import { ServiceMostViewGraphic } from "../components/graphics/services/serviceMostView";
 
 export default function HomeDashboard() {
   return (
@@ -24,17 +26,17 @@ export default function HomeDashboard() {
         <Tab key="Services" title="Services">
           <Card>
             <CardBody>
-            <TitleSection title="Graficos" description="Usuarios" />
-
+              <TitleSection title="Graficos" description="Servicios" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                <ServiciosMostPopularGraphic />
+                <ServiceMostViewGraphic />
+              </div>
             </CardBody>
           </Card>
         </Tab>
         <Tab key="Events" title="Events">
           <Card>
-            <CardBody>
-              
-              
-            </CardBody>
+            <CardBody></CardBody>
           </Card>
         </Tab>
       </Tabs>
