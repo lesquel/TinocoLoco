@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { SearchableTableSection } from "@/features/dashboard/section/allEvents";
+import { SearchableTableSection } from "@/features/dashboard/section/SearchableTableSection";
 import { getServices } from "@/features/services/services/services";
 import { IUService } from "@/interfaces/IUservices";
 import { SearchForm } from "@/components/utils/SearchForm";
