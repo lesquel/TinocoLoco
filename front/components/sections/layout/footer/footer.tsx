@@ -1,4 +1,5 @@
 "use client";
+import { QueryClientProvider } from "react-query";
 import { FooterClientContent } from "./FooterClientContent";
 import { QuickLinks } from "./QuickLinks";
 

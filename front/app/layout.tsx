@@ -10,6 +10,8 @@ import { fontSans } from "@/config/fonts";
 import { Footer } from "@/components/sections/layout/footer/footer";
 import Header from "@/components/sections/layout/header";
 import { InforVerificationToast } from "@/components/utils/toast/InforVerificationToast";
+import { ScrollShadow } from "@nextui-org/react";
+
 
 export const metadata: Metadata = {
   title: {
@@ -34,27 +36,30 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+
   return (
     <html suppressHydrationWarning lang="en">
       <head />
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
-        <Toaster />
-        <InforVerificationToast />
+          
+          <Toaster />
+          <InforVerificationToast />
 
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <div className="relative flex flex-col h-screen">
-            <Header />
+          <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+            <div className="relative flex flex-col h-screen">
+              <Header />
 
-            <main className="">{children}</main>
+              <main className="">{children}</main>
 
-            <Footer />
-          </div>
-        </Providers>
+              <Footer />
+            </div>
+          </Providers>
       </body>
     </html>
   );

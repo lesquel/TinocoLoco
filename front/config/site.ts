@@ -25,6 +25,20 @@ export const siteConfig = {
       href: "/about",
     },
   },
+  navItemsHeader: {
+    home: {
+      label: "Home",
+      href: "/",
+    },
+    blog: {
+      label: "Blog",
+      href: "/blog",
+    },
+    about: {
+      label: "About",
+      href: "/about",
+    },
+  },
   navMenuItems: {
     rentals: {
       label: "Rentals",

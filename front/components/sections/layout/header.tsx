@@ -18,24 +18,34 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { MdCheck, MdExpandMore } from "react-icons/md";
 
 import { siteConfig } from "@/config/site";
 import { getTokenFromCookie } from "@/features/auth/utils/getUserInfo";
 import { IUUser, Role } from "@/interfaces/IUser";
 import { Logo } from "@/components/utils/logo";
 import User from "@/public/images/user.png";
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [userInfo, setUserInfo] = useState<IUUser | null>(null); // Inicializar en null
+  const [userInfo, setUserInfo] = useState<IUUser | null>(null);
   const pathname = usePathname();
 
-  // Carga segura del usuario
   useEffect(() => {
-    const user = getTokenFromCookie(); // Esta función solo se ejecuta en el cliente
+    const user = getTokenFromCookie();
     setUserInfo(user);
   }, []);
 
-  const navItems = Object.entries(siteConfig.navItems);
+  const navItems = Object.entries(siteConfig.navItemsHeader);
+
+  const events = [
+    { key: "events", label: "Eventos", href: "/events" },
+    { key: "categories", label: "Categorias", href: "/events/category" },
+  ];
+  const services = [
+    { key: "services", label: "Servicios", href: "/services" },
+    { key: "categories", label: "Categorias", href: "/services/category" },
+  ];
 
   return (
     <Navbar 
@@ -71,6 +81,50 @@ export default function Header() {
             </Link>
           </NavbarItem>
         ))}
+        <Dropdown>
+          <NavbarItem>
+            <DropdownTrigger>
+              <Button
+                disableRipple
+                className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                endContent={<MdExpandMore className="text-small" />}
+                radius="sm"
+                variant="light"
+              >
+                Eventos
+              </Button>
+            </DropdownTrigger>
+          </NavbarItem>
+          <DropdownMenu aria-label="Eventos" variant="flat">
+            {events.map((item) => (
+              <DropdownItem key={item.key} href={item.href}>
+                {item.label}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
+        <Dropdown>
+          <NavbarItem>
+            <DropdownTrigger>
+              <Button
+                disableRipple
+                className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+                endContent={<MdExpandMore className="text-small" />}
+                radius="sm"
+                variant="light"
+              >
+                Servicios
+              </Button>
+            </DropdownTrigger>
+          </NavbarItem>
+          <DropdownMenu aria-label="Servicios" variant="flat">
+            {services.map((item) => (
+              <DropdownItem key={item.key} href={item.href}>
+                {item.label}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
       </NavbarContent>
 
       <NavbarContent justify="end">
@@ -160,7 +214,30 @@ export default function Header() {
             </Link>
           </NavbarMenuItem>
         ))}
+        {events.map((item) => (
+          <NavbarMenuItem key={item.key}>
+            <Link
+              className="w-full text-foreground hover:text-primary transition-colors"
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+        {services.map((item) => (
+          <NavbarMenuItem key={item.key}>
+            <Link
+              className="w-full text-foreground hover:text-primary transition-colors"
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item.label}
+            </Link>
+          </NavbarMenuItem>
+        ))}
       </NavbarMenu>
     </Navbar>
   );
 }
+

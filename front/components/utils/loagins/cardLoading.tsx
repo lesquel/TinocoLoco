@@ -25,13 +25,10 @@ export function CardLoagin({
       {title && description && (
         <TitleSection description={description} title={title} />
       )}
-      <div className="flex justify-between w-full">
+      <div className="flex justify-center sm:justify-between w-full flex-wrap items-center gap-4">
         <CardLoadingBasic />
-        <Spacer x={4} />
         <CardLoadingBasic />
-        <Spacer x={4} />
         <CardLoadingBasic />
-        <Spacer x={4} />
         <CardLoadingBasic />
       </div>
     </div>
