@@ -6,10 +6,12 @@ import { TitleSection } from "@/components/utils/titleSection";
 import { CardBasic } from "@/components/utils/cardBasic";
 import NoFountServices from "@/public/images/no_fount_events.jpg";
 import { CardLoagin } from "@/components/utils/loagins/cardLoading";
+import { useCallback } from "react";
 
 export function MostPopularEvents() {
+  const fecthEvent = useCallback(() => getMostPopularEvents({ size: 4 }), []);
   const { data, error, isLoading } =
-    useApiRequest<IUMostEventPopular>(getMostPopularEvents);
+    useApiRequest<IUMostEventPopular>(fecthEvent);
 
   if (error) {
     return <div>Error al obtener los datos</div>;
