@@ -7,10 +7,10 @@ import { SearchForm } from "@/components/utils/SearchForm";
 import { searchFieldsPromotions } from "@/features/promotions/utils/seacrFieldsPromotions";
 
 export default function DashboardEvents() {
-  const [searchParams, setSearchParams] = useState<any>({}); 
+  const [searchParams, setSearchParams] = useState<any>({});
 
   const handleSearch = (searchData: any) => {
-    setSearchParams(searchData); 
+    setSearchParams(searchData);
   };
 
   return (
@@ -20,14 +20,17 @@ export default function DashboardEvents() {
         pageSize={10}
         title="Todas las promociones"
         fetchData={getPromotions}
-        searchParams={searchParams} 
+        added_url="promotions/promotion/"
+        searchParams={searchParams}
         columns={[
           { name: "ID", uid: "id" },
-          { name: "Foto", uid: "photos" },
-          { name: "Nombre del servicio", uid: "service_name" },
+          { name: "Foto", uid: "promotion_image_url" },
+          { name: "Nombre de la promocion", uid: "promotion_name" },
           { name: "Fecha del creacion", uid: "creation_date" },
-          { name: "Descripción", uid: "service_description" },
-          { name: "Precio unitario", uid: "service_unitary_cost" },
+          { name: "Descripción", uid: "promotion_description" },
+          { name: "Porcentaje de descuento", uid: "promotion_discount_percentage" },
+          { name: "Valido desde", uid: "valid_from" },
+          { name: "Valido hasta", uid: "valid_until" },
           { name: "Estado", uid: "is_active" },
           { name: "Acciones", uid: "actions" },
         ]}

@@ -5,6 +5,7 @@ export interface IUPromotion {
   promotion_description: string;
   promotion_category: number;
   promotion_discount_percentage: number;
+  reservation_count: number;
   valid_from: string;
   valid_until: string;
   promotion_image?: string;

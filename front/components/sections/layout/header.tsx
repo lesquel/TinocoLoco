@@ -48,10 +48,10 @@ export default function Header() {
   ];
 
   return (
-    <Navbar 
-      as="header" 
-      maxWidth="xl" 
-      className="bg-background/70 backdrop-blur-md" 
+    <Navbar
+      as="header"
+      maxWidth="xl"
+      className="bg-background/70 backdrop-blur-md"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
     >
@@ -72,9 +72,8 @@ export default function Header() {
         {navItems.map(([key, item]) => (
           <NavbarItem key={key} isActive={pathname === item.href}>
             <Link
-              className={`text-foreground hover:text-[#F43F5E] transition-colors ${
-                pathname === item.href ? "font-semibold" : ""
-              }`}
+              className={`text-foreground hover:text-[#F43F5E] transition-colors ${pathname === item.href ? "font-semibold" : ""
+                }`}
               href={item.href}
             >
               {item.label}
@@ -187,9 +186,16 @@ export default function Header() {
                   {siteConfig.navMenuItems.dashboard.label}
                 </DropdownItem>
               )}
+
+              {userInfo.user.role === Role.ADMIN && (
+                <DropdownItem key="dashboard" href="https://tinocoloco.onrender.com/admin/">
+                  Panel de control
+                </DropdownItem>
+              )}
+
               {userInfo.user && userInfo.user.role !== Role.ADMIN && (
                 <DropdownItem key="myRentals" href={siteConfig.navMenuItems.myRentals.href}>
-                  {siteConfig.navMenuItems.myRentals.label}
+                  {siteConfig.navMenuItems.myRentals}
                 </DropdownItem>
               )}
               <DropdownItem key="logout" color="danger" href={siteConfig.navMenuItems.logout.href}>
@@ -204,9 +210,8 @@ export default function Header() {
         {navItems.map(([key, item]) => (
           <NavbarMenuItem key={key}>
             <Link
-              className={`w-full text-foreground hover:text-primary transition-colors ${
-                pathname === item.href ? "font-semibold" : ""
-              }`}
+              className={`w-full text-foreground hover:text-primary transition-colors ${pathname === item.href ? "font-semibold" : ""
+                }`}
               href={item.href}
               onClick={() => setIsMenuOpen(false)}
             >

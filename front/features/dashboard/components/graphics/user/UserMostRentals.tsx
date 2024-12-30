@@ -11,7 +11,7 @@ export function UserMostRentalsGraphic() {
   const fetchUsers = useCallback(
     () =>
       getUsersMostRentals({
-        size: 5,
+        size: 5, // Obtenemos solo los 5 usuarios con más rentas
       }),
     []
   );
@@ -35,34 +35,43 @@ export function UserMostRentalsGraphic() {
     );
   }
 
-  // Extraer nombres y número de rentas
+  // Extraer el nombre de usuario y el número de rentas
   const userData = data.results.map((user) => ({
-    name: user.username || "Desconocido",
-    value: user.identity_card || 0, // Cambiar "date_joined" por el campo correcto
+    name: user.username || "Desconocido", // Nombre del usuario
+    reservations: user.reservation_count || 0, // Número de rentas
   }));
 
-  // Configuración del gráfico tipo "pie"
+  // Configuración del gráfico de barras
   const option = {
     tooltip: {
-      trigger: "item",
-      formatter: "{b}: {c} rentas ({d}%)",
+      trigger: "axis",
+      formatter: "{b}: {c} rentas", // Muestra el nombre del usuario y las rentas
     },
-    legend: {
-      orient: "vertical",
-      left: "left",
+    xAxis: {
+      type: "category",
+      data: userData.map((user) => user.name), // Los nombres de usuario en el eje X
+      axisLabel: {
+        color: "#fff", // Color de las etiquetas en el eje X
+      },
+    },
+    yAxis: {
+      type: "value",
+      axisLabel: {
+        color: "#fff", // Color de las etiquetas en el eje Y
+      },
     },
     series: [
       {
         name: "Rentas",
-        type: "pie",
-        radius: "50%",
-        data: userData,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: "rgba(0, 0, 0, 0.5)",
-          },
+        type: "bar",
+        data: userData.map((user) => user.reservations), // Número de rentas para cada usuario
+        itemStyle: {
+          barBorderRadius: 5,
+          borderWidth: 1,
+          borderType: "solid",
+          borderColor: "#73c0de",
+          shadowColor: "#5470c6",
+          shadowBlur: 3,
         },
       },
     ],

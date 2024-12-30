@@ -6,17 +6,19 @@ import { FaEdit, FaTrash } from "react-icons/fa"; // Importa los iconos
 
 import No_fount_events from "@/public/images/no_fount_events.jpg";
 import { TableLoading } from "@/components/utils/loagins/tableLoading";
+const URL_BACKEND = "https://tinocoloco.onrender.com/admin/";
 
 interface SearchableTableSectionProps<T> {
   title: string;
   description: string;
-  fetchData: (params: { page: number; page_size: number; [key: string]: any }) => Promise<{ count: number; results: T[] }>;
+  fetchData: (params: { page: number; page_size: number;[key: string]: any }) => Promise<{ count: number; results: T[] }>;
+  added_url: string;
   columns: { name: string; uid: string }[];
   pageSize?: number;
   noDataMessage?: string;
   errorMessage?: string;
   loadingMessage?: string;
-  searchParams: any; 
+  searchParams: any;
   onEdit: (item: T) => void; // Callback para la acción de editar
   onDelete: (item: T) => void; // Callback para la acción de eliminar
 }
@@ -25,6 +27,7 @@ export const SearchableTableSection = <T extends Record<string, any>>({
   title,
   description,
   fetchData,
+  added_url,
   columns,
   pageSize = 10,
   noDataMessage = "No hay datos para mostrar",
@@ -68,10 +71,10 @@ export const SearchableTableSection = <T extends Record<string, any>>({
 
   const renderCell = useCallback((item: T, columnKey: keyof T) => {
     const value = item[columnKey];
-    if (columnKey === "photos"  && Array.isArray(value) && value.length > 0) {
+    if (columnKey === "photos" && Array.isArray(value) && value.length > 0) {
       return <Image alt="Item" className="w-16 h-16 object-cover rounded" src={value[0].image_url || No_fount_events.src} />;
     }
-    if (columnKey === "event_category_image_url" || columnKey === "service_category_image_url") {
+    if (columnKey === "event_category_image_url" || columnKey === "service_category_image_url" || columnKey === "promotion_image_url") {
       return <Image alt="Item" className="w-16 h-16 object-cover rounded" src={item[columnKey] || No_fount_events.src} />;
     }
     return value ?? "-";
@@ -80,13 +83,24 @@ export const SearchableTableSection = <T extends Record<string, any>>({
   const topContent = useMemo(() => (
     <div className="flex flex-col gap-4">
       <Card>
-        <CardHeader>
-          <h2 className="text-2xl font-bold">{title}</h2>
-          <p className="text-default-500">{description}</p>
+        <CardHeader className="flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <div>
+              <h2 className="text-2xl font-bold">{title}</h2>
+              <p className="text-default-500">{description}</p>
+            </div>
+            <button
+              onClick={() => window.open(`${URL_BACKEND}${added_url}add/`, "_blank")}
+              className="bg-danger text-white px-4 py-2 rounded "
+            >
+              Agregar
+            </button>
+          </div>
         </CardHeader>
       </Card>
     </div>
-  ), [title, description]);
+  ), [title, description, added_url]);
+
 
   const bottomContent = useMemo(() => (
     <div className="py-2 px-2 flex justify-between items-center">
@@ -108,7 +122,7 @@ export const SearchableTableSection = <T extends Record<string, any>>({
 
   if (isLoading) {
     return <div className="text-default-500 w-full">
-      <TableLoading  columns={5} rows={10} />
+      <TableLoading columns={5} rows={10} />
     </div>;
   }
 
@@ -131,10 +145,10 @@ export const SearchableTableSection = <T extends Record<string, any>>({
               <TableCell>
                 {columnKey === "actions" ? (
                   <div className="flex space-x-2">
-                    <button onClick={() => onEdit(item)} title="Editar" className="text-blue-500 hover:text-blue-700">
+                    <button onClick={() => window.open(`${URL_BACKEND}${added_url}${item.id}/change /`, "_blank")} title="Editar" className="text-blue-500 hover:text-blue-700">
                       <FaEdit />
                     </button>
-                    <button onClick={() => onDelete(item)} title="Eliminar" className="text-red-500 hover:text-red-700">
+                    <button onClick={() => window.open(`${URL_BACKEND}${added_url}${item.id}/delete/`, "_blank")} title="Eliminar" className="text-red-500 hover:text-red-700">
                       <FaTrash />
                     </button>
                   </div>

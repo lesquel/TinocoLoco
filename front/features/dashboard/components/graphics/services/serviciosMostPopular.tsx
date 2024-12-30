@@ -27,8 +27,8 @@ export  function ServiciosMostPopularGraphic() {
   }
 
   const dataServices = data.results.map((service) => ({
-    name: service.service_name,
-    value: service.view_count,
+    name: `${service.service_name} (${service.reservation_count} reservas)`,
+    value: service.reservation_count, 
   }));
 
   const option = {
