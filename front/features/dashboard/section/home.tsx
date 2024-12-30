@@ -15,7 +15,7 @@ export default function HomeDashboard() {
   return (
     <div className="flex w-full flex-col m-9">
       <Tabs aria-label="Options">
-        <Tab key="users" title="Users">
+        <Tab key="users" title="Usuarios">
           <Card>
             <CardBody>
               <TitleSection title="Graficos" description="Usuarios" />
@@ -27,7 +27,7 @@ export default function HomeDashboard() {
             </CardBody>
           </Card>
         </Tab>
-        <Tab key="Services" title="Services">
+        <Tab key="Services" title="Servicios">
           <Card>
             <CardBody>
               <TitleSection title="Graficos" description="Servicios" />
@@ -39,7 +39,7 @@ export default function HomeDashboard() {
             </CardBody>
           </Card>
         </Tab>
-        <Tab key="Events" title="Events">
+        <Tab key="Events" title="Eventos">
           <Card>
             <CardBody>
 

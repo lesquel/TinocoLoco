@@ -11,9 +11,9 @@ export default function DashboardEventsLayout({
         urls={[
           { url: "/dashboard/events", label: "Eventos" },
           { url: "/dashboard/events/create", label: "Crear evento" },
-          { url: "/dashboard/events/categoty", label: "Categoría" },
+          { url: "/dashboard/events/category", label: "Categoría" },
           {
-            url: "/dashboard/events/categoty/create",
+            url: "/dashboard/events/category/create",
             label: "Crear categoría",
           },
         ]}
